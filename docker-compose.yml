@@ -1,0 +1,16 @@
+# Iniciar base de datos postgres con docker, para desarrollo
+services:
+  bd_bancosol:
+    image: postgres:15
+    environment:
+      POSTGRES_USER: admin
+      POSTGRES_PASSWORD: password123
+      POSTGRES_DB: bancosol_campanas
+    ports:
+      - "5432:5432"
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+      - ./bd/schema.sql:/docker-entrypoint-initdb.d/init.sql
+
+volumes:
+  postgres_data:
