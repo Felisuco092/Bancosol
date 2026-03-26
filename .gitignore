@@ -56,3 +56,27 @@ build/
 # virtual machine crash logs, see http://www.java.com/en/download/help/error_hotspot.xml
 hs_err_pid*
 replay_pid*
+
+### Java y Maven ###
+Bancosol/target/
+Bancosol/*.jar
+Bancosol/*.war
+Bancosol/*.ear
+
+### IntelliJ IDEA ###
+Bancosol/.idea/
+Bancosol/*.iws
+Bancosol/*.iml
+Bancosol/*.ipr
+Bancosol/out/
+
+### Wrappers de Maven ###
+# Es común subirlos al repo, pero si prefieres ignorarlos:
+# Bancosol/.mvn/
+# Bancosol/mvnw
+# Bancosol/mvnw.cmd
+
+### Archivos de Sistema y Log ###
+Bancosol/*.log
+.DS_Store
+Thumbs.db
