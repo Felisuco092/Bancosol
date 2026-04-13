@@ -16,3 +16,11 @@ Front montado por html, css y js sin datos de la BD.
 ---
 ## FrontEnd 2
 Front completo en react para mostrar los datos de la bd.
+
+---
+## Levantar base de datos docker
+Debes tener instalado docker y docker compose para ello, tienes que dirigirte a la carpeta donde esta el docker-compose.yml de la carpeta db y ejecutar:
+```
+docker compose up -d
+```
+Una vez levantada la base de datos podras conectarte a ella, con el usuario, db y contraseña que esta dentro del docker-compose.yml
