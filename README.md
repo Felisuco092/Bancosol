@@ -76,7 +76,7 @@ Una vez levantada la base de datos podras conectarte a ella, con el usuario, db 
 
 ---
 
-### 8. Buzón de Incidencias (Feedback)
+### 8. Buzón de Incidencias (Feedback)(ignorar por ahora)
 **Descripción:** Pantalla de administración para leer y gestionar incidencias/feedback reportadas durante la campaña. Muestra una tabla tipo bandeja de entrada con: Fecha, Tienda, Usuario que reporta y texto de la incidencia.
 
 **Integración en la aplicación:**
@@ -84,3 +84,8 @@ Una vez levantada la base de datos podras conectarte a ella, con el usuario, db 
 - Los Administradores/Coordinadores acceden a esta página para revisar todo el feedback y problemas reportados durante el fin de semana.
 
 **Nota:** Requiere una nueva entidad en la base de datos: `IncidenciaEntity` (relacionada con `TiendaEntity` y `UsuarioEntity`).
+
+---
+
+### Bandeja de entrada
+**Descripción:** Bandeja para que los usuarios vean sus notificaciones que se envian automaticamente.

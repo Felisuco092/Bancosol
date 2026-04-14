@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bancosol - Turnos</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <aside class="sidebar">
+        <h2>Bancosol</h2>
+        <nav>
+            <ul>
+                <li><a href="dashboard.html">Cuadro de Mando</a></li>
+                <li><a href="campanas.html">Gestión de Campañas</a></li>
+                <li><a href="tiendas.html">Gestión de Tiendas</a></li>
+                <li><a href="colaboradores.html">Colaboradores</a></li>
+                <li><a href="usuarios.html">Usuarios</a></li>
+                <li><a href="turnos.html" class="active">Asignación de Turnos</a></li>
+                <li><a href="bandeja.html">Bandeja de Entrada</a></li>
+                <li><a href="#" id="logout-btn" style="color: #ff6b6b;">Cerrar Sesión</a></li>
+            </ul>
+        </nav>
+    </aside>
+
+    <main class="main-content">
+        <header class="header">
+            <h1>Asignación de Turnos (La Operativa)</h1>
+        </header>
+
+        <div class="card">
+            <h3>Seleccionar Tienda</h3>
+            <select style="padding: 10px; width: 300px;">
+                <option>Mercadona - Av. Andalucía</option>
+                <option>Carrefour - Rincón</option>
+            </select>
+            <span style="margin-left: 20px;">Capitán asignado: <strong>Juan Pérez</strong></span>
+        </div>
+
+        <div class="card">
+            <h3>Cuadrante de Turnos (Referencia PDF pág. 6)</h3>
+            <table style="text-align: center;">
+                <thead>
+                    <tr>
+                        <th>Franja Horaria</th>
+                        <th>Viernes</th>
+                        <th>Sábado</th>
+                        <th>Domingo</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><strong>Mañana (09:00 - 15:00)</strong></td>
+                        <td style="background: #d4edda;">Grupo Scout 1</td>
+                        <td style="background: #f8d7da;">[Vacío] <button>+</button></td>
+                        <td style="background: #d4edda;">Voluntarios UA</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Tarde (15:00 - 21:00)</strong></td>
+                        <td style="background: #f8d7da;">[Vacío] <button>+</button></td>
+                        <td style="background: #d4edda;">Ayto. Almáchar</td>
+                        <td style="background: #f8d7da;">[Vacío] <button>+</button></td>
+                    </tr>
+                </tbody>
+            </table>
+            <button class="btn btn-danger" style="margin-top: 20px;">Registrar Incidencia</button>
+        </div>
+    </main>
+
+    <script src="main.js"></script>
+</body>
+</html>
