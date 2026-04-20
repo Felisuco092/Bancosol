@@ -96,5 +96,5 @@ Una vez levantada la base de datos podras conectarte a ella, con el usuario, db 
 - 1º HTML/css y js de todas las pg.
 - 2º Controlador con get para cada pg principal
 - 3º Post necesarios
+  - /login (post) 
 - 4º Control de roles
-  - /login (post)
