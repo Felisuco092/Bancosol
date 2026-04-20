@@ -51,5 +51,15 @@ public class controler1 {
         return "tiendas";
     }
 
+    @GetMapping("/turnos")
+    public String doTurnos(){
+        return "turnos";
+    }
+
+    @GetMapping("/usuarios")
+    public String doUsuarios(){
+        return "usuarios";
+    }
+
 
 }

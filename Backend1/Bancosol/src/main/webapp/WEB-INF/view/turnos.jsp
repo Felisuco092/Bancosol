@@ -6,10 +6,17 @@
   To change this template use File | Settings | File Templates.
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%
+    // mantener seguiridad
+    if (session.getAttribute("user") == null) {
+        response.sendRedirect(request.getContextPath() + "/");
+        return;
+    }
+%>
 <html>
 <head>
     <meta charset="UTF-8">
-    <title>Bancosol - </title>
+    <title>Bancosol - Turnos</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/css/styles.css">
 </head>
@@ -31,7 +38,7 @@
 </aside>
 <main class="main-content">
     <header class="header">
-        <h1>Asignación de Turnos (La Operativa)</h1>
+        <h1><b>Asignación de Turnos (La Operativa)</b></h1>
     </header>
 
     <div class="card">
@@ -72,6 +79,6 @@
         <button class="btn btn-danger" style="margin-top: 20px;">Registrar Incidencia</button>
     </div>
 </main>
-
+<script src="${pageContext.request.contextPath}/js/main.js"></script>
 </body>
 </html>
