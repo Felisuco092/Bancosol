@@ -18,13 +18,13 @@
     <h2>Bancosol</h2>
     <nav>
         <ul>
-            <li><a href="dashboard.html">Cuadro de Mando</a></li>
-            <li><a href="campanas.html">Gestión de Campañas</a></li>
-            <li><a href="tiendas.html">Gestión de Tiendas</a></li>
-            <li><a href="colaboradores.html">Colaboradores</a></li>
-            <li><a href="usuarios.html">Usuarios</a></li>
-            <li><a href="turnos.html">Asignación de Turnos</a></li>
-            <li><a href="bandeja.html" class="active">Bandeja de Entrada</a></li>
+            <li><a href="dashboard">Cuadro de Mando</a></li>
+            <li><a href="campanas">Gestión de Campañas</a></li>
+            <li><a href="tiendas">Gestión de Tiendas</a></li>
+            <li><a href="colaboradores">Colaboradores</a></li>
+            <li><a href="usuarios">Usuarios</a></li>
+            <li><a href="turnos">Asignación de Turnos</a></li>
+            <li><a href="bandeja" class="active">Bandeja de Entrada</a></li>
             <li><a href="#" id="logout-btn" style="color: #ff6b6b;">Cerrar Sesión</a></li>
         </ul>
     </nav>
