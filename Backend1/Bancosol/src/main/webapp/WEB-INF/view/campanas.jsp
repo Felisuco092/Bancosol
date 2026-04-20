@@ -1,4 +1,5 @@
-<%--
+<%@ page import="uma.grupo13.bancosol.entity.CampanaEntity" %>
+<%@ page import="java.util.List" %><%--
   Created by IntelliJ IDEA.
   User: felix
   Date: 20/04/2026
@@ -14,6 +15,9 @@
     <link rel="stylesheet" href="/css/styles.css">
 </head>
 <body>
+<%
+    List<CampanaEntity> campanas = (List<CampanaEntity>) request.getAttribute("campanas");
+%>
 <aside class="sidebar">
     <h2>Bancosol</h2>
     <nav>
@@ -61,6 +65,33 @@
             </div>
             <button type="submit" class="btn btn-success">Guardar Campaña</button>
         </form>
+    </div>
+    <div class="card">
+        <table>
+            <thead>
+                <th>ID</th>
+                <th>NOMBRE</th>
+                <th>AÑO</th>
+                <th>DIA_COMIENZO</th>
+                <th>DIA_FINAL</th>
+            </thead>
+            <tbody>
+                <%
+                    for(CampanaEntity campana : campanas) {
+                        System.out.println(campana.getNombre());
+                %>
+                    <tr>
+                        <td><%= campana.getId()%></td>
+                        <td><%= campana.getNombre()%></td>
+                        <td><%= campana.getAno()%></td>
+                        <td><%= campana.getDiaComienzo()%></td>
+                        <td><%= campana.getDiaFinal()%></td>
+                    </tr>
+                <%
+                    }
+                %>
+            </tbody>
+        </table>
     </div>
 </main>
 </body>
