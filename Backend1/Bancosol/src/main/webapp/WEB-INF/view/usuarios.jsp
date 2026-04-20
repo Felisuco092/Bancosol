@@ -14,6 +14,55 @@
     <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/css/styles.css">
 </head>
 <body>
+    <aside class="sidebar">
+        <h2>Bancosol</h2>
+        <nav>
+            <ul>
+                <li><a href="dashboard.html">Cuadro de Mando</a></li>
+                <li><a href="campanas.html">Gestión de Campañas</a></li>
+                <li><a href="tiendas.html">Gestión de Tiendas</a></li>
+                <li><a href="colaboradores.html">Colaboradores</a></li>
+                <li><a href="usuarios.html" class="active">Usuarios</a></li>
+                <li><a href="turnos.html">Asignación de Turnos</a></li>
+                <li><a href="bandeja.html">Bandeja de Entrada</a></li>
+                <li><a href="#" id="logout-btn" style="color: #ff6b6b;">Cerrar Sesión</a></li>
+            </ul>
+        </nav>
+    </aside>
+    <main class="main-content">
+        <header class="header">
+            <h1>Gestión de Usuarios</h1>
+            <button class="btn btn-primary">+ Crear Usuario</button>
+        </header>
 
+        <div class="card">
+            <h3>Alta de Coordinadores / Capitanes (Referencia PDF pág. 5)</h3>
+            <form>
+                <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 20px;">
+                    <div>
+                        <label>Nombre:</label>
+                        <input type="text" style="width: 100%; padding: 8px;">
+                    </div>
+                    <div>
+                        <label>Zona Geográfica:</label>
+                        <input type="text" placeholder="Ej: Axarquía" style="width: 100%; padding: 8px;">
+                    </div>
+                    <div>
+                        <label>Rol:</label>
+                        <select style="width: 100%; padding: 8px;">
+                            <option>Administrador</option>
+                            <option>Coordinador</option>
+                            <option>Capitán</option>
+                        </select>
+                    </div>
+                    <div>
+                        <label>Contraseña:</label>
+                        <input type="password" style="width: 100%; padding: 8px;">
+                    </div>
+                </div>
+                <button type="submit" class="btn btn-success" style="margin-top: 20px;">Crear Usuario</button>
+            </form>
+        </div>
+    </main>
 </body>
 </html>
