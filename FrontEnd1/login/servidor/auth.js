@@ -27,6 +27,7 @@ router.get('/login', async (req, res) => {
 // ── Se puede hacer con POST /auth/login ─────────────────────────────────────────
 // router.post('/login', async (req, res) => {
 //   const { nombreUsuario, contrasena } = req.body;
+console.log(contrasena)
 
   // ── 1. Input validation ─────────────────────────────────────
   if (!nombreUsuario || typeof nombreUsuario !== 'string' || nombreUsuario.trim() === '') {
