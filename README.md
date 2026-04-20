@@ -89,3 +89,12 @@ Una vez levantada la base de datos podras conectarte a ella, con el usuario, db 
 
 ### Bandeja de entrada
 **Descripción:** Bandeja para que los usuarios vean sus notificaciones que se envian automaticamente.
+
+
+# To Do
+- 0º Pensar todas las pg, tanto las basicas como las tablas(actualizacion con fetch), edit y crear...
+- 1º HTML/css y js de todas las pg.
+- 2º Controlador con get para cada pg principal
+- 3º Post necesarios
+- 4º Control de roles
+  - /login (post)

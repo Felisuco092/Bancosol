@@ -12,31 +12,4 @@ import java.util.List;
 
 @Controller
 public class ControladorDePrueba {
-
-    @Autowired
-    protected CampanaRepository campanaRepository;
-
-    @GetMapping("/bandeja")
-    public String doStart() {
-        return "bandeja";
-    }
-    @GetMapping("/campanas")
-    public String doCampanas(Model model) {
-        List<CampanaEntity> campanas = campanaRepository.findAll();
-        for (CampanaEntity campana : campanas) {
-            System.out.println(campana.getNombre());
-        }
-        model.addAttribute("campanas", campanas);
-        return "campanas";
-    }
-    @GetMapping("/colaboradores")
-    public String doColaboradores() {
-        return "colaboradores";
-    }
-    @GetMapping("/dashboard")
-    public String doDashboard() {
-        return "dashboard";
-    }
-
-
 }

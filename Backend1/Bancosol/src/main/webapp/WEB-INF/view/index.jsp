@@ -1,6 +1,5 @@
 <!-- ARCHIVO DE GESTIÓN DE LOS INICIOS DE SESIÓN-->
 <%@ page import="java.util.List" %>
-<%@ page import=""%>
 <!-- Hacer 'imports' necesarios en esta sección-->
 <%--
   Created by IntelliJ IDEA.
@@ -15,13 +14,14 @@
     <title>BANCOSOL - Login</title>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/css/styles.css"> <!-- Importar css !-->
+    <link rel="stylesheet" type="text/css" href="../css/styles.css"> <!-- Importar css !-->
 </head>
+
 <body class="login-body">
   <div class = "card login-card">
     <h1 style="text-align: center;">Bancosol</h1>
     <p style="text-align: center;">Acceso al sistema de gestión</p>
-      <form id="login-form" action="${pageContext.request.contextPath}/login" method="POST">
+      <form id="login-form" action="/login" method="POST">
           <div style="margin-bottom: 15px;">
               <label for="username">Usuario:</label>
               <input type="text" id="username" name="username" style="width: 100%; padding: 8px; margin-top: 5px;" required>
