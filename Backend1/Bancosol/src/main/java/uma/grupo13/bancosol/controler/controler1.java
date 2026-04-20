@@ -61,5 +61,4 @@ public class controler1 {
         return "usuarios";
     }
 
-
 }
