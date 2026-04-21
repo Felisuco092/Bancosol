@@ -1,0 +1,68 @@
+<%--
+a
+  Created by IntelliJ IDEA.
+  User: Germán
+  Date: 20/04/2026
+  Time: 19:18
+  To change this template use File | Settings | File Templates.
+--%>
+<%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%
+    // mantener seguiridad
+
+%>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>Bancosol - Turnos</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/css/styles.css">
+</head>
+<body>
+<jsp:include page="aside.jsp"/>
+<main class="main-content">
+    <header class="header">
+        <h1><b>Asignación de Turnos (La Operativa)</b></h1>
+    </header>
+
+    <div class="card">
+        <h3>Seleccionar Tienda</h3>
+        <select style="padding: 10px; width: 300px;">
+            <option>Mercadona - Av. Andalucía</option>
+            <option>Carrefour - Rincón</option>
+        </select>
+        <span style="margin-left: 20px;">Capitán asignado: <strong>Juan Pérez</strong></span>
+    </div>
+
+    <div class="card">
+        <h3>Cuadrante de Turnos</h3>
+        <table style="text-align: center;">
+            <thead>
+            <tr>
+                <th>Franja Horaria</th>
+                <th>Viernes</th>
+                <th>Sábado</th>
+                <th>Domingo</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr>
+                <td><strong>Mañana (09:00 - 15:00)</strong></td>
+                <td style="background: #d4edda;">Grupo Scout 1</td>
+                <td style="background: #f8d7da;">[Vacío] <button>+</button></td>
+                <td style="background: #d4edda;">Voluntarios UA</td>
+            </tr>
+            <tr>
+                <td><strong>Tarde (15:00 - 21:00)</strong></td>
+                <td style="background: #f8d7da;">[Vacío] <button>+</button></td>
+                <td style="background: #d4edda;">Ayto. Almáchar</td>
+                <td style="background: #f8d7da;">[Vacío] <button>+</button></td>
+            </tr>
+            </tbody>
+        </table>
+        <button class="btn btn-danger" style="margin-top: 20px;">Registrar Incidencia</button>
+    </div>
+</main>
+<script src="${pageContext.request.contextPath}/js/main.js"></script>
+</body>
+</html>
