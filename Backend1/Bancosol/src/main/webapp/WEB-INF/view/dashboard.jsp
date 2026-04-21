@@ -19,6 +19,6 @@
         <h1>Cuadro de Mando</h1>
         <span>Bienvenido, Administrador</span>
     </header>
-
+</main>
 </body>
 </html>
