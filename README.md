@@ -100,4 +100,9 @@ Una vez levantada la base de datos podras conectarte a ella, con el usuario, db 
 - 4º Control de roles
 - 5º Extraer en clase a parte la sidebar en una clase a parte y poner referencia en cada clase .jsp
 
-![Ola](pinga)
+[![Ola](https://img.shields.io/badge/Paso_0-Completo-green)]
+[![Ola](https://img.shields.io/badge/Paso_1-En_proceso_(3/9_html)-yellow)]
+[![Ola](https://img.shields.io/badge/Paso_2-Pendiente-red)]
+[![Ola](https://img.shields.io/badge/Paso_3-Pendiente-red)]
+[![Ola](https://img.shields.io/badge/Paso_4-Pendiente-red)]
+[![Ola](https://img.shields.io/badge/Paso_5-Pendiente-red)]
