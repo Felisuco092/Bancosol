@@ -99,12 +99,16 @@ Una vez levantada la base de datos podras conectarte a ella, con el usuario, db 
   - /login (post) 
 - 4º Control de roles
 - 5º Extraer en clase a parte la sidebar en una clase a parte y poner referencia en cada clase .jsp
+- 6º Service
+- 7º DTO 
 
 ![Paso 0](https://img.shields.io/badge/Paso_0-Completo-green)
 ![Paso 1](https://img.shields.io/badge/Paso_1-En_proceso_(3/9_html)-yellow)
 ![Paso 2](https://img.shields.io/badge/Paso_2-Pendiente-red)
 ![Paso 3](https://img.shields.io/badge/Paso_3-Pendiente-red)
 ![Paso 4](https://img.shields.io/badge/Paso_4-Pendiente-red)
-![Paso 5](https://img.shields.io/badge/Paso_5-Pendiente-red)
+![Paso 5](https://img.shields.io/badge/Paso_5-Completo-green)
+![Paso 6](https://img.shields.io/badge/Paso_6-Pendiente-red)
+![Paso 7](https://img.shields.io/badge/Paso_7-Pendiente-red)
 
 ![LC](https://tenor.com/es/view/sticker-agnes-tachyon-low-cortisol-uma-musume-gif-14223536015423111051.gif)
