@@ -56,7 +56,7 @@ body {
 }
 
 .sidebar nav ul li a.active {
-    background-color: white;
+    background-color: #0056b3;
     color: black;
 }
 /* Main Content */
