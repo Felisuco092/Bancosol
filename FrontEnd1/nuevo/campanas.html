@@ -34,51 +34,59 @@
                 <button class="btn filter-btn active" data-filter="all">Todas</button>
                 <button class="btn filter-btn" data-filter="activa">Activas</button>
                 <button class="btn filter-btn" data-filter="terminada">Terminadas</button>
+                <button class="btn filter-btn" data-filter="proximamente">Próximamente</button>
             </div>
 
             <table>
                 <thead>
                     <tr>
-                        <th>ID</th>
                         <th>Nombre de Campaña</th>
                         <th>Año</th>
+                        <th>Inicio</th>
+                        <th>Fin</th>
                         <th>Estado</th>
-                        <th>Supermercados</th>
                         <th>Acciones</th>
                     </tr>
                 </thead>
                 <tbody id="campaign-table-body">
-                    <tr class="campaign-row" data-status="activa">
-                        <td>001</td>
-                        <td>Gran Recogida 2026</td>
+                    <!-- Las filas se procesarán por JS para determinar el estado real -->
+                    <tr class="campaign-row" data-start="2026-04-01" data-end="2026-05-30">
+                        <td>Gran Recogida Primavera</td>
                         <td>2026</td>
-                        <td><span style="background: #d4edda; color: #155724; padding: 4px 8px; border-radius: 4px; font-size: 0.85rem;">Activa</span></td>
-                        <td>Mercadona, Carrefour, Lidl</td>
+                        <td>01/04/2026</td>
+                        <td>30/05/2026</td>
+                        <td class="status-cell"></td>
                         <td>
-                            <button class="btn btn-primary" style="padding: 5px 10px; font-size: 0.8rem;">Editar</button>
-                            <button class="btn" style="padding: 5px 10px; font-size: 0.8rem; background: #6c757d; color: white;">Ver</button>
+                            <button class="btn btn-primary" style="padding: 5px 8px; font-size: 0.75rem;">Editar</button>
+                            <button class="btn" style="padding: 5px 8px; font-size: 0.75rem; background: #17a2b8; color: white;">Tiendas</button>
+                            <button class="btn" style="padding: 5px 8px; font-size: 0.75rem; background: #ffc107; color: #212529;">Colaboradores</button>
+                            <button class="btn" style="padding: 5px 8px; font-size: 0.75rem; background: #dc3545; color: white;">Borrar</button>
                         </td>
                     </tr>
-                    <tr class="campaign-row" data-status="terminada">
-                        <td>002</td>
-                        <td>Operación Kilo 2025</td>
+                    <tr class="campaign-row" data-start="2025-11-20" data-end="2025-12-15">
+                        <td>Campaña Navidad 2025</td>
                         <td>2025</td>
-                        <td><span style="background: #f8d7da; color: #721c24; padding: 4px 8px; border-radius: 4px; font-size: 0.85rem;">Terminada</span></td>
-                        <td>Dia, Lidl</td>
+                        <td>20/11/2025</td>
+                        <td>15/12/2025</td>
+                        <td class="status-cell"></td>
                         <td>
-                            <button class="btn btn-primary" style="padding: 5px 10px; font-size: 0.8rem;">Editar</button>
-                            <button class="btn" style="padding: 5px 10px; font-size: 0.8rem; background: #6c757d; color: white;">Ver</button>
+                            <button class="btn btn-primary" style="padding: 5px 8px; font-size: 0.75rem;">Editar</button>
+                            <button class="btn" style="padding: 5px 8px; font-size: 0.75rem; background: #17a2b8; color: white;">Tiendas</button>
+                            <button class="btn" style="padding: 5px 8px; font-size: 0.75rem; background: #ffc107; color: #212529;">Colaboradores</button>
+                            <button class="btn" style="padding: 5px 8px; font-size: 0.75rem; background: #dc3545; color: white;">Borrar</button>
                         </td>
                     </tr>
-                    <tr class="campaign-row" data-status="activa">
-                        <td>003</td>
-                        <td>Campaña Primavera</td>
+                    <tr class="campaign-row" data-start="2026-06-01" data-end="2026-06-15">
+                        <td>Operación Kilo Junio</td>
                         <td>2026</td>
-                        <td><span style="background: #d4edda; color: #155724; padding: 4px 8px; border-radius: 4px; font-size: 0.85rem;">Activa</span></td>
-                        <td>Mercadona, Dia</td>
+                        <td>01/06/2026</td>
+                        <td>15/06/2026</td>
+                        <td class="status-cell"></td>
                         <td>
-                            <button class="btn btn-primary" style="padding: 5px 10px; font-size: 0.8rem;">Editar</button>
-                            <button class="btn" style="padding: 5px 10px; font-size: 0.8rem; background: #6c757d; color: white;">Ver</button>
+                            <button class="btn btn-primary" style="padding: 5px 8px; font-size: 0.75rem;">Editar</button>
+                            <button class="btn" style="padding: 5px 8px; font-size: 0.75rem; background: #17a2b8; color: white;">Tiendas</button>
+                            <button class="btn" style="padding: 5px 8px; font-size: 0.75rem; background: #ffc107; color: #212529;">Colaboradores</button>
+                            <button class="btn" style="padding: 5px 8px; font-size: 0.75rem; background: #dc3545; color: white;">Borrar</button>
                         </td>
                     </tr>
                 </tbody>
@@ -88,22 +96,48 @@
 
     <script src="main.js"></script>
     <script>
+        function updateStatus() {
+            const now = new Date();
+            document.querySelectorAll('.campaign-row').forEach(row => {
+                const start = new Date(row.getAttribute('data-start'));
+                const end = new Date(row.getAttribute('data-end'));
+                const statusCell = row.querySelector('.status-cell');
+                let status = '';
+                let label = '';
+                let style = '';
+
+                if (now < start) {
+                    status = 'proximamente';
+                    label = 'Próximamente';
+                    style = 'background: #fff3cd; color: #856404;';
+                } else if (now > end) {
+                    status = 'terminada';
+                    label = 'Terminada';
+                    style = 'background: #f8d7da; color: #721c24;';
+                } else {
+                    status = 'activa';
+                    label = 'Activa';
+                    style = 'background: #d4edda; color: #155724;';
+                }
+
+                row.setAttribute('data-status', status);
+                statusCell.innerHTML = `<span style="${style} padding: 4px 8px; border-radius: 4px; font-size: 0.85rem;">${label}</span>`;
+            });
+        }
+
+        // Inicializar estados
+        updateStatus();
+
+        // Lógica de filtrado
         document.querySelectorAll('.filter-btn').forEach(button => {
             button.addEventListener('click', () => {
                 const filter = button.getAttribute('data-filter');
-                
-                // Actualizar estilo de botones
                 document.querySelectorAll('.filter-btn').forEach(btn => btn.classList.remove('active'));
                 button.classList.add('active');
 
-                // Filtrar filas
                 document.querySelectorAll('.campaign-row').forEach(row => {
                     const status = row.getAttribute('data-status');
-                    if (filter === 'all' || status === filter) {
-                        row.style.display = '';
-                    } else {
-                        row.style.display = 'none';
-                    }
+                    row.style.display = (filter === 'all' || status === filter) ? '' : 'none';
                 });
             });
         });
