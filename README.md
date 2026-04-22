@@ -106,3 +106,5 @@ Una vez levantada la base de datos podras conectarte a ella, con el usuario, db 
 ![Paso 3](https://img.shields.io/badge/Paso_3-Pendiente-red)
 ![Paso 4](https://img.shields.io/badge/Paso_4-Pendiente-red)
 ![Paso 5](https://img.shields.io/badge/Paso_5-Pendiente-red)
+
+![LC](https://tenor.com/es/view/sticker-agnes-tachyon-low-cortisol-uma-musume-gif-14223536015423111051)
