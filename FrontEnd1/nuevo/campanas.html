@@ -30,33 +30,83 @@
         </header>
 
         <div class="card">
-            <h3>Nueva Campaña (Referencia PDF pág. 2)</h3>
-            <form>
-                <div style="margin-bottom: 15px;">
-                    <label>Nombre de la Campaña:</label>
-                    <input type="text" placeholder="Ej: Gran Recogida" style="width: 100%; padding: 8px;">
-                </div>
-                <div style="margin-bottom: 15px;">
-                    <label>Año:</label>
-                    <select style="width: 100%; padding: 8px;">
-                        <option>2026</option>
-                        <option>2025</option>
-                    </select>
-                </div>
-                <div style="margin-bottom: 15px;">
-                    <label>Cadenas de Supermercados que participan:</label>
-                    <div style="margin-top: 10px;">
-                        <input type="checkbox"> Mercadona
-                        <input type="checkbox" style="margin-left: 20px;"> Carrefour
-                        <input type="checkbox" style="margin-left: 20px;"> Lidl
-                        <input type="checkbox" style="margin-left: 20px;"> Dia
-                    </div>
-                </div>
-                <button type="submit" class="btn btn-success">Guardar Campaña</button>
-            </form>
+            <div style="display: flex; gap: 10px; margin-bottom: 20px;">
+                <button class="btn filter-btn active" data-filter="all">Todas</button>
+                <button class="btn filter-btn" data-filter="activa">Activas</button>
+                <button class="btn filter-btn" data-filter="terminada">Terminadas</button>
+            </div>
+
+            <table>
+                <thead>
+                    <tr>
+                        <th>ID</th>
+                        <th>Nombre de Campaña</th>
+                        <th>Año</th>
+                        <th>Estado</th>
+                        <th>Supermercados</th>
+                        <th>Acciones</th>
+                    </tr>
+                </thead>
+                <tbody id="campaign-table-body">
+                    <tr class="campaign-row" data-status="activa">
+                        <td>001</td>
+                        <td>Gran Recogida 2026</td>
+                        <td>2026</td>
+                        <td><span style="background: #d4edda; color: #155724; padding: 4px 8px; border-radius: 4px; font-size: 0.85rem;">Activa</span></td>
+                        <td>Mercadona, Carrefour, Lidl</td>
+                        <td>
+                            <button class="btn btn-primary" style="padding: 5px 10px; font-size: 0.8rem;">Editar</button>
+                            <button class="btn" style="padding: 5px 10px; font-size: 0.8rem; background: #6c757d; color: white;">Ver</button>
+                        </td>
+                    </tr>
+                    <tr class="campaign-row" data-status="terminada">
+                        <td>002</td>
+                        <td>Operación Kilo 2025</td>
+                        <td>2025</td>
+                        <td><span style="background: #f8d7da; color: #721c24; padding: 4px 8px; border-radius: 4px; font-size: 0.85rem;">Terminada</span></td>
+                        <td>Dia, Lidl</td>
+                        <td>
+                            <button class="btn btn-primary" style="padding: 5px 10px; font-size: 0.8rem;">Editar</button>
+                            <button class="btn" style="padding: 5px 10px; font-size: 0.8rem; background: #6c757d; color: white;">Ver</button>
+                        </td>
+                    </tr>
+                    <tr class="campaign-row" data-status="activa">
+                        <td>003</td>
+                        <td>Campaña Primavera</td>
+                        <td>2026</td>
+                        <td><span style="background: #d4edda; color: #155724; padding: 4px 8px; border-radius: 4px; font-size: 0.85rem;">Activa</span></td>
+                        <td>Mercadona, Dia</td>
+                        <td>
+                            <button class="btn btn-primary" style="padding: 5px 10px; font-size: 0.8rem;">Editar</button>
+                            <button class="btn" style="padding: 5px 10px; font-size: 0.8rem; background: #6c757d; color: white;">Ver</button>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
         </div>
     </main>
 
     <script src="main.js"></script>
+    <script>
+        document.querySelectorAll('.filter-btn').forEach(button => {
+            button.addEventListener('click', () => {
+                const filter = button.getAttribute('data-filter');
+                
+                // Actualizar estilo de botones
+                document.querySelectorAll('.filter-btn').forEach(btn => btn.classList.remove('active'));
+                button.classList.add('active');
+
+                // Filtrar filas
+                document.querySelectorAll('.campaign-row').forEach(row => {
+                    const status = row.getAttribute('data-status');
+                    if (filter === 'all' || status === filter) {
+                        row.style.display = '';
+                    } else {
+                        row.style.display = 'none';
+                    }
+                });
+            });
+        });
+    </script>
 </body>
 </html>
