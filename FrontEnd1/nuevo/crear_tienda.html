@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bancosol - Tiendas - Crear</title>
+    <link rel="stylesheet" href="formulario.css">
+</head>
+<body>
+    <header>
+        <h1>Crear Tienda</h1>
+    </header>
+
+    <div class="formulario">
+        <form>
+            <div class="form-group">
+                <label for="cadena">Cadena</label>
+                <select name="cadena[]" id="cadena">
+                    <option value="cadena1">Cadena 1 (ejemplo)</option>
+                    <option value="cadena2">Cadena 2 (ejemplo)</option>
+                    <option value="cadena3">Cadena 3 (ejemplo)</option>
+                    <option value="cadena4">Cadena 4 (ejemplo)</option>
+                    <option value="cadena5">Cadena 5 (ejemplo)</option>
+                </select>
+            </div>
+            <div class="form-group">
+                <label for="descripcion">Especificación</label>
+                <input type="text" name="descripcion" id="descripcion" required/>
+            </div>
+            <div class="form-group">
+                <label for="Localidad">Localidad</label>
+                <input type="text" name="Localidad" id="Localidad" required/>
+            </div>
+            <div class="form-group">
+                <label for="domicilio">Domicilio</label>
+                <input type="text" name="domicilio" id="domicilio" required/>
+            </div>
+            <div class="form-group">
+                <label for="CPostal">Código Postal</label>
+                <input type="text" name="CPostal" id="CPostal" required/>
+            </div>
+            <div class="form-group">
+                <label for="ZGeo">Zona Geográfica</label>
+                <input type="text" name="ZGeo" id="ZGeo" required/>
+            </div>
+            <div class="form-actions">
+                <button type="submit" class="btn btn-primary">Crear Tienda</button>
+                <button type="button" class="btn btn-secondary" onclick="history.back()">Cancelar</button>
+            </div>
+        </form>
+    </div>
+</body>
