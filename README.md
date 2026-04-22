@@ -98,7 +98,7 @@ Una vez levantada la base de datos podras conectarte a ella, con el usuario, db 
 - 3º Post necesarios
   - /login (post) 
 - 4º Control de roles
-- 5º Extraer en clase a parte la sidebar en una clase a parte y poner referencia en cada clase .jsp
+- 5º Extraer en clase a parte la sidebar en una clase a parte y poner referencia en cada clase .jsp en Backend1
 - 6º Service
 - 7º DTO 
 
