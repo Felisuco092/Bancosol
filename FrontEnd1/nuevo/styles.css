@@ -59,6 +59,21 @@ body {
     background-color: #0056b3;
     color: white;
 }
+
+#menu-enlaces {
+    display: none; 
+}
+
+#menu-enlaces.abierto {
+    display: block;
+    animation: aparecer 0.3s ease-in-out;
+}
+
+@keyframes aparecer {
+    from { opacity: 0; transform: translateY(-10px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
 /* Main Content */
 .main-content {
     margin-left: var(--sidebar-width);
