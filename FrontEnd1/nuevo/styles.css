@@ -50,11 +50,15 @@ body {
     transition: 0.3s;
 }
 
-.sidebar nav ul li a:hover, .sidebar nav ul li a.active {
-    background-color: blue;
+.sidebar nav ul li a:hover {
+    background-color: rgb(12, 190, 225);
     color: black;
 }
 
+.sidebar nav ul li a.active {
+    background-color: white;
+    color: black;
+}
 /* Main Content */
 .main-content {
     margin-left: var(--sidebar-width);
