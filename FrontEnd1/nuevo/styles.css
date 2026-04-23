@@ -167,9 +167,7 @@ body:has(.sidebar.abierto) .main-content {
 
 /* Main Content */
 .main-content {
-    margin-left: 60px;
     padding: 40px;
-    width: calc(100% - 60px);
     transition: margin-left 0.3s ease-in-out, width 0.3s ease-in-out;
 }
 
@@ -191,6 +189,7 @@ body:has(.sidebar.abierto) .main-content {
     border-radius: 8px;
     box-shadow: 0 2px 4px rgba(0,0,0,0.1);
     margin-bottom: 20px;
+    overflow-x: auto;
 }
 
 .btn {
