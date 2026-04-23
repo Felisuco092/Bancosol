@@ -119,4 +119,4 @@ Importante seleccionar la base de datos de PostgreSQL y clicar en apply.
 
 ![SD](https://tenor.com/es/view/satono-diamond-uma-musume-satono-satono-diamond-worm-gif-10400485730432458344.gif)
 
-![SD](https://tenor.com/es/view/rlZv9jHZCqF.gif)
+![Leon](https://tenor.com/es/view/leon-kennedy-gif-14428209944621691527.gif)
