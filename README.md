@@ -19,11 +19,12 @@ Front completo en react para mostrar los datos de la bd.
 
 ---
 ## Levantar base de datos docker
-Debes tener instalado docker y docker compose para ello, tienes que dirigirte a la carpeta donde esta el docker-compose.yml de la carpeta db y ejecutar:
+Debes tener instalado docker y docker compose para ello, tienes que dirigirte a la carpeta donde esta el docker-compose.yml con schema.sql de la carpeta db, abrir el terminal en ese directorio y ejecutar:
 ```
 docker compose up -d
 ```
-Una vez levantada la base de datos podras conectarte a ella, con el usuario, db y contraseña que esta dentro del docker-compose.yml
+Una vez levantada la base de datos podras conectarte a ella, con el usuario, db y contraseña que esta dentro del docker-compose.yml.
+Importante seleccionar la base de datos de PostgreSQL y clicar en apply.
 
 ---
 
@@ -92,13 +93,13 @@ Una vez levantada la base de datos podras conectarte a ella, con el usuario, db 
 
 
 # To Do
-- 0º Pensar todas las pg, tanto las basicas como las tablas(actualizacion con fetch), edit y crear.
-- 1º HTML/css y js de todas las pg.
-- 2º Controlador con get para cada pg principal
+- 0º Pensar todas las páginas, tanto las basicas como las tablas(actualizacion con fetch), edit y crear.
+- 1º HTML/css y js de todas las páginas.
+- 2º Controlador con get para cada página principal
 - 3º Post necesarios
   - /login (post) 
 - 4º Control de roles
-- 5º Extraer en clase a parte la sidebar en una clase a parte y poner referencia en cada clase .jsp en Backend1
+- 5º Extraer en clase a parte la sidebar en una clase a parte y añadir en cada clase .jsp dentro de Frontend1
 - 6º Service
 - 7º DTO 
 
