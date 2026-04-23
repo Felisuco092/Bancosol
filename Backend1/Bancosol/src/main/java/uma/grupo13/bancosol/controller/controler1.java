@@ -26,7 +26,7 @@ public class controler1 {
             session.setAttribute("user", user);
             return "redirect:/dashboard";
         }else{
-            return "redirect:/"; // de momento devolver a la página de inicio
+            return "redirect:/"; // de momento devuelve a la página de inicio
         }
 
     }
