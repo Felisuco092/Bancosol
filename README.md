@@ -111,4 +111,6 @@ Una vez levantada la base de datos podras conectarte a ella, con el usuario, db 
 ![Paso 6](https://img.shields.io/badge/Paso_6-Pendiente-red)
 ![Paso 7](https://img.shields.io/badge/Paso_7-Pendiente-red)
 
-![LC](https://tenor.com/es/view/sticker-agnes-tachyon-low-cortisol-uma-musume-gif-14223536015423111051.gif)
+![LC](https://tenor.com/es/view/agnes-tachyon-low-cortisol-gif-6147390476112029717.gif)
+![que](https://tenor.com/es/view/double-speech-bubble-speechbubble-speech-bubble-umamusume-low-cortisol-gif-5557824492912855663.gif)
+![LC](https://tenor.com/es/view/shookai-umamusume-satono-diamond-gif-14347762895409516784.gif)
