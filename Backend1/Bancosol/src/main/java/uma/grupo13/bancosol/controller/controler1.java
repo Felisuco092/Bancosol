@@ -22,8 +22,13 @@ public class controler1 {
     public String doLogin(@RequestParam("username") String user,
                           @RequestParam("password") String password,
                           HttpSession session) {
+        if("admin".equals(user) && "paswword123".equals(password)){
+            session.setAttribute("user", user);
+            return "redirect:/dashboard";
+        }else{
+            return "redirect:/"; // de momento devolver a la página de inicio
+        }
 
-        return "index";
     }
 
     @GetMapping("/bandeja")
