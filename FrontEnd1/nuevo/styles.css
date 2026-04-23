@@ -21,15 +21,106 @@ body {
     color: var(--dark-text);
 }
 
+/* Toggle Button */
+.btn-collapsible {
+    position: fixed;
+    top: 20px;
+    left: 10px;
+    z-index: 1000;
+    width: 40px;
+    height: 40px;
+    padding: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: var(--primary-color);
+}
+
 /* Sidebar */
 .sidebar {
-    width: var(--sidebar-width);
+    width: 0;
+    min-width: 0;
     background-color: white;
     color: white;
     height: 100vh;
     position: fixed;
-    padding-top: 20px;
+    padding: 20px 0;
+    overflow: hidden;
+    overflow-y: auto;
+    transition: width 0.3s ease-in-out, min-width 0.3s ease-in-out;
+    z-index: 100;
 }
+
+.sidebar.abierto {
+    width: var(--sidebar-width);
+    min-width: var(--sidebar-width);
+}
+
+.sidebar .logo_login,
+#menu-enlaces {
+    opacity: 0;
+    transition: opacity 0.2s ease-in-out;
+    white-space: nowrap;
+}
+.logo_login {
+    padding-left: 60px;
+}
+
+.sidebar.abierto .logo_login,
+.sidebar.abierto #menu-enlaces {
+    opacity: 1;
+}
+
+.sidebar h2 {
+    text-align: center;
+    font-size: 1.5rem;
+    margin-bottom: 30px;
+}
+
+.sidebar nav ul {
+    list-style: none;
+    padding: 0;
+}
+
+.sidebar nav ul li a {
+    color: black;
+    text-decoration: none;
+    display: block;
+    padding: 15px 25px;
+    transition: 0.3s;
+}
+
+.sidebar nav ul li a:hover {
+    background-color: rgb(12, 190, 225);
+    color: black;
+}
+
+.sidebar nav ul li a.active {
+    background-color: #0056b3;
+    color: white;
+}
+
+/* Main Content */
+.main-content {
+    margin-left: 0;
+    padding: 40px;
+    width: 100%;
+    transition: margin-left 0.3s ease-in-out;
+}
+
+body:has(.sidebar.abierto) .main-content {
+    margin-left: var(--sidebar-width);
+}
+
+
+#btn-desplegable,
+.sidebar .logo_login,
+#menu-enlaces {
+    opacity: 1;
+    transition: opacity 0.2s ease-in-out;
+}
+
+
 
 .sidebar h2 {
     text-align: center;
@@ -76,10 +167,13 @@ body {
 
 /* Main Content */
 .main-content {
-    margin-left: var(--sidebar-width);
+    margin-left: 60px;
     padding: 40px;
-    width: calc(100% - var(--sidebar-width));
+    width: calc(100% - 60px);
+    transition: margin-left 0.3s ease-in-out, width 0.3s ease-in-out;
 }
+
+
 
 .header {
     display: flex;

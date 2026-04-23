@@ -19,22 +19,23 @@ document.addEventListener('DOMContentLoaded', () => {
             window.location.href = 'index.html';
         });
     }
-    //¿Lógica para el despliegue del menú sidebar?
-    /*const boton = document.getElementById('btn-desplegable');
-    const menu = document.getElementById('menu-enlaces');
+    const boton = document.getElementById('btn-desplegable');
+    const sidebar = document.querySelector('.sidebar');
+    const enlaces = document.getElementById('menu-enlaces');
 
-    boton.addEventListener('click', () => {
-
-        menu.classList.toggle('abierto');
-        
-
-        if (menu.classList.contains('abierto')) {
-            boton.innerHTML = '▲ Ocultar Menú';
-        } else {
-            boton.innerHTML = '▼ Mostrar Menú';
-        }
-    });
-    */
+    if (boton && sidebar) {
+        boton.addEventListener('click', () => {
+            sidebar.classList.toggle('abierto');
+            
+            if (sidebar.classList.contains('abierto')) {
+                boton.innerHTML = '✕';
+                enlaces.style.display = 'block';
+            } else {
+                boton.innerHTML = '☰';
+                enlaces.style.display = 'none';
+            }
+        });
+    }
 });
 
 
