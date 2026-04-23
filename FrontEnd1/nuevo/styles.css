@@ -108,11 +108,6 @@ body {
     transition: margin-left 0.3s ease-in-out;
 }
 
-body:has(.sidebar.abierto) .main-content {
-    margin-left: var(--sidebar-width);
-}
-
-
 #btn-desplegable,
 .sidebar .logo_login,
 #menu-enlaces {
