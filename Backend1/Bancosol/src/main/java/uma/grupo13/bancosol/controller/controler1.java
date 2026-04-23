@@ -1,10 +1,9 @@
-package uma.grupo13.bancosol.controler;
+package uma.grupo13.bancosol.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.*;
 import uma.grupo13.bancosol.dao.CampanaRepository;
 import uma.grupo13.bancosol.entity.CampanaEntity;
 
@@ -17,7 +16,8 @@ public class controler1 {
 
 
     @GetMapping("/")
-    public String doLogin() {
+    public String doLogin(@RequestParam("u")) {
+
         return "index";
     }
 
