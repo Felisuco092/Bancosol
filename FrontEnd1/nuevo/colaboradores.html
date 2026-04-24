@@ -32,52 +32,6 @@
             <button class="btn btn-primary">+ Nuevo Colaborador</button>
         </header>
 
-<div class="card">
-            <h3>Alta de Colaboradores</h3>
-            <form class="formulario">
-                <div class="form-group">
-                    <label>Nombre del Grupo/Entidad:</label>
-                    <input type="text" placeholder="Ej: Ayuntamiento de Almáchar" required>
-                </div>
-
-                <div class="form-group">
-                    <label>Tipo:</label>
-                    <select>
-                        <option>Grupo / Entidad</option>
-                        <option>Persona Física</option>
-                    </select>
-                </div>
-
-                <div class="form-group">
-                    <label>Domicilio:</label>
-                    <input type="text" placeholder="Ej: Calle Mayor, 25">
-                </div>
-
-                <div class="form-group">
-                    <label>Localidad:</label>
-                    <input type="text" placeholder="Ej: Almáchar" required>
-                </div>
-
-                <div class="form-group">
-                    <label>Código Postal:</label>
-                    <input type="text" placeholder="Ej: 29780" maxlength="5" required>
-                </div>
-
-                <div class="form-group">
-                    <label>Número de Voluntarios:</label>
-                    <input type="number" min="1" value="1">
-                </div>
-
-                <div class="form-group">
-                    <label>Observaciones:</label>
-                    <textarea rows="3" placeholder="Notas adicionales..."></textarea>
-                </div>
-
-                <button type="submit" class="btn btn-success">Registrar</button>
-                <button type="reset" class="btn btn-secondary">Limpiar</button>
-            </form>
-        </div>
-
         <div class="card">
             <div style="display: flex; gap: 10px; margin-bottom: 20px; flex-wrap: wrap;">
                 <div>
@@ -115,28 +69,28 @@
                         <td>Grupo</td>
                         <td>Almáchar</td>
                         <td>15</td>
-                        <td><button class="btn btn-small">Ver</button> <button class="btn btn-small">Editar</button></td>
+                        <td><button class="btn btn-primary" style="padding: 5px 8px; font-size: 0.75rem;">Editar</button> <button class="btn" style="padding: 5px 8px; font-size: 0.75rem; background: #dc3545; color: white;">Eliminar</button></td>
                     </tr>
                     <tr data-tipo="persona" data-localidad="Rincón de la Victoria">
                         <td>Maria López García</td>
                         <td>Persona Física</td>
                         <td>Rincón de la Victoria</td>
                         <td>1</td>
-                        <td><button class="btn btn-small">Ver</button> <button class="btn btn-small">Editar</button></td>
+                        <td><button class="btn btn-primary" style="padding: 5px 8px; font-size: 0.75rem;">Editar</button> <button class="btn" style="padding: 5px 8px; font-size: 0.75rem; background: #dc3545; color: white;">Eliminar</button></td>
                     </tr>
                     <tr data-tipo="grupo" data-localidad="Vélez-Rubio">
                         <td>Grupo Scout de Vélez</td>
                         <td>Grupo</td>
                         <td>Vélez-Rubio</td>
                         <td>8</td>
-                        <td><button class="btn btn-small">Ver</button> <button class="btn btn-small">Editar</button></td>
+                        <td><button class="btn btn-primary" style="padding: 5px 8px; font-size: 0.75rem;">Editar</button> <button class="btn" style="padding: 5px 8px; font-size: 0.75rem; background: #dc3545; color: white;">Eliminar</button></td>
                     </tr>
                     <tr data-tipo="grupo" data-localidad="Almáchar">
                         <td>Parroquia San Juan</td>
                         <td>Entidad</td>
                         <td>Almáchar</td>
                         <td>5</td>
-                        <td><button class="btn btn-small">Ver</button> <button class="btn btn-small">Editar</button></td>
+                        <td><button class="btn btn-primary" style="padding: 5px 8px; font-size: 0.75rem;">Editar</button> <button class="btn" style="padding: 5px 8px; font-size: 0.75rem; background: #dc3545; color: white;">Eliminar</button></td>
                     </tr>
                 </tbody>
             </table>
