@@ -21,6 +21,10 @@ body {
     color: var(--dark-text);
 }
 
+#login {
+    padding: 0;
+}
+
 /* Toggle Button */
 .btn-collapsible {
     position: fixed;
