@@ -95,6 +95,7 @@ Importante seleccionar la base de datos de PostgreSQL y clicar en apply.
 # To Do
 - 0º Pensar todas las páginas, tanto las basicas como las tablas(actualizacion con fetch), edit y crear.
 - 1º HTML/css y js de todas las páginas.
+  - Listas index, campañas, bandeja y editarCrear
 - 2º Controlador con get para cada página principal
 - 3º Post necesarios
   - /login (post) 
