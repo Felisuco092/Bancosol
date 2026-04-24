@@ -100,13 +100,14 @@ Importante seleccionar la base de datos de PostgreSQL y clicar en apply.
 - 3º Post necesarios
   - /login (post) 
 - 4º Control de roles
+  - Admin pueda ver en usuarios admin tambien y añadir admins?
 - 5º Extraer en clase a parte la sidebar en una clase a parte y añadir en cada clase .jsp dentro de Frontend1
 - 6º Crear js para emular petición y que devuelve un json. mock de base de datos con un timeout
 - 6º Service
 - 7º DTO 
 
 ![Paso 0](https://img.shields.io/badge/Paso_0-Completo-green)
-![Paso 1](https://img.shields.io/badge/Paso_1-En_proceso_(5/9_html)-yellow)
+![Paso 1](https://img.shields.io/badge/Paso_1-En_proceso_(7/9_html)-yellow)
 ![Paso 2](https://img.shields.io/badge/Paso_2-Pendiente-red)
 ![Paso 3](https://img.shields.io/badge/Paso_3-Pendiente-red)
 ![Paso 4](https://img.shields.io/badge/Paso_4-Pendiente-red)

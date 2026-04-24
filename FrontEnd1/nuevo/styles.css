@@ -25,6 +25,8 @@ body {
     padding: 0;
 }
 
+
+
 /* Toggle Button */
 .btn-collapsible {
     position: fixed;
@@ -118,8 +120,6 @@ body {
     opacity: 1;
     transition: opacity 0.2s ease-in-out;
 }
-
-
 
 .sidebar h2 {
     text-align: center;
@@ -322,4 +322,9 @@ th { background-color: #e9ecef; }
         padding: 0 ;
         font-size: 1rem ;
     }
+}
+
+.btn-danger{
+    background: #dc3545; 
+    color: white;
 }
