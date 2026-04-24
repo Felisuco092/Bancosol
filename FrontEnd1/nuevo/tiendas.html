@@ -38,27 +38,30 @@
                 <table>
                     <thead>
                         <tr>
-                            <th>Tienda</th>
-                            <th>P</th>
+                            <th>Cadena</th>
+                            <th>Participación</th>
                             <th>Domicilio</th>
                             <th>Localidad</th>
                             <th>Pr</th>
-                            <th>Editar tienda</th>
-                            <tr>
-                                <th></th>
-                                <th></th>
-                            </tr>
+                            <th>Acciones</th>
+                            
                         </tr>
                     </thead>
                     <tbody>
                         <tr style="cursor: pointer;" onclick="alert('Cargando detalle...')">
-                            <td>Mercadona el Cónsul</td>
+                            <td>Mercadona</td>
                             <td><input type="checkbox" checked onclick="event.stopPropagation()"></td>
                             <td>c/ Aristófanes, nºxx - Málaga</td>
                             <td>MÁLAGA</td>
                             <!--El html crear tienda es el mismo para editar, pero cambia q muestra todo vacio o los datos de esa-->
                             <td></td>    
-                            <td><a href="crea_tienda.html">Editar</a></td>
+                            <td>
+                                <button class="btn btn-primary" style="padding: 5px 8px; font-size: 0.75rem;" onclick="location.href='crea_tienda.html'">Crear tienda</button></br>
+                                <button class="btn" style="padding: 5px 8px; font-size: 0.75rem; background: #04e439; color: white;" onclick="location.href='anadir_tienda.html'">Añadir tienda</button></br>
+                                <button class="btn" style="padding: 5px 8px; font-size: 0.75rem; background: #05acf4; color: white;" onclick="location.href='eliminar_tienda.html'">Eliminar tienda</button></br>
+                                <button class="btn" style="padding: 5px 8px; font-size: 0.75rem; background: #f20606; color: white;" onclick="location.href='turnos.html'">Guardar</button></br>
+                                <button class="btn" style="padding: 5px 8px; font-size: 0.75rem; background: #28a745; color: white;" onclick="location.href='voluntarios.html'">Voluntarios asignados</button></br>
+                            </td>
                         </tr>
                         <tr>
                             <td>Lidl</td>
@@ -66,31 +69,55 @@
                             <td>c/ ...</td>
                             <td>MARBELLA</td>
                             <td></td>
-                            <td><a href="crea_tienda.html">Editar</a></td>
+                            <td>
+                                <button class="btn btn-primary" style="padding: 5px 8px; font-size: 0.75rem;" onclick="location.href='crea_tienda.html'">Crear tienda</button></br>
+                                <button class="btn" style="padding: 5px 8px; font-size: 0.75rem; background: #04e439; color: white;" onclick="location.href='anadir_tienda.html'">Añadir tienda</button></br>
+                                <button class="btn" style="padding: 5px 8px; font-size: 0.75rem; background: #05acf4; color: white;" onclick="location.href='eliminar_tienda.html'">Eliminar tienda</button></br>
+                                <button class="btn" style="padding: 5px 8px; font-size: 0.75rem; background: #f20606; color: white;" onclick="location.href='turnos.html'">Guardar</button></br>
+                                <button class="btn" style="padding: 5px 8px; font-size: 0.75rem; background: #28a745; color: white;" onclick="location.href='voluntarios.html'">Voluntarios asignados</button></br>
+                            </td>
                         </tr>
                         <tr>
-                            <td>Dia Capuchinos</td>
+                            <td>Dia</td>
                             <td><input type = "checkbox" checked onclick="event.stopPropagation()"></td>
                             <td>c/ ...</td>
                             <td>MÁLAGA</td>
                             <td></td>
-                            <td><a href="crea_tienda.html">Editar</a></td>
+                            <td>
+                                <button class="btn btn-primary" style="padding: 5px 8px; font-size: 0.75rem;" onclick="location.href='crea_tienda.html'">Crear tienda</button></br>
+                                <button class="btn" style="padding: 5px 8px; font-size: 0.75rem; background: #04e439; color: white;" onclick="location.href='anadir_tienda.html'">Añadir tienda</button></br>
+                                <button class="btn" style="padding: 5px 8px; font-size: 0.75rem; background: #05acf4; color: white;" onclick="location.href='eliminar_tienda.html'">Eliminar tienda</button></br>
+                                <button class="btn" style="padding: 5px 8px; font-size: 0.75rem; background: #f20606; color: white;" onclick="location.href='turnos.html'">Guardar</button></br>
+                                <button class="btn" style="padding: 5px 8px; font-size: 0.75rem; background: #28a745; color: white;" onclick="location.href='voluntarios.html'">Voluntarios asignados</button></br>
+                            </td>
                         </tr>
                         <tr>
-                            <td></td>
+                            <td>Carrefour</td>
                             <td><input type = "checkbox" checked onclick="event.stopPropagation()"></td>
                             <td>c/ ...</td>
                             <td></td>
                             <td></td>
-                            <td><a href="crea_tienda.html">Editar</a></td>
+                            <td>
+                                <button class="btn btn-primary" style="padding: 5px 8px; font-size: 0.75rem;" onclick="location.href='crea_tienda.html'">Crear tienda</button></br>
+                                <button class="btn" style="padding: 5px 8px; font-size: 0.75rem; background: #04e439; color: white;" onclick="location.href='anadir_tienda.html'">Añadir tienda</button></br>
+                                <button class="btn" style="padding: 5px 8px; font-size: 0.75rem; background: #05acf4; color: white;" onclick="location.href='eliminar_tienda.html'">Eliminar tienda</button></br>
+                                <button class="btn" style="padding: 5px 8px; font-size: 0.75rem; background: #f20606; color: white;" onclick="location.href='turnos.html'">Guardar</button></br>
+                                <button class="btn" style="padding: 5px 8px; font-size: 0.75rem; background: #28a745; color: white;" onclick="location.href='voluntarios.html'">Voluntarios asignados</button></br>
+                            </td>
                         </tr>
                         <tr>
-                            <td></td>
+                            <td>Covirán</td>
                             <td><input type = "checkbox" checked onclick="event.stopPropagation()"></td>
                             <td>c/ ...</td>
                             <td></td>
                             <td></td>
-                            <td><a href="crea_tienda.html">Editar</a></td>
+                            <td>
+                                <button class="btn btn-primary" style="padding: 5px 8px; font-size: 0.75rem;" onclick="location.href='crea_tienda.html'">Crear tienda</button></br>
+                                <button class="btn" style="padding: 5px 8px; font-size: 0.75rem; background: #04e439; color: white;" onclick="location.href='anadir_tienda.html'">Añadir tienda</button></br>
+                                <button class="btn" style="padding: 5px 8px; font-size: 0.75rem; background: #05acf4; color: white;" onclick="location.href='eliminar_tienda.html'">Eliminar tienda</button></br>
+                                <button class="btn" style="padding: 5px 8px; font-size: 0.75rem; background: #f20606; color: white;" onclick="location.href='turnos.html'">Guardar</button></br>
+                                <button class="btn" style="padding: 5px 8px; font-size: 0.75rem; background: #28a745; color: white;" onclick="location.href='voluntarios.html'">Voluntarios asignados</button></br>
+                            </td>
                         </tr>
                     </tbody>
                 </table>
