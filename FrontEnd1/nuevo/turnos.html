@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Bancosol - Turnos</title>
+    <title>Bancosol - Asignación de Turnos</title>
     <link rel="stylesheet" href="styles.css">
 </head>
 <body>
@@ -28,48 +28,115 @@
 
     <main class="main-content">
         <header class="header">
-            <h1>Asignación de Turnos (La Operativa)</h1>
+            <h1>Asignación de Turnos</h1>
         </header>
 
         <div class="card">
-            <h3>Seleccionar Tienda</h3>
-            <select style="padding: 10px; width: 100%;">
-                <option>Mercadona - Av. Andalucía</option>
-                <option>Carrefour - Rincón</option>
-            </select>
-            <span style="margin-left: 20px;">Capitán asignado: <strong>Juan Pérez</strong></span>
+            <div style="display: grid; grid-template-columns: 1fr 1fr auto; gap: 20px; align-items: end;">
+                <div>
+                    <label style="display: block; margin-bottom: 5px; font-weight: bold;">Campaña:</label>
+                    <select id="select-campana" style="padding: 10px; width: 100%; border-radius: 4px; border: 1px solid #ddd;">
+                        <option value="">-- Seleccione Campaña --</option>
+                        <option value="1">Gran Recogida Primavera 2026</option>
+                        <option value="2">Campaña Navidad 2025</option>
+                    </select>
+                </div>
+                <div>
+                    <label style="display: block; margin-bottom: 5px; font-weight: bold;">Tienda:</label>
+                    <select id="select-tienda" style="padding: 10px; width: 100%; border-radius: 4px; border: 1px solid #ddd;">
+                        <option value="">-- Seleccione Tienda --</option>
+                        <option value="101">Mercadona - Av. Andalucía</option>
+                        <option value="102">Carrefour - Rincón</option>
+                        <option value="103">Lidl - El Palo</option>
+                    </select>
+                </div>
+                <button id="btn-buscar" class="btn btn-primary">Ver Cuadrante</button>
+            </div>
         </div>
 
-        <div class="card">
-            <h3>Cuadrante de Turnos (Referencia PDF pág. 6)</h3>
-            <table style="text-align: center;">
-                <thead>
-                    <tr>
-                        <th>Franja Horaria</th>
-                        <th>Viernes</th>
-                        <th>Sábado</th>
-                        <th>Domingo</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr>
-                        <td><strong>Mañana (09:00 - 15:00)</strong></td>
-                        <td style="background: #d4edda;">Grupo Scout 1</td>
-                        <td style="background: #f8d7da;">[Vacío] <button>+</button></td>
-                        <td style="background: #d4edda;">Voluntarios UA</td>
-                    </tr>
-                    <tr>
-                        <td><strong>Tarde (15:00 - 21:00)</strong></td>
-                        <td style="background: #f8d7da;">[Vacío] <button>+</button></td>
-                        <td style="background: #d4edda;">Ayto. Almáchar</td>
-                        <td style="background: #f8d7da;">[Vacío] <button>+</button></td>
-                    </tr>
-                </tbody>
-            </table>
-            <button class="btn btn-danger" style="margin-top: 20px;">Registrar Incidencia</button>
+        <div id="cuadrante-container" style="display: none;">
+            <div class="card">
+                <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 15px;">
+                    <h3>Cuadrante de Turnos</h3>
+                    <div>
+                        <span>Capitán: <strong id="capitan-nombre">Juan Pérez</strong></span>
+                        <button class="btn btn-success" style="margin-left: 20px; font-size: 0.85rem;">+ Añadir Turno Extra</button>
+                    </div>
+                </div>
+                
+                <table style="width: 100%;">
+                    <thead>
+                        <tr>
+                            <th>Día</th>
+                            <th>Inicio</th>
+                            <th>Fin</th>
+                            <th>Voluntarios Asignados</th>
+                            <th>Acciones</th>
+                        </tr>
+                    </thead>
+                    <tbody id="tabla-turnos-body">
+                        <!-- Se poblará por JS -->
+                        <tr>
+                            <td>Viernes 01/04</td>
+                            <td>09:00</td>
+                            <td>15:00</td>
+                            <td>
+                                <div style="display: flex; flex-wrap: wrap; gap: 5px;">
+                                    <span style="background: #e2e3e5; padding: 2px 8px; border-radius: 12px; font-size: 0.8rem;">Carlos Ruiz <button style="border:none; background:none; cursor:pointer; color:red; font-weight:bold;">×</button></span>
+                                    <span style="background: #e2e3e5; padding: 2px 8px; border-radius: 12px; font-size: 0.8rem;">Ana Belén <button style="border:none; background:none; cursor:pointer; color:red; font-weight:bold;">×</button></span>
+                                    <button class="btn" style="padding: 2px 8px; font-size: 0.75rem; background: #28a745; color: white;">+ Añadir</button>
+                                </div>
+                            </td>
+                            <td>
+                                <button class="btn btn-danger" style="padding: 5px 10px; font-size: 0.75rem;">Incidencia</button>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>Viernes 01/04</td>
+                            <td>15:00</td>
+                            <td>21:00</td>
+                            <td>
+                                <div style="display: flex; flex-wrap: wrap; gap: 5px;">
+                                    <span style="background: #f8d7da; color: #721c24; padding: 2px 8px; border-radius: 12px; font-size: 0.8rem;">Vacío</span>
+                                    <button class="btn" style="padding: 2px 8px; font-size: 0.75rem; background: #28a745; color: white;">+ Añadir Voluntario</button>
+                                </div>
+                            </td>
+                            <td>
+                                <button class="btn btn-danger" style="padding: 5px 10px; font-size: 0.75rem;">Incidencia</button>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>Sábado 02/04</td>
+                            <td>09:00</td>
+                            <td>15:00</td>
+                            <td>
+                                <div style="display: flex; flex-wrap: wrap; gap: 5px;">
+                                    <span style="background: #d1ecf1; color: #0c5460; padding: 2px 8px; border-radius: 12px; font-size: 0.8rem;">Grupo Scout Malaka (10)</span>
+                                    <button class="btn" style="padding: 2px 8px; font-size: 0.75rem; background: #28a745; color: white;">+ Añadir</button>
+                                </div>
+                            </td>
+                            <td>
+                                <button class="btn btn-danger" style="padding: 5px 10px; font-size: 0.75rem;">Incidencia</button>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
         </div>
     </main>
 
     <script src="main.js"></script>
+    <script>
+        document.getElementById('btn-buscar').addEventListener('click', function() {
+            const campana = document.getElementById('select-campana').value;
+            const tienda = document.getElementById('select-tienda').value;
+
+            if (campana && tienda) {
+                document.getElementById('cuadrante-container').style.display = 'block';
+            } else {
+                alert('Por favor, seleccione una campaña y una tienda.');
+            }
+        });
+    </script>
 </body>
 </html>
