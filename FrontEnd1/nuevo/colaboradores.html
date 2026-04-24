@@ -33,18 +33,18 @@
         </header>
 
         <div class="card">
-            <div style="display: flex; gap: 10px; margin-bottom: 20px; flex-wrap: wrap;">
+            <div style="display: grid; grid-template-columns: 1fr 1fr auto; gap: 20px; align-items: end;">
                 <div>
-                    <label style="font-weight: 600; margin-right: 5px;">Tipo:</label>
-                    <select id="filter-tipo">
+                    <label style="display: block; margin-bottom: 5px; font-weight: bold;">Tipo:</label>
+                    <select id="filter-tipo" style="padding: 10px; width: 100%; border-radius: 4px; border: 1px solid #ddd;">
                         <option value="all">Todos</option>
                         <option value="grupo">Grupo / Entidad</option>
                         <option value="persona">Persona Física</option>
                     </select>
                 </div>
                 <div>
-                    <label style="font-weight: 600; margin-right: 5px;">Localidad:</label>
-                    <select id="filter-localidad">
+                    <label style="display: block; margin-bottom: 5px; font-weight: bold;">Localidad:</label>
+                    <select id="filter-localidad" style="padding: 10px; width: 100%; border-radius: 4px; border: 1px solid #ddd;">
                         <option value="all">Todas</option>
                         <option value="Almáchar">Almáchar</option>
                         <option value="Rincón de la Victoria">Rincón de la Victoria</option>
@@ -59,7 +59,9 @@
                         <th>Entidad</th>
                         <th>Tipo</th>
                         <th>Localidad</th>
+                        <th>C.P.</th>
                         <th>Nº Voluntarios</th>
+                        <th>Observaciones</th>
                         <th>Acciones</th>
                     </tr>
                 </thead>
@@ -68,28 +70,36 @@
                         <td>Ayuntamiento de Almáchar</td>
                         <td>Grupo</td>
                         <td>Almáchar</td>
+                        <td>29780</td>
                         <td>15</td>
+                        <td>Colaboración anual</td>
                         <td><button class="btn btn-primary" style="padding: 5px 8px; font-size: 0.75rem;">Editar</button> <button class="btn" style="padding: 5px 8px; font-size: 0.75rem; background: #dc3545; color: white;">Eliminar</button></td>
                     </tr>
                     <tr data-tipo="persona" data-localidad="Rincón de la Victoria">
                         <td>Maria López García</td>
                         <td>Persona Física</td>
                         <td>Rincón de la Victoria</td>
+                        <td>29730</td>
                         <td>1</td>
+                        <td>Disponible fines de semana</td>
                         <td><button class="btn btn-primary" style="padding: 5px 8px; font-size: 0.75rem;">Editar</button> <button class="btn" style="padding: 5px 8px; font-size: 0.75rem; background: #dc3545; color: white;">Eliminar</button></td>
                     </tr>
                     <tr data-tipo="grupo" data-localidad="Vélez-Rubio">
                         <td>Grupo Scout de Vélez</td>
                         <td>Grupo</td>
                         <td>Vélez-Rubio</td>
+                        <td>04800</td>
                         <td>8</td>
+                        <td>Grupo juvenil</td>
                         <td><button class="btn btn-primary" style="padding: 5px 8px; font-size: 0.75rem;">Editar</button> <button class="btn" style="padding: 5px 8px; font-size: 0.75rem; background: #dc3545; color: white;">Eliminar</button></td>
                     </tr>
                     <tr data-tipo="grupo" data-localidad="Almáchar">
                         <td>Parroquia San Juan</td>
                         <td>Entidad</td>
                         <td>Almáchar</td>
+                        <td>29780</td>
                         <td>5</td>
+                        <td>-</td>
                         <td><button class="btn btn-primary" style="padding: 5px 8px; font-size: 0.75rem;">Editar</button> <button class="btn" style="padding: 5px 8px; font-size: 0.75rem; background: #dc3545; color: white;">Eliminar</button></td>
                     </tr>
                 </tbody>
