@@ -110,7 +110,7 @@ body {
     display: flex;
     flex-direction: column; 
     gap: 12px; 
-    align-items: flex-start; /* Opcional: alinea los elementos a la izquierda de su columna */
+    align-items: flex-end; 
 }
 
 /* Main Content */
