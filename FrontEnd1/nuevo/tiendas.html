@@ -38,17 +38,18 @@
                 <table>
                     <thead>
                         <tr>
-                            <th>Cadena</th>
+                            <th>Tienda</th>
+                            <th>P</th>
+                            <th>Domicilio</th>
                             <th>Localidad</th>
-                            <th>Coordinador</th>
-                            <th>Estado</th>
+                            <th>Pr</th>
                             <th></th>
                         </tr>
                     </thead>
                     <tbody>
                         <tr style="cursor: pointer;" onclick="alert('Cargando detalle...')">
-                            <td>Mercadona</td>
-                            <td>Málaga</td>
+                            <td>Mercadona el Cónsul</td>
+                            <td><checkbox> </checkbox></td>
                             <td>Juan Pérez</td>
                             <td>Activo</td>
                             <!--El html crear tienda es el mismo para editar, pero cambia q muestra todo vacio o los datos de esa-->
@@ -65,21 +66,7 @@
                 </table>
             </div>
 
-            <div class="card" style="flex: 1;">
-                <h3>Detalle de Tienda</h3>
-                <form>
-                    <label>Dirección:</label>
-                    <input type="text" style="width: 100%; margin-bottom: 10px; padding: 5px;">
-                    <label>Marcar Excepción:</label>
-                    <input type="checkbox" style="margin-bottom: 10px;"><br>
-                    <label>Coordinador:</label>
-                    <select style="width: 100%; margin-bottom: 10px; padding: 5px;">
-                        <option>Juan Pérez</option>
-                        <option>Ana López</option>
-                    </select>
-                    <button class="btn btn-primary" style="width: 100%;">Actualizar</button>
-                </form>
-            </div>
+            
         </div>
     </main>
 
