@@ -25,6 +25,8 @@ body {
     padding: 0;
 }
 
+
+
 /* Toggle Button */
 .btn-collapsible {
     position: fixed;
@@ -104,6 +106,32 @@ body {
     color: white;
 }
 
+.acciones {
+    display: flex;
+    flex-direction: column; 
+    gap: 12px; 
+    align-items: flex-end; 
+}
+.status-badge {
+    padding: 6px 12px;
+    border-radius: 6px; /* Bordes redondeados */
+    font-size: 0.9rem;
+    font-weight: 500;
+    display: inline-block; /* Para que el fondo abrace al texto */
+    text-align: center;
+}
+
+.status-activa {
+    background-color: #d4edda; 
+    color: #0b5b38; 
+}
+
+/* Colores para el estado "Sin activar" (Por si lo necesitas) */
+.status-inactiva {
+    background-color: #f8d7da; 
+    color: #721c24; 
+}
+
 /* Main Content */
 .main-content {
     margin-left: 0;
@@ -118,8 +146,6 @@ body {
     opacity: 1;
     transition: opacity 0.2s ease-in-out;
 }
-
-
 
 .sidebar h2 {
     text-align: center;
@@ -290,10 +316,10 @@ th { background-color: #e9ecef; }
         padding: 12px 24px;
     }
     .btn-collapsible {
-        width: 40px !important;
-        height: 40px !important;
-        padding: 0 !important;
-        font-size: 1rem !important;
+        width: 40px ;
+        height: 40px ;
+        padding: 0 ;
+        font-size: 1rem ;
     }
 }
 
@@ -317,9 +343,14 @@ th { background-color: #e9ecef; }
         padding: 15px 30px;
     }
     .btn-collapsible {
-        width: 40px !important;
-        height: 40px !important;
-        padding: 0 !important;
-        font-size: 1rem !important;
+        width: 40px ;
+        height: 40px ;
+        padding: 0 ;
+        font-size: 1rem ;
     }
+}
+
+.btn-danger{
+    background: #dc3545; 
+    color: white;
 }

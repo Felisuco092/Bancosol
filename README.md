@@ -95,20 +95,22 @@ Importante seleccionar la base de datos de PostgreSQL y clicar en apply.
 # To Do
 - 0º Pensar todas las páginas, tanto las basicas como las tablas(actualizacion con fetch), edit y crear.
 - 1º HTML/css y js de todas las páginas.
-  - Listas index, campañas, bandeja y editarCrear
-- 2º Controlador con get para cada página principal
-- 3º Post necesarios
-  - /login (post) 
+  - Listas index, campañas, bandeja, turnos y editarCrear
+- 2º Controlador con gets y post
+  - ControladorBase tiene los que faltan
+- 3º Control de sesion
+  - Si sesion, redirect a dashboard y los demas a index sino sesión
 - 4º Control de roles
+  - Admin pueda ver en usuarios admin tambien y añadir admins?
 - 5º Extraer en clase a parte la sidebar en una clase a parte y añadir en cada clase .jsp dentro de Frontend1
 - 6º Crear js para emular petición y que devuelve un json. mock de base de datos con un timeout
 - 7º Service
 - 8º DTO 
 
 ![Paso 0](https://img.shields.io/badge/Paso_0-Completo-green)
-![Paso 1](https://img.shields.io/badge/Paso_1-En_proceso_(4/9_html)-yellow)
-![Paso 2](https://img.shields.io/badge/Paso_2-Pendiente-red)
-![Paso 3](https://img.shields.io/badge/Paso_3-En proceso-yellow)
+![Paso 1](https://img.shields.io/badge/Paso_1-En_proceso_(8/9_html)-yellow)
+![Paso 2](https://img.shields.io/badge/Paso_2-En_proceso_(esqueleto_gets)-yellow)
+![Paso 3](https://img.shields.io/badge/Paso_3-Pendiente-red)
 ![Paso 4](https://img.shields.io/badge/Paso_4-Pendiente-red)
 ![Paso 5](https://img.shields.io/badge/Paso_5-Completo-green)
 ![Paso 6](https://img.shields.io/badge/Paso_6-Pendiente-red)

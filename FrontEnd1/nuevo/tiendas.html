@@ -29,68 +29,112 @@
     <main class="main-content">
         <header class="header">
             <h1>Gestión de Tiendas</h1>
-            <input type="text" placeholder="Buscar por cadena, localidad..." style="padding: 8px; width: 300px;">
+            <div class="acciones">
+                <button class="btn btn-primary"; onclick="location.href='crear_tienda.html'">+ Nueva Tienda</button>
+                <input type="text" placeholder="Buscar por cadena, localidad..." style="padding: 8px; width: 300px;">
+                
+            </div>
         </header>
 
         <div style="display: flex; gap: 20px;">
+            <div style="display: flex; gap: 20px; flex-direction: column;">
+            
+            <div class="filtros-tiendas" style="display: flex; gap: 10px; margin-bottom: 10px;">
+                <button class="btn filter-btn active" data-filtro="todas">Todas</button>
+                <button class="btn filter-btn" data-filtro="activas">Activas</button>
+                <button class="btn filter-btn" data-filtro="sin-activar">Sin activar</button>
+            </div>
             <div class="card" style="flex: 2;">
-                <h3>Listado de Tiendas (Referencia PDF pág. 3)</h3>
+                <h3>Listado de Tiendas (PDF pág. 3)</h3>
                 <table>
                     <thead>
                         <tr>
                             <th>Tienda</th>
-                            <th>P</th>
-                            <th>Domicilio</th>
+                            <th>Descripción</th>
+                            <th>Participación</th>
                             <th>Localidad</th>
-                            <th>Pr</th>
-                            <th>Editar tienda</th>
-                            <tr>
-                                <th></th>
-                                <th></th>
-                            </tr>
+                            <th>Domicilio</th>
+                            <th>Código postal</th>
+                            <th>Zona geofráfica</th>
+                            <th>Estado</th>
+                            <th>Acciones</th>
+                            
                         </tr>
                     </thead>
-                    <tbody>
+                    <tbody id="tabla-tiendas-body">
                         <tr style="cursor: pointer;" onclick="alert('Cargando detalle...')">
                             <td>Mercadona el Cónsul</td>
-                            <td><input type="checkbox" checked onclick="event.stopPropagation()"></td>
+                            <td><i>La descripción va aquí</i></td>
+                            <td><input type="checkbox" onclick="event.stopPropagation()"></td>
                             <td>c/ Aristófanes, nºxx - Málaga</td>
                             <td>MÁLAGA</td>
                             <!--El html crear tienda es el mismo para editar, pero cambia q muestra todo vacio o los datos de esa-->
-                            <td></td>    
-                            <td><a href="crea_tienda.html">Editar</a></td>
+                            <td>...</td>   
+                            <td>...</td> 
+                            <td><span class="status-badge status-inactiva">Sin activar</span></td>
+                            <td>
+                                <button class="btn" style="padding: 5px 8px; font-size: 0.75rem; background: #0056b3; color: white;" onclick="location.href='editar_tienda.html'">Editar tienda</button><br>
+                                <button class="btn" style="padding: 5px 8px; font-size: 0.75rem; background: #fb0000; color: white;" onclick="location.href='eliminar_tienda.html'">Eliminar tienda</button><br>
+                                <!-- Voluntarios en html de colaboradores-->
+                            </td>
                         </tr>
                         <tr>
                             <td>Lidl</td>
-                            <td><input type = "checkbox" checked onclick="event.stopPropagation()"></td>
+                            <td><i>La descripción va aquí</i></td>
+                            <td><input type="checkbox" onclick="event.stopPropagation()"></td>
                             <td>c/ ...</td>
                             <td>MARBELLA</td>
-                            <td></td>
-                            <td><a href="crea_tienda.html">Editar</a></td>
+                            <td>...</td>
+                            <td>...</td> 
+                            <td><span class="status-badge status-inactiva">Sin activar</span> </td>
+                            <td>
+                                <button class="btn" style="padding: 5px 8px; font-size: 0.75rem; background: #0056b3; color: white;" onclick="location.href='editar_tienda.html'">Editar tienda</button><br>
+                                <button class="btn" style="padding: 5px 8px; font-size: 0.75rem; background: #fb0000; color: white;" onclick="location.href='eliminar_tienda.html'">Eliminar tienda</button><br>
+                                
+                            </td>
                         </tr>
                         <tr>
                             <td>Dia Capuchinos</td>
-                            <td><input type = "checkbox" checked onclick="event.stopPropagation()"></td>
+                            <td><i>La descripción va aquí</i></td>
+                            <td><input type="checkbox" onclick="event.stopPropagation()"></td>
                             <td>c/ ...</td>
                             <td>MÁLAGA</td>
-                            <td></td>
-                            <td><a href="crea_tienda.html">Editar</a></td>
+                            <td>...</td>
+                            <td>...</td> 
+                            <td><span class="status-badge status-inactiva">Sin activar</span></td>
+                            <td>
+                                <button class="btn" style="padding: 5px 8px; font-size: 0.75rem; background: #0056b3; color: white;" onclick="location.href='editar_tienda.html'">Editar tienda</button><br>
+                                <button class="btn" style="padding: 5px 8px; font-size: 0.75rem; background: #fb0000; color: white;" onclick="location.href='eliminar_tienda.html'">Eliminar tienda</button><br> 
+                            </td>
                         </tr>
                         <tr>
-                            <td></td>
-                            <td><input type = "checkbox" checked onclick="event.stopPropagation()"></td>
+                            <td>Carrefour Alameda</td>
+                            <td><i>La descripción va aquí</i></td>
+                            <td><input type="checkbox" onclick="event.stopPropagation()"></td>
                             <td>c/ ...</td>
-                            <td></td>
-                            <td></td>
-                            <td><a href="crea_tienda.html">Editar</a></td>
+                            <td>...</td>
+                            <td>...</td>
+                            <td>...</td> 
+                            <td><span class="status-badge status-inactiva">Sin activar</span></td>
+                            <td>
+                                <button class="btn" style="padding: 5px 8px; font-size: 0.75rem; background: #0056b3; color: white;" onclick="location.href='editar_tienda.html'">Editar tienda</button><br>
+                                <button class="btn" style="padding: 5px 8px; font-size: 0.75rem; background: #fb0000; color: white;" onclick="location.href='eliminar_tienda.html'">Eliminar tienda</button><br>
+                                
+                            </td>
                         </tr>
                         <tr>
-                            <td></td>
-                            <td><input type = "checkbox" checked onclick="event.stopPropagation()"></td>
+                            <td>Covirán</td>
+                            <td><i>La descripción va aquí</i></td>
+                            <td><input type="checkbox" onclick="event.stopPropagation()"></td>
                             <td>c/ ...</td>
-                            <td></td>
-                            <td></td>
-                            <td><a href="crea_tienda.html">Editar</a></td>
+                            <td>...</td>
+                            <td>...</td>
+                            <td>...</td> 
+                            <td><span class="status-badge status-inactiva">Sin activar</span></td>
+                            <td>
+                                <button class="btn" style="padding: 5px 8px; font-size: 0.75rem; background: #0056b3; color: white;" onclick="location.href='editar_tienda.html'">Editar tienda</button><br>
+                                <button class="btn" style="padding: 5px 8px; font-size: 0.75rem; background: #fb0000; color: white;" onclick="location.href='eliminar_tienda.html'">Eliminar tienda</button><br>
+                            </td>
                         </tr>
                     </tbody>
                 </table>
@@ -100,6 +144,7 @@
         </div>
     </main>
 
+    <script src="tiendas.js"></script>
     <script src="main.js"></script>
 </body>
 </html>

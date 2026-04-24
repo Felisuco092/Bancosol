@@ -1,0 +1,8 @@
+        .badge {
+            padding: 4px 10px;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            font-weight: 500;
+        }
+        .badge-persona { background-color: #e3f2fd; color: #1976d2; }
+        .badge-entidad { background-color: #f3e5f5; color: #7b1fa2; }
