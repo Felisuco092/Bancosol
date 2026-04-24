@@ -107,7 +107,7 @@ Importante seleccionar la base de datos de PostgreSQL y clicar en apply.
 - 7º DTO 
 
 ![Paso 0](https://img.shields.io/badge/Paso_0-Completo-green)
-![Paso 1](https://img.shields.io/badge/Paso_1-En_proceso_(6/9_html)-yellow)
+![Paso 1](https://img.shields.io/badge/Paso_1-En_proceso_(7/9_html)-yellow)
 ![Paso 2](https://img.shields.io/badge/Paso_2-Pendiente-red)
 ![Paso 3](https://img.shields.io/badge/Paso_3-Pendiente-red)
 ![Paso 4](https://img.shields.io/badge/Paso_4-Pendiente-red)

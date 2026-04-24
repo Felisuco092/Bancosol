@@ -29,46 +29,68 @@
     <main class="main-content">
         <header class="header">
             <h1>Gestión de Colaboradores</h1>
-            <button class="btn btn-primary">+ Nuevo Grupo/Entidad</button>
+            <button class="btn btn-primary">+ Nuevo Colaborador</button>
         </header>
 
         <div class="card">
-            <h3>Alta de Colaboradores (Referencia PDF pág. 4)</h3>
-            <form>
-                <div style="margin-bottom: 15px;">
-                    <label>Nombre del Grupo/Entidad:</label>
-                    <input type="text" placeholder="Ej: Ayuntamiento de Almáchar" style="width: 100%; padding: 8px;">
+            <div style="display: flex; gap: 10px; margin-bottom: 20px; flex-wrap: wrap;">
+                <div>
+                    <label style="font-weight: 600; margin-right: 5px;">Tipo:</label>
+                    <select id="filter-tipo">
+                        <option value="all">Todos</option>
+                        <option value="grupo">Grupo / Entidad</option>
+                        <option value="persona">Persona Física</option>
+                    </select>
                 </div>
-                
-                <h4>Contactos (Máximo 3)</h4>
-                <div style="border: 1px solid #ddd; padding: 10px; margin-bottom: 10px;">
-                    <label>Contacto 1:</label>
-                    <input type="text" placeholder="Nombre" style="width: 30%;">
-                    <input type="text" placeholder="Teléfono" style="width: 30%;">
-                    <input type="email" placeholder="Email" style="width: 30%;">
+                <div>
+                    <label style="font-weight: 600; margin-right: 5px;">Localidad:</label>
+                    <select id="filter-localidad">
+                        <option value="all">Todas</option>
+                        <option value="Almáchar">Almáchar</option>
+                        <option value="Rincón de la Victoria">Rincón de la Victoria</option>
+                        <option value="Vélez-Rubio">Vélez-Rubio</option>
+                    </select>
                 </div>
-                
-                <button type="submit" class="btn btn-success">Registrar Colaborador</button>
-            </form>
-        </div>
+            </div>
 
-        <div class="card">
-            <h3>Listado de Colaboradores</h3>
             <table>
                 <thead>
                     <tr>
                         <th>Entidad</th>
-                        <th>Contacto Principal</th>
-                        <th>Teléfono</th>
+                        <th>Tipo</th>
+                        <th>Localidad</th>
+                        <th>Nº Voluntarios</th>
                         <th>Acciones</th>
                     </tr>
                 </thead>
                 <tbody>
-                    <tr>
+                    <tr data-tipo="grupo" data-localidad="Almáchar">
+                        <td>Ayuntamiento de Almáchar</td>
+                        <td>Grupo</td>
+                        <td>Almáchar</td>
+                        <td>15</td>
+                        <td><button class="btn btn-primary" style="padding: 5px 8px; font-size: 0.75rem;">Editar</button> <button class="btn" style="padding: 5px 8px; font-size: 0.75rem; background: #dc3545; color: white;">Eliminar</button></td>
+                    </tr>
+                    <tr data-tipo="persona" data-localidad="Rincón de la Victoria">
+                        <td>Maria López García</td>
+                        <td>Persona Física</td>
+                        <td>Rincón de la Victoria</td>
+                        <td>1</td>
+                        <td><button class="btn btn-primary" style="padding: 5px 8px; font-size: 0.75rem;">Editar</button> <button class="btn" style="padding: 5px 8px; font-size: 0.75rem; background: #dc3545; color: white;">Eliminar</button></td>
+                    </tr>
+                    <tr data-tipo="grupo" data-localidad="Vélez-Rubio">
+                        <td>Grupo Scout de Vélez</td>
+                        <td>Grupo</td>
+                        <td>Vélez-Rubio</td>
+                        <td>8</td>
+                        <td><button class="btn btn-primary" style="padding: 5px 8px; font-size: 0.75rem;">Editar</button> <button class="btn" style="padding: 5px 8px; font-size: 0.75rem; background: #dc3545; color: white;">Eliminar</button></td>
+                    </tr>
+                    <tr data-tipo="grupo" data-localidad="Almáchar">
                         <td>Parroquia San Juan</td>
-                        <td>Padre Mateo</td>
-                        <td>952000000</td>
-                        <td><button>Ver</button></td>
+                        <td>Entidad</td>
+                        <td>Almáchar</td>
+                        <td>5</td>
+                        <td><button class="btn btn-primary" style="padding: 5px 8px; font-size: 0.75rem;">Editar</button> <button class="btn" style="padding: 5px 8px; font-size: 0.75rem; background: #dc3545; color: white;">Eliminar</button></td>
                     </tr>
                 </tbody>
             </table>
@@ -76,5 +98,6 @@
     </main>
 
     <script src="main.js"></script>
+    <script src="collaborators.js"></script>
 </body>
 </html>
