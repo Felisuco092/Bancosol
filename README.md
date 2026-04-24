@@ -102,17 +102,18 @@ Importante seleccionar la base de datos de PostgreSQL y clicar en apply.
 - 4º Control de roles
 - 5º Extraer en clase a parte la sidebar en una clase a parte y añadir en cada clase .jsp dentro de Frontend1
 - 6º Crear js para emular petición y que devuelve un json. mock de base de datos con un timeout
-- 6º Service
-- 7º DTO 
+- 7º Service
+- 8º DTO 
 
 ![Paso 0](https://img.shields.io/badge/Paso_0-Completo-green)
 ![Paso 1](https://img.shields.io/badge/Paso_1-En_proceso_(4/9_html)-yellow)
 ![Paso 2](https://img.shields.io/badge/Paso_2-Pendiente-red)
-![Paso 3](https://img.shields.io/badge/Paso_3-Pendiente-red)
+![Paso 3](https://img.shields.io/badge/Paso_3-En proceso-yellow)
 ![Paso 4](https://img.shields.io/badge/Paso_4-Pendiente-red)
 ![Paso 5](https://img.shields.io/badge/Paso_5-Completo-green)
 ![Paso 6](https://img.shields.io/badge/Paso_6-Pendiente-red)
-![Paso 7](https://img.shields.io/badge/Paso_7-Pendiente-red)
+![Paso 7](https://img.shields.io/badge/Paso_6-Pendiente-red)
+![Paso 8](https://img.shields.io/badge/Paso_7-Pendiente-red)
 
 ![LC](https://tenor.com/es/view/agnes-tachyon-low-cortisol-gif-6147390476112029717.gif)
 
