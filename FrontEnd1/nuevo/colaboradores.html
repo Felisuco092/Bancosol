@@ -29,26 +29,52 @@
     <main class="main-content">
         <header class="header">
             <h1>Gestión de Colaboradores</h1>
-            <button class="btn btn-primary">+ Nuevo Grupo/Entidad</button>
+            <button class="btn btn-primary">+ Nuevo Colaborador</button>
         </header>
 
         <div class="card">
-            <h3>Alta de Colaboradores (Referencia PDF pág. 4)</h3>
-            <form>
-                <div style="margin-bottom: 15px;">
+            <h3>Alta de Colaboradores</h3>
+            <form class="formulario">
+                <div class="form-group">
                     <label>Nombre del Grupo/Entidad:</label>
-                    <input type="text" placeholder="Ej: Ayuntamiento de Almáchar" style="width: 100%; padding: 8px;">
+                    <input type="text" placeholder="Ej: Ayuntamiento de Almáchar" required>
                 </div>
-                
-                <h4>Contactos (Máximo 3)</h4>
-                <div style="border: 1px solid #ddd; padding: 10px; margin-bottom: 10px;">
-                    <label>Contacto 1:</label>
-                    <input type="text" placeholder="Nombre" style="width: 30%;">
-                    <input type="text" placeholder="Teléfono" style="width: 30%;">
-                    <input type="email" placeholder="Email" style="width: 30%;">
+
+                <div class="form-group">
+                    <label>Tipo:</label>
+                    <select>
+                        <option>Grupo / Entidad</option>
+                        <option>Persona Física</option>
+                    </select>
                 </div>
-                
-                <button type="submit" class="btn btn-success">Registrar Colaborador</button>
+
+                <div class="form-group">
+                    <label>Domicilio:</label>
+                    <input type="text" placeholder="Ej: Calle Mayor, 25">
+                </div>
+
+                <div class="form-group">
+                    <label>Localidad:</label>
+                    <input type="text" placeholder="Ej: Almáchar" required>
+                </div>
+
+                <div class="form-group">
+                    <label>Código Postal:</label>
+                    <input type="text" placeholder="Ej: 29780" maxlength="5" required>
+                </div>
+
+                <div class="form-group">
+                    <label>Número de Voluntarios:</label>
+                    <input type="number" min="1" value="1">
+                </div>
+
+                <div class="form-group">
+                    <label>Observaciones:</label>
+                    <textarea rows="3" placeholder="Notas adicionales..."></textarea>
+                </div>
+
+                <button type="submit" class="btn btn-success">Registrar</button>
+                <button type="reset" class="btn btn-secondary">Limpiar</button>
             </form>
         </div>
 
@@ -58,17 +84,55 @@
                 <thead>
                     <tr>
                         <th>Entidad</th>
-                        <th>Contacto Principal</th>
-                        <th>Teléfono</th>
+                        <th>Tipo</th>
+                        <th>Localidad</th>
+                        <th>Nº Voluntarios</th>
                         <th>Acciones</th>
                     </tr>
                 </thead>
                 <tbody>
                     <tr>
+                        <td>Ayuntamiento de Almáchar</td>
+                        <td>Grupo</td>
+                        <td>Almáchar</td>
+                        <td>15</td>
+                        <td>
+                            <button class="btn btn-primary" style="padding: 5px 8px; font-size: 0.75rem;">Editar</button>
+                            <button class="btn" style="padding: 5px 8px; font-size: 0.75rem; background: #dc3545; color: white;">Borrar</button>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>Maria López García</td>
+                        <td>Persona Física</td>
+                        <td>Rincón de la Victoria</td>
+                        <td>1</td>
+                        <td>
+                            <button class="btn btn-primary" style="padding: 5px 8px; font-size: 0.75rem;">Editar</button>
+                            <button class="btn" style="padding: 5px 8px; font-size: 0.75rem; background: #dc3545; color: white;">Borrar</button>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>Grupo Scout de Vélez</td>
+                        <td>Grupo</td>
+                        <td>Vélez-Rubio</td>
+                        <td>8</td>
+                        <td>
+                            <button class="btn btn-primary" style="padding: 5px 8px; font-size: 0.75rem;">Editar</button>
+                            <button class="btn" style="padding: 5px 8px; font-size: 0.75rem; background: #dc3545; color: white;">Borrar</button>
+                        </td>
+                    </tr>
+                    <tr>
                         <td>Parroquia San Juan</td>
-                        <td>Padre Mateo</td>
-                        <td>952000000</td>
-                        <td><button>Ver</button></td>
+                        <td>Entidad</td>
+                        <td>Almáchar</td>
+                        <td>5</td>
+                        <td>
+                            <button class="btn btn-primary" style="padding: 5px 8px; font-size: 0.75rem;">Editar</button>
+                            <button class="btn" style="padding: 5px 8px; font-size: 0.75rem; background: #17a2b8; color: white;">Tiendas</button>
+                            <button class="btn" style="padding: 5px 8px; font-size: 0.75rem; background: #ffc107; color: #212529;">Colaboradores</button>
+                            <button class="btn" style="padding: 5px 8px; font-size: 0.75rem; background: #28a745; color: white;" onclick="location.href='turnos.html'">Turnos</button>
+                            <button class="btn" style="padding: 5px 8px; font-size: 0.75rem; background: #dc3545; color: white;">Borrar</button>
+                        </td>
                     </tr>
                 </tbody>
             </table>
