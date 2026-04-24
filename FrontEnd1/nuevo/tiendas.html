@@ -51,6 +51,7 @@
                         <tr>
                             <th>Tienda</th>
                             <th>Descripción</th>
+                            <th>Participación</th>
                             <th>Localidad</th>
                             <th>Domicilio</th>
                             <th>Código postal</th>
@@ -60,16 +61,17 @@
                             
                         </tr>
                     </thead>
-                    <tbody>
+                    <tbody id="tabla-tiendas-body">
                         <tr style="cursor: pointer;" onclick="alert('Cargando detalle...')">
                             <td>Mercadona el Cónsul</td>
                             <td><i>La descripción va aquí</i></td>
+                            <td><input type="checkbox" checked onclick="event.stopPropagation()"></td>
                             <td>c/ Aristófanes, nºxx - Málaga</td>
                             <td>MÁLAGA</td>
                             <!--El html crear tienda es el mismo para editar, pero cambia q muestra todo vacio o los datos de esa-->
                             <td>...</td>   
                             <td>...</td> 
-                            <td class="status-cell"></td> 
+                            <td><span class="status-badge status-activa">Activa</span></td>
                             <td>
                                 <button class="btn" style="padding: 5px 8px; font-size: 0.75rem; background: #04e439; color: white;" onclick="location.href='editar_tienda.html'">Editar tienda</button><br>
                                 <button class="btn" style="padding: 5px 8px; font-size: 0.75rem; background: #fb0000; color: white;" onclick="location.href='eliminar_tienda.html'">Eliminar tienda</button><br>
@@ -79,11 +81,12 @@
                         <tr>
                             <td>Lidl</td>
                             <td><i>La descripción va aquí</i></td>
+                            <td><input type="checkbox" checked onclick="event.stopPropagation()"></td>
                             <td>c/ ...</td>
                             <td>MARBELLA</td>
                             <td>...</td>
                             <td>...</td> 
-                            <td class="status-cell"></td>
+                            <td><span class="status-badge status-inactiva">Sin activar</span> </td>
                             <td>
                                 <button class="btn" style="padding: 5px 8px; font-size: 0.75rem; background: #04e439; color: white;" onclick="location.href='editar_tienda.html'">Editar tienda</button><br>
                                 <button class="btn" style="padding: 5px 8px; font-size: 0.75rem; background: #fb0000; color: white;" onclick="location.href='eliminar_tienda.html'">Eliminar tienda</button><br>
@@ -93,11 +96,12 @@
                         <tr>
                             <td>Dia Capuchinos</td>
                             <td><i>La descripción va aquí</i></td>
+                            <td><input type="checkbox" checked onclick="event.stopPropagation()"></td>
                             <td>c/ ...</td>
                             <td>MÁLAGA</td>
                             <td>...</td>
                             <td>...</td> 
-                            <td class="status-cell"></td>
+                            <td><span class="status-badge status-activa">Activa</span></td>
                             <td>
                                 <button class="btn" style="padding: 5px 8px; font-size: 0.75rem; background: #04e439; color: white;" onclick="location.href='editar_tienda.html'">Editar tienda</button><br>
                                 <button class="btn" style="padding: 5px 8px; font-size: 0.75rem; background: #fb0000; color: white;" onclick="location.href='eliminar_tienda.html'">Eliminar tienda</button><br> 
@@ -106,6 +110,7 @@
                         <tr>
                             <td>Carrefour Alameda</td>
                             <td><i>La descripción va aquí</i></td>
+                            <td><input type="checkbox" checked onclick="event.stopPropagation()"></td>
                             <td>c/ ...</td>
                             <td>...</td>
                             <td>...</td>
@@ -120,6 +125,7 @@
                         <tr>
                             <td>Covirán</td>
                             <td><i>La descripción va aquí</i></td>
+                            <td><input type="checkbox" checked onclick="event.stopPropagation()"></td>
                             <td>c/ ...</td>
                             <td>...</td>
                             <td>...</td>
