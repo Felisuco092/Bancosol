@@ -1,0 +1,27 @@
+package uma.grupo13.bancosol.controller;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
+import uma.grupo13.bancosol.dao.CampanaRepository;
+import uma.grupo13.bancosol.entity.CampanaEntity;
+
+import java.util.List;
+
+@Controller
+@RequestMapping("/campanas")
+public class CampanasController {
+    @Autowired
+    protected CampanaRepository campanaRepository;
+
+
+    @GetMapping("/")
+    public String doCampanas(Model model) {
+        List<CampanaEntity> campanas = campanaRepository.findAll();
+        model.addAttribute("paginaActual", "campanas");
+        model.addAttribute("campanas", campanas);
+        return "campanas";
+    }
+}
