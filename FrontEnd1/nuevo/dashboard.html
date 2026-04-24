@@ -31,27 +31,55 @@
             <h1>Cuadro de Mando</h1>
             <span>Bienvenido, Administrador</span>
         </header>
+        <div style="display: grid; grid-template-columns: repeat(2, 1fr); gap: 20px; grid-auto-rows: 1fr;">
+            <div class="card" style="display: flex; flex-direction: column; justify-content: space-between; align-items: center;">
+                <h3 style="text-align: center;">Total de Tiendas</h3>
+                <div style="font-size: 3rem; margin: 10px 0; text-align: center;">
+                    120
+                </div>
+                <p style="color: #666; text-align: center;">Tiendas registradas</p>
+            </div>
 
-        <div class="card">
-            <h3>Resumen de Cobertura</h3>
-            <p>Gráficas de barras e índices de cobertura por cadenas y localidades (Referencia PDF pág. 9).</p>
-            <div style="height: 200px; background: #eee; border: 1px dashed #ccc; display: flex; align-items: center; justify-content: center;">
-                [Espacio para Gráfica de Barras]
+            <div class="card" style="display: flex; flex-direction: column; justify-content: space-between; align-items: center;">
+                <h3>Total de Voluntarios Movilizados</h3>
+                <p style="font-size: 3rem; margin: 10px 0; color: #0056b3;">2,450</p> <!-- Son los voluntarios que tenemos en nuestra base de datos, el numero de ellos -->
+                <p style="color: #666;">voluntarios registrados</p>
             </div>
-        </div>
 
-        <div style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px;">
             <div class="card">
-                <h4>Total Tiendas</h4>
-                <p style="font-size: 2rem; margin: 0;">152</p>
+                <h3>Top Cadenas Participantes</h3>
+                <table style="width: 100%;">
+                    <thead>
+                        <tr>
+                            <th style="text-align: center;">Cadena</th>
+                            <th style="text-align: center;">Tiendas</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td style="padding: 8px 0; text-align: center;">Mercadona</td>
+                            <td style="text-align: center; font-weight: bold;">82</td>
+                        </tr>
+                        <tr>
+                            <td style="padding: 8px 0; text-align: center;">Carrefour</td>
+                            <td style="text-align: center; font-weight: bold;">35</td>
+                        </tr>
+                        <tr>
+                            <td style="padding: 8px 0; text-align: center;">Lidl</td>
+                            <td style="text-align: center; font-weight: bold;">22</td>
+                        </tr>
+                        <tr>
+                            <td style="padding: 8px 0; text-align: center;">Aldi</td>
+                            <td style="text-align: center; font-weight: bold;">13</td>
+                        </tr>
+                    </tbody>
+                </table>
             </div>
-            <div class="card">
-                <h4>Voluntarios</h4>
-                <p style="font-size: 2rem; margin: 0;">2,450</p>
-            </div>
-            <div class="card">
-                <h4>Cobertura Media</h4>
-                <p style="font-size: 2rem; margin: 0;">85%</p>
+
+            <div class="card" style="display: flex; flex-direction: column; justify-content: space-between; align-items: center;">
+                <h3>Días restantes</h3>
+                <p style="font-size: 3rem; margin: 10px 0; color: #0056b3;">42</p> <!-- id_voluntario sea NULL -->
+                <p style="color: #666;">Días restantes de la campaña activa</p>
             </div>
         </div>
     </main>
