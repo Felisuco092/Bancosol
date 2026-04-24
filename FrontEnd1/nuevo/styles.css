@@ -268,3 +268,46 @@ th { background-color: #e9ecef; }
     max-width: 100%;
     height: auto;
 }
+
+/* Responsive Scaling for Login */
+@media (min-width: 1200px) {
+    .login-card {
+        max-width: 500px;
+        padding: 40px;
+    }
+    .logo_login {
+        width: 350px;
+    }
+    .login-body {
+        font-size: 1.15rem;
+    }
+    .input_login input {
+        font-size: 1.15rem;
+        padding: 15px;
+    }
+    .btn {
+        font-size: 1.1rem;
+        padding: 12px 24px;
+    }
+}
+
+@media (min-width: 1600px) {
+    .login-card {
+        max-width: 650px;
+        padding: 60px;
+    }
+    .logo_login {
+        width: 450px;
+    }
+    .login-body {
+        font-size: 1.3rem;
+    }
+    .input_login input {
+        font-size: 1.3rem;
+        padding: 18px;
+    }
+    .btn {
+        font-size: 1.25rem;
+        padding: 15px 30px;
+    }
+}
