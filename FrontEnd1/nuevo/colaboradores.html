@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Bancosol - Colaboradores</title>
     <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="colaboradores.css">
 </head>
 <body>
     <button id="btn-desplegable" class="btn btn-primary btn-collapsible">
@@ -33,13 +34,13 @@
         </header>
 
         <div class="card">
-            <div style="display: grid; grid-template-columns: 1fr 1fr auto; gap: 20px; align-items: end;">
+            <div style="display: grid; grid-template-columns: 1fr 1fr auto; gap: 20px; align-items: end; margin-bottom: 20px;">
                 <div>
                     <label style="display: block; margin-bottom: 5px; font-weight: bold;">Tipo:</label>
                     <select id="filter-tipo" style="padding: 10px; width: 100%; border-radius: 4px; border: 1px solid #ddd;">
                         <option value="all">Todos</option>
-                        <option value="grupo">Grupo / Entidad</option>
-                        <option value="persona">Persona Física</option>
+                        <option value="false">Entidad / Grupo</option>
+                        <option value="true">Persona Física</option>
                     </select>
                 </div>
                 <div>
@@ -48,7 +49,7 @@
                         <option value="all">Todas</option>
                         <option value="Almáchar">Almáchar</option>
                         <option value="Rincón de la Victoria">Rincón de la Victoria</option>
-                        <option value="Vélez-Rubio">Vélez-Rubio</option>
+                        <option value="Málaga">Málaga</option>
                     </select>
                 </div>
             </div>
@@ -56,51 +57,43 @@
             <table>
                 <thead>
                     <tr>
-                        <th>Entidad</th>
+                        <th>Entidad / Nombre</th>
                         <th>Tipo</th>
                         <th>Localidad</th>
                         <th>C.P.</th>
-                        <th>Nº Voluntarios</th>
+                        <th>Voluntarios</th>
                         <th>Observaciones</th>
                         <th>Acciones</th>
                     </tr>
                 </thead>
-                <tbody>
-                    <tr data-tipo="grupo" data-localidad="Almáchar">
+                <tbody id="colaboradores-tbody">
+                    <!-- Los datos se procesan por la función para aplicar el estilo -->
+                    <tr data-es-persona="false" data-localidad="Almáchar">
                         <td>Ayuntamiento de Almáchar</td>
-                        <td>Grupo</td>
+                        <td class="tipo-cell"></td>
                         <td>Almáchar</td>
                         <td>29780</td>
                         <td>15</td>
                         <td>Colaboración anual</td>
-                        <td><button class="btn btn-primary" style="padding: 5px 8px; font-size: 0.75rem;">Editar</button> <button class="btn" style="padding: 5px 8px; font-size: 0.75rem; background: #dc3545; color: white;">Eliminar</button></td>
+                        <td><button class="btn btn-primary" style="padding: 5px 8px; font-size: 0.75rem;">Editar</button> <button class="btn" style="padding: 5px 8px; font-size: 0.75rem; background: #dc3545; color: white;">Borrar</button></td>
                     </tr>
-                    <tr data-tipo="persona" data-localidad="Rincón de la Victoria">
+                    <tr data-es-persona="true" data-localidad="Rincón de la Victoria">
                         <td>Maria López García</td>
-                        <td>Persona Física</td>
+                        <td class="tipo-cell"></td>
                         <td>Rincón de la Victoria</td>
                         <td>29730</td>
                         <td>1</td>
                         <td>Disponible fines de semana</td>
-                        <td><button class="btn btn-primary" style="padding: 5px 8px; font-size: 0.75rem;">Editar</button> <button class="btn" style="padding: 5px 8px; font-size: 0.75rem; background: #dc3545; color: white;">Eliminar</button></td>
+                        <td><button class="btn btn-primary" style="padding: 5px 8px; font-size: 0.75rem;">Editar</button> <button class="btn" style="padding: 5px 8px; font-size: 0.75rem; background: #dc3545; color: white;">Borrar</button></td>
                     </tr>
-                    <tr data-tipo="grupo" data-localidad="Vélez-Rubio">
-                        <td>Grupo Scout de Vélez</td>
-                        <td>Grupo</td>
-                        <td>Vélez-Rubio</td>
-                        <td>04800</td>
-                        <td>8</td>
-                        <td>Grupo juvenil</td>
-                        <td><button class="btn btn-primary" style="padding: 5px 8px; font-size: 0.75rem;">Editar</button> <button class="btn" style="padding: 5px 8px; font-size: 0.75rem; background: #dc3545; color: white;">Eliminar</button></td>
-                    </tr>
-                    <tr data-tipo="grupo" data-localidad="Almáchar">
-                        <td>Parroquia San Juan</td>
-                        <td>Entidad</td>
-                        <td>Almáchar</td>
-                        <td>29780</td>
-                        <td>5</td>
+                    <tr data-es-persona="false" data-localidad="Málaga">
+                        <td>Grupo Scout Malaka</td>
+                        <td class="tipo-cell"></td>
+                        <td>Málaga</td>
+                        <td>29018</td>
+                        <td>12</td>
                         <td>-</td>
-                        <td><button class="btn btn-primary" style="padding: 5px 8px; font-size: 0.75rem;">Editar</button> <button class="btn" style="padding: 5px 8px; font-size: 0.75rem; background: #dc3545; color: white;">Eliminar</button></td>
+                        <td><button class="btn btn-primary" style="padding: 5px 8px; font-size: 0.75rem;">Editar</button> <button class="btn" style="padding: 5px 8px; font-size: 0.75rem; background: #dc3545; color: white;">Borrar</button></td>
                     </tr>
                 </tbody>
             </table>
