@@ -33,32 +33,57 @@
         </header>
 
         <div class="card">
-            <h3>Alta de Coordinadores / Capitanes (Referencia PDF pág. 5)</h3>
-            <form>
-                <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 20px;">
-                    <div>
-                        <label>Nombre:</label>
-                        <input type="text" style="width: 100%; padding: 8px;">
-                    </div>
-                    <div>
-                        <label>Zona Geográfica:</label>
-                        <input type="text" placeholder="Ej: Axarquía" style="width: 100%; padding: 8px;">
-                    </div>
-                    <div>
-                        <label>Rol:</label>
-                        <select style="width: 100%; padding: 8px;">
-                            <option>Administrador</option>
-                            <option>Coordinador</option>
-                            <option>Capitán</option>
-                        </select>
-                    </div>
-                    <div>
-                        <label>Contraseña:</label>
-                        <input type="password" style="width: 100%; padding: 8px;">
-                    </div>
-                </div>
-                <button type="submit" class="btn btn-success" style="margin-top: 20px;">Crear Usuario</button>
-            </form>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Nombre</th>
+                        <th>Apellidos</th>
+                        <th>Email</th>
+                        <th>Teléfono</th>
+                        <th>Rol</th>
+                        <th>Área Asignada (Municipio)</th>
+                        <th>Acciones</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>Juan</td>
+                        <td>Pérez García</td>
+                        <td>juan.perez@email.com</td>
+                        <td>600123456</td>
+                        <td><span style="background: #e7f3ff; color: #007bff; padding: 4px 8px; border-radius: 4px;">Capitán</span></td>
+                        <td>Málaga Este</td>
+                        <td>
+                            <button class="btn btn-primary" style="padding: 5px 10px; font-size: 0.75rem;">Editar</button>
+                            <button class="btn btn-danger" style="padding: 5px 10px; font-size: 0.75rem;">Baja</button>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>María</td>
+                        <td>López Sánchez</td>
+                        <td>m.lopez@email.com</td>
+                        <td>611987654</td>
+                        <td><span style="background: #fff3e0; color: #fb8c00; padding: 4px 8px; border-radius: 4px;">Coordinador</span></td>
+                        <td>Almáchar</td>
+                        <td>
+                            <button class="btn btn-primary" style="padding: 5px 10px; font-size: 0.75rem;">Editar</button>
+                            <button class="btn btn-danger" style="padding: 5px 10px; font-size: 0.75rem;">Baja</button>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>Antonio</td>
+                        <td>Ruiz Fernández</td>
+                        <td>a.ruiz@email.com</td>
+                        <td>622456789</td>
+                        <td><span style="background: #e7f3ff; color: #007bff; padding: 4px 8px; border-radius: 4px;">Capitán</span></td>
+                        <td>Rincón de la Victoria</td>
+                        <td>
+                            <button class="btn btn-primary" style="padding: 5px 10px; font-size: 0.75rem;">Editar</button>
+                            <button class="btn btn-danger" style="padding: 5px 10px; font-size: 0.75rem;">Baja</button>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
         </div>
     </main>
 

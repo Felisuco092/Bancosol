@@ -323,3 +323,8 @@ th { background-color: #e9ecef; }
         font-size: 1rem !important;
     }
 }
+
+.btn-danger{
+    background: #dc3545; 
+    color: white;
+}
