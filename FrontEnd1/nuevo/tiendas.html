@@ -37,8 +37,15 @@
         </header>
 
         <div style="display: flex; gap: 20px;">
+            <div style="display: flex; gap: 20px; flex-direction: column;">
+            
+            <div class="filtros-tiendas" style="display: flex; gap: 10px; margin-bottom: 10px;">
+                <button class="btn filter-btn active" data-filtro="todas">Todas</button>
+                <button class="btn filter-btn" data-filtro="activas">Activas</button>
+                <button class="btn filter-btn" data-filtro="sin-activar">Sin activar</button>
+            </div>
             <div class="card" style="flex: 2;">
-                <h3>Listado de Tiendas (Referencia PDF pág. 3)</h3>
+                <h3>Listado de Tiendas (PDF pág. 3)</h3>
                 <table>
                     <thead>
                         <tr>
@@ -48,22 +55,24 @@
                             <th>Domicilio</th>
                             <th>Código postal</th>
                             <th>Zona geofráfica</th>
+                            <th>Estado</th>
                             <th>Acciones</th>
                             
                         </tr>
                     </thead>
                     <tbody>
                         <tr style="cursor: pointer;" onclick="alert('Cargando detalle...')">
-                            <td>Mercadona</td>
+                            <td>Mercadona el Cónsul</td>
                             <td><i>La descripción va aquí</i></td>
                             <td>c/ Aristófanes, nºxx - Málaga</td>
                             <td>MÁLAGA</td>
                             <!--El html crear tienda es el mismo para editar, pero cambia q muestra todo vacio o los datos de esa-->
                             <td>...</td>   
                             <td>...</td> 
+                            <td class="status-cell"></td> 
                             <td>
                                 <button class="btn" style="padding: 5px 8px; font-size: 0.75rem; background: #04e439; color: white;" onclick="location.href='editar_tienda.html'">Editar tienda</button><br>
-                                <button class="btn" style="padding: 5px 8px; font-size: 0.75rem; background: #05acf4; color: white;" onclick="location.href='eliminar_tienda.html'">Eliminar tienda</button><br>
+                                <button class="btn" style="padding: 5px 8px; font-size: 0.75rem; background: #fb0000; color: white;" onclick="location.href='eliminar_tienda.html'">Eliminar tienda</button><br>
                                 <!-- Voluntarios en html de colaboradores-->
                             </td>
                         </tr>
@@ -74,34 +83,37 @@
                             <td>MARBELLA</td>
                             <td>...</td>
                             <td>...</td> 
+                            <td class="status-cell"></td>
                             <td>
                                 <button class="btn" style="padding: 5px 8px; font-size: 0.75rem; background: #04e439; color: white;" onclick="location.href='editar_tienda.html'">Editar tienda</button><br>
-                                <button class="btn" style="padding: 5px 8px; font-size: 0.75rem; background: #05acf4; color: white;" onclick="location.href='eliminar_tienda.html'">Eliminar tienda</button><br>
+                                <button class="btn" style="padding: 5px 8px; font-size: 0.75rem; background: #fb0000; color: white;" onclick="location.href='eliminar_tienda.html'">Eliminar tienda</button><br>
                                 
                             </td>
                         </tr>
                         <tr>
-                            <td>Dia</td>
+                            <td>Dia Capuchinos</td>
                             <td><i>La descripción va aquí</i></td>
                             <td>c/ ...</td>
                             <td>MÁLAGA</td>
                             <td>...</td>
                             <td>...</td> 
+                            <td class="status-cell"></td>
                             <td>
                                 <button class="btn" style="padding: 5px 8px; font-size: 0.75rem; background: #04e439; color: white;" onclick="location.href='editar_tienda.html'">Editar tienda</button><br>
-                                <button class="btn" style="padding: 5px 8px; font-size: 0.75rem; background: #05acf4; color: white;" onclick="location.href='eliminar_tienda.html'">Eliminar tienda</button><br> 
+                                <button class="btn" style="padding: 5px 8px; font-size: 0.75rem; background: #fb0000; color: white;" onclick="location.href='eliminar_tienda.html'">Eliminar tienda</button><br> 
                             </td>
                         </tr>
                         <tr>
-                            <td>Carrefour</td>
+                            <td>Carrefour Alameda</td>
                             <td><i>La descripción va aquí</i></td>
                             <td>c/ ...</td>
                             <td>...</td>
                             <td>...</td>
                             <td>...</td> 
+                            <td class="status-cell"></td>
                             <td>
                                 <button class="btn" style="padding: 5px 8px; font-size: 0.75rem; background: #04e439; color: white;" onclick="location.href='editar_tienda.html'">Editar tienda</button><br>
-                                <button class="btn" style="padding: 5px 8px; font-size: 0.75rem; background: #05acf4; color: white;" onclick="location.href='eliminar_tienda.html'">Eliminar tienda</button><br>
+                                <button class="btn" style="padding: 5px 8px; font-size: 0.75rem; background: #fb0000; color: white;" onclick="location.href='eliminar_tienda.html'">Eliminar tienda</button><br>
                                 
                             </td>
                         </tr>
@@ -112,9 +124,10 @@
                             <td>...</td>
                             <td>...</td>
                             <td>...</td> 
+                            <td class="status-cell"></td>
                             <td>
                                 <button class="btn" style="padding: 5px 8px; font-size: 0.75rem; background: #04e439; color: white;" onclick="location.href='editar_tienda.html'">Editar tienda</button><br>
-                                <button class="btn" style="padding: 5px 8px; font-size: 0.75rem; background: #05acf4; color: white;" onclick="location.href='eliminar_tienda.html'">Eliminar tienda</button><br>
+                                <button class="btn" style="padding: 5px 8px; font-size: 0.75rem; background: #fb0000; color: white;" onclick="location.href='eliminar_tienda.html'">Eliminar tienda</button><br>
                             </td>
                         </tr>
                     </tbody>
@@ -125,6 +138,6 @@
         </div>
     </main>
 
-    <script src="main.js"></script>
+    <script src="tiendas.js"></script>
 </body>
 </html>
