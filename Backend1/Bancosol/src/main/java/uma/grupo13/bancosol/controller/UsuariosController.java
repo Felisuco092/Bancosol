@@ -3,6 +3,7 @@ package uma.grupo13.bancosol.controller;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 @Controller
@@ -14,4 +15,23 @@ public class UsuariosController {
         return "usuarios";
     }
 
+    @PostMapping("/editar")
+    public  String doEditarUsuarios(Model model) {
+        return "";
+    }
+
+    @PostMapping("/crear")
+    public  String doCrearUsuarios(Model model) {
+        return "";
+    }
+
+    @PostMapping("/borrar")
+    public  String doBorrarUsuarios(Model model) {
+        return "";
+    }
+
+    @PostMapping("/guardar")
+    public  String doGuardarUsuarios(Model model) {
+        return "redirect:/usuarios";
+    }
 }
