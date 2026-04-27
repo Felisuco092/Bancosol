@@ -53,4 +53,28 @@ document.addEventListener('DOMContentLoaded', () => {
             });
         });
     });
+
+    const selectCampanas = document.getElementById('select-filtro-campanas');
+    if (selectCampanas) {
+        selectCampanas.addEventListener('change', () => {
+            const campanaSeleccionada = selectCampanas.value;
+            console.log('Filtrando por campaña:', campanaSeleccionada);
+      
+             //Actualmente las filas no tienen datos de campaña asignados.
+                   // Si tuvieran un data-campana, se filtraría así:
+                  /*
+            filasTiendas.forEach(fila => {
+                const campanaFila = fila.getAttribute('data-campana');
+                if (campanaSeleccionada === 'todas' || campanaFila === campanaSeleccionada) {
+                    fila.style.display = '';
+                } else {
+                    fila.style.display = 'none';
+                }
+            });*/
+      
+            if (campanaSeleccionada === 'todas') {
+                filasTiendas.forEach(fila => fila.style.display = '');
+            }
+        });
+    }
 });
