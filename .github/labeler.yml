@@ -1,0 +1,16 @@
+backend:
+  - Backend1/**/*
+
+frontend:
+  - FrontEnd1/**/*
+
+database:
+  - bd/**/*
+
+docs:
+  - "**/*.md"
+  - "**/*.pdf"
+  - Modelo_de_datos/**/*
+
+api:
+  - Backend2/**/*

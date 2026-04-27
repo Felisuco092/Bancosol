@@ -4,6 +4,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import uma.grupo13.bancosol.dao.CampanaRepository;
 import uma.grupo13.bancosol.entity.CampanaEntity;
@@ -24,4 +25,25 @@ public class CampanasController {
         model.addAttribute("campanas", campanas);
         return "campanas";
     }
+
+    @PostMapping("/editar")
+    public  String doEditarCampana(Model model) {
+        return "";
+    }
+
+    @PostMapping("/crear")
+    public  String doCrearCampana(Model model) {
+        return "";
+    }
+
+    @PostMapping("/borrar")
+    public  String doBorrarCampana(Model model) {
+        return "";
+    }
+
+    @PostMapping("/guardar")
+    public  String doGuardarCampana(Model model) {
+        return "redirect:/campanas";
+    }
+
 }

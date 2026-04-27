@@ -40,9 +40,12 @@
             <div style="display: flex; gap: 20px; flex-direction: column;">
             
             <div class="filtros-tiendas" style="display: flex; gap: 10px; margin-bottom: 10px;">
-                <button class="btn filter-btn active" data-filtro="todas">Todas</button>
-                <button class="btn filter-btn" data-filtro="activas">Activas</button>
-                <button class="btn filter-btn" data-filtro="sin-activar">Sin activar</button>
+                <select id="select-filtro-campanas" class="btn" style="padding: 8px; border: 1px solid #ccc; font-weight: normal;">
+                    <option value="todas">Seleccionar Campaña...</option>
+                    <option value="campana-gran-recogida">Campaña de Gran Recogida Primavera</option>
+                    <option value="campana-navidad">Campaña Navidad</option>
+                    <option value="operacion-kilo">Operación Kilo Junio</option>
+                </select>
             </div>
             <div class="card" style="flex: 2;">
                 <h3>Listado de Tiendas (PDF pág. 3)</h3>
