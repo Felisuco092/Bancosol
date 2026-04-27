@@ -38,42 +38,30 @@ Importante seleccionar la base de datos de PostgreSQL y clicar en apply.
 ### 2. Cuadro de Mando (Dashboard / Inicio)
 **Descripción:** Pantalla principal (Home) al entrar, especialmente para el Administrador. Muestra las gráficas de barras e índices de cobertura por cadenas y localidades.
 
-**Referencia en PDF:** Página 9
-
 ---
 
 ### 3. Gestión de Campañas
 **Descripción:** Permite crear una nueva campaña (ej. "Gran Recogida"), seleccionar el año y marcar con checkboxes qué cadenas de supermercados participan a nivel general.
-
-**Referencia en PDF:** Página 2
 
 ---
 
 ### 4. Gestión de Tiendas
 **Descripción:** Listado interactivo con buscador/filtros (por cadena, localidad o coordinador). Al hacer clic en una tienda, se abre su detalle a la derecha para modificar la dirección, marcar "excepciones" de participación y asignarle un coordinador.
 
-**Referencia en PDF:** Página 3
-
 ---
 
 ### 5. Gestión de Colaboradores (Voluntarios)
 **Descripción:** Muestra el listado de los grupos de voluntarios o entidades (ej. "Ayuntamiento de Almáchar"). Permite dar de alta nuevos colaboradores y añadirles hasta 3 contactos diferentes (teléfono y email).
-
-**Referencia en PDF:** Página 4
 
 ---
 
 ### 6. Gestión de Usuarios (Coordinadores / Capitanes)
 **Descripción:** Pantalla de administración pura para dar de alta a las personas que van a usar la aplicación. Permite crear los usuarios, asignarles una zona geográfica y proteger sus contraseñas.
 
-**Referencia en PDF:** Página 5
-
 ---
 
 ### 7. Asignación de Turnos (La Operativa)
 **Descripción:** Pantalla compleja que usarán a diario los coordinadores durante la campaña. Permite seleccionar una tienda y ver un "cuadrante" con los turnos (Viernes Mañana, Viernes Tarde, etc.). Permite encajar a los colaboradores en franjas horarias específicas y nombrar al capitán de esa tienda.
-
-**Referencia en PDF:** Página 6
 
 ---
 
@@ -113,7 +101,7 @@ Importante seleccionar la base de datos de PostgreSQL y clicar en apply.
 ![Paso 3](https://img.shields.io/badge/Paso_3-Pendiente-red)
 ![Paso 1](https://img.shields.io/badge/Paso_1-En_proceso_(4/9_html)-yellow)
 ![Paso 2](https://img.shields.io/badge/Paso_2-Pendiente-red)
-![Paso 3](https://img.shields.io/badge/Paso_3-En proceso-yellow)
+![Paso 3](https://img.shields.io/badge/Paso_3-En_proceso-yellow)
 ![Paso 4](https://img.shields.io/badge/Paso_4-Pendiente-red)
 ![Paso 5](https://img.shields.io/badge/Paso_5-Completo-green)
 ![Paso 6](https://img.shields.io/badge/Paso_6-Pendiente-red)
@@ -129,3 +117,5 @@ Importante seleccionar la base de datos de PostgreSQL y clicar en apply.
 ![Leon](https://tenor.com/es/view/leon-kennedy-gif-14428209944621691527.gif)
 
 ![MbappeIsListening](https://tenor.com/es/view/kylian-mbappe-mbappe-i-would-rather-kylian-mbappe-i-would-rather-gif-3637069057647683703.gif)
+
+![Leon2](https://tenor.com/es/view/leon-leon-kennedy-leon-s-kennedy-leon-scott-kennedy-67-gif-1938107146117258547.gif)
