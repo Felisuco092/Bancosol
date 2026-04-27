@@ -47,9 +47,12 @@
             <div class="card" style="flex: 2;">
                 <h3>Listado de Tiendas (PDF pág. 3)</h3>
                 <div class="filtros-por-campanas" style="display: flex; gap: 10px; margin-bottom: 10px;">
-                    <button class="btn filter-btn " data-filtro="campana-gran-recogida">Campaña de Gran Recogida Primavera</button>
-                    <button class="btn filter-btn" data-filtro="campana-navidad">Campaña Navidad</button>
-                    <button class="btn filter-btn" data-filtro="operacion-kilo">Operación Kilo Junio</button>
+                    <select id="select-filtro-campanas" class="btn" style="padding: 8px; border: 1px solid #ccc; font-weight: normal;">
+                        <option value="todas">Seleccionar Campaña...</option>
+                        <option value="campana-gran-recogida">Campaña de Gran Recogida Primavera</option>
+                        <option value="campana-navidad">Campaña Navidad</option>
+                        <option value="operacion-kilo">Operación Kilo Junio</option>
+                    </select>
                 </div>
                 <table>
                     <thead>
