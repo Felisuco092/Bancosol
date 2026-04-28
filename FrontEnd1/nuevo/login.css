@@ -1,0 +1,111 @@
+/* ================================================
+   FrontEnd1/nuevo/login.css
+   Estilos exclusivos para la página de Login (index.html)
+   Usa IDs para evitar conflictos con otros CSS
+   ================================================ */
+
+/* ---------- Reset específico para login ---------- */
+#login-page {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    width: 100%;
+    background-color: #f8f9fa;
+    color: #343a40;
+}
+
+/* ---------- Card centrada ---------- */
+#login-card {
+    background: white;
+    border-radius: 8px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+    padding: 40px;
+    width: 100%;
+    max-width: 400px;
+    text-align: center;
+}
+
+/* ---------- Logo más pequeño ---------- */
+#login-logo {
+    display: block;
+    margin: 0 auto 20px;
+    width: 250pxpx;
+    max-width: 100%;
+    height: auto;
+}
+
+/* ---------- Subtítulo ---------- */
+#login-page .login-subtitle {
+    text-align: center;
+    color: #6c757d;
+    margin-bottom: 30px;
+    font-size: 0.95rem;
+}
+
+/* ---------- Formulario ---------- */
+#login-form {
+    text-align: left;
+}
+
+/* ---------- Inputs ---------- */
+#login-input-username,
+#login-input-password {
+    width: 100%;
+    margin-bottom: 20px;
+}
+
+#login-input-username label,
+#login-input-password label {
+    display: block;
+    margin-bottom: 8px;
+    font-weight: 500;
+    color: #343a40;
+}
+
+#login-page #username,
+#login-page #password {
+    width: 100%;
+    padding: 12px;
+    border: 1px solid #ced4da;
+    border-radius: 4px;
+    font-size: 1rem;
+    box-sizing: border-box;
+    transition: border-color 0.3s, box-shadow 0.3s;
+}
+
+#login-page #username:focus,
+#login-page #password:focus {
+    outline: none;
+    border-color: #0056b3;
+    box-shadow: 0 0 0 3px rgba(0, 86, 179, 0.1);
+}
+
+/* ---------- Botón de envío ---------- */
+#login-submit-btn {
+    width: 100%;
+    padding: 12px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    font-weight: bold;
+    font-size: 1rem;
+    background-color: #0056b3;
+    color: white;
+    transition: background-color 0.3s, transform 0.1s;
+    margin-top: 10px;
+}
+
+#login-submit-btn:hover {
+    background-color: #004494;
+    transform: translateY(-1px);
+}
+
+#login-submit-btn:active {
+    transform: translateY(0);
+}
+
+

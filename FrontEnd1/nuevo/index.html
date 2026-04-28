@@ -5,24 +5,26 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Bancosol - Login</title>
     <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="login.css">
+    <script src="js/main.js" defer></script>
 </head>
-<body class="login-body">
-    <div class="card login-card">
-        <img src="./assets/LOGO_BANCOSOL.png" alt="Logo BANCOSOL" class="logo_login" id="login">
+<body id="login-page" class="login-body">
+    <div id="login-card" class="card login-card">
+        <img src="./assets/LOGO_BANCOSOL.png" alt="Logo BANCOSOL" id="login-logo" class="logo_login">
         <p class="login-subtitle">Acceso al sistema de gestión</p>
         <form id="login-form">
-            <div class="input_login">
+            <div id="login-input-username" class="input_login">
                 <label for="username">Usuario:</label>
                 <input type="text" id="username" name="username" required>
             </div>
-            <div class="input_login">
+            <div id="login-input-password" class="input_login">
                 <label for="password">Contraseña:</label>
                 <input type="password" id="password" name="password" required>
             </div>
-            <button type="submit" class="btn btn-primary w-full">Entrar</button>
+            <button type="submit" id="login-submit-btn" class="btn btn-primary w-full">Entrar</button>
         </form>
     </div>
-    <script src="main.js"></script>
+    
     <script>
         document.getElementById('login-form').addEventListener('submit', (e) => {
             e.preventDefault();
