@@ -54,15 +54,16 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     });
 
+
     const selectCampanas = document.getElementById('select-filtro-campanas');
     if (selectCampanas) {
         selectCampanas.addEventListener('change', () => {
             const campanaSeleccionada = selectCampanas.value;
             console.log('Filtrando por campaña:', campanaSeleccionada);
-      
-             //Actualmente las filas no tienen datos de campaña asignados.
-                   // Si tuvieran un data-campana, se filtraría así:
-                  /*
+
+            // Nota: Actualmente las filas no tienen datos de campaña asignados.
+            // Si tuvieran un data-campana, se filtraría así:
+            /*
             filasTiendas.forEach(fila => {
                 const campanaFila = fila.getAttribute('data-campana');
                 if (campanaSeleccionada === 'todas' || campanaFila === campanaSeleccionada) {
@@ -71,10 +72,16 @@ document.addEventListener('DOMContentLoaded', () => {
                     fila.style.display = 'none';
                 }
             });*/
-      
+
+           // Por ahora, simulamos el filtrado mostrando todas si es 'todas'
+           // o simplemente dejando el listado actual para no romper la UI.
+           if (campanaSeleccionada === 'todas') {
+               filasTiendas.forEach(fila => fila.style.display = '');
+           }
+            });
+
             if (campanaSeleccionada === 'todas') {
                 filasTiendas.forEach(fila => fila.style.display = '');
             }
-        });
     }
 });
