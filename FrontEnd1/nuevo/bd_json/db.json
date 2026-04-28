@@ -1,0 +1,127 @@
+{
+  "$schema": "./node_modules/json-server/schema.json",
+  "roles": [
+    { "id": 1, "nombre": "Administrador" },
+    { "id": 2, "nombre": "Capitán" },
+    { "id": 3, "nombre": "Coordinador" },
+    { "id": 4, "nombre": "Responsable entidad"}
+  ],
+  "usuarios": [
+    {
+      "id": 1,
+      "nombre": "Juan",
+      "apellidos": "Pérez",
+      "usuario": "jperez",
+      "contrasena": "hash_seguro_123",
+      "email": "juan.perez@email.com",
+      "telefono": "600111222",
+      "area_asignada": "Zona Norte",
+      "id_rol": 1
+    },
+    {
+      "id": 2,
+      "nombre": "Ana",
+      "apellidos": "García",
+      "usuario": "agarcia",
+      "contrasena": "hash_seguro_456",
+      "email": "ana.garcia@email.com",
+      "telefono": "600333444",
+      "area_asignada": "Centro",
+      "id_rol": 2
+    }
+  ],
+  "cadenas": [
+    { "id": 1, "nombre": "Supermercados Sol", "codigo": "SOL-01" },
+    { "id": 2, "nombre": "Hiper Luna", "codigo": "LUNA-99" }
+  ],
+  "tiendas": [
+    {
+      "id": 1,
+      "descripcion": "Sol - Centro Ciudad",
+      "localidad": "Madrid",
+      "domicilio": "Calle Mayor 10",
+      "c_postal": "28001",
+      "zona_geografica": "Centro",
+      "id_cadena": 1,
+      "id_capitan": 2
+    },
+    {
+      "id": 2,
+      "descripcion": "Luna - Centro Comercial",
+      "localidad": "Madrid",
+      "domicilio": "Av. Albufera s/n",
+      "c_postal": "28038",
+      "zona_geografica": "Sur",
+      "id_cadena": 2,
+      "id_capitan": null
+    }
+  ],
+  "campanas": [
+    {
+      "id": 1,
+      "nombre": "Campaña Navidad 2025",
+      "ano": 2025,
+      "dia_comienzo": "2025-11-20",
+      "dia_final": "2025-12-15"
+    },
+    {
+      "id": 2,
+      "nombre": "Gran Recogida Primavera",
+      "ano": 2026,
+      "dia_comienzo": "2026-04-01",
+      "dia_final": "2026-05-30"
+    },
+    {
+      "id": 3,
+      "nombre": "Operación Kilo Junio",
+      "ano": 2026,
+      "dia_comienzo": "2026-06-01",
+      "dia_final": "2026-06-15"
+    }
+  ],
+  "voluntarios": [
+    {
+      "id": 1,
+      "nombre_entidad": "Asociación Vecinal",
+      "persona_fisica": false,
+      "domicilio": "Calle Falsa 123",
+      "localidad": "Madrid",
+      "codigo_postal": "28001",
+      "n_voluntarios": 10,
+      "observaciones": "Solo fines de semana"
+    }
+  ],
+  "turnos": [
+    {
+      "id": 1,
+      "dia": "2026-05-02",
+      "hora_inicio": "09:00",
+      "hora_fin": "14:00",
+      "id_campana": 1,
+      "id_voluntario": 1,
+      "id_tienda": 1
+    }
+  ],
+  "notificaciones": [
+    {
+      "id": 1,
+      "id_usuario_destino": 2,
+      "fecha_creacion": "2026-04-28T10:00:00Z",
+      "mensaje": "Has sido asignada a la campaña Operación Kilo."
+    }
+  ],
+  "participa": [
+    {
+      "id": 1,
+      "id_campana": 1,
+      "id_tienda": 1,
+      "id_coordinador": 1
+    },
+    {
+      "id": 2,
+      "id_campana": 1,
+      "id_tienda": 2,
+      "id_coordinador": null
+    }
+  ]
+}
