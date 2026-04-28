@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import uma.grupo13.bancosol.dao.UserRepository;
 import uma.grupo13.bancosol.entity.UsuarioEntity;
+import uma.grupo13.bancosol.utils.ValidaSesion;
 
 import java.util.List;
 
@@ -20,7 +21,7 @@ public class ControllerBase {
 
     @GetMapping("/")
     public String doStart(HttpSession session){
-        if (verificarSesion(session)) {
+        if (ValidaSesion.verificarSesion(session)) {
             return "redirect:/dashboard";
         }else {
             return "index";
@@ -29,7 +30,7 @@ public class ControllerBase {
 
     @GetMapping("/dashboard")
     public String doDashboard(Model model, HttpSession session) {
-        if (verificarSesion(session)) {
+        if (ValidaSesion.verificarSesion(session)) {
             model.addAttribute("paginaActual", "dashboard");
             return "dashboard";
         } else {
@@ -40,7 +41,7 @@ public class ControllerBase {
     @PostMapping("/login")
     public String dologin(@RequestParam("username") String user, @RequestParam("password") String password,
                           HttpSession session, Model model) {
-        if ("admin".equals(user) && "paswword123".equals(password)) {
+        if ("admin".equals(user) && "admin".equals(password)) {
             session.setAttribute("user", user);
             return "redirect:/dashboard";
         } else {
@@ -61,10 +62,6 @@ public class ControllerBase {
     public String dologout(HttpSession session){
         session.invalidate();
         return "redirect:/";
-    }
-
-    protected boolean verificarSesion(HttpSession session){
-        return session.getAttribute("user") != null;
     }
 }
 // datos en la bd
