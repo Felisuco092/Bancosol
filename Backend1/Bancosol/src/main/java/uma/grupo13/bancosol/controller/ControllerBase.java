@@ -64,6 +64,6 @@ public class ControllerBase {
         return "redirect:/";
     }
 }
-// datos en la bd
+// datos en la bd + atributos para cada get y pg(8+editarcrearver)
 // recargar tablas
-// post de cada boton: redirije a /get con los datos necesarios, ya esta el de bandeja
+// post de cada boton: redirije a /get con los datos necesarios

@@ -86,8 +86,8 @@ Importante seleccionar la base de datos de PostgreSQL y clicar en apply.
   - Listas index, campañas, bandeja, turnos y editarCrear
 - 2º Controlador con gets y post
   - ControladorBase tiene los que faltan
-  - Ya creado, faltan los gets devuelven las cosa, post y botones
-  - Pasar a jsp.
+  - Ya creado, faltan botones y /gardar y /borrar
+  - Pasar a jsp y ver los atributos necesarios.
 - 3º Control de sesion
   - Si sesion, redirect a dashboard y los demas a index sino sesión
 - 4º Control de roles
@@ -96,6 +96,7 @@ Importante seleccionar la base de datos de PostgreSQL y clicar en apply.
 - 6º Crear js para emular petición y que devuelve un json. mock de base de datos con un timeout
 - 7º Service
 - 8º DTO 
+- 9º Recarga de tablas(script de fetch)
 
 ![Paso 0](https://img.shields.io/badge/Paso_0-Completo-green)
 ![Paso 1](https://img.shields.io/badge/Paso_1-En_proceso_(8/9_html)-yellow)
@@ -103,9 +104,10 @@ Importante seleccionar la base de datos de PostgreSQL y clicar en apply.
 ![Paso 3](https://img.shields.io/badge/Paso_3-Pendiente-red)
 ![Paso 4](https://img.shields.io/badge/Paso_4-Pendiente-red)
 ![Paso 5](https://img.shields.io/badge/Paso_5-Completo-green)
-![Paso 6](https://img.shields.io/badge/Paso_6-Pendiente-red)
-![Paso 7](https://img.shields.io/badge/Paso_6-Pendiente-red)
-![Paso 8](https://img.shields.io/badge/Paso_7-Pendiente-red)
+![Paso 6](https://img.shields.io/badge/Paso_6-Opcional-orange)
+![Paso 7](https://img.shields.io/badge/Paso_7-Pendiente-red)
+![Paso 8](https://img.shields.io/badge/Paso_8-Pendiente-red)
+![Paso 9](https://img.shields.io/badge/Paso_9-Pendiente-red)
 
 ![LC](https://tenor.com/es/view/agnes-tachyon-low-cortisol-gif-6147390476112029717.gif)
 
