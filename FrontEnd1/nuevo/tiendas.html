@@ -41,10 +41,20 @@
                 <h3>Listado de Tiendas (PDF pág. 3)</h3>
                 <div class="filtros-por-campanas">
                     <select id="select-filtro-campanas2" class="btn select-filter">
+
                         <option value="todas">Seleccionar Campaña...</option>
                         <option value="campana-gran-recogida">Campaña de Gran Recogida Primavera</option>
                         <option value="campana-navidad">Campaña Navidad</option>
                         <option value="operacion-kilo">Operación Kilo Junio</option>
+                    </select>
+                    <select id="filtro-por-cadenas" class="btn select-filter">
+                        <option value="todas">Seleccionar Cadena de supermercados...</option>
+                        <option value="mercadona">Mercadona</option>
+                        <option value="lidl">Lidl</option>
+                        <option value="dia">Dia</option>
+                        <option value="aldi">Aldi</option>
+                        <option value="coviran">Covirán</option>
+                        <option value="corte-ingles">El Corte Inglés</option>
                     </select>
                 </div>
                 <table class="tabla-tiendas">
@@ -62,10 +72,10 @@
                         </tr>
                     </thead>
                     <tbody id="tabla-tiendas-body">
-                        <tr class="clickable" onclick="alert('Cargando detalle...')">
+                        <tr class="clickable">
                             <td>Mercadona el Cónsul</td>
                             <td><i>La descripción va aquí</i></td>
-                            <td><input type="checkbox" onclick="event.stopPropagation()"></td>
+                            <td><input type="checkbox"></td>
                             <td>c/ Aristófanes, nºxx - Málaga</td>
                             <td>MÁLAGA</td>
                             <td>...</td>
@@ -76,10 +86,10 @@
                                 <button class="btn btn-delete">Eliminar tienda</button>
                             </td>
                         </tr>
-                        <tr>
-                            <td>Lidl</td>
+                        <tr class="clickable">
+                            <td>Lidl el Polígono</td>
                             <td><i>La descripción va aquí</i></td>
-                            <td><input type="checkbox" onclick="event.stopPropagation()"></td>
+                            <td><input type="checkbox"></td>
                             <td>c/ ...</td>
                             <td>MARBELLA</td>
                             <td>...</td>
@@ -90,10 +100,52 @@
                                 <button class="btn btn-delete">Eliminar tienda</button>
                             </td>
                         </tr>
-                        <tr>
-                            <td>Dia Capuchinos</td>
+                        <tr class="clickable">
+                            <td>Lidl Antequera</td>
                             <td><i>La descripción va aquí</i></td>
-                            <td><input type="checkbox" onclick="event.stopPropagation()"></td>
+                            <td><input type="checkbox" ></td>
+                            <td>c/ ...</td>
+                            <td>ANTEQUERA</td>
+                            <td>...</td>
+                            <td>...</td>
+                            <td><span class="status-badge status-inactiva">Sin activar</span></td>
+                            <td>
+                                <button class="btn btn-edit" onclick="location.href='editar_tienda.html'">Editar tienda</button><br>
+                                <button class="btn btn-delete">Eliminar tienda</button>
+                            </td>
+                        </tr>
+                        <tr class="clickable">
+                            <td>Carrefour Alameda</td>
+                            <td><i>La descripción va aquí</i></td>
+                            <td><input type="checkbox"></td>
+                            <td>c/ ...</td>
+                            <td>...</td>
+                            <td>...</td>
+                            <td>...</td>
+                            <td><span class="status-badge status-inactiva">Sin activar</span></td>
+                            <td>
+                                <button class="btn btn-edit" onclick="location.href='editar_tienda.html'">Editar tienda</button><br>
+                                <button class="btn btn-delete">Eliminar tienda</button>
+                            </td>
+                        </tr>
+                        <tr class="clickable">
+                            <td>Covirán Puerto de la Torre</td>
+                            <td><i>La descripción va aquí</i></td>
+                            <td><input type="checkbox"></td>
+                            <td>c/ ...</td>
+                            <td>...</td>
+                            <td>...</td>
+                            <td>...</td>
+                            <td><span class="status-badge status-inactiva">Sin activar</span></td>
+                            <td>
+                                <button class="btn btn-edit" onclick="location.href='editar_tienda.html'">Editar tienda</button><br>
+                                <button class="btn btn-delete">Eliminar tienda</button>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>Mercadona Campanillas</td>
+                            <td><i>La descripción va aquí</i></td>
+                            <td><input type="checkbox" ></td>
                             <td>c/ ...</td>
                             <td>MÁLAGA</td>
                             <td>...</td>
@@ -104,12 +156,12 @@
                                 <button class="btn btn-delete">Eliminar tienda</button>
                             </td>
                         </tr>
-                        <tr>
-                            <td>Carrefour Alameda</td>
+                        <tr class="clickable">
+                            <td>Dia Carretera Cádiz</td>
                             <td><i>La descripción va aquí</i></td>
-                            <td><input type="checkbox" onclick="event.stopPropagation()"></td>
+                            <td><input type="checkbox" ></td>
                             <td>c/ ...</td>
-                            <td>...</td>
+                            <td>MÁLAGA</td>
                             <td>...</td>
                             <td>...</td>
                             <td><span class="status-badge status-inactiva">Sin activar</span></td>
@@ -118,17 +170,73 @@
                                 <button class="btn btn-delete">Eliminar tienda</button>
                             </td>
                         </tr>
-                        <tr>
-                            <td>Covirán</td>
+                        <tr class="clickable">
+                            <td>Covirán Bailén-Miraflores</td>
                             <td><i>La descripción va aquí</i></td>
-                            <td><input type="checkbox" onclick="event.stopPropagation()"></td>
+                            <td><input type="checkbox" ></td>
                             <td>c/ ...</td>
-                            <td>...</td>
+                            <td>MÁLAGA</td>
                             <td>...</td>
                             <td>...</td>
                             <td><span class="status-badge status-inactiva">Sin activar</span></td>
                             <td>
                                 <button class="btn btn-edit" onclick="location.href='editar_tienda.html'">Editar tienda</button><br>
+                                <button class="btn btn-delete">Eliminar tienda</button>
+                            </td>
+                        </tr>
+                        <tr class="clickable">
+                            <td>Dia Capuchinos</td>
+                            <td><i>La descripción va aquí</i></td>
+                            <td><input type="checkbox" ></td>
+                            <td>c/ ...</td>
+                            <td>MÁLAGA</td>
+                            <td>...</td>
+                            <td>...</td>
+                            <td><span class="status-badge status-inactiva">Sin activar</span></td>
+                            <td>
+                                <button class="btn btn-edit" onclick="location.href='editar_tienda.html'">Editar tienda</button><br>
+                                <button class="btn btn-delete">Eliminar tienda</button>
+                            </td>
+                        </tr>
+                        <tr class="clickable">
+                            <td>Dia Mármoles</td>
+                            <td><i>La descripción va aquí</i></td>
+                            <td><input type="checkbox" ></td>
+                            <td>c/ Mármoles, nº xx - Málaga</td>
+                            <td>MÁLAGA</td>
+                            <td>...</td>
+                            <td>...</td>
+                            <td><span class="status-badge status-inactiva">Sin activar</span></td>
+                            <td>
+                                <button class="btn btn-edit" onclick="location.href='editar_tienda.html'">Editar tienda</button><br>
+                                <button class="btn btn-delete">Eliminar tienda</button>
+                            </td>
+                        </tr>
+                        <tr class="clickable">
+                            <td>El Corte Inglés Bahía Málaga</td>
+                            <td><i>La descripción va aquí</i></td>
+                            <td><input type="checkbox"></td>
+                            <td>c/ , nº xx - Málaga</td>
+                            <td>MÁLAGA</td>
+                            <td>...</td>
+                            <td>...</td>
+                            <td><span class="status-badge status-inactiva">Sin activar</span></td>
+                            <td>
+                                <button class="btn btn-primary btn-sm">Editar tienda</button><br>
+                                <button class="btn btn-delete">Eliminar tienda</button>
+                            </td>
+                        </tr>
+                        <tr class="clickable">
+                            <td>El Corte Inglés Av. Andalucía</td>
+                            <td><i>La descripción va aquí</i></td>
+                            <td><input type="checkbox"></td>
+                            <td>Av. Andalucía, nº xx - Málaga</td>
+                            <td>MÁLAGA</td>
+                            <td>...</td>
+                            <td>...</td>
+                            <td><span class="status-badge status-inactiva">Sin activar</span></td>
+                            <td>
+                                <button class="btn btn-primary btn-sm">Editar tienda</button><br>
                                 <button class="btn btn-delete">Eliminar tienda</button>
                             </td>
                         </tr>

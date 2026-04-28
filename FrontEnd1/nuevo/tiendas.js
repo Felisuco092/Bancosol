@@ -26,8 +26,8 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     });
 
-    // Los botones de filtro: "Todas", "Activas", "Sin activar"
-    botonesFiltro.forEach(boton => {
+    // Los botones de filtro: "Todas", "Activas", "Sin activar" (eliminado previamente)
+    /*botonesFiltro.forEach(boton => {
         boton.addEventListener('click', () => {
             // Cambiar color del botón activo
             botonesFiltro.forEach(b => b.classList.remove('active'));
@@ -52,18 +52,17 @@ document.addEventListener('DOMContentLoaded', () => {
                 }
             });
         });
-    });
-
+    });*/
 
     const selectCampanas = document.getElementById('select-filtro-campanas');
     if (selectCampanas) {
         selectCampanas.addEventListener('change', () => {
             const campanaSeleccionada = selectCampanas.value;
             console.log('Filtrando por campaña:', campanaSeleccionada);
-
-            // Nota: Actualmente las filas no tienen datos de campaña asignados.
-            // Si tuvieran un data-campana, se filtraría así:
-            /*
+      
+             //Actualmente las filas no tienen datos de campaña asignados.
+                   // Si tuvieran un data-campana, se filtraría así:
+                  /*
             filasTiendas.forEach(fila => {
                 const campanaFila = fila.getAttribute('data-campana');
                 if (campanaSeleccionada === 'todas' || campanaFila === campanaSeleccionada) {
@@ -72,16 +71,10 @@ document.addEventListener('DOMContentLoaded', () => {
                     fila.style.display = 'none';
                 }
             });*/
-
-           // Por ahora, simulamos el filtrado mostrando todas si es 'todas'
-           // o simplemente dejando el listado actual para no romper la UI.
-           if (campanaSeleccionada === 'todas') {
-               filasTiendas.forEach(fila => fila.style.display = '');
-           }
-            });
-
+      
             if (campanaSeleccionada === 'todas') {
                 filasTiendas.forEach(fila => fila.style.display = '');
             }
+        });
     }
 });
