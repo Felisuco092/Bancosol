@@ -46,13 +46,22 @@
             </div>
             
             <div class="card" style="flex: 2;">
-                <h3>Listado de Tiendas (PDF pág. 3)</h3>
-                <div class="filtros-por-campanas" style="display: flex; gap: 10px; margin-bottom: 10px;">
+                <h2>Listado de Tiendas (PDF pág. 3)</h2>
+                <div class="filtros" style="display: flex; gap: 10px; margin-bottom: 10px;">
                     <select id="select-filtro-campanas" class="btn" style="padding: 8px; border: 1px solid #ccc; font-weight: normal;">
                         <option value="todas">Seleccionar Campaña...</option>
                         <option value="campana-gran-recogida">Campaña de Gran Recogida Primavera</option>
                         <option value="campana-navidad">Campaña Navidad</option>
                         <option value="operacion-kilo">Operación Kilo Junio</option>
+                    </select>
+                    <select id="filtro-por-cadenas" style="display: flex; gap: 10px; margin-bottom: 10px;">
+                        <option value="todas">Seleccionar Cadena de supermercados...</option>
+                        <option value="mercadona">Mercadona</option>
+                        <option value="lidl">Lidl</option>
+                        <option value="dia">Dia</option>
+                        <option value="aldi">Aldi</option>
+                        <option value="coviran">Covirán</option>
+                        <option value="corte-ingles">El Corte Inglés</option>
                     </select>
                 </div>
                 <table>
