@@ -1,13 +1,20 @@
+/* ================================================
+   FrontEnd1/nuevo/formulario.css
+   Estilos para formularios - Sistema Bancosol
+   ================================================ */
+
+/* Hereda variables de styles.css */
 :root {
     --primary-color: #0056b3;
+    --primary-hover: #004494;
     --secondary-color: #6c757d;
-    --success-color: #28a745;
-    --danger-color: #dc3545;
+    --secondary-hover: #5a6268;
     --light-bg: #f8f9fa;
     --dark-text: #343a40;
-    --sidebar-width: 250px;
+    --form-border: #ddd;
 }
 
+/* ---------- Form Layout ---------- */
 body {
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
     margin: 0;
@@ -28,9 +35,10 @@ body {
     overflow-y: auto;
     text-align: left;
     padding: 2rem;
-    padding-bottom: .5rem;
+    padding-bottom: 0.5rem;
 }
 
+/* ---------- Form Elements ---------- */
 h1 {
     color: var(--primary-color);
     margin-top: 1rem;
@@ -52,7 +60,7 @@ h1 {
 .form-group textarea {
     width: 100%;
     padding: 0.75rem;
-    border: 1px solid #ddd;
+    border: 1px solid var(--form-border);
     border-radius: 4px;
     font-size: 1rem;
     box-sizing: border-box;
@@ -67,6 +75,7 @@ h1 {
     box-shadow: 0 0 0 3px rgba(0, 86, 179, 0.1);
 }
 
+/* ---------- Buttons ---------- */
 .btn {
     padding: 0.75rem 1.5rem;
     border: none;
@@ -91,7 +100,7 @@ h1 {
 }
 
 .btn-primary:hover {
-    background-color: #004494;
+    background-color: var(--primary-hover);
 }
 
 .btn-secondary {
@@ -100,7 +109,5 @@ h1 {
 }
 
 .btn-secondary:hover {
-    background-color: #5a6268;
+    background-color: var(--secondary-hover);
 }
-
-
