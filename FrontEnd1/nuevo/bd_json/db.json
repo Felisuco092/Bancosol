@@ -82,13 +82,33 @@
   "voluntarios": [
     {
       "id": 1,
-      "nombre_entidad": "Asociación Vecinal",
+      "nombre_entidad": "Ayuntamiento de Almáchar",
       "persona_fisica": false,
-      "domicilio": "Calle Falsa 123",
-      "localidad": "Madrid",
-      "codigo_postal": "28001",
-      "n_voluntarios": 10,
-      "observaciones": "Solo fines de semana"
+      "domicilio": "", 
+      "localidad": "Almáchar",
+      "codigo_postal": "29780",
+      "n_voluntarios": 15,
+      "observaciones": "Colaboración anual"
+    },
+    {
+      "id": 2,
+      "nombre_entidad": "Maria López García",
+      "persona_fisica": true,
+      "domicilio": "",
+      "localidad": "Rincón de la Victoria",
+      "codigo_postal": "29730",
+      "n_voluntarios": 1,
+      "observaciones": "Disponible fines de semana"
+    },
+    {
+      "id": 3,
+      "nombre_entidad": "Grupo Scout Malaka",
+      "persona_fisica": false,
+      "domicilio": "",
+      "localidad": "Málaga",
+      "codigo_postal": "29018",
+      "n_voluntarios": 12,
+      "observaciones": "-"
     }
   ],
   "turnos": [

@@ -20,7 +20,7 @@ function modelo_Fila(campana) {
 }
 
 const tbody = document.getElementById("campaign-table-body");
-const campanas = fetch_data("campanas").then(render_Rows);
+const campanas = fetch_data("campanas", "Error solicitando campanas").then(render_Rows);
 
 function render_Rows(data) {
     console.log(data);
