@@ -21,7 +21,7 @@
                 <li><a href="usuarios.html">Usuarios</a></li>
                 <li><a href="turnos.html">Asignación de Turnos</a></li>
                 <li><a href="bandeja.html">Bandeja de Entrada</a></li>
-                <li><a href="#" id="logout-btn" style="color: #ff6b6b;">Cerrar Sesión</a></li>
+                <li><a href="#" id="logout-btn" class="text-logout">Cerrar Sesión</a></li>
             </ul>
         </nav>
     </aside>
@@ -31,55 +31,53 @@
             <h1>Cuadro de Mando</h1>
             <span>Bienvenido, Administrador</span>
         </header>
-        <div style="display: grid; grid-template-columns: repeat(2, 1fr); gap: 20px; grid-auto-rows: 1fr;">
-            <div class="card" style="display: flex; flex-direction: column; justify-content: space-between; align-items: center;">
-                <h3 style="text-align: center;">Total de Tiendas</h3>
-                <div style="font-size: 3rem; margin: 10px 0; text-align: center;">
-                    120
-                </div>
-                <p style="color: #666; text-align: center;">Tiendas registradas</p>
+        <div class="dashboard-grid">
+            <div class="card dashboard-card">
+                <h3>Total de Tiendas</h3>
+                <div class="dashboard-number">120</div>
+                <p class="dashboard-label">Tiendas registradas</p>
             </div>
 
-            <div class="card" style="display: flex; flex-direction: column; justify-content: space-between; align-items: center;">
+            <div class="card dashboard-card">
                 <h3>Total de Voluntarios Movilizados</h3>
-                <p style="font-size: 3rem; margin: 10px 0; color: #0056b3;">2,450</p> <!-- Son los voluntarios que tenemos en nuestra base de datos, el numero de ellos -->
-                <p style="color: #666;">voluntarios registrados</p>
+                <p class="dashboard-number blue">2,450</p>
+                <p class="dashboard-label">voluntarios registrados</p>
             </div>
 
             <div class="card">
                 <h3>Top Cadenas Participantes</h3>
-                <table style="width: 100%;">
+                <table class="dashboard-table">
                     <thead>
                         <tr>
-                            <th style="text-align: center;">Cadena</th>
-                            <th style="text-align: center;">Tiendas</th>
+                            <th>Cadena</th>
+                            <th>Tiendas</th>
                         </tr>
                     </thead>
                     <tbody>
                         <tr>
-                            <td style="padding: 8px 0; text-align: center;">Mercadona</td>
-                            <td style="text-align: center; font-weight: bold;">82</td>
+                            <td>Mercadona</td>
+                            <td><strong>82</strong></td>
                         </tr>
                         <tr>
-                            <td style="padding: 8px 0; text-align: center;">Carrefour</td>
-                            <td style="text-align: center; font-weight: bold;">35</td>
+                            <td>Carrefour</td>
+                            <td><strong>35</strong></td>
                         </tr>
                         <tr>
-                            <td style="padding: 8px 0; text-align: center;">Lidl</td>
-                            <td style="text-align: center; font-weight: bold;">22</td>
+                            <td>Lidl</td>
+                            <td><strong>22</strong></td>
                         </tr>
                         <tr>
-                            <td style="padding: 8px 0; text-align: center;">Aldi</td>
-                            <td style="text-align: center; font-weight: bold;">13</td>
+                            <td>Aldi</td>
+                            <td><strong>13</strong></td>
                         </tr>
                     </tbody>
                 </table>
             </div>
 
-            <div class="card" style="display: flex; flex-direction: column; justify-content: space-between; align-items: center;">
+            <div class="card dashboard-card">
                 <h3>Días restantes</h3>
-                <p style="font-size: 3rem; margin: 10px 0; color: #0056b3;">42</p> <!-- id_voluntario sea NULL -->
-                <p style="color: #666;">Días restantes de la campaña activa</p>
+                <p class="dashboard-number blue">42</p>
+                <p class="dashboard-label">Días restantes de la campaña activa</p>
             </div>
         </div>
     </main>
