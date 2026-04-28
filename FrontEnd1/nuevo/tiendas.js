@@ -52,8 +52,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 }
             });
         });
-    });
-    */
+    });*/
 
     const selectCampanas = document.getElementById('select-filtro-campanas');
     if (selectCampanas) {
