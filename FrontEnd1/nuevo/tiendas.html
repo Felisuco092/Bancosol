@@ -21,7 +21,7 @@
                 <li><a href="usuarios.html">Usuarios</a></li>
                 <li><a href="turnos.html">Asignación de Turnos</a></li>
                 <li><a href="bandeja.html">Bandeja de Entrada</a></li>
-                <li><a href="#" id="logout-btn" style="color: #ff6b6b;">Cerrar Sesión</a></li>
+                <li><a href="#" id="logout-btn" class="text-logout">Cerrar Sesión</a></li>
             </ul>
         </nav>
     </aside>
@@ -29,35 +29,25 @@
     <main class="main-content">
         <header class="header">
             <h1>Gestión de Tiendas</h1>
-            <div class="acciones">
-                <button class="btn btn-primary"; onclick="location.href='crear_tienda.html'">+ Nueva Tienda</button>
-                <input type="text" placeholder="Buscar por cadena, localidad..." style="padding: 8px; width: 300px;">
-                
+            <div class="acciones-header">
+                <button class="btn btn-primary" onclick="location.href='crear_tienda.html'">+ Nueva Tienda</button>
+                <input type="text" class="search-input" placeholder="Buscar por cadena, localidad...">
             </div>
         </header>
 
-        <div style="display: flex; gap: 20px;">
-            <div style="display: flex; gap: 20px; flex-direction: column;">
-            
-            <div class="filtros-tiendas" style="display: flex; gap: 10px; margin-bottom: 10px;">
-                <select id="select-filtro-campanas" class="btn" style="padding: 8px; border: 1px solid #ccc; font-weight: normal;">
-                    <option value="todas">Seleccionar Campaña...</option>
-                    <option value="campana-gran-recogida">Campaña de Gran Recogida Primavera</option>
-                    <option value="campana-navidad">Campaña Navidad</option>
-                    <option value="operacion-kilo">Operación Kilo Junio</option>
-                </select>
-            </div>
-            <div class="card" style="flex: 2;">
+        <div class="tiendas-layout">
+
+            <div class="card card-tienda">
                 <h3>Listado de Tiendas (PDF pág. 3)</h3>
-                <div class="filtros-por-campanas" style="display: flex; gap: 10px; margin-bottom: 10px;">
-                    <select id="select-filtro-campanas" class="btn" style="padding: 8px; border: 1px solid #ccc; font-weight: normal;">
+                <div class="filtros-por-campanas">
+                    <select id="select-filtro-campanas2" class="btn select-filter">
                         <option value="todas">Seleccionar Campaña...</option>
                         <option value="campana-gran-recogida">Campaña de Gran Recogida Primavera</option>
                         <option value="campana-navidad">Campaña Navidad</option>
                         <option value="operacion-kilo">Operación Kilo Junio</option>
                     </select>
                 </div>
-                <table>
+                <table class="tabla-tiendas">
                     <thead>
                         <tr>
                             <th>Tienda</th>
@@ -69,24 +59,21 @@
                             <th>Zona geofráfica</th>
                             <th>Estado</th>
                             <th>Acciones</th>
-                            
                         </tr>
                     </thead>
                     <tbody id="tabla-tiendas-body">
-                        <tr style="cursor: pointer;" onclick="alert('Cargando detalle...')">
+                        <tr class="clickable" onclick="alert('Cargando detalle...')">
                             <td>Mercadona el Cónsul</td>
                             <td><i>La descripción va aquí</i></td>
                             <td><input type="checkbox" onclick="event.stopPropagation()"></td>
                             <td>c/ Aristófanes, nºxx - Málaga</td>
                             <td>MÁLAGA</td>
-                            <!--El html crear tienda es el mismo para editar, pero cambia q muestra todo vacio o los datos de esa-->
-                            <td>...</td>   
-                            <td>...</td> 
+                            <td>...</td>
+                            <td>...</td>
                             <td><span class="status-badge status-inactiva">Sin activar</span></td>
                             <td>
-                                <button class="btn" style="padding: 5px 8px; font-size: 0.75rem; background: #0056b3; color: white;" onclick="location.href='editar_tienda.html'">Editar tienda</button><br>
-                                <button class="btn" style="padding: 5px 8px; font-size: 0.75rem; background: #fb0000; color: white;">Eliminar tienda</button><br>
-                                <!-- Voluntarios en html de colaboradores-->
+                                <button class="btn btn-primary btn-sm">Editar tienda</button><br>
+                                <button class="btn btn-delete">Eliminar tienda</button>
                             </td>
                         </tr>
                         <tr>
@@ -96,12 +83,11 @@
                             <td>c/ ...</td>
                             <td>MARBELLA</td>
                             <td>...</td>
-                            <td>...</td> 
-                            <td><span class="status-badge status-inactiva">Sin activar</span> </td>
+                            <td>...</td>
+                            <td><span class="status-badge status-inactiva">Sin activar</span></td>
                             <td>
-                                <button class="btn" style="padding: 5px 8px; font-size: 0.75rem; background: #0056b3; color: white;" onclick="location.href='editar_tienda.html'">Editar tienda</button><br>
-                                <button class="btn" style="padding: 5px 8px; font-size: 0.75rem; background: #fb0000; color: white;">Eliminar tienda</button><br>
-                                
+                                <button class="btn btn-edit" onclick="location.href='editar_tienda.html'">Editar tienda</button><br>
+                                <button class="btn btn-delete">Eliminar tienda</button>
                             </td>
                         </tr>
                         <tr>
@@ -111,11 +97,11 @@
                             <td>c/ ...</td>
                             <td>MÁLAGA</td>
                             <td>...</td>
-                            <td>...</td> 
+                            <td>...</td>
                             <td><span class="status-badge status-inactiva">Sin activar</span></td>
                             <td>
-                                <button class="btn" style="padding: 5px 8px; font-size: 0.75rem; background: #0056b3; color: white;" onclick="location.href='editar_tienda.html'">Editar tienda</button><br>
-                                <button class="btn" style="padding: 5px 8px; font-size: 0.75rem; background: #fb0000; color: white;">Eliminar tienda</button><br> 
+                                <button class="btn btn-edit" onclick="location.href='editar_tienda.html'">Editar tienda</button><br>
+                                <button class="btn btn-delete">Eliminar tienda</button>
                             </td>
                         </tr>
                         <tr>
@@ -125,12 +111,11 @@
                             <td>c/ ...</td>
                             <td>...</td>
                             <td>...</td>
-                            <td>...</td> 
+                            <td>...</td>
                             <td><span class="status-badge status-inactiva">Sin activar</span></td>
                             <td>
-                                <button class="btn" style="padding: 5px 8px; font-size: 0.75rem; background: #0056b3; color: white;" onclick="location.href='editar_tienda.html'">Editar tienda</button><br>
-                                <button class="btn" style="padding: 5px 8px; font-size: 0.75rem; background: #fb0000; color: white;">Eliminar tienda</button><br>
-                                
+                                <button class="btn btn-edit" onclick="location.href='editar_tienda.html'">Editar tienda</button><br>
+                                <button class="btn btn-delete">Eliminar tienda</button>
                             </td>
                         </tr>
                         <tr>
@@ -140,18 +125,16 @@
                             <td>c/ ...</td>
                             <td>...</td>
                             <td>...</td>
-                            <td>...</td> 
+                            <td>...</td>
                             <td><span class="status-badge status-inactiva">Sin activar</span></td>
                             <td>
-                                <button class="btn" style="padding: 5px 8px; font-size: 0.75rem; background: #0056b3; color: white;" onclick="location.href='editar_tienda.html'">Editar tienda</button><br>
-                                <button class="btn" style="padding: 5px 8px; font-size: 0.75rem; background: #fb0000; color: white;">Eliminar tienda</button><br>
+                                <button class="btn btn-edit" onclick="location.href='editar_tienda.html'">Editar tienda</button><br>
+                                <button class="btn btn-delete">Eliminar tienda</button>
                             </td>
                         </tr>
                     </tbody>
                 </table>
             </div>
-
-            
         </div>
     </main>
 

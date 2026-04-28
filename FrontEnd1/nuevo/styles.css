@@ -278,6 +278,347 @@ th {
     color: #7b1fa2;
 }
 
+/* ---------- 9. Página Dashboard ---------- */
+.dashboard-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 20px;
+    grid-auto-rows: 1fr;
+}
+
+.dashboard-card {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.dashboard-card h3 {
+    text-align: center;
+}
+
+.dashboard-number {
+    font-size: 3rem;
+    margin: 10px 0;
+    text-align: center;
+}
+
+.dashboard-number.blue {
+    color: var(--primary-color);
+}
+
+.dashboard-label {
+    color: #666;
+    text-align: center;
+}
+
+.dashboard-table {
+    width: 100%;
+}
+
+.dashboard-table th {
+    text-align: center;
+}
+
+.dashboard-table td {
+    padding: 8px 0;
+    text-align: center;
+}
+
+.dashboard-table td strong {
+    font-weight: bold;
+}
+
+/* ---------- 10. Página Colaboradores ---------- */
+.filtros-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr auto;
+    gap: 20px;
+    align-items: end;
+    margin-bottom: 20px;
+}
+
+.filtros-grid label {
+    display: block;
+    margin-bottom: 5px;
+    font-weight: bold;
+}
+
+.filtros-grid select {
+    padding: 10px;
+    width: 100%;
+    border-radius: 4px;
+    border: 1px solid #ddd;
+}
+
+.btn-sm {
+    padding: 5px 8px;
+    font-size: 0.75rem;
+}
+
+/* ---------- 11. Página Campañas ---------- */
+.filtros-campanas {
+    display: flex;
+    gap: 10px;
+    margin-bottom: 20px;
+}
+
+.btn-action {
+    padding: 5px 8px;
+    font-size: 0.75rem;
+}
+
+.btn-primary-sm {
+    padding: 5px 8px;
+    font-size: 0.75rem;
+}
+
+.btn-info {
+    background: #17a2b8;
+    color: white;
+}
+
+.btn-warning {
+    background: #ffc107;
+    color: #212529;
+}
+
+.btn-turnos {
+    background: #28a745;
+    color: white;
+}
+
+.btn-delete-campana {
+    background: #dc3545;
+    color: white;
+}
+
+.btn-view {
+    padding: 5px 12px;
+    font-size: 0.85rem;
+}
+
+.status-badge-campana {
+    padding: 4px 8px;
+    border-radius: 4px;
+    font-size: 0.85rem;
+}
+
+.clickable {
+    cursor: pointer;
+}
+
+.btn-info {
+    background: #17a2b8;
+    color: white;
+}
+
+.btn-warning {
+    background: #ffc107;
+    color: #212529;
+}
+
+.btn-turnos {
+    background: #28a745;
+    color: white;
+}
+
+.btn-delete-campana {
+    background: #dc3545;
+    color: white;
+}
+
+/* ---------- 12. Página Tiendas ---------- */
+.search-input {
+    padding: 8px;
+    width: 300px;
+}
+
+.tiendas-layout {
+    display: flex;
+    gap: 20px;
+}
+
+.tiendas-sidebar {
+    display: flex;
+    gap: 20px;
+    flex-direction: column;
+}
+
+.filtros-tiendas {
+    display: flex;
+    gap: 10px;
+    margin-bottom: 10px;
+}
+
+.filtros-por-campanas {
+    display: flex;
+    gap: 10px;
+    margin-bottom: 10px;
+}
+
+.select-filter {
+    padding: 8px;
+    border: 1px solid #ccc;
+    font-weight: normal;
+}
+
+.card-tienda {
+    flex: 2;
+}
+
+.card-tienda tr {
+    cursor: pointer;
+}
+
+.acciones-header {
+    display: flex;
+    gap: 20px;
+}
+
+.btn-edit {
+    padding: 5px 8px;
+    font-size: 0.75rem;
+    background: #0056b3;
+    color: white;
+}
+
+.btn-delete {
+    padding: 5px 8px;
+    font-size: 0.75rem;
+    background: #fb0000;
+    color: white;
+}
+
+.tabla-tiendas {
+    width: 100%;
+
+/* ---------- 13. Página Turnos ---------- */
+.filtros-turnos {
+    display: grid;
+    grid-template-columns: 1fr 1fr auto;
+    gap: 20px;
+    align-items: end;
+}
+
+.filtros-turnos label {
+    display: block;
+    margin-bottom: 5px;
+    font-weight: bold;
+}
+
+.filtros-turnos select {
+    padding: 10px;
+    width: 100%;
+    border-radius: 4px;
+    border: 1px solid #ddd;
+}
+
+.cuadrante-container {
+    display: none;
+}
+
+.cuadrante-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 15px;
+}
+
+.cuadrante-tabla {
+    width: 100%;
+}
+
+.voluntarios-cell {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 5px;
+}
+
+.voluntario-tag {
+    background: #e2e3e5;
+    padding: 2px 8px;
+    border-radius: 12px;
+    font-size: 0.8rem;
+}
+
+.voluntario-tag.empty {
+    background: #f8d7da;
+    color: #721c24;
+}
+
+.voluntario-tag.group {
+    background: #d1ecf1;
+    color: #0c5460;
+}
+
+.btn-add {
+    padding: 2px 8px;
+    font-size: 0.75rem;
+    background: var(--success-color);
+    color: white;
+}
+
+.btn-add-extra {
+    margin-left: 20px;
+    font-size: 0.85rem;
+}
+
+.btn-incidence {
+    padding: 5px 10px;
+    font-size: 0.75rem;
+}
+
+.btn-remove {
+    border: none;
+    background: none;
+    cursor: pointer;
+    color: red;
+    font-weight: bold;
+}
+
+.cuadrante-tabla {
+    width: 100%;
+}
+
+.cuadrante-actions {
+    display: flex;
+    align-items: center;
+}
+
+.cuadrante-actions span {
+    margin-right: 10px;
+}
+
+/* ---------- 14. Página Usuarios ---------- */
+.badge-rol {
+    padding: 4px 8px;
+    border-radius: 4px;
+}
+
+.badge-capitan {
+    background: #e7f3ff;
+    color: #007bff;
+}
+
+.badge-coordinador {
+    background: #fff3e0;
+    color: #fb8c00;
+}
+
+/* ---------- 15. Miscellaneous ---------- */
+.text-logout {
+    color: #ff6b6b;
+}
+
+.text-center {
+    text-align: center;
+}
+
+.w-full {
+    width: 100%;
+}
+
 /* ---------- 9. Login Page ---------- */
 .login-body {
     display: flex;
@@ -287,6 +628,15 @@ th {
     width: 100%;
     margin: 0;
     padding: 0;
+}
+
+.login-card {
+    width: 100%;
+    max-width: 400px;
+}
+
+.login-subtitle {
+    text-align: center;
 }
 
 .login-card {
@@ -337,10 +687,6 @@ th {
         font-size: 1.15rem;
         padding: 15px;
     }
-    .btn {
-        font-size: 1.1rem;
-        padding: 12px 24px;
-    }
 }
 
 @media (min-width: 1600px) {
@@ -362,4 +708,4 @@ th {
         font-size: 1.25rem;
         padding: 15px 30px;
     }
-}
+}}
