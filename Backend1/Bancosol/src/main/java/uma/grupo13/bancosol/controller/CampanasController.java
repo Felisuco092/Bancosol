@@ -1,5 +1,6 @@
 package uma.grupo13.bancosol.controller;
 
+import jakarta.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -8,6 +9,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import uma.grupo13.bancosol.dao.CampanaRepository;
 import uma.grupo13.bancosol.entity.CampanaEntity;
+import uma.grupo13.bancosol.utils.ValidaSesion;
 
 import java.util.List;
 
@@ -19,7 +21,9 @@ public class CampanasController {
 
 
     @GetMapping("/")
-    public String doCampanas(Model model) {
+    public String doCampanas(Model model, HttpSession session) {
+        if (!ValidaSesion.verificarSesion(session)) return "redirect:/";
+
         List<CampanaEntity> campanas = campanaRepository.findAll();
         model.addAttribute("paginaActual", "campanas");
         model.addAttribute("campanas", campanas);
@@ -27,22 +31,26 @@ public class CampanasController {
     }
 
     @PostMapping("/editar")
-    public  String doEditarCampana(Model model) {
+    public  String doEditarCampana(Model model, HttpSession session) {
+        if (!ValidaSesion.verificarSesion(session)) return "redirect:/";
         return "";
     }
 
     @PostMapping("/crear")
-    public  String doCrearCampana(Model model) {
+    public  String doCrearCampana(Model model, HttpSession session) {
+        if (!ValidaSesion.verificarSesion(session)) return "redirect:/";
         return "";
     }
 
     @PostMapping("/borrar")
-    public  String doBorrarCampana(Model model) {
+    public  String doBorrarCampana(Model model, HttpSession session) {
+        if (!ValidaSesion.verificarSesion(session)) return "redirect:/";
         return "";
     }
 
     @PostMapping("/guardar")
-    public  String doGuardarCampana(Model model) {
+    public  String doGuardarCampana(Model model, HttpSession session) {
+        if (!ValidaSesion.verificarSesion(session)) return "redirect:/";
         return "redirect:/campanas";
     }
 
