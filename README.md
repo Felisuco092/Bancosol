@@ -13,6 +13,8 @@ Backend sin jsp, que que se implementa junto a FrontEnd 2.
 ## FrontEnd 1
 Front montado por html, css y js sin datos de la BD.
 
+Instrucciones de como montar el serve-json en [Guia Json-server](./FrontEnd1/nuevo/bd_json/README.md)
+
 ---
 ## FrontEnd 2
 Front completo en react para mostrar los datos de la bd.

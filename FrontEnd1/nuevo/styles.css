@@ -273,6 +273,11 @@ th {
     color: #1976d2;
 }
 
+.badge-confirmar {
+    background-color: #ffa1a1;
+    color: #9a0101;
+}
+
 .badge-entidad {
     background-color: #f3e5f5;
     color: #7b1fa2;
