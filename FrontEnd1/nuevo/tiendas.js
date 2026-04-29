@@ -1,80 +1,70 @@
 document.addEventListener('DOMContentLoaded', () => {
-    
-    const botonesFiltro = document.querySelectorAll('.filter-btn');
+    const selectCampanas = document.getElementById('select-filtro-campanas');
+    const selectCadenas = document.getElementById('filtro-por-cadenas');
+    const selectLocalidad = document.getElementById('filtro-por-localidad');
     const filasTiendas = document.querySelectorAll('#tabla-tiendas-body tr');
 
-    filasTiendas.forEach(fila => {
-        const checkbox = fila.querySelector('input[type="checkbox"]');
-        const etiqueta = fila.querySelector('.status-badge');
+    // Simulación de estado de participación por campaña
+    // Esto guardará qué tiendas están marcadas en cada campaña
+    const participationState = {
+        'campana-gran-recogida': {},
+        'campana-navidad': {},
+        'operacion-kilo': {}
+    };
 
-        // Cambiar la etiqueta al hacer clic en el checkbox
-        if (checkbox && etiqueta) {
-            // Escuchamos el evento 'change' (cuando se marca o desmarca)
-            checkbox.addEventListener('change', () => {
-                if (checkbox.checked) {
-                    // Si se ha marcado -> Verde y "Activa"
-                    etiqueta.textContent = 'Activa';
-                    etiqueta.classList.remove('status-inactiva');
-                    etiqueta.classList.add('status-activa');
-                } else {
-                    // Si se ha desmarcado -> Rojo y "Sin activar"
-                    etiqueta.textContent = 'Sin activar';
-                    etiqueta.classList.remove('status-activa');
-                    etiqueta.classList.add('status-inactiva');
-                }
-            });
-        }
-    });
+    function applyFilters() {
+        const campana = selectCampanas.value;
+        const cadena = selectCadenas.value;
+        const localidad = selectLocalidad.value;
 
-    // Los botones de filtro: "Todas", "Activas", "Sin activar" (eliminado previamente)
-    /*botonesFiltro.forEach(boton => {
-        boton.addEventListener('click', () => {
-            // Cambiar color del botón activo
-            botonesFiltro.forEach(b => b.classList.remove('active'));
-            boton.classList.add('active');
+        filasTiendas.forEach((fila, index) => {
+            const matchCadena = (cadena === 'todas' || fila.getAttribute('data-cadena') === cadena);
+            const matchLocalidad = (localidad === 'todas' || fila.getAttribute('data-localidad') === localidad);
 
-            const filtroSeleccionado = boton.getAttribute('data-filtro');
-
-            filasTiendas.forEach(fila => {
-                const checkbox = fila.querySelector('input[type="checkbox"]');
-                if (!checkbox) return; 
-
-                const estaActiva = checkbox.checked;
-
-                if (filtroSeleccionado === 'todas') {
-                    fila.style.display = ''; 
-                } else if (filtroSeleccionado === 'activas' && estaActiva) {
-                    fila.style.display = ''; 
-                } else if (filtroSeleccionado === 'sin-activar' && !estaActiva) {
-                    fila.style.display = ''; 
-                } else {
-                    fila.style.display = 'none'; 
-                }
-            });
-        });
-    });*/
-
-    const selectCampanas = document.getElementById('select-filtro-campanas');
-    if (selectCampanas) {
-        selectCampanas.addEventListener('change', () => {
-            const campanaSeleccionada = selectCampanas.value;
-            console.log('Filtrando por campaña:', campanaSeleccionada);
-      
-             //Actualmente las filas no tienen datos de campaña asignados.
-                   // Si tuvieran un data-campana, se filtraría así:
-                  /*
-            filasTiendas.forEach(fila => {
-                const campanaFila = fila.getAttribute('data-campana');
-                if (campanaSeleccionada === 'todas' || campanaFila === campanaSeleccionada) {
-                    fila.style.display = '';
-                } else {
-                    fila.style.display = 'none';
-                }
-            });*/
-      
-            if (campanaSeleccionada === 'todas') {
-                filasTiendas.forEach(fila => fila.style.display = '');
+            if (matchCadena && matchLocalidad) {
+                fila.style.display = '';
+                // Cargar el estado del checkbox para esta campaña
+                const checkbox = fila.querySelector('.check-participa');
+                const badge = fila.querySelector('.status-badge');
+                
+                checkbox.checked = participationState[campana][index] || false;
+                updateBadge(badge, checkbox.checked);
+            } else {
+                fila.style.display = 'none';
             }
         });
     }
+
+    function updateBadge(badge, isActive) {
+        if (isActive) {
+            badge.textContent = 'Activa';
+            badge.classList.remove('status-inactiva');
+            badge.classList.add('status-activa');
+        } else {
+            badge.textContent = 'Sin activar';
+            badge.classList.remove('status-activa');
+            badge.classList.add('status-inactiva');
+        }
+    }
+
+    // Escuchar cambios en los checkboxes de participación
+    filasTiendas.forEach((fila, index) => {
+        const checkbox = fila.querySelector('.check-participa');
+        const badge = fila.querySelector('.status-badge');
+
+        checkbox.addEventListener('change', () => {
+            const campana = selectCampanas.value;
+            // Guardar el estado en memoria para la campaña actual
+            participationState[campana][index] = checkbox.checked;
+            updateBadge(badge, checkbox.checked);
+        });
+    });
+
+    // Eventos de cambio en filtros
+    selectCampanas.addEventListener('change', applyFilters);
+    selectCadenas.addEventListener('change', applyFilters);
+    selectLocalidad.addEventListener('change', applyFilters);
+
+    // Inicializar
+    applyFilters();
 });
