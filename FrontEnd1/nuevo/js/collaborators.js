@@ -6,8 +6,10 @@ const tbody = document.getElementById('colaboradores-tbody');
 
 
 // Función que comprueba el booleano y devuelve el estilo (badge)
-function formatTipo(esPersona) {
-    if (esPersona === "true") {
+function formatTipo(esPersona, esPendiente) {
+    if(esPendiente === "true") {
+        return '<span class="badge badge-confirmar">Por confirmar</span>';
+    } else if (esPersona === "true") {
         return '<span class="badge badge-persona">Persona Física</span>';
     } else {
         return '<span class="badge badge-entidad">Entidad / Grupo</span>';
@@ -19,16 +21,17 @@ function updateTableStyles() {
     const rows = document.querySelectorAll('#colaboradores-tbody tr');
     rows.forEach(row => {
         const esPersona = row.getAttribute('data-es-persona');
+        const esPendiente = row.getAttribute('pendiente');
+        console.log("Es persona: " + esPersona)
         const cell = row.querySelector('.tipo-cell');
         if (cell) {
-            cell.innerHTML = formatTipo(esPersona);
+            cell.innerHTML = formatTipo(esPersona, esPendiente);
         }
     });
 }
 
 function filterRows() {
     const tipoValue = filterTipo.value;
-    console.log(tipoValue)
     const localidadValue = filterLocalidad.value;
     const rows = document.querySelectorAll('#colaboradores-tbody tr');
 
@@ -46,8 +49,9 @@ function filterRows() {
 
 //Fetch de los datos
 
-function modelo_Fila(colaborador) {
-    return `<tr data-es-persona="${colaborador.persona_fisica}" data-localidad="${colaborador.localidad}">
+function modelo_Fila(colaborador, pendiente = false) {
+    return `<tr pendiente="${pendiente}"
+                data-es-persona="${colaborador.persona_fisica}" data-localidad="${colaborador.localidad}">
                         <td>${colaborador.nombre_entidad}</td>
                         <td class="tipo-cell"></td>
                         <td>${colaborador.localidad}</td>
@@ -58,9 +62,25 @@ function modelo_Fila(colaborador) {
                     </tr>`
 }
 
-function solicitud_colaboradores(data) {
+function solicitud_colaboradores(data, dataFisico, dataEntidad) {
+    const fisicoIds = new Set(dataFisico.map(v => v.id_voluntario));
+    const entidadIds = new Set(dataEntidad.map(v => v.id_voluntario));
+
+    function getVoluntarioType(id) {
+        const NumberId = Number(id)
+        if (fisicoIds.has(NumberId)) return 'fisico';
+        if (entidadIds.has(NumberId)) return 'entidad';
+        return 'desconocido';
+    }
+
     data.forEach(element => {
-        tbody.insertAdjacentHTML('beforeend', modelo_Fila(element))
+        if(element.aprobado) {
+            element.persona_fisica = getVoluntarioType(element.id) === 'fisico' ? true : false;
+            tbody.insertAdjacentHTML('beforeend', modelo_Fila(element))
+        } else {
+            tbody.insertAdjacentHTML('beforeend', modelo_Fila(element, true))
+        }
+        
     })
 
     if (filterTipo) filterTipo.addEventListener('change', filterRows);
@@ -70,9 +90,17 @@ function solicitud_colaboradores(data) {
     updateTableStyles();
 }
 
-const colaboradores = fetch_data('voluntarios', "No se ha podido obtener los voluntarios")
-    .then(solicitud_colaboradores)
 
-
+Promise.all([
+     fetch_data('voluntario_base'),
+     fetch_data('voluntario_fisico'),
+     fetch_data('voluntario_entidad')
+   ])
+   .then(([voluntariosBase, voluntariosFisico, voluntariosEntidad]) => {
+     solicitud_colaboradores(voluntariosBase, voluntariosFisico, voluntariosEntidad)
+   })
+   .catch(e => {
+    console.error(e);
+   });
 
 
