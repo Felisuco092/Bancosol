@@ -88,7 +88,7 @@ Importante seleccionar la base de datos de PostgreSQL y clicar en apply.
   - Listas index, campañas, bandeja, turnos y editarCrear
 - 2º Controlador con gets y post
   - ControladorBase tiene los que faltan
-  - Ya creado, faltan botones y /gardar y /borrar
+  - Ya creado, faltan botones y /guardar y /borrar
   - Pasar a jsp y ver los atributos necesarios.
 - 3º Control de sesion
   - Si sesion, redirect a dashboard y los demas a index sino sesión
@@ -99,9 +99,10 @@ Importante seleccionar la base de datos de PostgreSQL y clicar en apply.
 - 7º Service
 - 8º DTO 
 - 9º Recarga de tablas(script de fetch)
+- 10º Limpieza de capitanes si no se confirman en x tiempo
 
 ![Paso 0](https://img.shields.io/badge/Paso_0-Completo-green)
-![Paso 1](https://img.shields.io/badge/Paso_1-En_proceso_(8/9_html)-yellow)
+![Paso 1](https://img.shields.io/badge/Paso_1-Completo-green)
 ![Paso 2](https://img.shields.io/badge/Paso_2-En_proceso-yellow)
 ![Paso 3](https://img.shields.io/badge/Paso_3-Pendiente-red)
 ![Paso 4](https://img.shields.io/badge/Paso_4-Pendiente-red)
@@ -110,6 +111,7 @@ Importante seleccionar la base de datos de PostgreSQL y clicar en apply.
 ![Paso 7](https://img.shields.io/badge/Paso_7-Pendiente-red)
 ![Paso 8](https://img.shields.io/badge/Paso_8-Pendiente-red)
 ![Paso 9](https://img.shields.io/badge/Paso_9-Pendiente-red)
+![Paso 10](https://img.shields.io/badge/Paso_10-Opcional-orange)
 
 ![LC](https://tenor.com/es/view/agnes-tachyon-low-cortisol-gif-6147390476112029717.gif)
 

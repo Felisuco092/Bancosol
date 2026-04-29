@@ -434,69 +434,22 @@ th {
 }
 
 /* ---------- 12. Página Tiendas ---------- */
-.search-input {
-    padding: 8px;
-    width: 300px;
-}
-
 .tiendas-layout {
     display: flex;
     gap: 20px;
 }
 
-.tiendas-sidebar {
-    display: flex;
-    gap: 20px;
-    flex-direction: column;
-}
-
-.filtros-tiendas {
-    display: flex;
-    gap: 10px;
-    margin-bottom: 10px;
-}
-
-.filtros-por-campanas {
-    display: flex;
-    gap: 10px;
-    margin-bottom: 10px;
-}
-
-.select-filter {
-    padding: 8px;
-    border: 1px solid #ccc;
-    font-weight: normal;
-}
-
-.card-tienda {
-    flex: 2;
-}
-
-.card-tienda tr {
+/* Se eliminan estilos específicos antiguos de tiendas para favorecer el uso de .filtros-grid y .card genéricos */
+.check-participa {
+    width: 18px;
+    height: 18px;
     cursor: pointer;
 }
 
-.acciones-header {
-    display: flex;
-    gap: 20px;
+.tabla-tiendas tr:hover {
+    background-color: #f1f8ff;
 }
 
-.btn-edit {
-    padding: 5px 8px;
-    font-size: 0.75rem;
-    background: #0056b3;
-    color: white;
-}
-
-.btn-delete {
-    padding: 5px 8px;
-    font-size: 0.75rem;
-    background: #fb0000;
-    color: white;
-}
-
-.tabla-tiendas {
-    width: 100%;
 
 /* ---------- 13. Página Turnos ---------- */
 .filtros-turnos {
@@ -612,8 +565,14 @@ th {
 }
 
 /* ---------- 15. Miscellaneous ---------- */
-.text-logout {
-    color: #ff6b6b;
+.sidebar nav ul li a.text-logout {
+    color: #dc3545;
+    font-weight: bold;
+}
+
+.sidebar nav ul li a.text-logout:hover {
+    background-color: #f8dcdc;
+    color: #a71d2a;
 }
 
 .text-center {
@@ -713,4 +672,4 @@ th {
         font-size: 1.25rem;
         padding: 15px 30px;
     }
-}}
+}
