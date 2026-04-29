@@ -18,17 +18,28 @@ document.addEventListener('DOMContentLoaded', () => {
         const localidad = selectLocalidad.value;
 
         filasTiendas.forEach((fila, index) => {
-            const matchCadena = (cadena === 'todas' || fila.getAttribute('data-cadena') === cadena);
-            const matchLocalidad = (localidad === 'todas' || fila.getAttribute('data-localidad') === localidad);
+            // Usamos dataset para mayor claridad y seguridad
+            const rowCadena = fila.dataset.cadena || '';
+            const rowLocalidad = fila.dataset.localidad || '';
+
+            // Lógica de filtrado: si es 'todas' o coincide con el valor seleccionado
+            const matchCadena = (cadena === 'todas' || rowCadena === cadena);
+            const matchLocalidad = (localidad === 'todas' || rowLocalidad === localidad);
 
             if (matchCadena && matchLocalidad) {
                 fila.style.display = '';
-                // Cargar el estado del checkbox para esta campaña
+                
+                // Actualizar estado visual según la campaña seleccionada
                 const checkbox = fila.querySelector('.check-participa');
                 const badge = fila.querySelector('.status-badge');
                 
-                checkbox.checked = participationState[campana][index] || false;
-                updateBadge(badge, checkbox.checked);
+                if (checkbox) {
+                    const isChecked = !!(participationState[campana] && participationState[campana][index]);
+                    checkbox.checked = isChecked;
+                    if (badge) {
+                        updateBadge(badge, isChecked);
+                    }
+                }
             } else {
                 fila.style.display = 'none';
             }
@@ -36,6 +47,7 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     function updateBadge(badge, isActive) {
+        if (!badge) return;
         if (isActive) {
             badge.textContent = 'Activa';
             badge.classList.remove('status-inactiva');
@@ -52,12 +64,20 @@ document.addEventListener('DOMContentLoaded', () => {
         const checkbox = fila.querySelector('.check-participa');
         const badge = fila.querySelector('.status-badge');
 
-        checkbox.addEventListener('change', () => {
-            const campana = selectCampanas.value;
-            // Guardar el estado en memoria para la campaña actual
-            participationState[campana][index] = checkbox.checked;
-            updateBadge(badge, checkbox.checked);
-        });
+        if (checkbox) {
+            checkbox.addEventListener('change', () => {
+                const campana = selectCampanas.value;
+                // Asegurar que el objeto de la campaña existe
+                if (!participationState[campana]) {
+                    participationState[campana] = {};
+                }
+                // Guardar el estado en memoria para la campaña actual
+                participationState[campana][index] = checkbox.checked;
+                if (badge) {
+                    updateBadge(badge, checkbox.checked);
+                }
+            });
+        }
     });
 
     // Eventos de cambio en filtros
