@@ -79,13 +79,13 @@
       "dia_final": "2026-06-15"
     }
   ],
-<<<<<<< HEAD
   "voluntario_base": [
     {
       "id": 1,
       "domicilio": "",
       "zona_geografica": "Almáchar",
       "codigo_postal": "29780",
+      "observaciones": "Prueba",
       "aprobado": true
     },
     {
@@ -93,6 +93,7 @@
       "domicilio": "",
       "zona_geografica": "Rincón de la Victoria",
       "codigo_postal": "29730",
+      "observaciones": "Prueba",
       "aprobado": true
     },
     {
@@ -100,20 +101,21 @@
       "domicilio": "",
       "zona_geografica": "Málaga",
       "codigo_postal": "29018",
+      "observaciones": "Prueba",
       "aprobado": false
     }
   ],
 
   "voluntario_entidad": [
     {
-      "id": 1,
+      "id": "1",
       "id_voluntario": 1,
       "nombre_asociacion": "Ayuntamiento de Almáchar",
       "n_voluntarios": 15,
       "id_responsable": 101
     },
     {
-      "id": 3,
+      "id": "3",
       "id_voluntario": 3,
       "nombre_asociacion": "Grupo Scout Malaka",
       "n_voluntarios": 12,
@@ -123,43 +125,11 @@
 
   "voluntario_fisico": [
     {
-      "id": 2,
+      "id":2,
       "id_voluntario": 2,
       "nombre": "Maria",
       "apellidos": "López García",
       "id_coordinador": 201
-=======
-  "voluntarios": [
-    {
-      "id": 1,
-      "nombre_entidad": "Ayuntamiento de Almáchar",
-      "persona_fisica": false,
-      "domicilio": "", 
-      "localidad": "Almáchar",
-      "codigo_postal": "29780",
-      "n_voluntarios": 15,
-      "observaciones": "Colaboración anual"
-    },
-    {
-      "id": 2,
-      "nombre_entidad": "Maria López García",
-      "persona_fisica": true,
-      "domicilio": "",
-      "localidad": "Rincón de la Victoria",
-      "codigo_postal": "29730",
-      "n_voluntarios": 1,
-      "observaciones": "Disponible fines de semana"
-    },
-    {
-      "id": 3,
-      "nombre_entidad": "Grupo Scout Malaka",
-      "persona_fisica": false,
-      "domicilio": "",
-      "localidad": "Málaga",
-      "codigo_postal": "29018",
-      "n_voluntarios": 12,
-      "observaciones": "-"
->>>>>>> b05fb8c6684e5a13ad881728aab92cc6470b7677
     }
   ],
   "turnos": [

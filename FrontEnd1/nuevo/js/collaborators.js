@@ -6,15 +6,10 @@ const tbody = document.getElementById('colaboradores-tbody');
 
 
 // Función que comprueba el booleano y devuelve el estilo (badge)
-<<<<<<< HEAD
 function formatTipo(esPersona, esPendiente) {
     if(esPendiente === "true") {
         return '<span class="badge badge-confirmar">Por confirmar</span>';
     } else if (esPersona === "true") {
-=======
-function formatTipo(esPersona) {
-    if (esPersona === "true") {
->>>>>>> b05fb8c6684e5a13ad881728aab92cc6470b7677
         return '<span class="badge badge-persona">Persona Física</span>';
     } else {
         return '<span class="badge badge-entidad">Entidad / Grupo</span>';
@@ -26,27 +21,16 @@ function updateTableStyles() {
     const rows = document.querySelectorAll('#colaboradores-tbody tr');
     rows.forEach(row => {
         const esPersona = row.getAttribute('data-es-persona');
-<<<<<<< HEAD
         const esPendiente = row.getAttribute('pendiente');
-        console.log("Es persona: " + esPersona)
         const cell = row.querySelector('.tipo-cell');
         if (cell) {
             cell.innerHTML = formatTipo(esPersona, esPendiente);
-=======
-        const cell = row.querySelector('.tipo-cell');
-        if (cell) {
-            cell.innerHTML = formatTipo(esPersona);
->>>>>>> b05fb8c6684e5a13ad881728aab92cc6470b7677
         }
     });
 }
 
 function filterRows() {
     const tipoValue = filterTipo.value;
-<<<<<<< HEAD
-=======
-    console.log(tipoValue)
->>>>>>> b05fb8c6684e5a13ad881728aab92cc6470b7677
     const localidadValue = filterLocalidad.value;
     const rows = document.querySelectorAll('#colaboradores-tbody tr');
 
@@ -64,28 +48,49 @@ function filterRows() {
 
 //Fetch de los datos
 
-<<<<<<< HEAD
 function modelo_Fila(colaborador, pendiente = false) {
     return `<tr pendiente="${pendiente}"
                 data-es-persona="${colaborador.persona_fisica}" data-localidad="${colaborador.localidad}">
-=======
-function modelo_Fila(colaborador) {
-    return `<tr data-es-persona="${colaborador.persona_fisica}" data-localidad="${colaborador.localidad}">
->>>>>>> b05fb8c6684e5a13ad881728aab92cc6470b7677
-                        <td>${colaborador.nombre_entidad}</td>
+                        <td>${colaborador.nombre}</td>
                         <td class="tipo-cell"></td>
-                        <td>${colaborador.localidad}</td>
+                        <td>${colaborador.zona_geografica}</td>
                         <td>${colaborador.codigo_postal}</td>
                         <td>${colaborador.n_voluntarios}</td>
-                        <td>C${colaborador.observaciones}</td>
+                        <td>${colaborador.observaciones}</td>
                         <td><button class="btn btn-primary btn-sm">Editar</button> <button class="btn btn-danger btn-sm">Borrar</button></td>
                     </tr>`
 }
 
-<<<<<<< HEAD
+
+
 function solicitud_colaboradores(data, dataFisico, dataEntidad) {
     const fisicoIds = new Set(dataFisico.map(v => v.id_voluntario));
     const entidadIds = new Set(dataEntidad.map(v => v.id_voluntario));
+
+    function json_change(json, arrayJsonFisico, arrayJsonEntidad) {
+        //Esto es para hacer una especie de left join con arrayJsonFisico o arrayJsonEntidad el voluntario
+        const type = getVoluntarioType(json.id);
+        if(type === 'fisico'){
+            const json_fisico = arrayJsonFisico.find((element) => {
+                return element.id === json.id;
+            })
+            return {...json, 
+                nombre: json_fisico.nombre + " " + json_fisico.apellidos,
+                persona_fisica: true,
+                n_voluntarios:1
+            }
+        } else {
+            const json_entidad = arrayJsonEntidad.find((element) => {
+                return element.id === json.id;
+            })
+            
+            return {...json,
+                nombre: json_entidad.nombre_asociacion,
+                persona_fisica: false,
+                n_voluntarios: json_entidad.n_voluntarios
+            }
+        }
+    }
 
     function getVoluntarioType(id) {
         const NumberId = Number(id)
@@ -96,17 +101,13 @@ function solicitud_colaboradores(data, dataFisico, dataEntidad) {
 
     data.forEach(element => {
         if(element.aprobado) {
-            element.persona_fisica = getVoluntarioType(element.id) === 'fisico' ? true : false;
+            element = json_change(element, dataFisico, dataEntidad)
             tbody.insertAdjacentHTML('beforeend', modelo_Fila(element))
         } else {
+            element = json_change(element, dataFisico, dataEntidad)
             tbody.insertAdjacentHTML('beforeend', modelo_Fila(element, true))
         }
         
-=======
-function solicitud_colaboradores(data) {
-    data.forEach(element => {
-        tbody.insertAdjacentHTML('beforeend', modelo_Fila(element))
->>>>>>> b05fb8c6684e5a13ad881728aab92cc6470b7677
     })
 
     if (filterTipo) filterTipo.addEventListener('change', filterRows);
@@ -116,7 +117,6 @@ function solicitud_colaboradores(data) {
     updateTableStyles();
 }
 
-<<<<<<< HEAD
 
 Promise.all([
      fetch_data('voluntario_base'),
@@ -129,11 +129,5 @@ Promise.all([
    .catch(e => {
     console.error(e);
    });
-=======
-const colaboradores = fetch_data('voluntarios', "No se ha podido obtener los voluntarios")
-    .then(solicitud_colaboradores)
-
-
->>>>>>> b05fb8c6684e5a13ad881728aab92cc6470b7677
 
 
