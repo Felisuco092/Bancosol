@@ -472,7 +472,7 @@ th {
     border: 1px solid #ddd;
 }
 
-.cuadrante-container {
+#cuadrante-container {
     display: none;
 }
 
