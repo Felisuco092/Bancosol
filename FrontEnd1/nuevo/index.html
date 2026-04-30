@@ -7,6 +7,7 @@
     <link rel="stylesheet" href="styles.css">
     <link rel="stylesheet" href="login.css">
     <script src="js/main.js" defer></script>
+    <script src="js/login.js" defer></script>
 </head>
 <body id="login-page" class="login-body">
     <div id="login-card" class="card login-card">
@@ -24,14 +25,5 @@
             <button type="submit" id="login-submit-btn" class="btn btn-primary w-full">Entrar</button>
         </form>
     </div>
-    
-    <script>
-        document.getElementById('login-form').addEventListener('submit', (e) => {
-            e.preventDefault();
-            // Simulación simple para navegación
-            sessionStorage.setItem('user', 'admin');
-            window.location.href = 'dashboard.html';
-        });
-    </script>
 </body>
 </html>
