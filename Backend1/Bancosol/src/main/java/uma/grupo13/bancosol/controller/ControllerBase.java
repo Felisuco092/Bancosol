@@ -39,9 +39,9 @@ public class ControllerBase {
     }
 
     @PostMapping("/login")
-    public String dologin(@RequestParam("username") String user, @RequestParam("password") String password,
+    public String dologin(@RequestParam("username") String user, @RequestParam("password") String pass,
                           HttpSession session, Model model) {
-        if ("admin".equals(user) && "admin".equals(password)) {
+        if ("admin".equals(user) && "admin".equals(pass)) {
             session.setAttribute("user", user);
             return "redirect:/dashboard";
         } else {

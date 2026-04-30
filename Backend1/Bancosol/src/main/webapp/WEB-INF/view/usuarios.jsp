@@ -1,20 +1,17 @@
-<%--
-  Created by IntelliJ IDEA.
-  User: Germán
-  Date: 20/04/2026
-  Time: 19:21
-  To change this template use File | Settings | File Templates.
---%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
-<html>
+<!DOCTYPE html>
+<html lang="es">
 <head>
     <meta charset="UTF-8">
-    <title>BANCOSOL - Usuarios</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/css/styles.css">
+    <title>Bancosol - Usuarios</title>
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/css/styles.css">
+    <script src="${pageContext.request.contextPath}/js/main.js" defer></script>
 </head>
 <body>
+    <% request.setAttribute("paginaActual", "usuarios"); %>
     <jsp:include page="aside.jsp"/>
+
     <main class="main-content">
         <header class="header">
             <h1>Gestión de Usuarios</h1>
@@ -22,34 +19,58 @@
         </header>
 
         <div class="card">
-            <h3>Alta de Coordinadores / Capitanes (Referencia PDF pág. 5)</h3>
-            <form>
-                <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 20px;">
-                    <div>
-                        <label>Nombre:</label>
-                        <input type="text" style="width: 100%; padding: 8px;">
-                    </div>
-                    <div>
-                        <label>Zona Geográfica:</label>
-                        <input type="text" placeholder="Ej: Axarquía" style="width: 100%; padding: 8px;">
-                    </div>
-                    <div>
-                        <label>Rol:</label>
-                        <select style="width: 100%; padding: 8px;">
-                            <option>Administrador</option>
-                            <option>Coordinador</option>
-                            <option>Capitán</option>
-                        </select>
-                    </div>
-                    <div>
-                        <label>Contraseña:</label>
-                        <input type="password" style="width: 100%; padding: 8px;">
-                    </div>
-                </div>
-                <button type="submit" class="btn btn-success" style="margin-top: 20px;">Crear Usuario</button>
-            </form>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Nombre</th>
+                        <th>Apellidos</th>
+                        <th>Email</th>
+                        <th>Teléfono</th>
+                        <th>Rol</th>
+                        <th>Área Asignada (Municipio)</th>
+                        <th>Acciones</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>Juan</td>
+                        <td>Pérez García</td>
+                        <td>juan.perez@email.com</td>
+                        <td>600123456</td>
+                        <td><span class="badge-rol badge-capitan">Capitán</span></td>
+                        <td>Málaga Este</td>
+                        <td>
+                            <button class="btn btn-primary btn-sm">Editar</button>
+                            <button class="btn btn-danger btn-sm">Baja</button>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>María</td>
+                        <td>López Sánchez</td>
+                        <td>m.lopez@email.com</td>
+                        <td>611987654</td>
+                        <td><span class="badge-rol badge-coordinador">Coordinador</span></td>
+                        <td>Almáchar</td>
+                        <td>
+                            <button class="btn btn-primary btn-sm">Editar</button>
+                            <button class="btn btn-danger btn-sm">Baja</button>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>Antonio</td>
+                        <td>Ruiz Fernández</td>
+                        <td>a.ruiz@email.com</td>
+                        <td>622456789</td>
+                        <td><span class="badge-rol badge-capitan">Capitán</span></td>
+                        <td>Rincón de la Victoria</td>
+                        <td>
+                            <button class="btn btn-primary btn-sm">Editar</button>
+                            <button class="btn btn-danger btn-sm">Baja</button>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
         </div>
     </main>
-    <script src="${pageContext.request.contextPath}/js/main.js"></script>
 </body>
 </html>

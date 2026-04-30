@@ -1,24 +1,71 @@
-<%--
-  Created by IntelliJ IDEA.
-  Date: 20/04/2026
-  To change this template use File | Settings | File Templates.
---%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
-<html>
+<!DOCTYPE html>
+<html lang="es">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Bancosol - Dashboard</title>
     <link rel="stylesheet" href="${pageContext.request.contextPath}/css/styles.css">
+    <script src="${pageContext.request.contextPath}/js/main.js" defer></script>
 </head>
 <body>
-<jsp:include page="aside.jsp"/>
+    <% request.setAttribute("paginaActual", "dashboard"); %>
+    <jsp:include page="aside.jsp"/>
 
-<main class="main-content">
-    <header class="header">
-        <h1>Cuadro de Mando</h1>
-        <span>Bienvenido, Administrador</span>
-    </header>
-</main>
+    <main class="main-content">
+        <header class="header">
+            <h1>Cuadro de Mando</h1>
+            <span>Bienvenido, Administrador</span>
+        </header>
+        <div class="dashboard-grid">
+            <div class="card dashboard-card">
+                <h3>Total de Tiendas</h3>
+                <div class="dashboard-number">120</div>
+                <p class="dashboard-label">Tiendas registradas</p>
+            </div>
+
+            <div class="card dashboard-card">
+                <h3>Total de Voluntarios Movilizados</h3>
+                <p class="dashboard-number blue">2,450</p>
+                <p class="dashboard-label">voluntarios registrados</p>
+            </div>
+
+            <div class="card">
+                <h3>Top Cadenas Participantes</h3>
+                <table class="dashboard-table">
+                    <thead>
+                        <tr>
+                            <th>Cadena</th>
+                            <th>Tiendas</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>Mercadona</td>
+                            <td><strong>82</strong></td>
+                        </tr>
+                        <tr>
+                            <td>Carrefour</td>
+                            <td><strong>35</strong></td>
+                        </tr>
+                        <tr>
+                            <td>Lidl</td>
+                            <td><strong>22</strong></td>
+                        </tr>
+                        <tr>
+                            <td>Aldi</td>
+                            <td><strong>13</strong></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <div class="card dashboard-card">
+                <h3>Días restantes</h3>
+                <p class="dashboard-number blue">42</p>
+                <p class="dashboard-label">Días restantes de la campaña activa</p>
+            </div>
+        </div>
+    </main>
 </body>
 </html>

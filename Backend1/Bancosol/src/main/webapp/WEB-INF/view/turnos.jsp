@@ -1,68 +1,85 @@
-<%--
-a
-  Created by IntelliJ IDEA.
-  User: Germán
-  Date: 20/04/2026
-  Time: 19:18
-  To change this template use File | Settings | File Templates.
---%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
-<%
-    // mantener seguiridad
-
-%>
-<html>
+<!DOCTYPE html>
+<html lang="es">
 <head>
     <meta charset="UTF-8">
-    <title>Bancosol - Turnos</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/css/styles.css">
+    <title>Bancosol - Asignación de Turnos</title>
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/css/styles.css">
+    <script src="${pageContext.request.contextPath}/js/main.js" defer></script>
+    <script src="${pageContext.request.contextPath}/js/turnos.js" defer></script>
 </head>
 <body>
-<jsp:include page="aside.jsp"/>
-<main class="main-content">
-    <header class="header">
-        <h1><b>Asignación de Turnos (La Operativa)</b></h1>
-    </header>
+    <% request.setAttribute("paginaActual", "turnos"); %>
+    <jsp:include page="aside.jsp"/>
 
-    <div class="card">
-        <h3>Seleccionar Tienda</h3>
-        <select style="padding: 10px; width: 300px;">
-            <option>Mercadona - Av. Andalucía</option>
-            <option>Carrefour - Rincón</option>
-        </select>
-        <span style="margin-left: 20px;">Capitán asignado: <strong>Juan Pérez</strong></span>
-    </div>
+    <main class="main-content">
+        <header class="header">
+            <h1>Asignación de Turnos</h1>
+        </header>
 
-    <div class="card">
-        <h3>Cuadrante de Turnos</h3>
-        <table style="text-align: center;">
-            <thead>
-            <tr>
-                <th>Franja Horaria</th>
-                <th>Viernes</th>
-                <th>Sábado</th>
-                <th>Domingo</th>
-            </tr>
-            </thead>
-            <tbody>
-            <tr>
-                <td><strong>Mañana (09:00 - 15:00)</strong></td>
-                <td style="background: #d4edda;">Grupo Scout 1</td>
-                <td style="background: #f8d7da;">[Vacío] <button>+</button></td>
-                <td style="background: #d4edda;">Voluntarios UA</td>
-            </tr>
-            <tr>
-                <td><strong>Tarde (15:00 - 21:00)</strong></td>
-                <td style="background: #f8d7da;">[Vacío] <button>+</button></td>
-                <td style="background: #d4edda;">Ayto. Almáchar</td>
-                <td style="background: #f8d7da;">[Vacío] <button>+</button></td>
-            </tr>
-            </tbody>
-        </table>
-        <button class="btn btn-danger" style="margin-top: 20px;">Registrar Incidencia</button>
-    </div>
-</main>
-<script src="${pageContext.request.contextPath}/js/main.js"></script>
+        <div class="card filtros-turnos">
+            <div>
+                <label for="select-campana">Campaña:</label>
+                <select id="select-campana">
+                    <option value="">-- Seleccione Campaña --</option>
+                    <option value="1">Gran Recogida Primavera 2026</option>
+                    <option value="2">Campaña Navidad 2025</option>
+                </select>
+            </div>
+            <div>
+                <label for="select-tienda">Tienda:</label>
+                <select id="select-tienda">
+                    <option value="">-- Seleccione Tienda --</option>
+                    <option value="101">Mercadona - Av. Andalucía</option>
+                    <option value="102">Carrefour - Rincón</option>
+                    <option value="103">Lidl - El Palo</option>
+                </select>
+            </div>
+            <button id="btn-buscar" class="btn btn-primary">Ver Cuadrante</button>
+        </div>
+
+        <div id="cuadrante-container">
+            <div class="card">
+                <div class="cuadrante-header">
+                    <h3>Cuadrante de Turnos</h3>
+                    <div class="cuadrante-actions">
+                        <span>Capitán: <strong id="capitan-nombre">Juan Pérez</strong></span>
+                        <button class="btn btn-success btn-add-extra">+ Añadir Turno Extra</button>
+                    </div>
+                </div>
+                
+                <table class="cuadrante-tabla">
+                    <thead>
+                        <tr>
+                            <th>Día</th>
+                            <th>Inicio</th>
+                            <th>Fin</th>
+                            <th>Voluntarios Asignados</th>
+                            <th>Acciones</th>
+                        </tr>
+                    </thead>
+                    <tbody id="tabla-turnos-body">
+                        <!-- Filas de ejemplo -->
+                        <tr>
+                            <td>Viernes 01/04</td>
+                            <td>09:00</td>
+                            <td>15:00</td>
+                            <td>
+                                <div class="voluntarios-cell">
+                                    <span class="voluntario-tag">Carlos Ruiz <button class="btn-remove">×</button></span>
+                                    <span class="voluntario-tag">Ana Belén <button class="btn-remove">×</button></span>
+                                    <button class="btn btn-sm btn-add">+ Añadir</button>
+                                </div>
+                            </td>
+                            <td>
+                                <button class="btn btn-danger btn-incidence">Incidencia</button>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </main>
 </body>
 </html>
