@@ -18,6 +18,7 @@ public class TurnosController {
     public String doTurnos(Model model, @RequestParam(name="campana", required = false)CampanaEntity campana, HttpSession session){
         if (!ValidaSesion.verificarSesion(session)) return "redirect:/";
 
+        model.addAttribute("paginaActual", "turnos");
         return "turnos";
     }
 

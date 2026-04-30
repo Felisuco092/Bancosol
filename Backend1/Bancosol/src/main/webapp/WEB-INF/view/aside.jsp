@@ -1,27 +1,27 @@
-<%--
-  Created by IntelliJ IDEA.
-  User: felix
-  Date: 21/04/2026
-  Time: 13:20
-  To change this template use File | Settings | File Templates.
---%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
-
 <%
     String paginaActual = (String) request.getAttribute("paginaActual");
+    if (paginaActual == null) paginaActual = "";
 %>
+<button id="btn-desplegable" class="btn btn-primary btn-collapsible">
+    ☰
+</button>
 <aside class="sidebar">
-    <h2>Bancosol</h2>
-    <nav>
+    <img src="${pageContext.request.contextPath}/assets/LOGO_BANCOSOL.png" alt="Logo BANCOSOL" class="logo_login">
+    <nav id="menu-enlaces">
         <ul>
-            <li><a href="/dashboard" class="<%= "dashboard".equals(paginaActual) ? "active" : "" %>">Cuadro de Mando</a></li>
-            <li><a href="/campanas" class="<%= "campanas".equals(paginaActual) ? "active" : "" %>">Gestión de Campañas</a></li>
-            <li><a href="/tiendas" class="<%= "tiendas".equals(paginaActual) ? "active" : "" %>">Gestión de Tiendas</a></li>
-            <li><a href="/colaboradores" class="<%= "colaboradores".equals(paginaActual) ? "active" : "" %>">Colaboradores</a></li>
-            <li><a href="/usuarios" class="<%= "usuarios".equals(paginaActual) ? "active" : "" %>">Usuarios</a></li>
-            <li><a href="/turnos" class="<%= "turnos".equals(paginaActual) ? "active" : "" %>">Asignación de Turnos</a></li>
-            <li><a href="/bandeja" class="<%= "bandeja".equals(paginaActual) ? "active" : "" %>">Bandeja de Entrada</a></li>
-            <li><a href="/" id="logout-btn" style="color: #ff6b6b;">Cerrar Sesión</a></li>
+            <li><a href="${pageContext.request.contextPath}/dashboard" class="<%= "dashboard".equals(paginaActual) ? "active" : "" %>">Cuadro de Mando</a></li>
+            <li><a href="${pageContext.request.contextPath}/campanas/" class="<%= "campanas".equals(paginaActual) ? "active" : "" %>">Gestión de Campañas</a></li>
+            <li><a href="${pageContext.request.contextPath}/tiendas/" class="<%= "tiendas".equals(paginaActual) ? "active" : "" %>">Gestión de Tiendas</a></li>
+            <li><a href="${pageContext.request.contextPath}/colaboradores/" class="<%= "colaboradores".equals(paginaActual) ? "active" : "" %>">Colaboradores</a></li>
+            <li><a href="${pageContext.request.contextPath}/usuarios/" class="<%= "usuarios".equals(paginaActual) ? "active" : "" %>">Usuarios</a></li>
+            <li><a href="${pageContext.request.contextPath}/turnos/" class="<%= "turnos".equals(paginaActual) ? "active" : "" %>">Asignación de Turnos</a></li>
+            <li><a href="${pageContext.request.contextPath}/bandeja/" class="<%= "bandeja".equals(paginaActual) ? "active" : "" %>">Bandeja de Entrada</a></li>
+            <li>
+                <form action="${pageContext.request.contextPath}/logout" method="POST" style="margin: 0; padding: 0;">
+                    <button type="submit" id="logout-btn" class="btn-logout">Cerrar Sesión</button>
+                </form>
+            </li>
         </ul>
     </nav>
 </aside>
