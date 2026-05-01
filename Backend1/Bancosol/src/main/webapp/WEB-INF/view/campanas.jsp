@@ -5,9 +5,9 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Bancosol - Campañas</title>
-    <link rel="stylesheet" href="${pageContext.request.contextPath}/css/styles.css">
-    <script src="${pageContext.request.contextPath}/js/main.js" defer></script>
-    <script src="${pageContext.request.contextPath}/js/campanas.js" type="module"></script>
+    <link rel="stylesheet" href="../../css/styles.css">
+    <script src="../js/aside.js" defer></script>
+    <script src="../js/campanas.js" type="module"></script>
 </head>
 <body>
     <% request.setAttribute("paginaActual", "campanas"); %>
