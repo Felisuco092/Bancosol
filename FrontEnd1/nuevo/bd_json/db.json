@@ -10,23 +10,34 @@
     {
       "id": 1,
       "nombre": "Juan",
-      "apellidos": "Pérez",
+      "apellidos": "Pérez García",
       "usuario": "jperez",
-      "contrasena": "hash_seguro_123",
+      "contrasena": "hash123",
       "email": "juan.perez@email.com",
-      "telefono": "600111222",
-      "area_asignada": "Zona Norte",
-      "id_rol": 1
+      "telefono": "600123456",
+      "area_asignada": "Málaga Este",
+      "id_rol": 2
     },
     {
       "id": 2,
-      "nombre": "Ana",
-      "apellidos": "García",
-      "usuario": "agarcia",
-      "contrasena": "hash_seguro_456",
-      "email": "ana.garcia@email.com",
-      "telefono": "600333444",
-      "area_asignada": "Centro",
+      "nombre": "María",
+      "apellidos": "López Sánchez",
+      "usuario": "mlopez",
+      "contrasena": "hash456",
+      "email": "m.lopez@email.com",
+      "telefono": "611987654",
+      "area_asignada": "Almáchar",
+      "id_rol": 3
+    },
+    {
+      "id": 3,
+      "nombre": "Antonio",
+      "apellidos": "Ruiz Fernández",
+      "usuario": "aruiz",
+      "contrasena": "hash789",
+      "email": "a.ruiz@email.com",
+      "telefono": "622456789",
+      "area_asignada": "Rincón de la Victoria",
       "id_rol": 2
     }
   ],

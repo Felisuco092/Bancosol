@@ -6,6 +6,7 @@
     <title>Bancosol - Usuarios</title>
     <link rel="stylesheet" href="styles.css">
     <script src="js/main.js" defer></script>
+    <script src="js/usuarios.js" type="module"></script>
 </head>
 <body>
     <button id="btn-desplegable" class="btn btn-primary btn-collapsible">
@@ -46,43 +47,8 @@
                         <th>Acciones</th>
                     </tr>
                 </thead>
-                <tbody>
-                    <tr>
-                        <td>Juan</td>
-                        <td>Pérez García</td>
-                        <td>juan.perez@email.com</td>
-                        <td>600123456</td>
-                        <td><span class="badge-rol badge-capitan">Capitán</span></td>
-                        <td>Málaga Este</td>
-                        <td>
-                            <button class="btn btn-primary btn-sm">Editar</button>
-                            <button class="btn btn-danger btn-sm">Baja</button>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>María</td>
-                        <td>López Sánchez</td>
-                        <td>m.lopez@email.com</td>
-                        <td>611987654</td>
-                        <td><span class="badge-rol badge-coordinador">Coordinador</span></td>
-                        <td>Almáchar</td>
-                        <td>
-                            <button class="btn btn-primary btn-sm">Editar</button>
-                            <button class="btn btn-danger btn-sm">Baja</button>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>Antonio</td>
-                        <td>Ruiz Fernández</td>
-                        <td>a.ruiz@email.com</td>
-                        <td>622456789</td>
-                        <td><span class="badge-rol badge-capitan">Capitán</span></td>
-                        <td>Rincón de la Victoria</td>
-                        <td>
-                            <button class="btn btn-primary btn-sm">Editar</button>
-                            <button class="btn btn-danger btn-sm">Baja</button>
-                        </td>
-                    </tr>
+                <tbody id="usuarios_tbody">
+                    
                 </tbody>
             </table>
         </div>
