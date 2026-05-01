@@ -6,6 +6,7 @@
     <title>Bancosol - Bandeja de Entrada</title>
     <link rel="stylesheet" href="styles.css">
     <script src="js/main.js" defer></script>
+    <script src="js/bandeja.js" type="module"></script>
 </head>
 <body>
     <button id="btn-desplegable" class="btn btn-primary btn-collapsible">
@@ -42,21 +43,8 @@
                         <th>Acciones</th>
                     </tr>
                 </thead>
-                <tbody>
-                    <tr>
-                        <td>14/04/2026</td>
-                        <td>Nueva campaña "Gran Recogida" asignada</td>
-                        <td>
-                            <button class="btn btn-primary btn-view">Ver mensaje</button>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>12/04/2026</td>
-                        <td>Cambio en el turno de Sábado - Tienda Almáchar</td>
-                        <td>
-                            <button class="btn btn-primary btn-view">Ver mensaje</button>
-                        </td>
-                    </tr>
+                <tbody id="notificaciones_tbody">
+                    
                 </tbody>
             </table>
         </div>
