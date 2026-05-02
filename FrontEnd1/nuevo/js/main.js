@@ -18,26 +18,46 @@ document.addEventListener('DOMContentLoaded', () => {
             window.location.href = 'index.html';
         });
     }
-    const boton = document.getElementById('btn-desplegable');
-    const sidebar = document.querySelector('.sidebar');
-    const enlaces = document.getElementById('menu-enlaces');
-    const mainContent = document.getElementsByClassName('main-content');
+    function bindSidebar() {
+        const boton = document.getElementById('btn-desplegable');
+        const sidebar = document.querySelector('.sidebar');
+        const enlaces = document.getElementById('menu-enlaces');
+        const mainContent = document.getElementsByClassName('main-content');
 
-    if (boton && sidebar) {
-        boton.addEventListener('click', () => {
-            sidebar.classList.toggle('abierto');
-            
-            if (sidebar.classList.contains('abierto')) {
-                boton.innerHTML = '✕';
-                enlaces.style.display = 'block';
-                mainContent[0].style.marginLeft = '250px';
-            } else {
-                boton.innerHTML = '☰';
-                enlaces.style.display = 'none';
-                mainContent[0].style.marginLeft = '0px';
+        if (boton && sidebar) {
+            boton.addEventListener('click', () => {
+                sidebar.classList.toggle('abierto');
+                
+                if (sidebar.classList.contains('abierto')) {
+                    boton.innerHTML = '✕';
+                    enlaces.style.display = 'block';
+                    mainContent[0].style.marginLeft = '250px';
+                } else {
+                    boton.innerHTML = '☰';
+                    enlaces.style.display = 'none';
+                    mainContent[0].style.marginLeft = '0px';
+                }
+            });
+        }
+    }
+
+    
+    document.addEventListener('include-html-loaded', bindSidebar);
+
+    function setActiveLink() {
+        const nav = document.getElementById('menu-enlaces');
+        if (!nav) return;
+        const currentPage = window.location.pathname.split('/').pop();
+        nav.querySelectorAll('a').forEach(a => {
+            a.classList.remove('active');
+            if (a.getAttribute('href').includes(currentPage)) {
+                a.classList.add('active');
             }
         });
     }
+
+    
+    document.addEventListener('include-html-loaded', setActiveLink);
 });
 
 
