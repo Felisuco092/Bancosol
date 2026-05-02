@@ -7,26 +7,10 @@
     <link rel="stylesheet" href="styles.css">
     <script src="js/tiendas.js" type="module"></script>
     <script src="js/main.js" defer></script>
+    <script src="js/custom_element/custom_element.js" defer></script>
 </head>
 <body>
-    <button id="btn-desplegable" class="btn btn-primary btn-collapsible">
-        ☰
-    </button>
-    <aside class="sidebar">
-        <img src="./assets/LOGO_BANCOSOL.png" alt="Logo BANCOSOL" class="logo_login">
-        <nav id="menu-enlaces">
-            <ul>
-                <li><a href="dashboard.html" >Cuadro de Mando</a></li>
-                <li><a href="campanas.html">Gestión de Campañas</a></li>
-                <li><a href="tiendas.html" class="active">Gestión de Tiendas</a></li>
-                <li><a href="colaboradores.html">Colaboradores</a></li>
-                <li><a href="usuarios.html">Usuarios</a></li>
-                <li><a href="turnos.html">Asignación de Turnos</a></li>
-                <li><a href="bandeja.html">Bandeja de Entrada</a></li>
-                <li><a href="#" id="logout-btn" class="text-logout">Cerrar Sesión</a></li>
-            </ul>
-        </nav>
-    </aside>
+    <include-html src="custom_elementsHTML/aside_bancosol.html"></include-html>
 
     <main class="main-content">
         <header class="header">
