@@ -6,6 +6,7 @@
     <title>Bancosol - Dashboard</title>
     <link rel="stylesheet" href="styles.css">
     <script src="js/main.js" defer></script>
+    <script src="js/dashboard.js" type="module"></script>
 </head>
 <body>
     <button id="btn-desplegable" class="btn btn-primary btn-collapsible">
@@ -35,13 +36,13 @@
         <div class="dashboard-grid">
             <div class="card dashboard-card">
                 <h3>Total de Tiendas</h3>
-                <div class="dashboard-number">120</div>
+                <div class="dashboard-number" id="metric-total-tiendas">-</div>
                 <p class="dashboard-label">Tiendas registradas</p>
             </div>
 
             <div class="card dashboard-card">
                 <h3>Total de Voluntarios Movilizados</h3>
-                <p class="dashboard-number blue">2,450</p>
+                <p class="dashboard-number blue" id="metric-total-voluntarios">-</p>
                 <p class="dashboard-label">voluntarios registrados</p>
             </div>
 
@@ -54,31 +55,15 @@
                             <th>Tiendas</th>
                         </tr>
                     </thead>
-                    <tbody>
-                        <tr>
-                            <td>Mercadona</td>
-                            <td><strong>82</strong></td>
-                        </tr>
-                        <tr>
-                            <td>Carrefour</td>
-                            <td><strong>35</strong></td>
-                        </tr>
-                        <tr>
-                            <td>Lidl</td>
-                            <td><strong>22</strong></td>
-                        </tr>
-                        <tr>
-                            <td>Aldi</td>
-                            <td><strong>13</strong></td>
-                        </tr>
+                    <tbody id="metric-top-cadenas-tbody">
                     </tbody>
                 </table>
             </div>
 
             <div class="card dashboard-card">
                 <h3>Días restantes</h3>
-                <p class="dashboard-number blue">42</p>
-                <p class="dashboard-label">Días restantes de la campaña activa</p>
+                <p class="dashboard-number blue" id="metric-days-remaining">-</p>
+                <p class="dashboard-label" id="metric-days-label">Cargando...</p>
             </div>
         </div>
     </main>
