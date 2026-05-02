@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Bancosol - Tiendas</title>
     <link rel="stylesheet" href="styles.css">
-    <script src="js/tiendas.js" defer></script>
+    <script src="js/tiendas.js" type="module"></script>
     <script src="js/main.js" defer></script>
 </head>
 <body>
@@ -39,36 +39,28 @@
                 <div>
                     <label for="select-filtro-campanas">Campaña:</label>
                     <select id="select-filtro-campanas">
-                        <option value="campana-gran-recogida">Campaña de Gran Recogida Primavera</option>
-                        <option value="campana-navidad">Campaña Navidad</option>
-                        <option value="operacion-kilo" selected>Operación Kilo Junio</option>
+                        <option value="">Seleccionar Campaña...</option>
                     </select>
                 </div>
                 <div>
                     <label for="filtro-por-cadenas">Cadena:</label>
                     <select id="filtro-por-cadenas">
                         <option value="todas">Seleccionar Cadena...</option>
-                        <option value="mercadona">Mercadona</option>
-                        <option value="lidl">Lidl</option>
-                        <option value="dia">Dia</option>
-                        <option value="aldi">Aldi</option>
-                        <option value="coviran">Covirán</option>
-                        <option value="corte-ingles">El Corte Inglés</option>
-                        <option value="carrefour">Carrefour</option>
                     </select>
                 </div>
                 <div>
                     <label for="filtro-por-localidad">Localidad:</label>
                     <select id="filtro-por-localidad">
                         <option value="todas">Seleccionar Localidad...</option>
-                        <option value="malaga">Málaga</option>
-                        <option value="marbella">Marbella</option>
-                        <option value="antequera">Antequera</option>
                     </select>
                 </div>
             </div>
 
-            <table class="tabla-tiendas">
+            <div id="tiendas-placeholder" class="card" style="text-align: center; padding: 2rem; color: #666;">
+                Seleccione una campaña para visualizar las tiendas
+            </div>
+
+            <table id="tabla-tiendas" class="tabla-tiendas" style="display: none;">
                 <thead>
                     <tr>
                         <th>Tienda</th>
@@ -82,162 +74,6 @@
                     </tr>
                 </thead>
                 <tbody id="tabla-tiendas-body">
-                    <tr class="clickable" data-cadena="mercadona" data-localidad="malaga">
-                        <td>Mercadona el Cónsul</td>
-                        <td><input type="checkbox" class="check-participa"></td>
-                        <td>MÁLAGA</td>
-                        <td>c/ Aristófanes, nºxx</td>
-                        <td>29010</td>
-                        <td>Teatinos</td>
-                        <td><span class="status-badge status-inactiva">Sin activar</span></td>
-                        <td>
-                            <button class="btn btn-primary btn-sm" onclick="location.href='editar_tienda.html'">Editar</button>
-                            <button class="btn btn-danger btn-sm">Borrar</button>
-                        </td>
-                    </tr>
-                    <tr class="clickable" data-cadena="lidl" data-localidad="marbella">
-                        <td>Lidl el Polígono</td>
-                        <td><input type="checkbox" class="check-participa"></td>
-                        <td>MARBELLA</td>
-                        <td>c/ Industrial, 5</td>
-                        <td>29600</td>
-                        <td>Polígono</td>
-                        <td><span class="status-badge status-inactiva">Sin activar</span></td>
-                        <td>
-                            <button class="btn btn-primary btn-sm">Editar</button>
-                            <button class="btn btn-danger btn-sm">Borrar</button>
-                        </td>
-                    </tr>
-                    <tr class="clickable" data-cadena="lidl" data-localidad="antequera">
-                        <td>Lidl Antequera</td>
-                        <td><input type="checkbox" class="check-participa"></td>
-                        <td>ANTEQUERA</td>
-                        <td>Av. Principal, 10</td>
-                        <td>29200</td>
-                        <td>Centro</td>
-                        <td><span class="status-badge status-inactiva">Sin activar</span></td>
-                        <td>
-                            <button class="btn btn-primary btn-sm">Editar</button>
-                            <button class="btn btn-danger btn-sm">Borrar</button>
-                        </td>
-                    </tr>
-                    <tr class="clickable" data-cadena="carrefour" data-localidad="malaga">
-                        <td>Carrefour Alameda</td>
-                        <td><input type="checkbox" class="check-participa"></td>
-                        <td>MÁLAGA</td>
-                        <td>Av. de la Aurora</td>
-                        <td>29007</td>
-                        <td>Alameda</td>
-                        <td><span class="status-badge status-inactiva">Sin activar</span></td>
-                        <td>
-                            <button class="btn btn-primary btn-sm">Editar</button>
-                            <button class="btn btn-danger btn-sm">Borrar</button>
-                        </td>
-                    </tr>
-                    <tr class="clickable" data-cadena="coviran" data-localidad="malaga">
-                        <td>Covirán Puerto de la Torre</td>
-                        <td><input type="checkbox" class="check-participa"></td>
-                        <td>MÁLAGA</td>
-                        <td>c/ Lope de Vega</td>
-                        <td>29010</td>
-                        <td>Puerto de la Torre</td>
-                        <td><span class="status-badge status-inactiva">Sin activar</span></td>
-                        <td>
-                            <button class="btn btn-primary btn-sm">Editar</button>
-                            <button class="btn btn-danger btn-sm">Borrar</button>
-                        </td>
-                    </tr>
-                    <tr class="clickable" data-cadena="dia" data-localidad="malaga">
-                        <td>Dia Mármoles</td>
-                        <td><input type="checkbox" class="check-participa"></td>
-                        <td>MÁLAGA</td>
-                        <td>c/ Mármoles, nº xx</td>
-                        <td>29007</td>
-                        <td>Centro</td>
-                        <td><span class="status-badge status-inactiva">Sin activar</span></td>
-                        <td>
-                            <button class="btn btn-primary btn-sm">Editar</button>
-                            <button class="btn btn-danger btn-sm">Borrar</button>
-                        </td>
-                    </tr>
-                    <tr class="clickable" data-cadena="mercadona" data-localidad="malaga">
-                        <td>Mercadona Campanillas</td>
-                        <td><input type="checkbox" class="check-participa"></td>
-                        <td>MÁLAGA</td>
-                        <td>c/ Principal, s/n</td>
-                        <td>29590</td>
-                        <td>Campanillas</td>
-                        <td><span class="status-badge status-inactiva">Sin activar</span></td>
-                        <td>
-                            <button class="btn btn-primary btn-sm" onclick="location.href='editar_tienda.html'">Editar</button>
-                            <button class="btn btn-danger btn-sm">Borrar</button>
-                        </td>
-                    </tr>
-                    <tr class="clickable" data-cadena="dia" data-localidad="malaga">
-                        <td>Dia Carretera Cádiz</td>
-                        <td><input type="checkbox" class="check-participa"></td>
-                        <td>MÁLAGA</td>
-                        <td>Av. Velázquez, 45</td>
-                        <td>29004</td>
-                        <td>Ctra. Cádiz</td>
-                        <td><span class="status-badge status-inactiva">Sin activar</span></td>
-                        <td>
-                            <button class="btn btn-primary btn-sm">Editar</button>
-                            <button class="btn btn-danger btn-sm">Borrar</button>
-                        </td>
-                    </tr>
-                    <tr class="clickable" data-cadena="coviran" data-localidad="malaga">
-                        <td>Covirán Bailén-Miraflores</td>
-                        <td><input type="checkbox" class="check-participa"></td>
-                        <td>MÁLAGA</td>
-                        <td>c/ Martínez de la Rosa</td>
-                        <td>29010</td>
-                        <td>Bailén</td>
-                        <td><span class="status-badge status-inactiva">Sin activar</span></td>
-                        <td>
-                            <button class="btn btn-primary btn-sm">Editar</button>
-                            <button class="btn btn-danger btn-sm">Borrar</button>
-                        </td>
-                    </tr>
-                    <tr class="clickable" data-cadena="dia" data-localidad="malaga">
-                        <td>Dia Capuchinos</td>
-                        <td><input type="checkbox" class="check-participa"></td>
-                        <td>MÁLAGA</td>
-                        <td>Alameda de Capuchinos</td>
-                        <td>29013</td>
-                        <td>Capuchinos</td>
-                        <td><span class="status-badge status-inactiva">Sin activar</span></td>
-                        <td>
-                            <button class="btn btn-primary btn-sm">Editar</button>
-                            <button class="btn btn-danger btn-sm">Borrar</button>
-                        </td>
-                    </tr>
-                    <tr class="clickable" data-cadena="corte-ingles" data-localidad="malaga">
-                        <td>El Corte Inglés Bahía Málaga</td>
-                        <td><input type="checkbox" class="check-participa"></td>
-                        <td>MÁLAGA</td>
-                        <td>c/ Hamlet, 2</td>
-                        <td>29006</td>
-                        <td>Cruz de Humilladero</td>
-                        <td><span class="status-badge status-inactiva">Sin activar</span></td>
-                        <td>
-                            <button class="btn btn-primary btn-sm">Editar</button>
-                            <button class="btn btn-danger btn-sm">Borrar</button>
-                        </td>
-                    </tr>
-                    <tr class="clickable" data-cadena="corte-ingles" data-localidad="malaga">
-                        <td>El Corte Inglés Av. Andalucía</td>
-                        <td><input type="checkbox" class="check-participa"></td>
-                        <td>MÁLAGA</td>
-                        <td>Av. Andalucía, 4</td>
-                        <td>29007</td>
-                        <td>Centro</td>
-                        <td><span class="status-badge status-inactiva">Sin activar</span></td>
-                        <td>
-                            <button class="btn btn-primary btn-sm">Editar</button>
-                            <button class="btn btn-danger btn-sm">Borrar</button>
-                        </td>
-                    </tr>
                 </tbody>
             </table>
         </div>

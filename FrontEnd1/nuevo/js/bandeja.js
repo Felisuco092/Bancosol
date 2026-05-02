@@ -11,7 +11,7 @@ function modelo_Fila(json) {
                         <td>${dateToString(json.fecha_creacion)}</td>
                         <td>${json.asunto}</td>
                         <td>
-                            <button class="btn btn-primary btn-view" onclick="alert(${json.mensaje})">Ver mensaje</button>
+                            <button class="btn btn-primary btn-view" onclick="alert('${json.mensaje}')">Ver mensaje</button>
                         </td>
                     </tr>`
 }
