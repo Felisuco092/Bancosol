@@ -92,7 +92,7 @@ Importante seleccionar la base de datos de PostgreSQL y clicar en apply.
     - Seperar tablas a jsp aparte y modificar lo q haga falta de los jsp de las 8 páginas + aside.
     - Pasar los js a controler(solo los q haga falta)
     - Paginas de editar/crear(necesita datos)(las q necesiten)
-  - HECHO(contando todos los jsp relacionados): Aside, dashboard y bandeja.
+  - HECHO(contando todos los jsp relacionados): Aside; /, /dashboard y /bandeja.
 - 3º Control de sesion(necesita datos)
   - Si sesion, redirect a dashboard y los demas a index sino sesión(todos los gets y posts)
   - /login (medio hecho)
