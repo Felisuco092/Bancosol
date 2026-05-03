@@ -87,9 +87,12 @@ Importante seleccionar la base de datos de PostgreSQL y clicar en apply.
 - 1º HTML/css y js de todas las páginas.
   - Listas index, campañas, bandeja, turnos y editarCrear
 - 2º Controlador con gets y post
-  - Ya creado, faltan botones y /guardar y /borrar
-  - Pasar a jsp y ver los atributos necesarios. Aside listo.
-  - Pg talas y editar/crear(necesita datos)
+  - Para cada una de los controladores (gets ya creados y algunos posts(botones+login+logout))
+    - Pulir Gets (atributos) y hacer los posts(login y logout PUNTO 3)
+    - Seperar tablas a jsp aparte y modificar lo q haga falta de los jsp de las 8 páginas + aside.
+    - Pasar los js a controler(solo los q haga falta)
+    - Paginas de editar/crear(necesita datos)(las q necesiten)
+  - HECHO(contando todos los jsp relacionados): Aside, dashboard y bandeja.
 - 3º Control de sesion(necesita datos)
   - Si sesion, redirect a dashboard y los demas a index sino sesión(todos los gets y posts)
   - /login (medio hecho)
