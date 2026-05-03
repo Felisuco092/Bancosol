@@ -7,12 +7,24 @@
     <title>Bancosol - Login</title>
     <link rel="stylesheet" href="../../css/styles.css">
     <link rel="stylesheet" href="../../css/login.css">
-
+    <%String error = (String)request.getAttribute("error");%>
 </head>
 <body id="login-page" class="login-body">
     <div id="login-card" class="card login-card">
         <img src="../../assets/LOGO_BANCOSOL.png" alt="Logo BANCOSOL" id="login-logo" class="logo_login">
         <p class="login-subtitle">Acceso al sistema de gestión</p>
+
+        <%
+            if (error != null) {
+        %>
+        <div class="alert alert-danger" role="alert">
+            <%= error %>
+        </div>
+        <%
+            }
+        %>
+
+
         <form id="login-form" action="/login" method="POST">
             <div id="login-input-username" class="input_login">
                 <label for="username">Usuario:</label>

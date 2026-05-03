@@ -7,8 +7,12 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import uma.grupo13.bancosol.dao.TiendasRepository;
 import uma.grupo13.bancosol.dao.UserRepository;
+import uma.grupo13.bancosol.dao.VoluntariosRepository;
+import uma.grupo13.bancosol.entity.TiendaEntity;
 import uma.grupo13.bancosol.entity.UsuarioEntity;
+import uma.grupo13.bancosol.entity.VoluntarioEntity;
 import uma.grupo13.bancosol.utils.ValidaSesion;
 
 import java.util.List;
@@ -17,6 +21,10 @@ import java.util.List;
 public class ControllerBase {
     @Autowired
     protected UserRepository userRepo;
+    @Autowired
+    protected TiendasRepository tiendasRepo;
+    @Autowired
+    protected VoluntariosRepository voluntariosRepo;
 
 
     @GetMapping("/")
@@ -32,6 +40,11 @@ public class ControllerBase {
     public String doDashboard(Model model, HttpSession session) {
         if (ValidaSesion.verificarSesion(session)) {
             model.addAttribute("paginaActual", "dashboard");
+            List<TiendaEntity> tiendas = tiendasRepo.findAll();
+            model.addAttribute("tiendas", tiendas);
+            List<VoluntarioEntity> voluntarios = voluntariosRepo.findAll();
+            model.addAttribute("voluntarios", voluntarios);
+
             return "dashboard";
         } else {
             return "redirect:/";
