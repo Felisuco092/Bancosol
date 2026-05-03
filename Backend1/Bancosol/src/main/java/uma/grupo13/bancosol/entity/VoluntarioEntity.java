@@ -16,7 +16,7 @@ public class VoluntarioEntity {
     private Integer id;
 
     @Column(name = "nombre_entidad", nullable = false)
-    private String nombreEntidad; // [cite: 611]
+    private String nombreEntidad;
 
     @Column(name = "persona_fisica")
     private Boolean personaFisica = true;

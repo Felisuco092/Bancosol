@@ -88,14 +88,14 @@ Importante seleccionar la base de datos de PostgreSQL y clicar en apply.
   - Listas index, campañas, bandeja, turnos y editarCrear
 - 2º Controlador con gets y post
   - Para cada una de los controladores (gets ya creados y algunos posts(botones+login+logout))
-    - Pulir Gets (atributos) y hacer los posts(login y logout PUNTO 3)
+    - Pulir Gets (atributos) y hacer los posts(login y logout PUNTO 3.1) Tener en cuenta 3.1
     - Seperar tablas a jsp aparte y modificar lo q haga falta de los jsp de las 8 páginas + aside.
     - Pasar los js a controler(solo los q haga falta)
     - Paginas de editar/crear(necesita datos)(las q necesiten)
-  - HECHO(contando todos los jsp relacionados): Aside; /, /dashboard y /bandeja.
+  - HECHO(contando todos los jsp relacionados): Aside; ControllerBase.
 - 3º Control de sesion(necesita datos)
   - Si sesion, redirect a dashboard y los demas a index sino sesión(todos los gets y posts)
-  - /login (medio hecho)
+  - /login (medio hecho) /logout hecho
 - 4º Control de roles
   - Admin pueda ver en usuarios admin tambien y añadir admins?
 - 5º Extraer en clase a parte la sidebar en una clase a parte y añadir en cada clase .jsp dentro de Frontend1
