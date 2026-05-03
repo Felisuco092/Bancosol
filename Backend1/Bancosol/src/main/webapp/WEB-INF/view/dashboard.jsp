@@ -1,6 +1,8 @@
 <%@ page import="java.util.List" %>
 <%@ page import="uma.grupo13.bancosol.entity.TiendaEntity" %>
 <%@ page import="uma.grupo13.bancosol.entity.VoluntarioEntity" %>
+<%@ page import="uma.grupo13.bancosol.entity.CampanaEntity" %>
+<%@ page import="uma.grupo13.bancosol.entity.CadenaEntity" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <!DOCTYPE html>
 <html lang="es">
@@ -13,6 +15,8 @@
     <%
         List<TiendaEntity> tiendas = (List<TiendaEntity>) request.getAttribute("tiendas");
         List<VoluntarioEntity> voluntarios = (List<VoluntarioEntity>) request.getAttribute("voluntarios");
+        CampanaEntity campana = (CampanaEntity) request.getAttribute("campana");
+        List<CadenaEntity> cadenas= (List<CadenaEntity>) request.getAttribute("cadenas");
     %>
 </head>
 <body>
@@ -55,30 +59,31 @@
                         </tr>
                     </thead>
                     <tbody>
-                        <tr>
-                            <td>Mercadona</td>
-                            <td><strong>82</strong></td>
-                        </tr>
-                        <tr>
-                            <td>Carrefour</td>
-                            <td><strong>35</strong></td>
-                        </tr>
-                        <tr>
-                            <td>Lidl</td>
-                            <td><strong>22</strong></td>
-                        </tr>
-                        <tr>
-                            <td>Aldi</td>
-                            <td><strong>13</strong></td>
-                        </tr>
+                        <%
+                            for(CadenaEntity c : cadenas){ %>
+                                <tr>
+                                    <td><%=c.getNombre()%></td>
+                                    <td><strong><%=c.getTiendas().size()%></strong></td>
+                                </tr>
+                        <%
+                            }
+                        %>
                     </tbody>
                 </table>
             </div>
 
             <div class="card dashboard-card">
                 <h3>Días restantes</h3>
-                <p class="dashboard-number blue">42</p>
+                <%
+                    if (campana==null) { %>
+                <p class="dashboard-number blue">Ninguna campaña activa.</p>
+                <%
+                    }else{ %>
+                <p class="dashboard-number blue"><%=campana.getTiempoRestante()%></p>
                 <p class="dashboard-label">Días restantes de la campaña activa</p>
+                <%
+                    }
+                %>
             </div>
         </div>
     </main>
