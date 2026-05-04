@@ -5,26 +5,12 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Bancosol - Usuarios</title>
     <link rel="stylesheet" href="styles.css">
+    <script src="js/main.js" defer></script>
+    <script src="js/custom_element/custom_element.js" defer></script>
+    <script src="js/usuarios.js" type="module"></script>
 </head>
 <body>
-    <button id="btn-desplegable" class="btn btn-primary btn-collapsible">
-        ☰
-    </button>
-    <aside class="sidebar">
-        <img src="./assets/LOGO_BANCOSOL.png" alt="Logo BANCOSOL" class="logo_login">
-        <nav id="menu-enlaces">
-            <ul>
-                <li><a href="dashboard.html" >Cuadro de Mando</a></li>
-                <li><a href="campanas.html">Gestión de Campañas</a></li>
-                <li><a href="tiendas.html">Gestión de Tiendas</a></li>
-                <li><a href="colaboradores.html">Colaboradores</a></li>
-                <li><a href="usuarios.html" class="active">Usuarios</a></li>
-                <li><a href="turnos.html">Asignación de Turnos</a></li>
-                <li><a href="bandeja.html">Bandeja de Entrada</a></li>
-                <li><a href="#" id="logout-btn" class="text-logout">Cerrar Sesión</a></li>
-            </ul>
-        </nav>
-    </aside>
+    <include-html src="custom_elementsHTML/aside_bancosol.html"></include-html>
 
     <main class="main-content">
         <header class="header">
@@ -45,48 +31,13 @@
                         <th>Acciones</th>
                     </tr>
                 </thead>
-                <tbody>
-                    <tr>
-                        <td>Juan</td>
-                        <td>Pérez García</td>
-                        <td>juan.perez@email.com</td>
-                        <td>600123456</td>
-                        <td><span class="badge-rol badge-capitan">Capitán</span></td>
-                        <td>Málaga Este</td>
-                        <td>
-                            <button class="btn btn-primary btn-sm">Editar</button>
-                            <button class="btn btn-danger btn-sm">Baja</button>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>María</td>
-                        <td>López Sánchez</td>
-                        <td>m.lopez@email.com</td>
-                        <td>611987654</td>
-                        <td><span class="badge-rol badge-coordinador">Coordinador</span></td>
-                        <td>Almáchar</td>
-                        <td>
-                            <button class="btn btn-primary btn-sm">Editar</button>
-                            <button class="btn btn-danger btn-sm">Baja</button>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>Antonio</td>
-                        <td>Ruiz Fernández</td>
-                        <td>a.ruiz@email.com</td>
-                        <td>622456789</td>
-                        <td><span class="badge-rol badge-capitan">Capitán</span></td>
-                        <td>Rincón de la Victoria</td>
-                        <td>
-                            <button class="btn btn-primary btn-sm">Editar</button>
-                            <button class="btn btn-danger btn-sm">Baja</button>
-                        </td>
-                    </tr>
+                <tbody id="usuarios_tbody">
+                    
                 </tbody>
             </table>
         </div>
     </main>
 
-    <script src="main.js"></script>
+    
 </body>
 </html>

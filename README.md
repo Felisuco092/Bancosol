@@ -13,6 +13,8 @@ Backend sin jsp, que que se implementa junto a FrontEnd 2.
 ## FrontEnd 1
 Front montado por html, css y js sin datos de la BD.
 
+Instrucciones de como montar el serve-json en [Guia Json-server](./FrontEnd1/nuevo/bd_json/README.md)
+
 ---
 ## FrontEnd 2
 Front completo en react para mostrar los datos de la bd.
@@ -85,31 +87,35 @@ Importante seleccionar la base de datos de PostgreSQL y clicar en apply.
 - 1º HTML/css y js de todas las páginas.
   - Listas index, campañas, bandeja, turnos y editarCrear
 - 2º Controlador con gets y post
-  - ControladorBase tiene los que faltan
-  - Ya creado, faltan botones y /guardar y /borrar
-  - Pasar a jsp y ver los atributos necesarios.
-- 3º Control de sesion
-  - Si sesion, redirect a dashboard y los demas a index sino sesión
+  - Para cada una de los controladores (gets ya creados y algunos posts(botones+login+logout))
+    - Pulir Gets (atributos) y hacer los posts(login y logout PUNTO 3.1) Tener en cuenta 3.1
+    - Seperar tablas a jsp aparte y modificar lo q haga falta de los jsp de las 8 páginas + aside.
+    - Pasar los js a controler(solo los q haga falta)
+    - Paginas de editar/crear(necesita datos)(las q necesiten)
+  - HECHO(contando todos los jsp relacionados): Aside; ControllerBase.
+- 3º Control de sesion(necesita datos)
+  - Si sesion, redirect a dashboard y los demas a index sino sesión(todos los gets y posts)
+  - /login (medio hecho) /logout hecho
 - 4º Control de roles
   - Admin pueda ver en usuarios admin tambien y añadir admins?
 - 5º Extraer en clase a parte la sidebar en una clase a parte y añadir en cada clase .jsp dentro de Frontend1
 - 6º Crear js para emular petición y que devuelve un json. mock de base de datos con un timeout
 - 7º Service
 - 8º DTO 
-- 9º Recarga de tablas(script de fetch)
+- 9º Recarga de tablas(script de fetch)(necesita datos)
 - 10º Limpieza de capitanes si no se confirman en x tiempo
 
 ![Paso 0](https://img.shields.io/badge/Paso_0-Completo-green)
 ![Paso 1](https://img.shields.io/badge/Paso_1-Completo-green)
 ![Paso 2](https://img.shields.io/badge/Paso_2-En_proceso-yellow)
-![Paso 3](https://img.shields.io/badge/Paso_3-Pendiente-red)
+![Paso 3](https://img.shields.io/badge/Paso_3-En_proceso-yellow)
 ![Paso 4](https://img.shields.io/badge/Paso_4-Pendiente-red)
 ![Paso 5](https://img.shields.io/badge/Paso_5-Completo-green)
-![Paso 6](https://img.shields.io/badge/Paso_6-Opcional-orange)
+![Paso 6](https://img.shields.io/badge/Paso_6-Completo-green)
 ![Paso 7](https://img.shields.io/badge/Paso_7-Pendiente-red)
 ![Paso 8](https://img.shields.io/badge/Paso_8-Pendiente-red)
-![Paso 9](https://img.shields.io/badge/Paso_9-Pendiente-red)
-![Paso 10](https://img.shields.io/badge/Paso_10-Opcional-orange)
+![Paso 9](https://img.shields.io/badge/Paso_9-A_empezar-orange)
+![Paso 10](https://img.shields.io/badge/Paso_10-Opcional-purple)
 
 ![LC](https://tenor.com/es/view/agnes-tachyon-low-cortisol-gif-6147390476112029717.gif)
 

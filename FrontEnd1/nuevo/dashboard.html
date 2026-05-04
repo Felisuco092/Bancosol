@@ -5,26 +5,12 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Bancosol - Dashboard</title>
     <link rel="stylesheet" href="styles.css">
+    <script src="js/main.js" defer></script>
+    <script src="js/custom_element/custom_element.js" defer></script>
+    <script src="js/dashboard.js" type="module"></script>
 </head>
 <body>
-    <button id="btn-desplegable" class="btn btn-primary btn-collapsible">
-        ☰
-    </button>
-    <aside class="sidebar">
-        <img src="./assets/LOGO_BANCOSOL.png" alt="Logo BANCOSOL" class="logo_login">
-        <nav id="menu-enlaces">
-            <ul>
-                <li><a href="dashboard.html" class="active">Cuadro de Mando</a></li>
-                <li><a href="campanas.html">Gestión de Campañas</a></li>
-                <li><a href="tiendas.html">Gestión de Tiendas</a></li>
-                <li><a href="colaboradores.html">Colaboradores</a></li>
-                <li><a href="usuarios.html">Usuarios</a></li>
-                <li><a href="turnos.html">Asignación de Turnos</a></li>
-                <li><a href="bandeja.html">Bandeja de Entrada</a></li>
-                <li><a href="#" id="logout-btn" class="text-logout">Cerrar Sesión</a></li>
-            </ul>
-        </nav>
-    </aside>
+    <include-html src="custom_elementsHTML/aside_bancosol.html"></include-html>
 
     <main class="main-content">
         <header class="header">
@@ -34,13 +20,13 @@
         <div class="dashboard-grid">
             <div class="card dashboard-card">
                 <h3>Total de Tiendas</h3>
-                <div class="dashboard-number">120</div>
+                <div class="dashboard-number" id="metric-total-tiendas">-</div>
                 <p class="dashboard-label">Tiendas registradas</p>
             </div>
 
             <div class="card dashboard-card">
                 <h3>Total de Voluntarios Movilizados</h3>
-                <p class="dashboard-number blue">2,450</p>
+                <p class="dashboard-number blue" id="metric-total-voluntarios">-</p>
                 <p class="dashboard-label">voluntarios registrados</p>
             </div>
 
@@ -53,35 +39,19 @@
                             <th>Tiendas</th>
                         </tr>
                     </thead>
-                    <tbody>
-                        <tr>
-                            <td>Mercadona</td>
-                            <td><strong>82</strong></td>
-                        </tr>
-                        <tr>
-                            <td>Carrefour</td>
-                            <td><strong>35</strong></td>
-                        </tr>
-                        <tr>
-                            <td>Lidl</td>
-                            <td><strong>22</strong></td>
-                        </tr>
-                        <tr>
-                            <td>Aldi</td>
-                            <td><strong>13</strong></td>
-                        </tr>
+                    <tbody id="metric-top-cadenas-tbody">
                     </tbody>
                 </table>
             </div>
 
             <div class="card dashboard-card">
                 <h3>Días restantes</h3>
-                <p class="dashboard-number blue">42</p>
-                <p class="dashboard-label">Días restantes de la campaña activa</p>
+                <p class="dashboard-number blue" id="metric-days-remaining">-</p>
+                <p class="dashboard-label" id="metric-days-label">Cargando...</p>
             </div>
         </div>
     </main>
 
-    <script src="main.js"></script>
+    
 </body>
 </html>

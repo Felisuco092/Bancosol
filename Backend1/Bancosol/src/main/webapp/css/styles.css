@@ -1,13 +1,29 @@
-/* FrontEnd1/nuevo/styles.css */
+/* ================================================
+   FrontEnd1/nuevo/styles.css
+   Estilos principales - Sistema Bancosol
+   ================================================ */
 
+/* ---------- 1. Variables ---------- */
 :root {
     --primary-color: #0056b3;
+    --primary-hover: #004494;
     --secondary-color: #6c757d;
+    --secondary-hover: #5a6268;
     --success-color: #28a745;
     --danger-color: #dc3545;
     --light-bg: #f8f9fa;
     --dark-text: #343a40;
     --sidebar-width: 250px;
+    --border-color: #dee2e6;
+    --input-border: #ced4da;
+    --shadow: 0 2px 4px rgba(0,0,0,0.1);
+    --sidebar-bg: white;
+    --sidebar-hover: rgb(12, 190, 225);
+}
+
+/* ---------- 2. Reset & Base ---------- */
+* {
+    box-sizing: border-box;
 }
 
 body {
@@ -18,14 +34,60 @@ body {
     color: var(--dark-text);
 }
 
-/* Sidebar */
+body.no-sidebar {
+    display: block;
+}
+
+/* ---------- 3. Layout: Sidebar ---------- */
 .sidebar {
-    width: var(--sidebar-width);
-    background-color: #343a40;
-    color: white;
+    width: 0;
+    min-width: 0;
+    background-color: var(--sidebar-bg);
     height: 100vh;
     position: fixed;
-    padding-top: 20px;
+    padding: 20px 0;
+    overflow: hidden;
+    overflow-y: auto;
+    transition: width 0.3s ease-in-out, min-width 0.3s ease-in-out;
+    z-index: 100;
+}
+
+.sidebar.abierto {
+    width: var(--sidebar-width);
+    min-width: var(--sidebar-width);
+}
+
+.sidebar .logo_login,
+#menu-enlaces {
+    opacity: 0;
+    transition: opacity 0.2s ease-in-out;
+    white-space: nowrap;
+}
+
+.sidebar.abierto .logo_login,
+.sidebar.abierto #menu-enlaces {
+    opacity: 1;
+}
+
+.sidebar .logo_login {
+    display: block;
+    width: 80%;
+    max-width: 180px;
+    margin: 0 0 0 55px;
+}
+
+#menu-enlaces {
+    display: none;
+}
+
+#menu-enlaces.abierto {
+    display: block;
+    opacity: 1;
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(-10px); }
+    to { opacity: 1; transform: translateY(0); }
 }
 
 .sidebar h2 {
@@ -37,26 +99,33 @@ body {
 .sidebar nav ul {
     list-style: none;
     padding: 0;
+    margin: 0;
 }
 
 .sidebar nav ul li a {
-    color: #adb5bd;
+    color: black;
     text-decoration: none;
     display: block;
     padding: 15px 25px;
     transition: 0.3s;
 }
 
-.sidebar nav ul li a:hover, .sidebar nav ul li a.active {
-    background-color: #495057;
+.sidebar nav ul li a:hover {
+    background-color: var(--sidebar-hover);
+    color: black;
+}
+
+.sidebar nav ul li a.active {
+    background-color: var(--primary-color);
     color: white;
 }
 
-/* Main Content */
+/* ---------- 4. Layout: Main Content ---------- */
 .main-content {
-    margin-left: var(--sidebar-width);
+    margin-left: 0;
     padding: 40px;
-    width: calc(100% - var(--sidebar-width));
+    width: 100%;
+    transition: margin-left 0.3s ease-in-out, width 0.3s ease-in-out;
 }
 
 .header {
@@ -64,31 +133,91 @@ body {
     justify-content: space-between;
     align-items: center;
     margin-bottom: 30px;
-    border-bottom: 2px solid #dee2e6;
+    border-bottom: 2px solid var(--border-color);
     padding-bottom: 10px;
 }
 
-/* Forms and Cards */
-.card {
-    background: white;
-    padding: 20px;
-    border-radius: 8px;
-    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
-    margin-bottom: 20px;
-}
-
+/* ---------- 5. Componentes: Botones ---------- */
 .btn {
     padding: 10px 20px;
     border: none;
     border-radius: 4px;
     cursor: pointer;
     font-weight: bold;
+    transition: background-color 0.3s, transform 0.1s;
 }
 
-.btn-primary { background-color: var(--primary-color); color: white; }
-.btn-success { background-color: var(--success-color); color: white; }
+.btn:hover {
+    transform: translateY(-1px);
+}
 
-/* Tables */
+.btn:active {
+    transform: translateY(0);
+}
+
+.btn-primary {
+    background-color: var(--primary-color);
+    color: white;
+}
+
+.btn-primary:hover {
+    background-color: var(--primary-hover);
+}
+
+.btn-success {
+    background-color: var(--success-color);
+    color: white;
+}
+
+.btn-danger {
+    background-color: var(--danger-color);
+    color: white;
+}
+
+.btn-secondary {
+    background-color: var(--secondary-color);
+    color: white;
+}
+
+.btn-secondary:hover {
+    background-color: var(--secondary-hover);
+}
+
+.filter-btn {
+    background-color: #e9ecef;
+    color: var(--dark-text);
+}
+
+.filter-btn.active {
+    background-color: var(--primary-color);
+    color: white;
+}
+
+.btn-collapsible {
+    position: fixed;
+    top: 20px;
+    left: 10px;
+    z-index: 1000;
+    width: 40px;
+    height: 40px;
+    padding: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: var(--primary-color);
+}
+
+/* ---------- 6. Componentes: Cards ---------- */
+.card {
+    background: white;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: var(--shadow);
+    margin-bottom: 20px;
+    overflow-x: auto;
+}
+
+/* ---------- 7. Componentes: Tablas ---------- */
 table {
     width: 100%;
     border-collapse: collapse;
@@ -98,12 +227,372 @@ table {
 th, td {
     text-align: left;
     padding: 12px;
-    border-bottom: 1px solid #dee2e6;
+    border-bottom: 1px solid var(--border-color);
 }
 
-th { background-color: #e9ecef; }
+th {
+    background-color: #e9ecef;
+}
 
-/* Login Page specific */
+/* ---------- 8. Componentes: Estados ---------- */
+.status-badge {
+    padding: 6px 12px;
+    border-radius: 6px;
+    font-size: 0.9rem;
+    font-weight: 500;
+    display: inline-block;
+    text-align: center;
+}
+
+.status-activa {
+    background-color: #d4edda;
+    color: #0b5b38;
+}
+
+.status-inactiva {
+    background-color: #f8d7da;
+    color: #721c24;
+}
+
+.acciones {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    align-items: flex-end;
+}
+
+.badge {
+    padding: 4px 10px;
+    border-radius: 20px;
+    font-size: 0.8rem;
+    font-weight: 500;
+}
+
+.badge-persona {
+    background-color: #e3f2fd;
+    color: #1976d2;
+}
+
+.badge-confirmar {
+    background-color: #ffa1a1;
+    color: #9a0101;
+}
+
+.badge-entidad {
+    background-color: #f3e5f5;
+    color: #7b1fa2;
+}
+
+/* ---------- 9. Página Dashboard ---------- */
+.dashboard-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 20px;
+    grid-auto-rows: 1fr;
+}
+
+.dashboard-card {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.dashboard-card h3 {
+    text-align: center;
+}
+
+.dashboard-number {
+    font-size: 3rem;
+    margin: 10px 0;
+    text-align: center;
+}
+
+.dashboard-number.blue {
+    color: var(--primary-color);
+}
+
+.dashboard-label {
+    color: #666;
+    text-align: center;
+}
+
+.dashboard-table {
+    width: 100%;
+}
+
+.dashboard-table th {
+    text-align: center;
+}
+
+.dashboard-table td {
+    padding: 8px 0;
+    text-align: center;
+}
+
+.dashboard-table td strong {
+    font-weight: bold;
+}
+
+/* ---------- 10. Página Colaboradores ---------- */
+.filtros-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr auto;
+    gap: 20px;
+    align-items: end;
+    margin-bottom: 20px;
+}
+
+.filtros-grid label {
+    display: block;
+    margin-bottom: 5px;
+    font-weight: bold;
+}
+
+.filtros-grid select {
+    padding: 10px;
+    width: 100%;
+    border-radius: 4px;
+    border: 1px solid #ddd;
+}
+
+.btn-sm {
+    padding: 5px 8px;
+    font-size: 0.75rem;
+}
+
+/* ---------- 11. Página Campañas ---------- */
+.filtros-campanas {
+    display: flex;
+    gap: 10px;
+    margin-bottom: 20px;
+}
+
+.btn-action {
+    padding: 5px 8px;
+    font-size: 0.75rem;
+}
+
+.btn-primary-sm {
+    padding: 5px 8px;
+    font-size: 0.75rem;
+}
+
+.btn-info {
+    background: #17a2b8;
+    color: white;
+}
+
+.btn-warning {
+    background: #ffc107;
+    color: #212529;
+}
+
+.btn-turnos {
+    background: #28a745;
+    color: white;
+}
+
+.btn-delete-campana {
+    background: #dc3545;
+    color: white;
+}
+
+.btn-view {
+    padding: 5px 12px;
+    font-size: 0.85rem;
+}
+
+.status-badge-campana {
+    padding: 4px 8px;
+    border-radius: 4px;
+    font-size: 0.85rem;
+}
+
+.clickable {
+    cursor: pointer;
+}
+
+.btn-info {
+    background: #17a2b8;
+    color: white;
+}
+
+.btn-warning {
+    background: #ffc107;
+    color: #212529;
+}
+
+.btn-turnos {
+    background: #28a745;
+    color: white;
+}
+
+.btn-delete-campana {
+    background: #dc3545;
+    color: white;
+}
+
+/* ---------- 12. Página Tiendas ---------- */
+.tiendas-layout {
+    display: flex;
+    gap: 20px;
+}
+
+/* Se eliminan estilos específicos antiguos de tiendas para favorecer el uso de .filtros-grid y .card genéricos */
+.check-participa {
+    width: 18px;
+    height: 18px;
+    cursor: pointer;
+}
+
+.tabla-tiendas tr:hover {
+    background-color: #f1f8ff;
+}
+
+
+/* ---------- 13. Página Turnos ---------- */
+.filtros-turnos {
+    display: grid;
+    grid-template-columns: 1fr 1fr auto;
+    gap: 20px;
+    align-items: end;
+}
+
+.filtros-turnos label {
+    display: block;
+    margin-bottom: 5px;
+    font-weight: bold;
+}
+
+.filtros-turnos select {
+    padding: 10px;
+    width: 100%;
+    border-radius: 4px;
+    border: 1px solid #ddd;
+}
+
+#cuadrante-container {
+    display: none;
+}
+
+.cuadrante-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 15px;
+}
+
+.cuadrante-tabla {
+    width: 100%;
+}
+
+.voluntarios-cell {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 5px;
+}
+
+.voluntario-tag {
+    background: #e2e3e5;
+    padding: 2px 8px;
+    border-radius: 12px;
+    font-size: 0.8rem;
+}
+
+.voluntario-tag.empty {
+    background: #f8d7da;
+    color: #721c24;
+}
+
+.voluntario-tag.group {
+    background: #d1ecf1;
+    color: #0c5460;
+}
+
+.btn-add {
+    padding: 2px 8px;
+    font-size: 0.75rem;
+    background: var(--success-color);
+    color: white;
+}
+
+.btn-add-extra {
+    margin-left: 20px;
+    font-size: 0.85rem;
+}
+
+.btn-incidence {
+    padding: 5px 10px;
+    font-size: 0.75rem;
+}
+
+.btn-remove {
+    border: none;
+    background: none;
+    cursor: pointer;
+    color: red;
+    font-weight: bold;
+}
+
+.cuadrante-tabla {
+    width: 100%;
+}
+
+.cuadrante-actions {
+    display: flex;
+    align-items: center;
+}
+
+.cuadrante-actions span {
+    margin-right: 10px;
+}
+
+/* ---------- 14. Página Usuarios ---------- */
+.badge-rol {
+    padding: 4px 8px;
+    border-radius: 4px;
+}
+
+.badge-capitan {
+    background: #e7f3ff;
+    color: #007bff;
+}
+
+.badge-coordinador {
+    background: #fff3e0;
+    color: #fb8c00;
+}
+
+/* ---------- 15. Miscellaneous ---------- */
+.sidebar nav ul li .btn-logout {
+    background: none;
+    border: none;
+    padding: 15px 25px;
+    width: 100%;
+    text-align: left;
+    cursor: pointer;
+    font-family: inherit;
+    font-size: inherit;
+    color: #dc3545;
+    font-weight: bold;
+    transition: 0.3s;
+}
+
+.sidebar nav ul li .btn-logout:hover {
+    background-color: #f8dcdc;
+    color: #a71d2a;
+}
+
+.text-center {
+    text-align: center;
+}
+
+.w-full {
+    width: 100%;
+}
+
+/* ---------- 9. Login Page ---------- */
 .login-body {
     display: flex;
     justify-content: center;
@@ -111,9 +600,85 @@ th { background-color: #e9ecef; }
     height: 100vh;
     width: 100%;
     margin: 0;
+    padding: 0;
 }
 
 .login-card {
     width: 100%;
     max-width: 400px;
+}
+
+.login-subtitle {
+    text-align: center;
+}
+
+.login-card {
+    width: 100%;
+    max-width: 400px;
+}
+
+.login-card .logo_login {
+    display: block;
+    margin: 0 auto 20px;
+    width: 280px;
+    max-width: 100%;
+    height: auto;
+}
+
+.input_login {
+    width: 100%;
+    margin-bottom: 15px;
+}
+
+.input_login label {
+    display: block;
+    margin-bottom: 5px;
+    font-weight: 500;
+}
+
+.input_login input {
+    width: 100%;
+    padding: 12px;
+    border: 1px solid var(--input-border);
+    border-radius: 4px;
+    font-size: 1rem;
+}
+
+/* ---------- 10. Responsive ---------- */
+@media (min-width: 1200px) {
+    .login-card {
+        max-width: 500px;
+        padding: 40px;
+    }
+    .login-card .logo_login {
+        width: 350px;
+    }
+    .login-body {
+        font-size: 1.15rem;
+    }
+    .input_login input {
+        font-size: 1.15rem;
+        padding: 15px;
+    }
+}
+
+@media (min-width: 1600px) {
+    .login-card {
+        max-width: 650px;
+        padding: 60px;
+    }
+    .login-card .logo_login {
+        width: 450px;
+    }
+    .login-body {
+        font-size: 1.3rem;
+    }
+    .input_login input {
+        font-size: 1.3rem;
+        padding: 18px;
+    }
+    .btn {
+        font-size: 1.25rem;
+        padding: 15px 30px;
+    }
 }

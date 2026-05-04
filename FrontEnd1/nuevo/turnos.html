@@ -5,26 +5,12 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Bancosol - Asignación de Turnos</title>
     <link rel="stylesheet" href="styles.css">
+    <script src="js/main.js" defer></script>
+    <script src="js/custom_element/custom_element.js" defer></script>
+    <script src="js/turnos.js" type="module"></script>
 </head>
 <body>
-    <button id="btn-desplegable" class="btn btn-primary btn-collapsible">
-        ☰
-    </button>
-    <aside class="sidebar">
-        <img src="./assets/LOGO_BANCOSOL.png" alt="Logo BANCOSOL" class="logo_login">
-        <nav id="menu-enlaces">
-            <ul>
-                <li><a href="dashboard.html" >Cuadro de Mando</a></li>
-                <li><a href="campanas.html">Gestión de Campañas</a></li>
-                <li><a href="tiendas.html">Gestión de Tiendas</a></li>
-                <li><a href="colaboradores.html">Colaboradores</a></li>
-                <li><a href="usuarios.html">Usuarios</a></li>
-                <li><a href="turnos.html" class="active">Asignación de Turnos</a></li>
-                <li><a href="bandeja.html">Bandeja de Entrada</a></li>
-                <li><a href="#" id="logout-btn" class="text-logout">Cerrar Sesión</a></li>
-            </ul>
-        </nav>
-    </aside>
+    <include-html src="custom_elementsHTML/aside_bancosol.html"></include-html>
 
     <main class="main-content">
         <header class="header">
@@ -36,29 +22,24 @@
                     <label for="select-campana">Campaña:</label>
                     <select id="select-campana">
                         <option value="">-- Seleccione Campaña --</option>
-                        <option value="1">Gran Recogida Primavera 2026</option>
-                        <option value="2">Campaña Navidad 2025</option>
                     </select>
                 </div>
                 <div>
                     <label for="select-tienda">Tienda:</label>
                     <select id="select-tienda">
                         <option value="">-- Seleccione Tienda --</option>
-                        <option value="101">Mercadona - Av. Andalucía</option>
-                        <option value="102">Carrefour - Rincón</option>
-                        <option value="103">Lidl - El Palo</option>
                     </select>
                 </div>
                 <button id="btn-buscar" class="btn btn-primary">Ver Cuadrante</button>
-            </div>
+            
         </div>
 
-        <div id="cuadrante-container">
+        <div id="cuadrante-container" style="display: none;">
             <div class="card">
                 <div class="cuadrante-header">
                     <h3>Cuadrante de Turnos</h3>
                     <div class="cuadrante-actions">
-                        <span>Capitán: <strong id="capitan-nombre">Juan Pérez</strong></span>
+                        <span>Capitán: <strong id="capitan-nombre">-</strong></span>
                         <button class="btn btn-success btn-add-extra">+ Añadir Turno Extra</button>
                     </div>
                 </div>
@@ -74,67 +55,10 @@
                         </tr>
                     </thead>
                     <tbody id="tabla-turnos-body">
-                        <tr>
-                            <td>Viernes 01/04</td>
-                            <td>09:00</td>
-                            <td>15:00</td>
-                            <td>
-                                <div class="voluntarios-cell">
-                                    <span class="voluntario-tag">Carlos Ruiz <button class="btn-remove">×</button></span>
-                                    <span class="voluntario-tag">Ana Belén <button class="btn-remove">×</button></span>
-                                    <button class="btn btn-sm btn-add">+ Añadir</button>
-                                </div>
-                            </td>
-                            <td>
-                                <button class="btn btn-danger btn-incidence">Incidencia</button>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>Viernes 01/04</td>
-                            <td>15:00</td>
-                            <td>21:00</td>
-                            <td>
-                                <div class="voluntarios-cell">
-                                    <span class="voluntario-tag empty">Vacío</span>
-                                    <button class="btn btn-sm btn-add">+ Añadir Voluntario</button>
-                                </div>
-                            </td>
-                            <td>
-                                <button class="btn btn-danger btn-incidence">Incidencia</button>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>Sábado 02/04</td>
-                            <td>09:00</td>
-                            <td>15:00</td>
-                            <td>
-                                <div class="voluntarios-cell">
-                                    <span class="voluntario-tag group">Grupo Scout Malaka (10)</span>
-                                    <button class="btn btn-sm btn-add">+ Añadir</button>
-                                </div>
-                            </td>
-                            <td>
-                                <button class="btn btn-danger btn-incidence">Incidencia</button>
-                            </td>
-                        </tr>
                     </tbody>
                 </table>
             </div>
         </div>
     </main>
-
-    <script src="main.js"></script>
-    <script>
-        document.getElementById('btn-buscar').addEventListener('click', function() {
-            const campana = document.getElementById('select-campana').value;
-            const tienda = document.getElementById('select-tienda').value;
-
-            if (campana && tienda) {
-                document.getElementById('cuadrante-container').style.display = 'block';
-            } else {
-                alert('Por favor, seleccione una campaña y una tienda.');
-            }
-        });
-    </script>
 </body>
 </html>

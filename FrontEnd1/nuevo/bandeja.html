@@ -5,26 +5,12 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Bancosol - Bandeja de Entrada</title>
     <link rel="stylesheet" href="styles.css">
+    <script src="js/main.js" defer></script>
+    <script src="js/custom_element/custom_element.js" defer></script>
+    <script src="js/bandeja.js" type="module"></script>
 </head>
 <body>
-    <button id="btn-desplegable" class="btn btn-primary btn-collapsible">
-        ☰
-    </button>
-    <aside class="sidebar">
-        <img src="./assets/LOGO_BANCOSOL.png" alt="Logo BANCOSOL" class="logo_login">
-        <nav id="menu-enlaces">
-            <ul>
-                <li><a href="dashboard.html" >Cuadro de Mando</a></li>
-                <li><a href="campanas.html">Gestión de Campañas</a></li>
-                <li><a href="tiendas.html">Gestión de Tiendas</a></li>
-                <li><a href="colaboradores.html">Colaboradores</a></li>
-                <li><a href="usuarios.html">Usuarios</a></li>
-                <li><a href="turnos.html">Asignación de Turnos</a></li>
-                <li><a href="bandeja.html" class="active">Bandeja de Entrada</a></li>
-                <li><a href="#" id="logout-btn" class="text-logout">Cerrar Sesión</a></li>
-            </ul>
-        </nav>
-    </aside>
+    <include-html src="custom_elementsHTML/aside_bancosol.html"></include-html>
 
     <main class="main-content">
         <header class="header">
@@ -41,26 +27,13 @@
                         <th>Acciones</th>
                     </tr>
                 </thead>
-                <tbody>
-                    <tr>
-                        <td>14/04/2026</td>
-                        <td>Nueva campaña "Gran Recogida" asignada</td>
-                        <td>
-                            <button class="btn btn-primary btn-view">Ver mensaje</button>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>12/04/2026</td>
-                        <td>Cambio en el turno de Sábado - Tienda Almáchar</td>
-                        <td>
-                            <button class="btn btn-primary btn-view">Ver mensaje</button>
-                        </td>
-                    </tr>
+                <tbody id="notificaciones_tbody">
+                    
                 </tbody>
             </table>
         </div>
     </main>
 
-    <script src="main.js"></script>
+    
 </body>
 </html>

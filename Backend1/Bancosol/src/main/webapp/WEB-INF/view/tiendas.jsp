@@ -1,79 +1,90 @@
-<%--
-  Created by IntelliJ IDEA.
-  User: Germán
-  Date: 20/04/2026
-  Time: 12:10
-  To change this template use File | Settings | File Templates.
---%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
-<%
-
-%>
-<html>
+<!DOCTYPE html>
+<html lang="es">
 <head>
-    <title>BANCOSOL - Tiendas</title>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/css/styles.css">
+    <title>Bancosol - Tiendas</title>
+    <link rel="stylesheet" href="../../css/styles.css">
+    <script src="../js/tiendas.js" defer></script>
+    <script src="../js/aside.js" defer></script>
 </head>
 <body>
-<jsp:include page="aside.jsp"/>
-<main class = "main-content">
-    <header class="header">
-        <h1>Gestión de Tiendas</h1>
-        <div class="filters">
-            <input type="text" placeholder="Buscar por cadena, localidad..." style="padding: 8px; width: 300px;">
-        </div>
-    </header>
+    <% request.setAttribute("paginaActual", "tiendas"); %>
+    <jsp:include page="aside.jsp"/>
 
-    <div style="display: flex; gap: 20px;">
-        <div class="card" style="flex: 2;">
-            <h3>Listado de Tiendas</h3>
-            <table>
+    <main class="main-content">
+        <header class="header">
+            <h1>Gestión de Tiendas</h1>
+            <button class="btn btn-primary" onclick="location.href='crear_tienda.html'">+ Nueva Tienda</button>
+        </header>
+
+        <div class="card">
+            <div class="filtros-grid">
+                <div>
+                    <label for="select-filtro-campanas">Campaña:</label>
+                    <select id="select-filtro-campanas">
+                        <option value="campana-gran-recogida">Campaña de Gran Recogida Primavera</option>
+                        <option value="campana-navidad">Campaña Navidad</option>
+                        <option value="operacion-kilo" selected>Operación Kilo Junio</option>
+                    </select>
+                </div>
+                <div>
+                    <label for="filtro-por-cadenas">Cadena:</label>
+                    <select id="filtro-por-cadenas">
+                        <option value="todas">Seleccionar Cadena...</option>
+                        <option value="mercadona">Mercadona</option>
+                        <option value="lidl">Lidl</option>
+                        <option value="dia">Dia</option>
+                        <option value="aldi">Aldi</option>
+                        <option value="coviran">Covirán</option>
+                        <option value="corte-ingles">El Corte Inglés</option>
+                        <option value="carrefour">Carrefour</option>
+                    </select>
+                </div>
+                <div>
+                    <label for="filtro-por-localidad">Localidad:</label>
+                    <select id="filtro-por-localidad">
+                        <option value="todas">Seleccionar Localidad...</option>
+                        <option value="malaga">Málaga</option>
+                        <option value="marbella">Marbella</option>
+                        <option value="antequera">Antequera</option>
+                    </select>
+                </div>
+            </div>
+
+            <table class="tabla-tiendas">
                 <thead>
-                <tr>
-                    <th>ID</th>
-                    <th>Cadena</th>
-                    <th>Localidad</th>
-                    <th>Coordinador</th>
-                    <th>Participación</th>
-                </tr>
+                    <tr>
+                        <th>Tienda</th>
+                        <th>Participación</th>
+                        <th>Localidad</th>
+                        <th>Domicilio</th>
+                        <th>C.P.</th>
+                        <th>Zona</th>
+                        <th>Estado</th>
+                        <th>Acciones</th>
+                    </tr>
                 </thead>
-                <tbody>
-                <tr onclick="cargarDetalle('CARR-01')">
-                    <td>CARR-01</td>
-                    <td>Carrefour Hiper</td>
-                    <td>Rincón de la Victoria</td>
-                    <td>JM Cobos</td>
-                    <td><span class="badge active">✔</span></td>
-                </tr>
+                <tbody id="tabla-tiendas-body">
+                    <!-- Filas estáticas del HTML original, se podrían dinamizar después -->
+                    <tr class="clickable" data-cadena="mercadona" data-localidad="malaga">
+                        <td>Mercadona el Cónsul</td>
+                        <td><input type="checkbox" class="check-participa"></td>
+                        <td>MÁLAGA</td>
+                        <td>c/ Aristófanes, nºxx</td>
+                        <td>29010</td>
+                        <td>Teatinos</td>
+                        <td><span class="status-badge status-inactiva">Sin activar</span></td>
+                        <td>
+                            <button class="btn btn-primary btn-sm">Editar</button>
+                            <button class="btn btn-danger btn-sm">Borrar</button>
+                        </td>
+                    </tr>
+                    <!-- ... resto de filas ... -->
                 </tbody>
             </table>
         </div>
-
-        <div class="card" style="flex: 1;">
-            <h3>Detalle de Tienda (Formulario)</h3>
-            <form action="${pageContext.request.contextPath}/tiendas/update" method="POST">
-                <label>Domicilio:</label>
-                <input type="text" name="domicilio" value="c/ Arroyo de Totalán, nº 36" style="width: 100%; margin-bottom: 10px; padding: 5px;">
-
-                <label>C. Postal:</label>
-                <input type="text" name="cp" value="29730" style="width: 50%; margin-bottom: 10px; padding: 5px;">
-
-                <label>Coordinador Asignado:</label>
-                <select name="id_coordinador" style="width: 100%; margin-bottom: 10px; padding: 5px;">
-                    <option value="1">JM Cobos</option>
-                    <option value="2">Ana López</option>
-                </select>
-
-                <div style="margin: 15px 0;">
-                    <label><input type="checkbox" name="excepcion"> Marcar Excepción</label>
-                </div>
-
-                <button type="submit" class="btn btn-primary" style="width: 100%;">Actualizar Tienda</button>
-            </form>
-        </div>
-    </div>
-</main>
+    </main>
 </body>
 </html>

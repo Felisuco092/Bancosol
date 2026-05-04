@@ -6,26 +6,12 @@
     <title>Bancosol - Colaboradores</title>
     <link rel="stylesheet" href="styles.css">
     <link rel="stylesheet" href="colaboradores.css">
+    <script src="js/main.js" defer></script>
+    <script src="js/custom_element/custom_element.js" defer></script>
+    <script src="js/collaborators.js" type="module"></script>
 </head>
 <body>
-    <button id="btn-desplegable" class="btn btn-primary btn-collapsible">
-        ☰
-    </button>
-    <aside class="sidebar">
-        <img src="./assets/LOGO_BANCOSOL.png" alt="Logo BANCOSOL" class="logo_login">
-        <nav id="menu-enlaces">
-            <ul>
-                <li><a href="dashboard.html" >Cuadro de Mando</a></li>
-                <li><a href="campanas.html">Gestión de Campañas</a></li>
-                <li><a href="tiendas.html">Gestión de Tiendas</a></li>
-                <li><a href="colaboradores.html" class="active">Colaboradores</a></li>
-                <li><a href="usuarios.html">Usuarios</a></li>
-                <li><a href="turnos.html">Asignación de Turnos</a></li>
-                <li><a href="bandeja.html">Bandeja de Entrada</a></li>
-                <li><a href="#" id="logout-btn" class="text-logout">Cerrar Sesión</a></li>
-            </ul>
-        </nav>
-    </aside>
+    <include-html src="custom_elementsHTML/aside_bancosol.html"></include-html>
 
     <main class="main-content">
         <header class="header">
@@ -41,6 +27,7 @@
                         <option value="all">Todos</option>
                         <option value="false">Entidad / Grupo</option>
                         <option value="true">Persona Física</option>
+                        <option value="confirmar">Por confirmar</option>
                     </select>
                 </div>
                 <div>
@@ -67,40 +54,13 @@
                     </tr>
                 </thead>
                 <tbody id="colaboradores-tbody">
-                    <!-- Los datos se procesan por la función para aplicar el estilo -->
-                    <tr data-es-persona="false" data-localidad="Almáchar">
-                        <td>Ayuntamiento de Almáchar</td>
-                        <td class="tipo-cell"></td>
-                        <td>Almáchar</td>
-                        <td>29780</td>
-                        <td>15</td>
-                        <td>Colaboración anual</td>
-                        <td><button class="btn btn-primary btn-sm">Editar</button> <button class="btn btn-danger btn-sm">Borrar</button></td>
-                    </tr>
-                    <tr data-es-persona="true" data-localidad="Rincón de la Victoria">
-                        <td>Maria López García</td>
-                        <td class="tipo-cell"></td>
-                        <td>Rincón de la Victoria</td>
-                        <td>29730</td>
-                        <td>1</td>
-                        <td>Disponible fines de semana</td>
-                        <td><button class="btn btn-primary btn-sm">Editar</button> <button class="btn btn-danger btn-sm">Borrar</button></td>
-                    </tr>
-                    <tr data-es-persona="false" data-localidad="Málaga">
-                        <td>Grupo Scout Malaka</td>
-                        <td class="tipo-cell"></td>
-                        <td>Málaga</td>
-                        <td>29018</td>
-                        <td>12</td>
-                        <td>-</td>
-                        <td><button class="btn btn-primary btn-sm">Editar</button> <button class="btn btn-danger btn-sm">Borrar</button></td>
-                    </tr>
+                    <!--Datos ya procesados con js-->
                 </tbody>
             </table>
         </div>
     </main>
 
-    <script src="main.js"></script>
-    <script src="collaborators.js"></script>
+    
+    
 </body>
 </html>
