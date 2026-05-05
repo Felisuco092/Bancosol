@@ -7,6 +7,8 @@
     <link rel="stylesheet" href="styles.css">
     <script src="js/main.js" defer></script>
     <script src="js/custom_element/custom_element.js" defer></script>
+    <script src="js/cadenas.js" type="module" ></script>
+    
 </head>
 <body>
     <include-html src="custom_elementsHTML/aside_bancosol.html"></include-html>
@@ -14,7 +16,7 @@
 <main class="main-content">
     <header class="header">
         <h1>Cadenas</h1>
-        <button class="btn btn-primary" onclick="location.href='crear_tienda.html'">+ Nueva Tienda</button>
+        <button class="btn btn-primary" onclick="location.href='crear_tienda.html'">+ Nueva Cadena</button>
     </header>
         
     <div class ="card filtros-cadena">
@@ -23,6 +25,62 @@
             
     </div>
 
-    
+    <div class = "card">
+        <table>
+                <thead>
+                    <tr>
+                        <th><b>Nombre de Cadena</b></th>
+                        <th><b>Estado participación</b></th>
+                        <th><b>Acciones</b></th>
+                    </tr>
+                </thead>
+                <tbody id="chain-table-body">
+                    <!-- Cuerpo de la tabla con ejemplos de prueba -->
+                     <tr>
+                        <th>MERCADONA</th>
+                        <th></th>
+                        <th>
+                            <button class="btn btn-primary btn-sm">Editar</button>
+                            <button class="btn btn-danger btn-sm">Eliminar</button>
+                        </th>
+                     </tr>
+                     <tr>
+                        <th>CARREFOUR</th>
+                        <th></th>
+                        <th>
+                            <button class="btn btn-primary btn-sm">Editar</button>
+                            <button class="btn btn-danger btn-sm">Eliminar</button>
+                        </th>
+                     </tr>
+                     <tr>
+                        <th>ASWAK ASSALAM</th>
+                        <th></th>
+                        <th>
+                            <button class="btn btn-primary btn-sm">Editar</button>
+                            <button class="btn btn-danger btn-sm">Eliminar</button>
+                        </th>
+                     </tr>
+                     <tr>
+                        <th>LIDL</th>
+                        <th></th>
+                        <th>
+                            <button class="btn btn-primary btn-sm">Editar</button>
+                            <button class="btn btn-danger btn-sm">Eliminar</button>
+                        </th>
+                     </tr>
+                     <tr>
+                        <th>DIA</th>
+                        <th></th>
+                        <th>
+                            <button class="btn btn-primary btn-sm">Editar</button>
+                            <button class="btn btn-danger btn-sm">Eliminar</button>
+                        </th>
+                     </tr>
+                </tbody>
+            </table>
+    </div>
+
+
     </main>
 </body>
+</html>

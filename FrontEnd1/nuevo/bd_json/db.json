@@ -69,7 +69,8 @@
     { "id": 3, "nombre": "Carrefour", "codigo": "CAR-01" },
     { "id": 4, "nombre": "Covirán", "codigo": "COV-01" },
     { "id": 5, "nombre": "Dia", "codigo": "DIA-01" },
-    { "id": 6, "nombre": "El Corte Inglés", "codigo": "ECI-01" }
+    { "id": 6, "nombre": "El Corte Inglés", "codigo": "ECI-01" },
+    { "id": 7, "nombre": "Aswak Assalam", "código": "ASA-01"}
   ],
   "tiendas": [
     {
