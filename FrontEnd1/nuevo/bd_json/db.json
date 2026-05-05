@@ -65,6 +65,66 @@
       "zona_geografica": "Sur",
       "id_cadena": 2,
       "id_capitan": null
+    },
+    {
+      "id": 3,
+      "descripcion": "",
+      "localidad": "",
+      "domicilio": "",
+      "c_postal": "",
+      "zona_geografica": "",
+      "id_cadena": "",
+      "id_capitan": null
+    },
+    {
+      "id": 3,
+      "descripcion": "",
+      "localidad": "",
+      "domicilio": "",
+      "c_postal": "",
+      "zona_geografica": "",
+      "id_cadena": "",
+      "id_capitan": null
+    },
+    {
+      "id": 3,
+      "descripcion": "",
+      "localidad": "",
+      "domicilio": "",
+      "c_postal": "",
+      "zona_geografica": "",
+      "id_cadena": "",
+      "id_capitan": null
+    },
+    {
+      "id": 3,
+      "descripcion": "",
+      "localidad": "",
+      "domicilio": "",
+      "c_postal": "",
+      "zona_geografica": "",
+      "id_cadena": "",
+      "id_capitan": null
+    },
+    {
+      "id": 3,
+      "descripcion": "",
+      "localidad": "",
+      "domicilio": "",
+      "c_postal": "",
+      "zona_geografica": "",
+      "id_cadena": "",
+      "id_capitan": null
+    },
+    {
+      "id": 3,
+      "descripcion": "",
+      "localidad": "",
+      "domicilio": "",
+      "c_postal": "",
+      "zona_geografica": "",
+      "id_cadena": "",
+      "id_capitan": null
     }
   ],
   "campanas": [
