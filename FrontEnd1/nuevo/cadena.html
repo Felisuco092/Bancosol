@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Bancosol - Dashboard</title>
+    <title>Bancosol - Cadenas</title>
     <link rel="stylesheet" href="styles.css">
     <script src="js/main.js" defer></script>
     <script src="js/custom_element/custom_element.js" defer></script>
@@ -19,65 +19,39 @@
         <button class="btn btn-primary" onclick="location.href='crear_tienda.html'">+ Nueva Cadena</button>
     </header>
         
-    <div class ="card filtros-cadena">
-        <button class="btn filter-btn active" data-filter="all">Todas</button>
-        <button class="btn filter-btn" data-filter="activa">Activas</button>
-            
-    </div>
+    <div class="card">
+        <div class="filtros-grid">
+            <div>
+                <label for="select-filtro-campanas">Campaña:</label>
+                <select id="select-filtro-campanas">
+                    <option value="">Seleccionar Campaña...</option>
+                </select>
+            </div>
+            <div class="filtros-cadenas">
+                <label>Mostrar:</label>
+                <div class="btn-group">
+                    <button class="btn filter-btn active" data-filter="all">Todas</button>
+                    <button class="btn filter-btn" data-filter="activa">Activas</button>
+                </div>
+            </div>
+        </div>
 
-    <div class = "card">
-        <table>
-                <thead>
-                    <tr>
-                        <th><b>Nombre de Cadena</b></th>
-                        <th><b>Estado participación</b></th>
-                        <th><b>Acciones</b></th>
-                    </tr>
-                </thead>
-                <tbody id="chain-table-body">
-                    <!-- Cuerpo de la tabla con ejemplos de prueba -->
-                     <tr>
-                        <th>MERCADONA</th>
-                        <th></th>
-                        <th>
-                            <button class="btn btn-primary btn-sm">Editar</button>
-                            <button class="btn btn-danger btn-sm">Eliminar</button>
-                        </th>
-                     </tr>
-                     <tr>
-                        <th>CARREFOUR</th>
-                        <th></th>
-                        <th>
-                            <button class="btn btn-primary btn-sm">Editar</button>
-                            <button class="btn btn-danger btn-sm">Eliminar</button>
-                        </th>
-                     </tr>
-                     <tr>
-                        <th>ASWAK ASSALAM</th>
-                        <th></th>
-                        <th>
-                            <button class="btn btn-primary btn-sm">Editar</button>
-                            <button class="btn btn-danger btn-sm">Eliminar</button>
-                        </th>
-                     </tr>
-                     <tr>
-                        <th>LIDL</th>
-                        <th></th>
-                        <th>
-                            <button class="btn btn-primary btn-sm">Editar</button>
-                            <button class="btn btn-danger btn-sm">Eliminar</button>
-                        </th>
-                     </tr>
-                     <tr>
-                        <th>DIA</th>
-                        <th></th>
-                        <th>
-                            <button class="btn btn-primary btn-sm">Editar</button>
-                            <button class="btn btn-danger btn-sm">Eliminar</button>
-                        </th>
-                     </tr>
-                </tbody>
-            </table>
+        <div id="cadenas-placeholder" class="text-center" style="padding: 2rem; color: #666;">
+            Seleccione una campaña para visualizar las cadenas
+        </div>
+
+        <table id="tabla-cadenas" class="tabla-cadenas" style="display: none;">
+            <thead>
+                <tr>
+                    <th>Nombre de Cadena</th>
+                    <th>Estado Participación</th>
+                    <th>Acciones</th>
+                </tr>
+            </thead>
+            <tbody id="chain-table-body">
+                
+            </tbody>
+        </table>
     </div>
 
 
