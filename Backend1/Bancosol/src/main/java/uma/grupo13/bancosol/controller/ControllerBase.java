@@ -43,7 +43,7 @@ public class ControllerBase {
             model.addAttribute("paginaActual", "dashboard");
             List<TiendaEntity> tiendas = tiendasRepo.findAll();
             model.addAttribute("tiendas", tiendas);
-            List<VoluntarioEntity> voluntarios = voluntariosRepo.findAll();
+            List<VoluntarioEntidadEntity> voluntarios = voluntariosRepo.findAllEntidades();
             model.addAttribute("voluntarios", voluntarios);
             Optional<CampanaEntity> campanaOpt = campanaRepo.findCampanaActiva();
             CampanaEntity campana = campanaOpt.orElse(null);
