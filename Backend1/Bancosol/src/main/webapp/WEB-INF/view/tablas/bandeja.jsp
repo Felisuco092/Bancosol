@@ -17,6 +17,7 @@
     <%for(NotificacionEntity notificacionAct: notificacionList){%>
     <tr>
         <td><%=notificacionAct.getFechaCreacion()%></td>
+        <!-- <%//=notificacionAct.getAsunto()%>-->
         <td><%=notificacionAct.getMensaje()%></td>
         <td>
             <button class="btn btn-primary btn-view">Ver mensaje</button>
