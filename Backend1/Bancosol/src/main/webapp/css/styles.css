@@ -564,7 +564,15 @@ th {
     color: #fb8c00;
 }
 
-/* ---------- 15. Miscellaneous ---------- */
+/* ---------- 15. Página Cadenas -------------*/
+
+.filtros-cadenas {
+    display: flex;
+    gap: 10px;
+    margin-bottom: 20px;
+}
+
+/* ---------- 16. Miscellaneous ---------- */
 .sidebar nav ul li .btn-logout {
     background: none;
     border: none;
