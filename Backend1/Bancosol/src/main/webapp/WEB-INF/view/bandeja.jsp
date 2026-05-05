@@ -11,9 +11,16 @@
 <body>
     <% request.setAttribute("paginaActual", "bandeja"); %>
     <jsp:include page="aside.jsp"/>
-    <div id="tabla-bandeja-notificaciones">
-        <jsp:include page="tablas/bandeja.jsp" /> <!-- Añadir referencia a la tabla que mostramos -->
-    </div>
+
+    <main class="main-content">
+        <header class="header">
+            <h1>Bandeja de Entrada</h1>
+        </header>
+        <div class="card">
+            <h3>Notificaciones</h3>
+            <jsp:include page="tablas/bandeja.jsp" /> <!-- Añadir referencia a la tabla que mostramos -->
+        </div>
+    </main>
 
 </body>
 </html>
