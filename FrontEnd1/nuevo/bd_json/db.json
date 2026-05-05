@@ -69,7 +69,8 @@
     { "id": 3, "nombre": "Carrefour", "codigo": "CAR-01" },
     { "id": 4, "nombre": "Covirán", "codigo": "COV-01" },
     { "id": 5, "nombre": "Dia", "codigo": "DIA-01" },
-    { "id": 6, "nombre": "El Corte Inglés", "codigo": "ECI-01" }
+    { "id": 6, "nombre": "El Corte Inglés", "codigo": "ECI-01" },
+    { "id": 7, "nombre": "Aswak Assalam", "código": "ASA-01"}
   ],
   "tiendas": [
     {
@@ -343,6 +344,7 @@
     { "id": 6, "id_campana": 2, "id_tienda": 6, "id_coordinador": 1 },
     { "id": 7, "id_campana": 1, "id_tienda": 1, "id_coordinador": 1 },
     { "id": 8, "id_campana": 1, "id_tienda": 7, "id_coordinador": 1 },
-    { "id": 9, "id_campana": 1, "id_tienda": 12, "id_coordinador": 1 }
+    { "id": 9, "id_campana": 1, "id_tienda": 12, "id_coordinador": 1 },
+    { "id": 10, "id_campana": 1, "id_tienda": 4, "id_coordinador": 1 }
   ]
 }

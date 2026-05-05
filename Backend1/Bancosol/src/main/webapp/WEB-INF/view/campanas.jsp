@@ -30,12 +30,12 @@
             <table>
                 <thead>
                     <tr>
-                        <th>Nombre de Campaña</th>
-                        <th>Año</th>
-                        <th>Inicio</th>
-                        <th>Fin</th>
-                        <th>Estado</th>
-                        <th>Acciones</th>
+                        <th><b>Nombre de Campaña</b></th>
+                        <th><b>Año</b></th>
+                        <th><b>Inicio</b></th>
+                        <th><b>Fin</b></th>
+                        <th><b>Estado</b></th>
+                        <th><b>Acciones</b></th>
                     </tr>
                 </thead>
                 <tbody id="campaign-table-body">
