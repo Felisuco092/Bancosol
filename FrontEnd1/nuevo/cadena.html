@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bancosol - Dashboard</title>
+    <link rel="stylesheet" href="styles.css">
+    <script src="js/main.js" defer></script>
+    <script src="js/custom_element/custom_element.js" defer></script>
+</head>
+<body>
+    <include-html src="custom_elementsHTML/aside_bancosol.html"></include-html>
+
+<main class="main-content">
+    <header class="header">
+        <h1>Cadenas</h1>
+        <button class="btn btn-primary" onclick="location.href='crear_tienda.html'">+ Nueva Tienda</button>
+    </header>
+        
+    <div class ="card filtros-cadena">
+        <button class="btn filter-btn active" data-filter="all">Todas</button>
+        <button class="btn filter-btn" data-filter="activa">Activas</button>
+            
+    </div>
+
+    
+    </main>
+</body>
