@@ -101,9 +101,10 @@ Importante seleccionar la base de datos de PostgreSQL y clicar en apply.
 - 5º Extraer en clase a parte la sidebar en una clase a parte y añadir en cada clase .jsp dentro de Frontend1
 - 6º Crear js para emular petición y que devuelve un json. mock de base de datos con un timeout
 - 7º Service
-- 8º DTO 
-- 9º Recarga de tablas(script de fetch)(necesita datos)
-- 10º Limpieza de capitanes si no se confirman en x tiempo
+- 8º Crear clase cadena en frontend y backend que visualice todas las cadenas existentes y las que participen en las campañas ajustandose al modelo de otras clases existentes
+- 9º DTO 
+- 10º Recarga de tablas(script de fetch)(necesita datos)
+- 11º Limpieza de capitanes si no se confirman en x tiempo
 
 ![Paso 0](https://img.shields.io/badge/Paso_0-Completo-green)
 ![Paso 1](https://img.shields.io/badge/Paso_1-Completo-green)
@@ -113,9 +114,10 @@ Importante seleccionar la base de datos de PostgreSQL y clicar en apply.
 ![Paso 5](https://img.shields.io/badge/Paso_5-Completo-green)
 ![Paso 6](https://img.shields.io/badge/Paso_6-Completo-green)
 ![Paso 7](https://img.shields.io/badge/Paso_7-Pendiente-red)
-![Paso 8](https://img.shields.io/badge/Paso_8-Pendiente-red)
-![Paso 9](https://img.shields.io/badge/Paso_9-A_empezar-orange)
-![Paso 10](https://img.shields.io/badge/Paso_10-Opcional-purple)
+![Paso 8](https://img.shields.io/badge/Paso_7-Pendiente-red)
+![Paso 9](https://img.shields.io/badge/Paso_8-Pendiente-red)
+![Paso 10](https://img.shields.io/badge/Paso_9-A_empezar-orange)
+![Paso 11](https://img.shields.io/badge/Paso_10-Opcional-purple)
 
 ![LC](https://tenor.com/es/view/agnes-tachyon-low-cortisol-gif-6147390476112029717.gif)
 
