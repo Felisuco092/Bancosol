@@ -1,8 +1,5 @@
 <%@ page import="java.util.List" %>
-<%@ page import="uma.grupo13.bancosol.entity.TiendaEntity" %>
-<%@ page import="uma.grupo13.bancosol.entity.VoluntarioEntity" %>
-<%@ page import="uma.grupo13.bancosol.entity.CampanaEntity" %>
-<%@ page import="uma.grupo13.bancosol.entity.CadenaEntity" %>
+<%@ page import="uma.grupo13.bancosol.entity.*" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <!DOCTYPE html>
 <html lang="es">
@@ -14,7 +11,7 @@
     <script src="../../js/aside.js" defer></script>
     <%
         List<TiendaEntity> tiendas = (List<TiendaEntity>) request.getAttribute("tiendas");
-        List<VoluntarioEntity> voluntarios = (List<VoluntarioEntity>) request.getAttribute("voluntarios");
+        List<VoluntarioEntidadEntity> voluntarios = (List<VoluntarioEntidadEntity>) request.getAttribute("voluntarios");
         CampanaEntity campana = (CampanaEntity) request.getAttribute("campana");
         List<CadenaEntity> cadenas= (List<CadenaEntity>) request.getAttribute("cadenas");
     %>
@@ -40,7 +37,7 @@
                 <p class="dashboard-number blue">
                     <%
                         int total = 0;
-                        for (VoluntarioEntity v :voluntarios){
+                        for (VoluntarioEntidadEntity v : voluntarios){
                             total += v.getNVoluntarios();
                         }
                     %>
