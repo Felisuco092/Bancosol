@@ -43,4 +43,7 @@ public class UsuarioEntity {
 
     @OneToMany(mappedBy = "usuarioDestino")
     private List<NotificacionEntity> notificaciones = new ArrayList<>();
+
+    @OneToMany(mappedBy = "capitan")
+    private List<TiendaEntity> tiendasComoCapitan = new ArrayList<>();
 }

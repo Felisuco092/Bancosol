@@ -24,5 +24,8 @@ public class NotificacionEntity {
     private LocalDateTime fechaCreacion;
 
     @Column(nullable = false, columnDefinition = "TEXT")
+    private String asunto;
+
+    @Column(nullable = false, columnDefinition = "TEXT")
     private String mensaje;
 }
