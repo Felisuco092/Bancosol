@@ -114,7 +114,7 @@ Importante seleccionar la base de datos de PostgreSQL y clicar en apply.
 ![Paso 5](https://img.shields.io/badge/Paso_5-Completo-green)
 ![Paso 6](https://img.shields.io/badge/Paso_6-Completo-green)
 ![Paso 7](https://img.shields.io/badge/Paso_7-Pendiente-red)
-![Paso 8](https://img.shields.io/badge/Paso_7-Pendiente-red)
+![Paso 8](https://img.shields.io/badge/Paso_7-En_proceso-yellow)
 ![Paso 9](https://img.shields.io/badge/Paso_8-Pendiente-red)
 ![Paso 10](https://img.shields.io/badge/Paso_9-A_empezar-orange)
 ![Paso 11](https://img.shields.io/badge/Paso_10-Opcional-purple)
@@ -130,3 +130,8 @@ Importante seleccionar la base de datos de PostgreSQL y clicar en apply.
 ![MbappeIsListening](https://tenor.com/es/view/kylian-mbappe-mbappe-i-would-rather-kylian-mbappe-i-would-rather-gif-3637069057647683703.gif)
 
 ![Leon2](https://tenor.com/es/view/leon-leon-kennedy-leon-s-kennedy-leon-scott-kennedy-67-gif-1938107146117258547.gif)
+![SionismForever](https://tenor.com/es/view/israel-chad-gigachad-love-israel-patriotic-gif-21179445.gif)
+![leonTrumpista](https://tenor.com/es/view/resident-evil-resident-evil-9-re9-leon-kennedy-leon-s-kennedy-gif-10733986607391926053.gif)
+
+![alberto](https://tenor.com/es/view/wesker-albert-wesker-7-minutes-eating-fat-gif-2520199480123465425.gif)
+
