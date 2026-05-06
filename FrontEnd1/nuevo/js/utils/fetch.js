@@ -5,7 +5,8 @@ function fetch_data(ruta, error) {
             return data
         })
         .catch(err => {
-            console.error("Ha ocurrido un error en el fetch:\n error")
+            console.error("Ha ocurrido un error en el fetch de " + ruta + ":", err);
+            throw err;
         })
 
 }

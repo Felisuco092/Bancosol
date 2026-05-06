@@ -1,6 +1,5 @@
 import { fetch_data } from "./utils/fetch.js";
 
-const selectCampanas = document.getElementById('select-filtro-campanas');
 const tbody = document.getElementById('chain-table-body');
 const tableElement = document.getElementById('tabla-cadenas');
 const placeholder = document.getElementById('cadenas-placeholder');
