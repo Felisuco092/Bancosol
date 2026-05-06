@@ -573,7 +573,7 @@ th {
 }
 
 /* ---------- 16. Miscellaneous ---------- */
-.sidebar nav ul li a.text-btn-logout {
+.sidebar nav ul li a.text-logout {
     background: none;
     border: none;
     padding: 15px 25px;
