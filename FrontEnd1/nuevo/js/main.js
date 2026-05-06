@@ -41,7 +41,7 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     }
 
-    
+    bindSidebar();
     document.addEventListener('include-html-loaded', bindSidebar);
 
     function setActiveLink() {
@@ -56,7 +56,7 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
 
-    
+    setActiveLink();
     document.addEventListener('include-html-loaded', setActiveLink);
 });
 
