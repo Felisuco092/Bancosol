@@ -6,18 +6,21 @@
 %>
 <table id="tabla-cadenas" class="tabla-cadenas" style="display: none;">
     <thead>
-    <tr>
-        <th><b>Nombre de Cadena</b></th>
-        <th><b>Estado Participación</b></th>
-        <th><b>Acciones</b></th>
-    </tr>
+        <tr>
+            <th><b>Nombre de Cadena</b></th>
+            <th><b>Código</b></th>
+            <th><b>Acciones</b></th>
+        </tr>
     </thead>
     <tbody id="chain-table-body">
     <%for(CadenaEntity cadenaAct: cadenasList){%>
         <tr>
             <td><%=cadenaAct.getNombre()%></td>
-
-            <td></td>
+            <td><%=cadenaAct.getCodigo()%></td>
+            <td>
+                <button class="btn btn-primary btn-sm">Editar</button>
+                <button class="btn btn-danger btn-sm">Eliminar</button>
+            </td>
         </tr>
     <%}%>
     </tbody>
