@@ -88,7 +88,7 @@ Importante seleccionar la base de datos de PostgreSQL y clicar en apply.
   - Listas index, campañas, bandeja, turnos y editarCrear
 - 2º Controlador con gets y post
   - Para cada una de los controladores (gets ya creados y algunos posts(botones+login+logout))
-    - Pulir Gets (atributos) y hacer los posts(login y logout PUNTO 3.1) Tener en cuenta 3.1
+    - Pulir Gets (atributos) y hacer los posts(login y logout PUNTO 3.2) Tener en cuenta 3.1
     - Seperar tablas a jsp aparte y modificar lo q haga falta de los jsp de las 8 páginas + aside.
     - Pasar los js a controler(solo los q haga falta)
     - Paginas de editar/crear(necesita datos)(las q necesiten)
@@ -97,7 +97,6 @@ Importante seleccionar la base de datos de PostgreSQL y clicar en apply.
   - Si sesion, redirect a dashboard y los demas a index sino sesión(todos los gets y posts)
   - /login (medio hecho) /logout hecho
 - 4º Control de roles
-  - Admin pueda ver en usuarios admin tambien y añadir admins?
 - 5º Extraer en clase a parte la sidebar en una clase a parte y añadir en cada clase .jsp dentro de Frontend1
 - 6º Crear js para emular petición y que devuelve un json. mock de base de datos con un timeout
 - 7º Service
@@ -114,10 +113,10 @@ Importante seleccionar la base de datos de PostgreSQL y clicar en apply.
 ![Paso 5](https://img.shields.io/badge/Paso_5-Completo-green)
 ![Paso 6](https://img.shields.io/badge/Paso_6-Completo-green)
 ![Paso 7](https://img.shields.io/badge/Paso_7-Pendiente-red)
-![Paso 8](https://img.shields.io/badge/Paso_7-En_proceso-yellow)
-![Paso 9](https://img.shields.io/badge/Paso_8-Pendiente-red)
-![Paso 10](https://img.shields.io/badge/Paso_9-A_empezar-orange)
-![Paso 11](https://img.shields.io/badge/Paso_10-Opcional-purple)
+![Paso 8](https://img.shields.io/badge/Paso_8-En_proceso-yellow)
+![Paso 9](https://img.shields.io/badge/Paso_9-Pendiente-red)
+![Paso 10](https://img.shields.io/badge/Paso_10-A_empezar-orange)
+![Paso 11](https://img.shields.io/badge/Paso_11-Opcional-purple)
 
 ![LC](https://tenor.com/es/view/agnes-tachyon-low-cortisol-gif-6147390476112029717.gif)
 
