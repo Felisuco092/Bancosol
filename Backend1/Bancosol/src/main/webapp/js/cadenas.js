@@ -49,14 +49,6 @@ function modelo_Fila(cadena, isParticipating) {
     `;
 }
 
-function populateDropdowns() {
-    globalData.campanas.forEach(campana => {
-        const option = document.createElement('option');
-        option.value = campana.id;
-        option.textContent = campana.nombre;
-        selectCampanas.appendChild(option);
-    });
-}
 
 function renderTable() {
     const selectedCampana = selectCampanas.value;
