@@ -4,9 +4,6 @@ const selectCampanas = document.getElementById('select-filtro-campanas');
 const tbody = document.getElementById('chain-table-body');
 const tableElement = document.getElementById('tabla-cadenas');
 const placeholder = document.getElementById('cadenas-placeholder');
-const filterButtons = document.querySelectorAll('.filter-btn');
-
-let currentFilter = 'all';
 
 let globalData = {
     tiendas: [],
@@ -75,11 +72,6 @@ function renderTable() {
     globalData.cadenas.forEach(cadena => {
         const isParticipating = checkChainParticipation(cadena.id, selectedCampana);
         
-        // Aplicar filtro de botones (Todas / Activas)
-        if (currentFilter === 'activa' && !isParticipating) {
-            return;
-        }
-
         const filaHTML = modelo_Fila(cadena, isParticipating);
         tbody.insertAdjacentHTML('beforeend', filaHTML);
     });
@@ -99,15 +91,6 @@ function initialize(data) {
     
     // Event listeners
     selectCampanas.addEventListener('change', renderTable);
-    
-    filterButtons.forEach(btn => {
-        btn.addEventListener('click', () => {
-            filterButtons.forEach(b => b.classList.remove('active'));
-            btn.classList.add('active');
-            currentFilter = btn.dataset.filter;
-            renderTable();
-        });
-    });
 
     renderTable();
 }
