@@ -8,7 +8,7 @@ import java.time.LocalDate;
 import java.time.LocalTime;
 
 @Entity
-@Table(name = "TURNO")
+@Table(name = "turno")
 @Getter
 @Setter
 @NoArgsConstructor
