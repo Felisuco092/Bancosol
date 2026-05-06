@@ -6,7 +6,7 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 @Entity
-@Table(name = "Voluntario_Entidad")
+@Table(name = "voluntario_entidad")
 @PrimaryKeyJoinColumn(name = "id_voluntario")
 @Getter
 @Setter
