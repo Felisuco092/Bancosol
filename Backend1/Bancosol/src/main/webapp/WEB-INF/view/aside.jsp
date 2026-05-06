@@ -12,6 +12,7 @@
         <ul>
             <li><a href="/dashboard" class="<%= "dashboard".equals(paginaActual) ? "active" : "" %>">Cuadro de Mando</a></li>
             <li><a href="/campanas/" class="<%= "campanas".equals(paginaActual) ? "active" : "" %>">Gestión de Campañas</a></li>
+            <li><a href="/cadenas" class="<%= "cadenas".equals(paginaActual) ? "active" : "" %>">Gestión de Cadenas</a></li>
             <li><a href="/tiendas/" class="<%= "tiendas".equals(paginaActual) ? "active" : "" %>">Gestión de Tiendas</a></li>
             <li><a href="/colaboradores/" class="<%= "colaboradores".equals(paginaActual) ? "active" : "" %>">Colaboradores</a></li>
             <li><a href="/usuarios/" class="<%= "usuarios".equals(paginaActual) ? "active" : "" %>">Usuarios</a></li>
