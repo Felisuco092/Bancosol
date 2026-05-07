@@ -24,7 +24,7 @@ public class UsuariosController {
         if (!ValidaSesion.verificarSesion(session)) return "redirect:/";
         model.addAttribute("paginaActual", "usuarios");
         List<UsuarioEntity> usuarios= userRepo.findAll();
-        model.addAttribute("usuarios", usuarios);
+        model.addAttribute("users", usuarios);
         return "usuarios";
     }
 
