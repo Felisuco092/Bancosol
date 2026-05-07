@@ -6,7 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Bancosol - Usuarios</title>
     <link rel="stylesheet" href="../../css/styles.css">
-    <script src="../js/aside.js" defer></script>
+    <script src="../../js/aside.js" defer></script>
 </head>
 <body>
     <% request.setAttribute("paginaActual", "usuarios"); %>

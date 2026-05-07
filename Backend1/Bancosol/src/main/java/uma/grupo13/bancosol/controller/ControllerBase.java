@@ -63,7 +63,8 @@ public class ControllerBase {
             session.setAttribute("user", user);
             return "redirect:/dashboard";
         } else {
-            return "redirect:/"; // de momento devuelve a la página de inicio
+            model.addAttribute("error", "Usuario no encontrado o error de autenticación");
+            return "index"; // de momento devuelve a la página de inicio
         }
         /*UserEditorEntity editor = userEditorRepository.autheticate(username, password);
         if (editor == null) {
