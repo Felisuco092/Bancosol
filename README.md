@@ -93,7 +93,7 @@ Importante seleccionar la base de datos de PostgreSQL y clicar en apply.
     - Pasar los js a controler(solo los q haga falta)
     - Paginas de editar/crear(necesita datos)(las q necesiten)
   - HECHO(contando todos los jsp relacionados): Aside; ControllerBase.
-  - HACIENDO: BandejaController CadenaController
+  - HACIENDO: BandejaController CadenaController Usuarios
   - PENDIENTE: 
 - 3º Control de sesion(necesita datos)
   - Si sesion, redirect a dashboard y los demas a index sino sesión(todos los gets y posts)
@@ -106,7 +106,7 @@ Importante seleccionar la base de datos de PostgreSQL y clicar en apply.
 - 9º DTO y Service
 - 10º Recarga de tablas(script de fetch)(necesita datos)
 - 11º Limpieza de capitanes si no se confirman en x tiempo
-- 12º Crear página unificada "crear ____" para todos los jsp en las vistas que permitan crear y añadir una nueva tienda o campaña (el modelo está en el frontend con crear_tienda)
+- 12º React
 
 ![Paso 0](https://img.shields.io/badge/Paso_0-Completo-green)
 ![Paso 1](https://img.shields.io/badge/Paso_1-Completo-green)
@@ -120,7 +120,7 @@ Importante seleccionar la base de datos de PostgreSQL y clicar en apply.
 ![Paso 9](https://img.shields.io/badge/Paso_9-Pendiente-red)
 ![Paso 10](https://img.shields.io/badge/Paso_10-A_empezar-orange)
 ![Paso 11](https://img.shields.io/badge/Paso_11-Opcional-purple)
-![Paso 12](https://img.shields.io/badge/Paso_12-En_estado_inicial-orange)
+![Paso 12](https://img.shields.io/badge/Paso_12-Pendiente-red)
 
 ![LC](https://tenor.com/es/view/agnes-tachyon-low-cortisol-gif-6147390476112029717.gif)
 

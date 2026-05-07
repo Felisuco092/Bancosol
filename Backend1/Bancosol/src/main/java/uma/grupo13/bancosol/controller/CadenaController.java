@@ -25,7 +25,7 @@ public class CadenaController {
         if (!ValidaSesion.verificarSesion(session)) return "redirect:/";
 
         model.addAttribute("paginaActual", "cadenas");
-        List<CadenaEntity> cadenaslist = this.cadenaRepository.findAll();
+        List<CadenaEntity> cadenaslist = cadenaRepository.findAll();
         model.addAttribute("cadenas", cadenaslist);
         return "cadenas";
     }
