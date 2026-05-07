@@ -8,7 +8,7 @@
 </button>
 <aside class="sidebar">
     <img src="../../assets/LOGO_BANCOSOL.png" alt="Logo BANCOSOL" class="logo_login">
-    <nav id="menu-enlaces">
+    <nav id="menu-enlaces">git
         <ul>
             <li><a href="/dashboard" class="<%= "dashboard".equals(paginaActual) ? "active" : "" %>">Cuadro de Mando</a></li>
             <li><a href="/campanas/" class="<%= "campanas".equals(paginaActual) ? "active" : "" %>">Gestión de Campañas</a></li>
