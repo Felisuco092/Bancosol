@@ -4,7 +4,7 @@
 <%
     List<CadenaEntity> cadenasList = (List<CadenaEntity>) request.getAttribute("cadenas");
 %>
-<table id="tabla-cadenas" class="tabla-cadenas" style="display: none;">
+<table id="tabla-cadenas" class="tabla-cadenas">
     <thead>
         <tr>
             <th><b>Nombre de Cadena</b></th>
