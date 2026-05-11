@@ -7,6 +7,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import uma.grupo13.bancosol.dao.CampanaRepository;
 import uma.grupo13.bancosol.entity.CampanaEntity;
 import uma.grupo13.bancosol.utils.ValidaSesion;
@@ -31,9 +32,11 @@ public class CampanasController {
     }
 
     @PostMapping("/editar")
-    public  String doEditarCampana(Model model, HttpSession session) {
+    public  String doEditarCampana(@RequestParam(value = "", required = false) Integer idCampana,
+            Model model, HttpSession session) {
         if (!ValidaSesion.verificarSesion(session)) return "redirect:/";
-        return "";
+
+        return "crear_editar/crear_editar_campana";
     }
 
     @GetMapping("/crear")
