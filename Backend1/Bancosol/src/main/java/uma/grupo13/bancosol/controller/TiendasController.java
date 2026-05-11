@@ -19,6 +19,9 @@ public class TiendasController {
         return "tiendas";
     }
 
+
+
+
     @PostMapping("/editar")
     public  String doEditarTiendas(Model model, HttpSession session) {
         if (!ValidaSesion.verificarSesion(session)) return "redirect:/";
