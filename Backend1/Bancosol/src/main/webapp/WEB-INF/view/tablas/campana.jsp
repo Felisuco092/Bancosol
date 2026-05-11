@@ -23,7 +23,11 @@
                 <td><%=campanaAct.getAno()%></td>
                 <td><%=campanaAct.getDiaComienzo()%></td>
                 <td><%=campanaAct.getDiaFinal()%></td>
-                <td></td>
+                <td>Por hacer </td>
+                <td>
+                    <button class="btn btn-primary btn-sm">Editar</button>
+                    <button class="btn btn-danger btn-sm">Eliminar</button>
+                </td>
             </tr>
         <%}%>
     </tbody>
