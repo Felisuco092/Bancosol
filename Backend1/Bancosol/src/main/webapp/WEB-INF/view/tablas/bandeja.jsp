@@ -19,7 +19,7 @@
         <td><%=notificacionAct.getFechaCreacion()%></td>
         <td><%=notificacionAct.getAsunto()%></td>
         <td>
-            <button class="btn btn-primary btn-view">Ver mensaje</button>
+            <button class="btn btn-primary btn-view" onclick="alert('<%=notificacionAct.getMensaje()%>')">Ver mensaje</button>
         </td>
     </tr>
     <%}%>
