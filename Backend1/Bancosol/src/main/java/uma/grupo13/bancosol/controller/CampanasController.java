@@ -36,10 +36,10 @@ public class CampanasController {
         return "";
     }
 
-    @PostMapping("/crear")
-    public  String doCrearCampana(Model model, HttpSession session) {
+    @GetMapping("/crear")
+    public String doCrearCampana(Model model, HttpSession session) {
         if (!ValidaSesion.verificarSesion(session)) return "redirect:/";
-        return "";
+        return "crear_editar/crear_campana";
     }
 
     @PostMapping("/borrar")
