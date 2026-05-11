@@ -9,8 +9,10 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import uma.grupo13.bancosol.dao.NotificacionRepository;
+import uma.grupo13.bancosol.dao.RolRepository;
 import uma.grupo13.bancosol.dao.UserRepository;
 import uma.grupo13.bancosol.entity.NotificacionEntity;
+import uma.grupo13.bancosol.entity.RolEntity;
 import uma.grupo13.bancosol.entity.UsuarioEntity;
 import uma.grupo13.bancosol.utils.ValidaSesion;
 
@@ -23,6 +25,9 @@ public class UsuariosController {
     protected UserRepository userRepo;
     @Autowired
     protected NotificacionRepository notificacionRepo;
+    @Autowired
+    protected RolRepository rolRepo;
+
 
     @GetMapping("/")
     public String doUsuarios(Model model, HttpSession session){
@@ -33,16 +38,23 @@ public class UsuariosController {
         return "usuarios";
     }
 
-    @PostMapping("/editar")
+    @GetMapping("/editar")
     public  String doEditarUsuarios(Model model, HttpSession session, @RequestParam("id") Integer id) {
         if (!ValidaSesion.verificarSesion(session)) return "redirect:/";
-        return "redirect:/usuarios/";
+        UsuarioEntity usuario=userRepo.getById(id);
+        model.addAttribute("usuario", usuario);
+        List<RolEntity> roles= rolRepo.findAll();
+        model.addAttribute("roles", roles);
+        return "crear_editar/crear_usuario";
     }
 
-    @PostMapping("/crear")
+    @GetMapping("/crear")
     public  String doCrearUsuarios(Model model, HttpSession session) {
         if (!ValidaSesion.verificarSesion(session)) return "redirect:/";
-        return "redirect:/usuarios/";
+        model.addAttribute("usuario", new UsuarioEntity());
+        List<RolEntity> roles= rolRepo.findAll();
+        model.addAttribute("roles", roles);
+        return "crear_editar/crear_usuario";
     }
 
     @PostMapping("/borrar")
@@ -59,8 +71,46 @@ public class UsuariosController {
     }
 
     @PostMapping("/guardar")
-    public  String doGuardarUsuarios(Model model, HttpSession session) {
+    public String doGuardarUsuarios(Model model, HttpSession session,
+                                    @RequestParam(value = "id", required = false) Integer id,
+                                    @RequestParam("nombre") String nombre,
+                                    @RequestParam("apellidos") String apellidos,
+                                    @RequestParam("user") String user,
+                                    @RequestParam("password") String password,
+                                    @RequestParam("email") String email,
+                                    @RequestParam(value = "telefono", required = false) String telefono,
+                                    @RequestParam(value = "area", required = false) String area,
+                                    @RequestParam("rol") Integer idRol) {
         if (!ValidaSesion.verificarSesion(session)) return "redirect:/";
+
+        UsuarioEntity usuario;
+        if (id != null) {
+            usuario = userRepo.getById(id);
+        } else {
+            usuario = new UsuarioEntity();
+        }
+
+        usuario.setNombre(nombre);
+        usuario.setApellidos(apellidos);
+        usuario.setUsuario(user);
+        usuario.setEmail(email);
+        usuario.setTelefono(telefono);
+        usuario.setAreaAsignada(area);
+
+        if (password != null && !password.isEmpty()) {
+            usuario.setContrasena(password);
+        } else if (id == null) {
+            model.addAttribute("error", "La contraseña es obligatoria para nuevos usuarios.");
+            model.addAttribute("usuario", usuario);
+            model.addAttribute("roles", rolRepo.findAll());
+            return "crear_editar/crear_usuario";
+        }
+
+        RolEntity rol = rolRepo.getById(idRol);
+        usuario.setRol(rol);
+
+        userRepo.save(usuario);
+
         return "redirect:/usuarios/";
     }
 }

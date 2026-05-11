@@ -39,8 +39,11 @@
             <td><span class="badge-rol badge-<%=rolClass%>"><%=rol.getNombre()%></span></td>
             <td><%=u.getAreaAsignada()%></td>
             <td>
-                <button class="btn btn-primary btn-sm" onclick="editarUsuario(<%=u.getId()%>)">Editar</button>
-                <button class="btn btn-danger btn-sm" onclick="borrarUsuario(<%=u.getId()%>)">Baja</button>
+                <a href="/usuarios/editar?id=<%=u.getId()%>"><button class="btn btn-primary btn-sm">Editar</button></a>
+                <form action="/usuarios/borrar" method="POST" onsubmit="return confirm('¿Seguro que desea eliminar este usuario?')">
+                    <input type="hidden" name="id" value="<%=u.getId()%>">
+                    <input type="submit" class="btn btn-danger btn-sm" value="Borrar">
+                </form>
             </td>
         </tr>
     <%
