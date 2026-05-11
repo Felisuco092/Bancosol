@@ -76,6 +76,12 @@ Importante seleccionar la base de datos de PostgreSQL y clicar en apply.
 
 **Nota:** Requiere una nueva entidad en la base de datos: `IncidenciaEntity` (relacionada con `TiendaEntity` y `UsuarioEntity`).
 
+### 9. Crear/Editar objetos que se añaden a la base de datos
+**Descripción:** Crear modelos de página en la vista (con su javaScript correspondiente) que permitan la creación, la edición de nuevos objetos que se puedan añadir a la base de datos: ya sea una campaña nueva, una tienda, un usuario. Tareas Asignadas:
+**Germán: Crear/Editar campaña y tienda**
+**Félix: Crear/Editar cadena y voluntario**
+**Jorge: Crear/Editar usuario**
+
 ---
 
 ### Bandeja de entrada
@@ -92,7 +98,7 @@ Importante seleccionar la base de datos de PostgreSQL y clicar en apply.
     - Seperar tablas a jsp aparte y modificar lo q haga falta de los jsp de las 8 páginas + aside.
     - Pasar los js a controler(solo los q haga falta)
     - Paginas de editar/crear(necesita datos)(las q necesiten)
-  - HECHO(contando todos los jsp relacionados): Aside; ControllerBase, UsuariosController.
+  - HECHO(contando todos los jsp relacionados): Aside; ControllerBase, UsuariosController, CadenaController.
   - HACIENDO: BandejaController CampanaController
   - PENDIENTE: 
 - 3º Control de sesion(necesita datos)

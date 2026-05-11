@@ -7,6 +7,7 @@
     <title>Bancosol - Gestión Cadenas</title>
     <link rel="stylesheet" href="../../css/styles.css">
     <script src="../../js/aside.js" defer></script>
+    <script src="../../js/crear_editar/crear_editar_cadena.js" defer></script>
 </head>
 <body>
     <% request.setAttribute("paginaActual", "cadenas"); %>
@@ -15,7 +16,9 @@
     <main class="main-content">
         <header class="header">
             <h1>Gestión de Cadenas</h1>
-            <button class="btn btn-primary">+ Nueva Cadena</button>
+            <a href="/cadenas/crear">
+                <button class="btn btn-primary">+ Nueva Cadena</button>
+            </a>
         </header>
         <div class="card">
             <jsp:include page="tablas/cadenas.jsp"/>
