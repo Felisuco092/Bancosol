@@ -39,8 +39,8 @@
             <td><span class="badge-rol badge-<%=rolClass%>"><%=rol.getNombre()%></span></td>
             <td><%=u.getAreaAsignada()%></td>
             <td>
-                <button class="btn btn-primary btn-sm">Editar</button>
-                <button class="btn btn-danger btn-sm">Baja</button>
+                <button class="btn btn-primary btn-sm" onclick="editarUsuario(<%=u.getId()%>)">Editar</button>
+                <button class="btn btn-danger btn-sm" onclick="borrarUsuario(<%=u.getId()%>)">Baja</button>
             </td>
         </tr>
     <%
