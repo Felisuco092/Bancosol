@@ -46,4 +46,12 @@ public class UsuarioEntity {
 
     @OneToMany(mappedBy = "capitan")
     private List<TiendaEntity> tiendasComoCapitan = new ArrayList<>();
+
+    public void deleteTiendas(){
+        if(!tiendasComoCapitan.isEmpty()) {
+            for (TiendaEntity tienda : tiendasComoCapitan) {
+                tienda.setCapitan(null);
+            }
+        }
+    }
 }
