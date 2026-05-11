@@ -8,7 +8,9 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import uma.grupo13.bancosol.dao.NotificacionRepository;
 import uma.grupo13.bancosol.dao.UserRepository;
+import uma.grupo13.bancosol.entity.NotificacionEntity;
 import uma.grupo13.bancosol.entity.UsuarioEntity;
 import uma.grupo13.bancosol.utils.ValidaSesion;
 
@@ -19,6 +21,8 @@ import java.util.List;
 public class UsuariosController {
     @Autowired
     protected UserRepository userRepo;
+    @Autowired
+    protected NotificacionRepository notificacionRepo;
 
     @GetMapping("/")
     public String doUsuarios(Model model, HttpSession session){
@@ -44,7 +48,13 @@ public class UsuariosController {
     @PostMapping("/borrar")
     public  String doBorrarUsuarios(Model model, HttpSession session, @RequestParam("id") Integer id) {
         if (!ValidaSesion.verificarSesion(session)) return "redirect:/";
-
+        UsuarioEntity usuario=userRepo.getById(id);
+        List<NotificacionEntity> notficaciones=usuario.getNotificaciones();
+        for(NotificacionEntity notificacion:notficaciones){
+            notificacionRepo.delete(notificacion);
+        }
+        usuario.deleteTiendas();
+        userRepo.delete(usuario);
         return "redirect:/usuarios/";
     }
 
