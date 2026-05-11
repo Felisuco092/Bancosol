@@ -130,19 +130,5 @@ Importante seleccionar la base de datos de PostgreSQL y clicar en apply.
 ![Paso 12](https://img.shields.io/badge/Paso_12-Pendiente-red)
 ![Paso 13](https://img.shields.io/badge/Paso_13-Opcional-purple)
 
-![LC](https://tenor.com/es/view/agnes-tachyon-low-cortisol-gif-6147390476112029717.gif)
 
-![que](https://tenor.com/es/view/double-speech-bubble-speechbubble-speech-bubble-umamusume-low-cortisol-gif-5557824492912855663.gif)
-
-![SD](https://tenor.com/es/view/satono-diamond-uma-musume-satono-satono-diamond-worm-gif-10400485730432458344.gif)
-
-![Leon](https://tenor.com/es/view/leon-kennedy-gif-14428209944621691527.gif)
-
-![MbappeIsListening](https://tenor.com/es/view/kylian-mbappe-mbappe-i-would-rather-kylian-mbappe-i-would-rather-gif-3637069057647683703.gif)
-
-![Leon2](https://tenor.com/es/view/leon-leon-kennedy-leon-s-kennedy-leon-scott-kennedy-67-gif-1938107146117258547.gif)
-![SionismForever](https://tenor.com/es/view/israel-chad-gigachad-love-israel-patriotic-gif-21179445.gif)
-![leonTrumpista](https://tenor.com/es/view/resident-evil-resident-evil-9-re9-leon-kennedy-leon-s-kennedy-gif-10733986607391926053.gif)
-
-![alberto](https://tenor.com/es/view/wesker-albert-wesker-7-minutes-eating-fat-gif-2520199480123465425.gif)
 
