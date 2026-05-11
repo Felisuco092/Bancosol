@@ -8,6 +8,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import uma.grupo13.bancosol.dao.CadenaRepository;
 import uma.grupo13.bancosol.entity.CadenaEntity;
 import uma.grupo13.bancosol.utils.ValidaSesion;
@@ -30,27 +31,46 @@ public class CadenaController {
         return "cadenas";
     }
 
-    @PostMapping("/editar")
-    public  String doEditarCadena(HttpSession session, Model model) {
+    @GetMapping("/editar")
+    public  String doEditarCadena(HttpSession session, Model model,
+                                  @RequestParam("id") Integer id) {
         if (!ValidaSesion.verificarSesion(session)) return "redirect:/";
-        return "";
+        CadenaEntity cadena = cadenaRepository.getReferenceById(id);
+        model.addAttribute("cadena", cadena);
+        return "crear_editar/crear_editar_cadena";
     }
 
-    @PostMapping("/crear")
+    @GetMapping("/crear")
     public  String doCrearCadena(HttpSession session, Model model) {
         if (!ValidaSesion.verificarSesion(session)) return "redirect:/";
-        return "";
+        return "crear_editar/crear_editar_cadena";
     }
 
     @PostMapping("/borrar")
-    public  String doBorrarCadena(HttpSession session, Model model){
+    public  String doBorrarCadena(HttpSession session, Model model,
+                                  @RequestParam("id") Integer id){
         if (!ValidaSesion.verificarSesion(session)) return "redirect:/";
-        return "";
+        CadenaEntity cadena = cadenaRepository.getReferenceById(id);
+        cadena.eliminarTiendas();
+        cadenaRepository.delete(cadena);
+        return "redirect:/cadenas/";
     }
 
     @PostMapping("/guardar")
-    public  String doGuardarCadena(HttpSession session, Model model) {
+    public  String doGuardarCadena(HttpSession session, Model model,
+                                   @RequestParam("nombre") String nombre,
+                                   @RequestParam("codigo") String codigo,
+                                   @RequestParam(value = "id",required = false) Integer id) {
         if (!ValidaSesion.verificarSesion(session)) return "redirect:/";
-        return "redirect:/cadenas";
+        CadenaEntity cadena;
+        if (id == null) {
+            cadena = new CadenaEntity();
+        } else {
+            cadena = cadenaRepository.getReferenceById(id);
+        }
+        cadena.setNombre(nombre);
+        cadena.setCodigo(codigo);
+        cadenaRepository.save(cadena);
+        return "redirect:/cadenas/";
     }
 }

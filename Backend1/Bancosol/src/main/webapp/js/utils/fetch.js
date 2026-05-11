@@ -15,4 +15,16 @@ function fetch_data(url) {
         });
 }
 
-export { fetch_data };
+function fetch_post(url, urlSearchParams, success, error) {
+    fetch(url, {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/x-www-form-urlencoded',
+        },
+        body: urlSearchParams
+    })
+        .then(success)
+        .catch(error);
+}
+
+export { fetch_data, fetch_post };
