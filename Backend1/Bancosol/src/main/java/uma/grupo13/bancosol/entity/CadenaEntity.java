@@ -25,4 +25,11 @@ public class CadenaEntity {
 
     @OneToMany(mappedBy = "cadena")
     private List<TiendaEntity> tiendas = new ArrayList<>();
+
+    public void eliminarTiendas() {
+        for (TiendaEntity tienda : tiendas) {
+            tienda.getParticipaciones().clear();
+        }
+        tiendas.clear();
+    }
 }

@@ -18,8 +18,14 @@
             <td><%=cadenaAct.getNombre()%></td>
             <td><%=cadenaAct.getCodigo()%></td>
             <td>
-                <button class="btn btn-primary btn-sm">Editar</button>
-                <button class="btn btn-danger btn-sm">Eliminar</button>
+                <a href="/cadenas/editar?id=<%=cadenaAct.getId()%>">
+                    <button class="btn btn-primary btn-sm">Editar</button>
+                </a>
+                <form action="/cadenas/borrar" method="post"
+                    onsubmit="return confirm('¿Eliminar esta cadena? Se borrarán todas sus tiendas.')">
+                    <input type="hidden" name="id" value="<%=cadenaAct.getId()%>" />
+                    <button class="btn btn-danger btn-sm">Eliminar</button>
+                </form>
             </td>
         </tr>
     <%}%>
