@@ -7,7 +7,7 @@
     <title>Bancosol - Usuarios</title>
     <link rel="stylesheet" href="../../css/styles.css">
     <script src="../../js/aside.js" defer></script>
-    <script src="../../js/string_utils.js" defer></script>
+    <script src="../../js/usuarios.js" defer></script>
 </head>
 <body>
     <% request.setAttribute("paginaActual", "usuarios"); %>
@@ -16,7 +16,7 @@
     <main class="main-content">
         <header class="header">
             <h1>Gestión de Usuarios</h1>
-            <button class="btn btn-primary">+ Crear Usuario</button>
+            <button class="btn btn-primary" onclick="crearUsuario()">+ Crear Usuario</button>
         </header>
 
         <div class="card">

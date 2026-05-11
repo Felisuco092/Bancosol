@@ -7,6 +7,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import uma.grupo13.bancosol.dao.UserRepository;
 import uma.grupo13.bancosol.entity.UsuarioEntity;
 import uma.grupo13.bancosol.utils.ValidaSesion;
@@ -29,26 +30,27 @@ public class UsuariosController {
     }
 
     @PostMapping("/editar")
-    public  String doEditarUsuarios(Model model, HttpSession session) {
+    public  String doEditarUsuarios(Model model, HttpSession session, @RequestParam("id") Integer id) {
         if (!ValidaSesion.verificarSesion(session)) return "redirect:/";
-        return "";
+        return "redirect:/usuarios/";
     }
 
     @PostMapping("/crear")
     public  String doCrearUsuarios(Model model, HttpSession session) {
         if (!ValidaSesion.verificarSesion(session)) return "redirect:/";
-        return "";
+        return "redirect:/usuarios/";
     }
 
     @PostMapping("/borrar")
-    public  String doBorrarUsuarios(Model model, HttpSession session) {
+    public  String doBorrarUsuarios(Model model, HttpSession session, @RequestParam("id") Integer id) {
         if (!ValidaSesion.verificarSesion(session)) return "redirect:/";
-        return "";
+
+        return "redirect:/usuarios/";
     }
 
     @PostMapping("/guardar")
     public  String doGuardarUsuarios(Model model, HttpSession session) {
         if (!ValidaSesion.verificarSesion(session)) return "redirect:/";
-        return "redirect:/usuarios";
+        return "redirect:/usuarios/";
     }
 }
