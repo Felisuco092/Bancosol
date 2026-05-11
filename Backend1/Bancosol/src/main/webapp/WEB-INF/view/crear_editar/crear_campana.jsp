@@ -19,20 +19,21 @@
     <div class="formulario">
         <form id="form-crear-campana">
             <div class="form-group">
-                <label for="nombre">Nombre</label>
-                <select name="cadena[]" id="cadena" required>
-                    <option value=""></option>
-                </select>
+                <label for="nombre">Especifique el nombre de la campaña:</label>
+                <input type="text" name="nombre" id="nombre" required/>
             </div>
             <div class="form-group">
-                <label for="anyo">Año</label>
-                <p>Especifique el año del transcurso de la campaña<input type="number" name="anyo" id="anyo" required/></p>
+                <label for="anyo">Especifique el año del transcurso de la campaña:</label>
+                <input type="number" name="anyo" id="anyo" required/>
             </div>
             <div class="form-group">
-                <label for="Localidad">Localidad</label>
-                <input type="text" name="Localidad" id="Localidad" required/>
+                <label for="anyo">Especifique el día de comienzo de la campaña:</label>
+                <input type="date" name="fecha-inicio" id="fecha-inicio" required/>
             </div>
-
+            <div class="form-group">
+                <label for="anyo">Especifique el día final de la campaña: </label>
+                <input type="date" name="fecha-fin" id="fecha-fin" required/>
+            </div>
 
             <div class="form-actions">
                 <button type="submit" class="btn btn-primary">Crear Campaña</button>
