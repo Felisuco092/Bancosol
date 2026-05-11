@@ -19,20 +19,19 @@
     </tr>
     </thead>
     <tbody id="campaign-table-body">
-    <!-- Para comprobar el estado se comparan las fechas de inicio y fin de la campaña actual-->
         <% if (campanasList != null) { 
             for(CampanaEntity campanaAct: campanasList){ 
                 String status = "activa";
-                String estadoCampana = "Activa";
+                String label = "Activa";
                 String style = "background: #d4edda; color: #155724;";
 
                 if (today.isBefore(campanaAct.getDiaComienzo())) {
                     status = "proximamente";
-                    estadoCampana = "Próximamente";
+                    label = "Próximamente";
                     style = "background: #fff3cd; color: #856404;";
                 } else if (today.isAfter(campanaAct.getDiaFinal())) {
                     status = "terminada";
-                    estadoCampana = "Terminada";
+                    label = "Terminada";
                     style = "background: #f8d7da; color: #721c24;";
                 }
         %>
@@ -43,7 +42,7 @@
                 <td><%=campanaAct.getDiaFinal()%></td>
                 <td class="status-cell">
                     <span style="<%=style%> padding: 4px 8px; border-radius: 4px; font-size: 0.85rem;">
-                        <%=estadoCampana%>
+                        <%=label%>
                     </span>
                 </td>
                 <td>
