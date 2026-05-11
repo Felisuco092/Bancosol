@@ -16,7 +16,7 @@
     <main class="main-content">
         <header class="header">
             <h1>Gestión de Campañas</h1>
-            <button class="btn btn-primary">+ Nueva Campaña</button>
+            <button class="btn btn-primary" onclick="location.href='/campanas/crear'">+ Nueva Campaña</button>
         </header>
 
         <div class="card filtros-campanas">
