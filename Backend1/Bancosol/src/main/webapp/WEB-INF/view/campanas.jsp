@@ -27,21 +27,7 @@
         </div>
 
         <div class="card">
-            <table>
-                <thead>
-                    <tr>
-                        <th><b>Nombre de Campaña</b></th>
-                        <th><b>Año</b></th>
-                        <th><b>Inicio</b></th>
-                        <th><b>Fin</b></th>
-                        <th><b>Estado</b></th>
-                        <th><b>Acciones</b></th>
-                    </tr>
-                </thead>
-                <tbody id="campaign-table-body">
-                    <!-- Datos cargados por JS -->
-                </tbody>
-            </table>
+            <jsp:include page="tablas/campana.jsp"/>
         </div>
     </main>
 </body>
