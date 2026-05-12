@@ -1,4 +1,3 @@
-
 package uma.grupo13.bancosol.controller;
 
 import jakarta.servlet.http.HttpSession;
@@ -115,4 +114,3 @@ public class UsuariosController {
         return "redirect:/usuarios/";
     }
 }
-
