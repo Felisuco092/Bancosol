@@ -6,8 +6,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Bancosol - Tiendas</title>
     <link rel="stylesheet" href="../../css/styles.css">
-    <script src="../js/tiendas.js" defer></script>
-    <script src="../js/aside.js" defer></script>
+    <script src="../../js/tiendas.js" defer></script>
+    <script src="../../js/aside.js" defer></script>
 </head>
 <body>
     <% request.setAttribute("paginaActual", "tiendas"); %>
@@ -16,7 +16,7 @@
     <main class="main-content">
         <header class="header">
             <h1>Gestión de Tiendas</h1>
-            <button class="btn btn-primary" onclick="location.href='crear_tienda.html'">+ Nueva Tienda</button>
+            <button class="btn btn-primary" onclick="location.href='crear_editar/crear_tienda.jsp'">+ Nueva Tienda</button>
         </header>
 
         <div class="card">

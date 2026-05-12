@@ -93,6 +93,8 @@ Importante seleccionar la base de datos de PostgreSQL y clicar en apply.
     - Pasar los js a controler(solo los q haga falta)
     - Paginas de editar/crear(necesita datos)(las q necesiten)
   - HECHO(contando todos los jsp relacionados): Aside; ControllerBase.
+  - HACIENDO: BandejaController CadenaController Usuarios
+  - PENDIENTE: 
 - 3º Control de sesion(necesita datos)
   - Si sesion, redirect a dashboard y los demas a index sino sesión(todos los gets y posts)
   - /login (medio hecho) /logout hecho
@@ -101,10 +103,12 @@ Importante seleccionar la base de datos de PostgreSQL y clicar en apply.
 - 6º Crear js para emular petición y que devuelve un json. mock de base de datos con un timeout
 - 7º Service
 - 8º Crear clase cadena en frontend y backend que visualice todas las cadenas existentes y las que participen en las campañas ajustandose al modelo de otras clases existentes
-- 9º DTO 
+- 9º DTO y Service
 - 10º Recarga de tablas(script de fetch)(necesita datos)
 - 11º Limpieza de capitanes si no se confirman en x tiempo
-- 12º Pasar el html/jsp a React
+- 12º React
+- 13º Confirmación al borrar
+
 
 ![Paso 0](https://img.shields.io/badge/Paso_0-Completo-green)
 ![Paso 1](https://img.shields.io/badge/Paso_1-Completo-green)
@@ -119,6 +123,7 @@ Importante seleccionar la base de datos de PostgreSQL y clicar en apply.
 ![Paso 10](https://img.shields.io/badge/Paso_10-A_empezar-orange)
 ![Paso 11](https://img.shields.io/badge/Paso_11-Opcional-purple)
 ![Paso 12](https://img.shields.io/badge/Paso_12-Pendiente-red)
+![Paso 13](https://img.shields.io/badge/Paso_13-Opcional-purple)
 
 ![LC](https://tenor.com/es/view/agnes-tachyon-low-cortisol-gif-6147390476112029717.gif)
 

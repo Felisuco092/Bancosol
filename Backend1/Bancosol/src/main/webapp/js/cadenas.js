@@ -1,6 +1,5 @@
 import { fetch_data } from "./utils/fetch.js";
 
-const selectCampanas = document.getElementById('select-filtro-campanas');
 const tbody = document.getElementById('chain-table-body');
 const tableElement = document.getElementById('tabla-cadenas');
 const placeholder = document.getElementById('cadenas-placeholder');
@@ -49,14 +48,6 @@ function modelo_Fila(cadena, isParticipating) {
     `;
 }
 
-function populateDropdowns() {
-    globalData.campanas.forEach(campana => {
-        const option = document.createElement('option');
-        option.value = campana.id;
-        option.textContent = campana.nombre;
-        selectCampanas.appendChild(option);
-    });
-}
 
 function renderTable() {
     const selectedCampana = selectCampanas.value;

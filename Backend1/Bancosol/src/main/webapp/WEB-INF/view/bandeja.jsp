@@ -6,7 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Bancosol - Bandeja de Entrada</title>
     <link rel="stylesheet" href="../../css/styles.css">
-    <script src="../js/aside.js" defer></script>
+    <script src="../../js/aside.js" defer></script>
 </head>
 <body>
     <% request.setAttribute("paginaActual", "bandeja"); %>
@@ -17,7 +17,6 @@
             <h1>Bandeja de Entrada</h1>
         </header>
         <div class="card">
-            <h3>Notificaciones</h3>
             <jsp:include page="tablas/bandeja.jsp" /> <!-- Añadir referencia a la tabla que mostramos -->
         </div>
     </main>

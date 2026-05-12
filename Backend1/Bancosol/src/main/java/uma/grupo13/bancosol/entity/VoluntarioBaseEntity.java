@@ -9,7 +9,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 @Entity
-@Table(name = "Voluntario_Base")
+@Table(name = "voluntario_base")
 @Inheritance(strategy = InheritanceType.JOINED)
 @Getter
 @Setter
