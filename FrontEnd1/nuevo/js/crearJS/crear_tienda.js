@@ -1,4 +1,4 @@
-import { fetch_data } from "./utils/fetch.js";
+import { fetch_data } from "../utils/fetch.js";
 
 const selectCadena = document.getElementById('cadena');
 const form = document.querySelector('form');
@@ -40,7 +40,7 @@ async function handleSubmit(e) {
 
         if (response.ok) {
             alert('Tienda creada con éxito');
-            window.location.href = 'tiendas.html';
+            window.location.href = '../tiendas.html';
         } else {
             alert('Error al crear la tienda');
         }
@@ -50,8 +50,30 @@ async function handleSubmit(e) {
     }
 }
 
-fetch_data('cadenas')
-    .then(populateCadenas)
+function populateCapitanes(capitanes) {
+    const selectCapitan = document.getElementById('capitan');
+    selectCapitan.innerHTML = '<option value="">-- Seleccione un capitán --</option>';
+    capitanes.forEach(capitan => {
+        const option = document.createElement('option');
+        option.value = capitan.id;
+        option.textContent = capitan.nombre;
+        selectCapitan.appendChild(option);
+    });
+}
+
+function populate(cadenas, usuarios, roles) {
+    populateCadenas(cadenas);
+    const capitanRol = roles.find(rol => rol.nombre === 'Capitán');
+    const capitanes = usuarios.filter(user => String(user.id_rol) === String(capitanRol.id));
+    populateCapitanes(capitanes);
+}
+
+Promise.all([
+    fetch_data('cadenas'),
+    fetch_data('usuarios'),
+    fetch_data('roles')
+])
+    .then(([cadenas, usuarios, roles]) => populate(cadenas, usuarios, roles))
     .catch(err => console.error(err));
 
 form.addEventListener('submit', handleSubmit);

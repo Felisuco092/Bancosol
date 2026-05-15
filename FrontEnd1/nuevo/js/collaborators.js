@@ -64,15 +64,15 @@ function modelo_Fila(colaborador, pendiente = false) {
 
 
 function solicitud_colaboradores(data, dataFisico, dataEntidad) {
-    const fisicoIds = new Set(dataFisico.map(v => v.id_voluntario));
-    const entidadIds = new Set(dataEntidad.map(v => v.id_voluntario));
+    const fisicoIds = new Set(dataFisico.map(v => String(v.id_voluntario)));
+    const entidadIds = new Set(dataEntidad.map(v => String(v.id_voluntario)));
 
     function json_change(json, arrayJsonFisico, arrayJsonEntidad) {
         //Esto es para hacer una especie de left join con arrayJsonFisico o arrayJsonEntidad el voluntario
         const type = getVoluntarioType(json.id);
         if(type === 'fisico'){
             const json_fisico = arrayJsonFisico.find((element) => {
-                return element.id === json.id;
+                return String(element.id) === String(json.id);
             })
             return {...json, 
                 nombre: json_fisico.nombre + " " + json_fisico.apellidos,
@@ -81,9 +81,8 @@ function solicitud_colaboradores(data, dataFisico, dataEntidad) {
             }
         } else {
             const json_entidad = arrayJsonEntidad.find((element) => {
-                return element.id === json.id;
+                return String(element.id) === String(json.id);
             })
-            
             return {...json,
                 nombre: json_entidad.nombre_asociacion,
                 persona_fisica: false,
@@ -93,9 +92,9 @@ function solicitud_colaboradores(data, dataFisico, dataEntidad) {
     }
 
     function getVoluntarioType(id) {
-        const NumberId = Number(id)
-        if (fisicoIds.has(NumberId)) return 'fisico';
-        if (entidadIds.has(NumberId)) return 'entidad';
+        const StringId = String(id)
+        if (fisicoIds.has(StringId)) return 'fisico';
+        if (entidadIds.has(StringId)) return 'entidad';
         return 'desconocido';
     }
 

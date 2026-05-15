@@ -3,7 +3,7 @@ import { quitarTildes } from "./utils/string_utils.js";
 
 function getRolName(arrayJsonRoles, id) {
     //Dado un id de rol, obtiene que nombre de rol tiene.
-    const jsonRol = arrayJsonRoles.find((json) => Number(json.id) === id)
+    const jsonRol = arrayJsonRoles.find((json) => String(json.id) === String(id))
     return jsonRol.nombre
 }
 

@@ -16,14 +16,14 @@ let globalData = {
 };
 
 function getCadenaName(id) {
-    const cadena = globalData.cadenas.find(c => Number(c.id) === Number(id));
+    const cadena = globalData.cadenas.find(c => String(c.id) === String(id));
     return cadena ? cadena.nombre : 'Desconocida';
 }
 
 function getParticipaState(campanaId, tiendaId) {
     return globalData.participa.some(p => 
-        Number(p.id_campana) === Number(campanaId) && 
-        Number(p.id_tienda) === Number(tiendaId)
+        String(p.id_campana) === String(campanaId) && 
+        String(p.id_tienda) === String(tiendaId)
     );
 }
 
@@ -109,7 +109,7 @@ function renderTable() {
     globalData.tiendas.forEach(tienda => {
         const participates = getParticipaState(selectedCampana, tienda.id);
         
-        const matchCadena = (selectedCadena === 'todas' || Number(tienda.id_cadena) === Number(selectedCadena));
+        const matchCadena = (selectedCadena === 'todas' || String(tienda.id_cadena) === String(selectedCadena));
         const matchLocalidad = (selectedLocalidad === 'todas' || tienda.localidad.toLowerCase() === selectedLocalidad);
 
         if (matchCadena && matchLocalidad) {

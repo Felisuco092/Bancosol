@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bancosol - Colaboradores - Crear</title>
+    <link rel="stylesheet" href="../formulario.css">
+    <script src="../js/main.js" defer></script>
+    <script src="../js/crearJS/crear_colaborador.js" type="module"></script>
+</head>
+<body>
+    <header>
+        <h1>Crear Colaborador</h1>
+    </header>
+
+    <div class="formulario">
+        <form>
+            <div class="form-group">
+                <label for="tipo_colaborador">Tipo de Colaborador<span class="required">*</span></label>
+                <select name="tipo_colaborador" id="tipo_colaborador" required>
+                    <option value="">-- Seleccione un tipo --</option>
+                    <option value="fisico">Persona Física</option>
+                    <option value="entidad">Entidad / Grupo</option>
+                </select>
+            </div>
+
+            <div id="campos-base">
+                <div class="form-group">
+                    <label for="domicilio">Domicilio<span class="required">*</span></label>
+                    <input type="text" name="domicilio" id="domicilio" required/>
+                </div>
+                <div class="form-group">
+                    <label for="zona_geografica">Zona Geográfica<span class="required">*</span></label>
+                    <input type="text" name="zona_geografica" id="zona_geografica" required/>
+                </div>
+                <div class="form-group">
+                    <label for="codigo_postal">Código Postal<span class="required">*</span></label>
+                    <input type="text" name="codigo_postal" id="codigo_postal" required/>
+                </div>
+                <div class="form-group">
+                    <label for="observaciones">Observaciones</label>
+                    <textarea name="observaciones" id="observaciones" rows="3"></textarea>
+                </div>
+            </div>
+
+            <div id="campos-fisico" style="display: none;">
+                <div class="form-group">
+                    <label for="nombre">Nombre<span class="required">*</span></label>
+                    <input type="text" name="nombre" id="nombre" required/>
+                </div>
+                <div class="form-group">
+                    <label for="apellidos">Apellidos<span class="required">*</span></label>
+                    <input type="text" name="apellidos" id="apellidos" required/>
+                </div>
+            </div>
+
+            <div id="campos-entidad" style="display: none;">
+                <div class="form-group">
+                    <label for="nombre_asociacion">Nombre de Asociación<span class="required">*</span></label>
+                    <input type="text" name="nombre_asociacion" id="nombre_asociacion" required/>
+                </div>
+                <div class="form-group">
+                    <label for="n_voluntarios">Número de Voluntarios<span class="required">*</span></label>
+                    <input type="number" name="n_voluntarios" id="n_voluntarios" required/>
+                </div>
+            </div>
+
+            <div class="form-actions">
+                <button type="submit" class="btn btn-primary">Crear Colaborador</button>
+                <button type="button" class="btn btn-secondary" onclick="history.back()">Cancelar</button>
+            </div>
+        </form>
+    </div>
+</body>
+</html>
