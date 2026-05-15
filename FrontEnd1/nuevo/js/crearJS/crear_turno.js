@@ -49,9 +49,13 @@ async function handleSubmit(e) {
     };
 
     function validateDate(hora_inicio, hora_fin) {
-        const horaInicio = new Date(hora_inicio);
-        const horaFin = new Date(hora_fin);
-        return horaInicio < horaFin;
+        const [startHours, startMinutes] = hora_inicio.split(':').map(Number);
+        const [endHours, endMinutes] = hora_fin.split(':').map(Number);
+        
+        const startTotalMinutes = startHours * 60 + startMinutes;
+        const endTotalMinutes = endHours * 60 + endMinutes;
+        
+        return startTotalMinutes < endTotalMinutes;
     }
 
     if (!validateDate(newTurno.hora_inicio, newTurno.hora_fin)) {

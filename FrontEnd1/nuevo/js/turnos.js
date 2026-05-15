@@ -39,7 +39,7 @@ function getUsuarioName(id) {
 function modelo_Fila(turno) {
     const voluntarioDisplay = getVoluntarioDisplay(turno.id_voluntario);
     
-    // Format date nicely (assuming YYYY-MM-DD)
+    // Format date nicely 
     const fecha = new Date(turno.dia);
     const options = { weekday: 'long', day: '2-digit', month: '2-digit' };
     const fechaFormateada = fecha.toLocaleDateString('es-ES', options);
@@ -51,8 +51,7 @@ function modelo_Fila(turno) {
             <td>${turno.hora_fin}</td>
             <td>
                 <div class="voluntarios-cell">
-                    <span class="voluntario-tag">${voluntarioDisplay} </span>
-                    
+                    <span class="voluntario-tag">${voluntarioDisplay}<button class="btn-remove">×</button></span>
                 </div>
             </td>
             <td>
@@ -106,7 +105,8 @@ function handleBuscarClick() {
     if (filteredTurnos.length === 0) {
         tablaTurnosBody.innerHTML = '<tr><td colspan="5" style="text-align: center;">No hay turnos registrados para esta selección.</td></tr>';
     } else {
-        filteredTurnos.forEach(turno => {
+        filteredTurnos.sort((a, b) => new Date(a.dia) - new Date(b.dia))
+            .forEach(turno => {
             tablaTurnosBody.insertAdjacentHTML('beforeend', modelo_Fila(turno));
         });
     }
