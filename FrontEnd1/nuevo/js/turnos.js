@@ -18,12 +18,12 @@ let globalData = {
 };
 
 function getVoluntarioDisplay(idVoluntario) {
-    const fisico = globalData.voluntarioFisico.find(v => Number(v.id_voluntario) === Number(idVoluntario));
+    const fisico = globalData.voluntarioFisico.find(v => String(v.id_voluntario) === String(idVoluntario));
     if (fisico) {
         return `${fisico.nombre} ${fisico.apellidos}`;
     }
 
-    const entidad = globalData.voluntarioEntidad.find(v => Number(v.id_voluntario) === Number(idVoluntario));
+    const entidad = globalData.voluntarioEntidad.find(v => String(v.id_voluntario) === String(idVoluntario));
     if (entidad) {
         return `${entidad.nombre_asociacion} (${entidad.n_voluntarios})`;
     }
@@ -32,7 +32,7 @@ function getVoluntarioDisplay(idVoluntario) {
 }
 
 function getUsuarioName(id) {
-    const user = globalData.usuarios.find(u => Number(u.id) === Number(id));
+    const user = globalData.usuarios.find(u => String(u.id) === String(id));
     return user ? `${user.nombre} ${user.apellidos}` : 'No asignado';
 }
 
@@ -89,12 +89,12 @@ function handleBuscarClick() {
 
     // Filter turnos
     const filteredTurnos = globalData.turnos.filter(t => 
-        Number(t.id_campana) === Number(campanaId) && 
-        Number(t.id_tienda) === Number(tiendaId)
+        String(t.id_campana) === String(campanaId) && 
+        String(t.id_tienda) === String(tiendaId)
     );
 
     // Show captain
-    const tienda = globalData.tiendas.find(t => Number(t.id) === Number(tiendaId));
+    const tienda = globalData.tiendas.find(t => String(t.id) === String(tiendaId));
     if (tienda && tienda.id_capitan) {
         capitanNombre.textContent = getUsuarioName(tienda.id_capitan);
     } else {

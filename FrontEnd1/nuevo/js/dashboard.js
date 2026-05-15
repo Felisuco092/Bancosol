@@ -26,7 +26,7 @@ function getTopCadenas(cadenas, tiendas) {
         .slice(0, 4);
 
     return sorted.map(([id, count]) => {
-        const cadena = cadenas.find(c => Number(c.id) === Number(id));
+        const cadena = cadenas.find(c => String(c.id) === String(id));
         return {
             nombre: cadena.nombre,
             tiendas: count

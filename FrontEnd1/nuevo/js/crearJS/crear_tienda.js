@@ -40,7 +40,7 @@ async function handleSubmit(e) {
 
         if (response.ok) {
             alert('Tienda creada con éxito');
-            window.location.href = 'tiendas.html';
+            window.location.href = '../tiendas.html';
         } else {
             alert('Error al crear la tienda');
         }
@@ -64,7 +64,7 @@ function populateCapitanes(capitanes) {
 function populate(cadenas, usuarios, roles) {
     populateCadenas(cadenas);
     const capitanRol = roles.find(rol => rol.nombre === 'Capitán');
-    const capitanes = usuarios.filter(user => Number(user.id_rol) === Number(capitanRol.id));
+    const capitanes = usuarios.filter(user => String(user.id_rol) === String(capitanRol.id));
     populateCapitanes(capitanes);
 }
 

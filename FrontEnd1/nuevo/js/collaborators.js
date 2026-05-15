@@ -93,9 +93,9 @@ function solicitud_colaboradores(data, dataFisico, dataEntidad) {
     }
 
     function getVoluntarioType(id) {
-        const NumberId = Number(id)
-        if (fisicoIds.has(NumberId)) return 'fisico';
-        if (entidadIds.has(NumberId)) return 'entidad';
+        const StringId = String(id)
+        if (fisicoIds.has(StringId)) return 'fisico';
+        if (entidadIds.has(StringId)) return 'entidad';
         return 'desconocido';
     }
 
