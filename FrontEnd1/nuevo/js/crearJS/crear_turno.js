@@ -48,6 +48,17 @@ async function handleSubmit(e) {
         id_voluntario: Number(formData.get('voluntario'))
     };
 
+    function validateDate(hora_inicio, hora_fin) {
+        const horaInicio = new Date(hora_inicio);
+        const horaFin = new Date(hora_fin);
+        return horaInicio < horaFin;
+    }
+
+    if (!validateDate(newTurno.hora_inicio, newTurno.hora_fin)) {
+        alert('La hora de inicio debe ser anterior a la hora de fin');
+        return;
+    }
+
     console.log('Enviando nuevo turno:', newTurno);
 
     try {

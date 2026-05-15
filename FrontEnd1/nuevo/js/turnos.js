@@ -51,8 +51,8 @@ function modelo_Fila(turno) {
             <td>${turno.hora_fin}</td>
             <td>
                 <div class="voluntarios-cell">
-                    <span class="voluntario-tag">${voluntarioDisplay} <button class="btn-remove">×</button></span>
-                    <button class="btn btn-sm btn-add">+ Añadir</button>
+                    <span class="voluntario-tag">${voluntarioDisplay} </span>
+                    
                 </div>
             </td>
             <td>
