@@ -1,4 +1,4 @@
-import { fetch_data } from "./utils/fetch.js";
+import { fetch_data } from "../utils/fetch.js";
 
 const selectCadena = document.getElementById('cadena');
 const form = document.querySelector('form');
