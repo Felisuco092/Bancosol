@@ -38,6 +38,10 @@ body {
     padding-bottom: 0.5rem;
 }
 
+.required {
+    color: red;
+}
+
 /* ---------- Form Elements ---------- */
 h1 {
     color: var(--primary-color);
