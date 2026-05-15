@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bancosol - Usuarios - Crear</title>
+    <link rel="stylesheet" href="../formulario.css">
+    <script src="../js/main.js" defer></script>
+    <script src="../js/crearJS/crear_usuario.js" type="module"></script>
+</head>
+<body>
+    <header>
+        <h1>Crear Usuario</h1>
+    </header>
+
+    <div class="formulario">
+        <form>
+            <div class="form-group">
+                <label for="nombre">Nombre<span class="required">*</span></label>
+                <input type="text" name="nombre" id="nombre" required/>
+            </div>
+            <div class="form-group">
+                <label for="apellidos">Apellidos<span class="required">*</span></label>
+                <input type="text" name="apellidos" id="apellidos" required/>
+            </div>
+            <div class="form-group">
+                <label for="usuario">Usuario<span class="required">*</span></label>
+                <input type="text" name="usuario" id="usuario" required/>
+            </div>
+            <div class="form-group">
+                <label for="contrasena">Contraseña<span class="required">*</span></label>
+                <input type="password" name="contrasena" id="contrasena" required/>
+            </div>
+            <div class="form-group">
+                <label for="email">Email<span class="required">*</span></label>
+                <input type="email" name="email" id="email" required/>
+            </div>
+            <div class="form-group">
+                <label for="telefono">Teléfono<span class="required">*</span></label>
+                <input type="tel" name="telefono" id="telefono" required/>
+            </div>
+            <div class="form-group">
+                <label for="area_asignada">Área Asignada<span class="required">*</span></label>
+                <input type="text" name="area_asignada" id="area_asignada" required/>
+            </div>
+            <div class="form-group">
+                <label for="rol">Rol<span class="required">*</span></label>
+                <select name="rol" id="rol" required>
+                    <option value="">-- Seleccione un rol --</option>
+                </select>
+            </div>
+            <div class="form-actions">
+                <button type="submit" class="btn btn-primary">Crear Usuario</button>
+                <button type="button" class="btn btn-secondary" onclick="history.back()">Cancelar</button>
+            </div>
+        </form>
+    </div>
+</body>
+</html>
