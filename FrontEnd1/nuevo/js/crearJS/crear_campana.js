@@ -1,9 +1,28 @@
+import { fetch_data } from "../utils/fetch.js";
+
 const form = document.querySelector('form');
+let existingCampanas = [];
+
+function hasDateOverlap(newStart, newEnd) {
+    return existingCampanas.some(c => {
+        const existStart = new Date(c.dia_comienzo);
+        const existEnd = new Date(c.dia_final);
+        return newStart <= existEnd && newEnd >= existStart;
+    });
+}
 
 async function handleSubmit(e) {
     e.preventDefault();
     
     const formData = new FormData(form);
+    const newStart = new Date(formData.get('dia_comienzo'));
+    const newEnd = new Date(formData.get('dia_final'));
+
+    if (hasDateOverlap(newStart, newEnd)) {
+        alert('Ya existe una campaña en ese rango de fechas');
+        return;
+    }
+
     const newCampana = {
         nombre: formData.get('nombre'),
         ano: Number(formData.get('ano')),
@@ -33,5 +52,9 @@ async function handleSubmit(e) {
         alert('No se pudo conectar con el servidor (JSON Server)');
     }
 }
+
+fetch_data('campanas')
+    .then(data => { existingCampanas = data; })
+    .catch(err => console.error('Error al cargar campañas existentes:', err));
 
 form.addEventListener('submit', handleSubmit);
