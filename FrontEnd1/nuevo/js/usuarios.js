@@ -1,4 +1,4 @@
-import { fetch_data, delete_data } from "./utils/fetch.js";
+import { fetch_data, delete_data, update_data } from "./utils/fetch.js";
 import { quitarTildes } from "./utils/string_utils.js";
 
 function getRolName(arrayJsonRoles, id) {
@@ -30,8 +30,12 @@ function renderUsers([arrayJsonUsers, arrayJsonRoles]) {
         tbody.insertAdjacentHTML('beforeend', modelo_Fila(element, roleName));
         const btnEliminar = document.getElementById(`eliminar-usuario-${element.id}`);
         btnEliminar.addEventListener('click', async () => {
-            if (confirm('¿Estás seguro de dar de baja a este usuario?')) {
+            if (confirm('¿Estás seguro de dar de baja a este usuario? Se desasignará de las tiendas donde sea capitán.')) {
                 try {
+                    const tiendas = await fetch_data(`tiendas?id_capitan=${element.id}`);
+                    for (const tienda of tiendas) {
+                        await update_data(`tiendas/${tienda.id}`, { id_capitan: '' });
+                    }
                     const notificaciones = await fetch_data(`notificaciones?id_usuario_destino=${element.id}`);
                     notificaciones.forEach(n => delete_data(`notificaciones/${n.id}`));
                     await delete_data(`usuarios/${element.id}`);
