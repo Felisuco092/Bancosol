@@ -1,19 +1,20 @@
-import { fetch_data } from "./utils/fetch.js";
+import { fetch_data, delete_data } from "./utils/fetch.js";
 
 const tbody = document.getElementById('chain-table-body');
 
 let globalData = {
-    cadenas: []
+    cadenas: [],
+    tiendas: []
 };
 
 function modelo_Fila(cadena) {
     return `
-        <tr>
+        <tr id="fila-cadena-${cadena.id}">
             <td><strong>${cadena.nombre}</strong></td>
             <td>${cadena.codigo || 'N/A'}</td>
             <td>
                 <button class="btn btn-primary btn-sm">Editar</button>
-                <button class="btn btn-danger btn-sm">Eliminar</button>
+                <button class="btn btn-danger btn-sm" id="eliminar-cadena-${cadena.id}">Eliminar</button>
             </td>
         </tr>
     `;
@@ -25,6 +26,36 @@ function renderTable() {
     globalData.cadenas.forEach(cadena => {
         const filaHTML = modelo_Fila(cadena);
         tbody.insertAdjacentHTML('beforeend', filaHTML);
+        const botonEliminar = document.getElementById(`eliminar-cadena-${cadena.id}`);
+        botonEliminar.addEventListener('click', async () => {
+            if(confirm('¿Estás seguro de eliminar esta cadena? Se eliminarán todas las tiendas asociadas.')) {
+
+                //Fetch de las tiendas de la cadena
+                try{
+                    const tiendas_query = await fetch_data(`tiendas?id_cadena=${cadena.id}`);
+                    tiendas_query.forEach(async (tienda) => {
+                        //Eliminar participaciones de la tienda
+                        const participaciones_query = await fetch_data(`participa?id_tienda=${tienda.id}`);
+                        participaciones_query.forEach(participacion => {
+                            delete_data(`participaciones/${participacion.id}`);
+                        });
+                        //Eliminar turnos de la tienda
+                        const turnos_query = await fetch_data(`turnos?id_tienda=${tienda.id}`);
+                        turnos_query.forEach(turno => {
+                            delete_data(`turnos/${turno.id}`);
+                        });
+                        //Eliminar la tienda
+                        delete_data(`tiendas/${tienda.id}`);
+                    });
+                    //Eliminar la cadena
+                    delete_data(`cadenas/${cadena.id}`);
+                    document.getElementById(`fila-cadena-${cadena.id}`).remove();
+                } catch (err) {
+                    console.error("Error al cargar tiendas:", err);
+                } 
+
+            }
+        });
     });
 
     if (globalData.cadenas.length === 0) {

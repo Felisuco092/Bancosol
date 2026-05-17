@@ -1,5 +1,7 @@
+const API_URL = 'http://localhost:3001';
+
 function fetch_data(ruta, error) {
-    return fetch('http://localhost:3001/' + ruta)
+    return fetch(API_URL + '/' + ruta)
         .then((response) => response.json())
         .then(data => {
             return data
@@ -11,4 +13,18 @@ function fetch_data(ruta, error) {
 
 }
 
-export {fetch_data}
+function delete_data(ruta,error) {
+    return fetch(API_URL + '/' + ruta, {
+        method: 'DELETE'
+    })
+    .then((response) => response.json())
+    .then(data => {
+        return data
+    })
+    .catch(err => {
+        console.error("Ha ocurrido un error en el delete de " + ruta + ":", err);
+        throw err;
+    })
+}
+
+export {fetch_data, delete_data}

@@ -19,13 +19,13 @@ async function handleSubmit(e) {
     
     const formData = new FormData(form);
     const newTienda = {
-        id_cadena: Number(formData.get('cadena[]')),
+        id_cadena: String(formData.get('cadena[]')),
         descripcion: formData.get('descripcion'),
         localidad: formData.get('Localidad'),
         domicilio: formData.get('domicilio'),
         c_postal: formData.get('CPostal'),
         zona_geografica: formData.get('ZGeo'),
-        id_capitan: null
+        id_capitan: formData.get('capitan')
     };
 
     console.log('Enviando nueva tienda:', newTienda);
