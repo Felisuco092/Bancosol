@@ -1,4 +1,5 @@
 import { fetch_data } from "../utils/fetch.js";
+import { quitarTildes } from "../utils/string_utils.js";
 
 const selectCadena = document.getElementById('cadena');
 const form = document.querySelector('form');
@@ -63,7 +64,7 @@ function populateCapitanes(capitanes) {
 
 function populate(cadenas, usuarios, roles) {
     populateCadenas(cadenas);
-    const capitanRol = roles.find(rol => rol.nombre === 'Capitán');
+    const capitanRol = roles.find(rol => quitarTildes(rol.nombre).toLowerCase() === 'capitan');
     const capitanes = usuarios.filter(user => String(user.id_rol) === String(capitanRol.id));
     populateCapitanes(capitanes);
 }
