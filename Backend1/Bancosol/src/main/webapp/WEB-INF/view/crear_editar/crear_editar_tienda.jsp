@@ -26,15 +26,15 @@
                     </select>
                 </div>
                 <div class="form-group">
-                    <label for="descripcion">Especificaci&oacute;n</label>
+                    <label for="descripcion">Especificaci&oacute;n:</label>
                     <input type="text" name="descripcion" id="descripcion" required/>
                 </div>
                 <div class="form-group">
-                    <label for="Localidad">Localidad</label>
+                    <label for="Localidad">Especifique la localidad:</label>
                     <input type="text" name="Localidad" id="Localidad" required/>
                 </div>
                 <div class="form-group">
-                    <label for="domicilio">Domicilio</label>
+                    <label for="domicilio">Especifique el domicilio:</label>
                     <input type="text" name="domicilio" id="domicilio" required/>
                 </div>
                 <div class="form-group">
@@ -42,7 +42,7 @@
                     <input type="text" name="CPostal" id="CPostal" required/>
                 </div>
                 <div class="form-group">
-                    <label for="ZGeo">Zona Geogr&aacute;fica</label>
+                    <label for="ZGeo">Especifique la zona Geogr&aacute;fica</label>
                     <input type="text" name="ZGeo" id="ZGeo" required/>
                 </div>
                 <div class="form-actions">
