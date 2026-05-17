@@ -37,7 +37,7 @@ function renderTable() {
                         //Eliminar participaciones de la tienda
                         const participaciones_query = await fetch_data(`participa?id_tienda=${tienda.id}`);
                         participaciones_query.forEach(participacion => {
-                            delete_data(`participaciones/${participacion.id}`);
+                            delete_data(`participa/${participacion.id}`);
                         });
                         //Eliminar turnos de la tienda
                         const turnos_query = await fetch_data(`turnos?id_tienda=${tienda.id}`);

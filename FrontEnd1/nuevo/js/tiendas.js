@@ -1,4 +1,4 @@
-import { fetch_data } from "./utils/fetch.js";
+import { fetch_data, delete_data } from "./utils/fetch.js";
 
 const selectCampanas = document.getElementById('select-filtro-campanas');
 const selectCadenas = document.getElementById('filtro-por-cadenas');
@@ -46,7 +46,7 @@ function modelo_Fila(tienda, participates) {
     const statusText = participates ? 'Activa' : 'Sin activar';
 
     return `
-        <tr class="clickable" data-cadena="${tienda.id_cadena}" data-localidad="${tienda.localidad.toLowerCase()}">
+        <tr id="fila-tienda-${tienda.id}" class="clickable" data-cadena="${tienda.id_cadena}" data-localidad="${tienda.localidad.toLowerCase()}">
             <td>${tienda.descripcion}</td>
             <td><input type="checkbox" class="check-participa" ${participates ? 'checked' : ''} data-tienda-id="${tienda.id}"></td>
             <td>${tienda.localidad.toUpperCase()}</td>
@@ -56,7 +56,7 @@ function modelo_Fila(tienda, participates) {
             <td><span class="status-badge ${statusClass}">${statusText}</span></td>
             <td>
                 <button class="btn btn-primary btn-sm">Editar</button>
-                <button class="btn btn-danger btn-sm">Borrar</button>
+                <button class="btn btn-danger btn-sm" id="eliminar-tienda-${tienda.id}">Borrar</button>
             </td>
         </tr>
     `;
@@ -122,6 +122,24 @@ function renderTable() {
         checkbox.addEventListener('change', (e) => {
             const badge = e.target.closest('tr').querySelector('.status-badge');
             updateBadge(badge, e.target.checked);
+        });
+    });
+
+    document.querySelectorAll('[id^="eliminar-tienda-"]').forEach(btn => {
+        btn.addEventListener('click', async () => {
+            const id = btn.id.replace('eliminar-tienda-', '');
+            if (confirm('¿Estás seguro de eliminar esta tienda? Se eliminarán sus participaciones y turnos asociados.')) {
+                try {
+                    const participaciones = await fetch_data(`participa?id_tienda=${id}`);
+                    participaciones.forEach(p => delete_data(`participa/${p.id}`));
+                    const turnos = await fetch_data(`turnos?id_tienda=${id}`);
+                    turnos.forEach(t => delete_data(`turnos/${t.id}`));
+                    await delete_data(`tiendas/${id}`);
+                    document.getElementById(`fila-tienda-${id}`).remove();
+                } catch (err) {
+                    console.error("Error al eliminar tienda:", err);
+                }
+            }
         });
     });
 }

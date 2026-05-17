@@ -1,4 +1,4 @@
-import { fetch_data } from "./utils/fetch.js";
+import { fetch_data, delete_data } from "./utils/fetch.js";
 
 const filterTipo = document.getElementById('filter-tipo');
 const filterLocalidad = document.getElementById('filter-localidad');
@@ -49,7 +49,7 @@ function filterRows() {
 //Fetch de los datos
 
 function modelo_Fila(colaborador, pendiente = false) {
-    return `<tr pendiente="${pendiente}"
+    return `<tr id="fila-colaborador-${colaborador.id}" pendiente="${pendiente}"
                 data-es-persona="${colaborador.persona_fisica}" data-localidad="${colaborador.localidad}">
                         <td>${colaborador.nombre}</td>
                         <td class="tipo-cell"></td>
@@ -57,7 +57,7 @@ function modelo_Fila(colaborador, pendiente = false) {
                         <td>${colaborador.codigo_postal}</td>
                         <td>${colaborador.n_voluntarios}</td>
                         <td>${colaborador.observaciones}</td>
-                        <td><button class="btn btn-primary btn-sm">Editar</button> <button class="btn btn-danger btn-sm">Borrar</button></td>
+                        <td><button class="btn btn-primary btn-sm">Editar</button> <button class="btn btn-danger btn-sm" id="eliminar-colaborador-${colaborador.id}">Borrar</button></td>
                     </tr>`
 }
 
@@ -72,7 +72,7 @@ function solicitud_colaboradores(data, dataFisico, dataEntidad) {
         const type = getVoluntarioType(json.id);
         if(type === 'fisico'){
             const json_fisico = arrayJsonFisico.find((element) => {
-                return String(element.id) === String(json.id);
+                return String(element.id_voluntario) === String(json.id);
             })
             return {...json, 
                 nombre: json_fisico.nombre + " " + json_fisico.apellidos,
@@ -106,7 +106,23 @@ function solicitud_colaboradores(data, dataFisico, dataEntidad) {
             element = json_change(element, dataFisico, dataEntidad)
             tbody.insertAdjacentHTML('beforeend', modelo_Fila(element, true))
         }
-        
+        const btnEliminar = document.getElementById(`eliminar-colaborador-${element.id}`);
+        btnEliminar.addEventListener('click', async () => {
+            if (confirm('¿Estás seguro de eliminar este colaborador?')) {
+                try {
+                    const turnos = await fetch_data(`turnos?id_voluntario=${element.id}`);
+                    turnos.forEach(t => delete_data(`turnos/${t.id}`));
+                    const fisicos = await fetch_data(`voluntario_fisico?id_voluntario=${element.id}`);
+                    fisicos.forEach(f => delete_data(`voluntario_fisico/${f.id}`));
+                    const entidades = await fetch_data(`voluntario_entidad?id_voluntario=${element.id}`);
+                    entidades.forEach(e => delete_data(`voluntario_entidad/${e.id}`));
+                    await delete_data(`voluntario_base/${element.id}`);
+                    document.getElementById(`fila-colaborador-${element.id}`).remove();
+                } catch (err) {
+                    console.error("Error al eliminar colaborador:", err);
+                }
+            }
+        });
     })
 
     if (filterTipo) filterTipo.addEventListener('change', filterRows);

@@ -3,10 +3,28 @@ const camposFisico = document.getElementById('campos-fisico');
 const camposEntidad = document.getElementById('campos-entidad');
 const form = document.querySelector('form');
 
+const nombreInput = document.getElementById('nombre');
+const apellidosInput = document.getElementById('apellidos');
+const nombreAsociacionInput = document.getElementById('nombre_asociacion');
+const nVoluntariosInput = document.getElementById('n_voluntarios');
+
+function setRequired(input, required) {
+    if (required) {
+        input.setAttribute('required', '');
+    } else {
+        input.removeAttribute('required');
+    }
+}
+
 tipoSelect.addEventListener('change', () => {
     const value = tipoSelect.value;
     camposFisico.style.display = value === 'fisico' ? 'block' : 'none';
     camposEntidad.style.display = value === 'entidad' ? 'block' : 'none';
+
+    setRequired(nombreInput, value === 'fisico');
+    setRequired(apellidosInput, value === 'fisico');
+    setRequired(nombreAsociacionInput, value === 'entidad');
+    setRequired(nVoluntariosInput, value === 'entidad');
 });
 
 async function handleSubmit(e) {
