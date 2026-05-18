@@ -13,9 +13,9 @@ import uma.grupo13.bancosol.utils.ValidaSesion;
 public class ColaboradoresController {
     @GetMapping("/")
     public String doColaboradores(Model model, HttpSession session) {
-        if (!ValidaSesion.verificarSesion(session)) return "redirect:/";
+        //if (!ValidaSesion.verificarSesion(session)) return "redirect:/";
 
-        model.addAttribute("paginaActual", "colaboradores");
+
         return "colaboradores";
     }
 

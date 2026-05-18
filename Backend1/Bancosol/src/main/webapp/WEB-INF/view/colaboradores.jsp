@@ -41,22 +41,7 @@
                 </div>
             </div>
 
-            <table>
-                <thead>
-                    <tr>
-                        <th>Entidad / Nombre</th>
-                        <th>Tipo</th>
-                        <th>Localidad</th>
-                        <th>C.P.</th>
-                        <th>Voluntarios</th>
-                        <th>Observaciones</th>
-                        <th>Acciones</th>
-                    </tr>
-                </thead>
-                <tbody id="colaboradores-tbody">
-                    <!-- Datos ya procesados con js -->
-                </tbody>
-            </table>
+            <jsp:include page="tablas/colaboradores.jsp" />
         </div>
     </main>
 </body>
