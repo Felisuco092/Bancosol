@@ -39,4 +39,10 @@ public class TiendaEntity {
 
     @OneToMany(mappedBy = "tienda")
     private List<ParticipaEntity> participaciones = new ArrayList<>();
+
+    public boolean participaEn(Integer idCampana) {
+        if (idCampana == null || participaciones == null) return false;
+        return participaciones.stream()
+                .anyMatch(p -> p.getId().getIdCampana().equals(idCampana));
+    }
 }

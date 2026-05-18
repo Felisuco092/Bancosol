@@ -98,9 +98,9 @@ Importante seleccionar la base de datos de PostgreSQL y clicar en apply.
     - Seperar tablas a jsp aparte y modificar lo q haga falta de los jsp de las 8 páginas + aside.
     - Pasar los js a controler(solo los q haga falta)
     - Paginas de editar/crear(necesita datos)(las q necesiten)
-  - HECHO(contando todos los jsp relacionados): Aside; ControllerBase, UsuariosController, CadenaController.
-  - HACIENDO: BandejaController CampanaController
-  - PENDIENTE: 
+  - HECHO(contando todos los jsp relacionados): Aside; ControllerBase, UsuariosController, CadenaController, BandejaController.
+  - HACIENDO: CampanaController, TiendaController, ColaboradorController
+  - PENDIENTE: TurnosController
 - 3º Control de sesion(necesita datos)
   - Si sesion, redirect a dashboard y los demas a index sino sesión(todos los gets y posts)
   - /login (medio hecho) /logout hecho
@@ -125,7 +125,7 @@ Importante seleccionar la base de datos de PostgreSQL y clicar en apply.
 ![Paso 7](https://img.shields.io/badge/Paso_7-Pendiente-red)
 ![Paso 8](https://img.shields.io/badge/Paso_8-En_proceso-yellow)
 ![Paso 9](https://img.shields.io/badge/Paso_9-Pendiente-red)
-![Paso 10](https://img.shields.io/badge/Paso_10-A_empezar-orange)
+![Paso 10](https://img.shields.io/badge/Paso_10-En_proceso-yellow)
 ![Paso 11](https://img.shields.io/badge/Paso_11-Opcional-purple)
 ![Paso 12](https://img.shields.io/badge/Paso_12-Pendiente-red)
 ![Paso 13](https://img.shields.io/badge/Paso_13-Opcional-purple)
