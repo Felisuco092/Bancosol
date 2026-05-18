@@ -22,7 +22,7 @@
 <body>
 <main class="main-content">
     <header class="header">
-        <h1>Crear Tienda</h1>
+        <h1><%= (cadena.getId()!=null?"Editar":"Crear") %> cadena</h1>
     </header>
 
     <div class="formulario">
@@ -34,7 +34,7 @@
                        value="<%=cadena.getNombre() != null ? cadena.getNombre() : ""%>" >
             </div>
             <div class="form-group">
-                <label for="codigo">codigo</label>
+                <label for="codigo">Código</label>
                 <input type="text" name="codigo" id="codigo" required
                        value="<%=cadena.getCodigo() != null ? cadena.getCodigo() : ""%>"/>
             </div>
