@@ -1,24 +1,32 @@
+<%@ page import="uma.grupo13.bancosol.entity.CampanaEntity" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <!DOCTYPE html>
 <html lang="es">
+<%
+    CampanaEntity campana = (CampanaEntity) request.getAttribute("campana");
+    if(campana == null) campana = new CampanaEntity();
+%>
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Bancosol - Campañas - Crear</title>
+    <title><%=campana.getNombre() != null ? "Editar " : "Crear "%>campaña</title>
     <link rel="stylesheet" href="../../../css/styles.css">
     <link rel="stylesheet" href="../../../css/formulario.css">
-    <script src="../../../js/aside.js" defer></script>
     <script src="../../../js/crear_campana.js" type="module"></script>
 </head>
+
 <body>
 
     <main class="main-content">
         <header class="header">
-            <h1>Crear Campaña</h1>
+            <h1><%= (campana.getId()!=null?"Editar":"Crear") %> campaña</h1>
         </header>
 
         <div class="formulario">
             <form id="form-crear-campana">
+                <div class="form-group">
+                    <input type="hidden" name="id_campana" value="" required/>
+                </div>
                 <div class="form-group">
                     <label for="nombre">Especifique el nombre de la campaña:</label>
                     <input type="text" name="nombre" id="nombre" required/>

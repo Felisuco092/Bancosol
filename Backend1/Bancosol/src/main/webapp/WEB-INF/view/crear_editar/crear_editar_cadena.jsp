@@ -22,7 +22,7 @@
 <body>
 <main class="main-content">
     <header class="header">
-        <h1>Crear Tienda</h1>
+        <h1><%= (cadena.getId()!=null?"Editar":"Crear") %> cadena</h1>
     </header>
 
     <div class="formulario">

@@ -35,13 +35,16 @@ public class CampanasController {
     public  String doEditarCampana(@RequestParam(value = "", required = false) Integer idCampana,
             Model model, HttpSession session) {
         if (!ValidaSesion.verificarSesion(session)) return "redirect:/";
-
+        CampanaEntity campanaEdit = this.campanaRepository.getReferenceById(idCampana);
+        model.addAttribute("campana", campanaEdit);
         return "crear_editar/crear_editar_campana";
     }
 
     @GetMapping("/crear")
-    public String doCrearCampana(Model model, HttpSession session) {
+    public String doCrearCampana(@RequestParam(value = "", required = false) Integer idCampana,
+            Model model, HttpSession session) {
         if (!ValidaSesion.verificarSesion(session)) return "redirect:/";
+
         return "crear_editar/crear_editar_campana";
     }
 
