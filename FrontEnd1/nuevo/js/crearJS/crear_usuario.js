@@ -25,7 +25,7 @@ async function handleSubmit(e) {
         email: formData.get('email'),
         telefono: formData.get('telefono'),
         area_asignada: formData.get('area_asignada'),
-        id_rol: Number(formData.get('rol'))
+        id_rol: String(formData.get('rol'))
     };
 
     console.log('Enviando nuevo usuario:', newUsuario);

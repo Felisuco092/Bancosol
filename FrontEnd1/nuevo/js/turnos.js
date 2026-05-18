@@ -1,4 +1,4 @@
-import { fetch_data } from "./utils/fetch.js";
+import { fetch_data, delete_data } from "./utils/fetch.js";
 
 const selectCampana = document.getElementById('select-campana');
 const selectTienda = document.getElementById('select-tienda');
@@ -45,13 +45,13 @@ function modelo_Fila(turno) {
     const fechaFormateada = fecha.toLocaleDateString('es-ES', options);
 
     return `
-        <tr>
+        <tr id="fila-turno-${turno.id}">
             <td style="text-transform: capitalize;">${fechaFormateada}</td>
             <td>${turno.hora_inicio}</td>
             <td>${turno.hora_fin}</td>
             <td>
                 <div class="voluntarios-cell">
-                    <span class="voluntario-tag">${voluntarioDisplay}<button class="btn-remove">×</button></span>
+                    <span class="voluntario-tag">${voluntarioDisplay}<button class="btn-remove" id="eliminar-turno-${turno.id}">×</button></span>
                 </div>
             </td>
             <td>
@@ -108,6 +108,17 @@ function handleBuscarClick() {
         filteredTurnos.sort((a, b) => new Date(a.dia) - new Date(b.dia))
             .forEach(turno => {
             tablaTurnosBody.insertAdjacentHTML('beforeend', modelo_Fila(turno));
+            const btnEliminar = document.getElementById(`eliminar-turno-${turno.id}`);
+            btnEliminar.addEventListener('click', async () => {
+                if (confirm('¿Estás seguro de eliminar este turno?')) {
+                    try {
+                        await delete_data(`turnos/${turno.id}`);
+                        document.getElementById(`fila-turno-${turno.id}`).remove();
+                    } catch (err) {
+                        console.error("Error al eliminar turno:", err);
+                    }
+                }
+            });
         });
     }
 

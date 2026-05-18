@@ -43,9 +43,9 @@ async function handleSubmit(e) {
         dia: formData.get('dia'),
         hora_inicio: formData.get('hora_inicio'),
         hora_fin: formData.get('hora_fin'),
-        id_campana: Number(formData.get('campana')),
-        id_tienda: Number(formData.get('tienda')),
-        id_voluntario: Number(formData.get('voluntario'))
+        id_campana: String(formData.get('campana')),
+        id_tienda: String(formData.get('tienda')),
+        id_voluntario: String(formData.get('voluntario'))
     };
 
     function validateDate(hora_inicio, hora_fin) {

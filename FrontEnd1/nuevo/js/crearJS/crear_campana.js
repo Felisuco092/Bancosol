@@ -3,11 +3,11 @@ import { fetch_data } from "../utils/fetch.js";
 const form = document.querySelector('form');
 let existingCampanas = [];
 
-function hasDateOverlap(newStart, newEnd) {
+function hasDateOverlap(newStart, newEnd, year) {
     return existingCampanas.some(c => {
         const existStart = new Date(c.dia_comienzo);
         const existEnd = new Date(c.dia_final);
-        return newStart <= existEnd && newEnd >= existStart;
+        return c.ano === year && newStart <= existEnd && newEnd >= existStart;
     });
 }
 
@@ -17,8 +17,13 @@ async function handleSubmit(e) {
     const formData = new FormData(form);
     const newStart = new Date(formData.get('dia_comienzo'));
     const newEnd = new Date(formData.get('dia_final'));
+    const year = Number(formData.get('ano'));
+    if(newStart.getFullYear() !== year || newEnd.getFullYear() !== year) {
+        alert('Las fechas deben ser del mismo año');
+        return;
+    }
 
-    if (hasDateOverlap(newStart, newEnd)) {
+    if (hasDateOverlap(newStart, newEnd, year)) {
         alert('Ya existe una campaña en ese rango de fechas');
         return;
     }

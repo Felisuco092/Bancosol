@@ -1,9 +1,9 @@
-import { fetch_data } from "./utils/fetch.js";
+import { fetch_data, delete_data } from "./utils/fetch.js";
 
 //Cargar los json y meterlo a la tabla
 
 function modelo_Fila(campana) {
-    return `<tr class="campaign-row" data-start="${campana.dia_comienzo}" data-end="${campana.dia_final}">
+    return `<tr id="fila-campana-${campana.id}" class="campaign-row" data-start="${campana.dia_comienzo}" data-end="${campana.dia_final}">
                         <td>${campana.nombre}</td>
                         <td>${campana.ano}</td>
                         <td>${campana.dia_comienzo}</td>
@@ -14,7 +14,7 @@ function modelo_Fila(campana) {
                             <button class="btn btn-action btn-info">Tiendas</button><br>
                             <button class="btn btn-action btn-warning">Colaboradores</button><br>
                             <button class="btn btn-action btn-turnos" onclick="location.href='turnos.html'">Turnos</button><br>
-                            <button class="btn btn-action btn-delete-campana">Borrar</button><br>
+                            <button class="btn btn-action btn-delete-campana" id="eliminar-campana-${campana.id}">Borrar</button><br>
                         </td>
                     </tr>`
 }
@@ -25,7 +25,22 @@ const campanas = fetch_data("campanas", "Error solicitando campanas").then(rende
 function render_Rows(data) {
     console.log(data);
     data.forEach(element => {
-        tbody.insertAdjacentHTML('beforeend', modelo_Fila(element))
+        tbody.insertAdjacentHTML('beforeend', modelo_Fila(element));
+        const btnEliminar = document.getElementById(`eliminar-campana-${element.id}`);
+        btnEliminar.addEventListener('click', async () => {
+            if (confirm('¿Estás seguro de eliminar esta campaña? Se eliminarán las participaciones y turnos asociados.')) {
+                try {
+                    const participaciones = await fetch_data(`participa?id_campana=${element.id}`);
+                    participaciones.forEach(p => delete_data(`participa/${p.id}`));
+                    const turnos = await fetch_data(`turnos?id_campana=${element.id}`);
+                    turnos.forEach(t => delete_data(`turnos/${t.id}`));
+                    await delete_data(`campanas/${element.id}`);
+                    document.getElementById(`fila-campana-${element.id}`).remove();
+                } catch (err) {
+                    console.error("Error al eliminar campaña:", err);
+                }
+            }
+        });
     });
 
     // Inicializar estados

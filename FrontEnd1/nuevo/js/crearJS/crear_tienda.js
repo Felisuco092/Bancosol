@@ -1,4 +1,5 @@
 import { fetch_data } from "../utils/fetch.js";
+import { quitarTildes } from "../utils/string_utils.js";
 
 const selectCadena = document.getElementById('cadena');
 const form = document.querySelector('form');
@@ -18,13 +19,13 @@ async function handleSubmit(e) {
     
     const formData = new FormData(form);
     const newTienda = {
-        id_cadena: Number(formData.get('cadena[]')),
+        id_cadena: String(formData.get('cadena[]')),
         descripcion: formData.get('descripcion'),
         localidad: formData.get('Localidad'),
         domicilio: formData.get('domicilio'),
         c_postal: formData.get('CPostal'),
         zona_geografica: formData.get('ZGeo'),
-        id_capitan: null
+        id_capitan: formData.get('capitan')
     };
 
     console.log('Enviando nueva tienda:', newTienda);
@@ -63,7 +64,7 @@ function populateCapitanes(capitanes) {
 
 function populate(cadenas, usuarios, roles) {
     populateCadenas(cadenas);
-    const capitanRol = roles.find(rol => rol.nombre === 'Capitán');
+    const capitanRol = roles.find(rol => quitarTildes(rol.nombre).toLowerCase() === 'capitan');
     const capitanes = usuarios.filter(user => String(user.id_rol) === String(capitanRol.id));
     populateCapitanes(capitanes);
 }
