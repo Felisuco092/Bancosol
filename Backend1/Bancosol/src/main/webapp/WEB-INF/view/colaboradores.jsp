@@ -7,7 +7,6 @@
     <title>Bancosol - Colaboradores</title>
     <link rel="stylesheet" href="../../css/styles.css">
     <script src="../../js/aside.js" defer></script>
-    <script src="../../js/collaborators.js" type="module"></script>
 </head>
 <body>
     <% request.setAttribute("paginaActual", "colaboradores"); %>
@@ -34,15 +33,43 @@
                     <label for="filter-localidad">Localidad:</label>
                     <select id="filter-localidad">
                         <option value="all">Todas</option>
-                        <option value="Almáchar">Almáchar</option>
-                        <option value="Rincón de la Victoria">Rincón de la Victoria</option>
-                        <option value="Málaga">Málaga</option>
+                        <% for (String loc : (java.util.List<String>) request.getAttribute("localidades")) { %>
+                            <option value="<%=loc%>"><%=loc%></option>
+                        <% } %>
                     </select>
                 </div>
             </div>
 
-            <jsp:include page="tablas/colaboradores.jsp" />
+            <div id="tabla-container">
+                <jsp:include page="tablas/colaboradores.jsp" />
+            </div>
         </div>
     </main>
+
+    <script>
+        const filterTipo = document.getElementById('filter-tipo');
+        const filterLocalidad = document.getElementById('filter-localidad');
+        const tablaContainer = document.getElementById('tabla-container');
+
+        function filtrar() {
+            const params = new URLSearchParams();
+            params.set('tipo', filterTipo.value);
+            params.set('localidad', filterLocalidad.value);
+
+            fetch('/colaboradores/filtrar', {
+                method: 'POST',
+                body: params,
+                headers: { 'Content-Type': 'application/x-www-form-urlencoded' }
+            })
+                .then(r => r.text())
+                .then(html => {
+                    tablaContainer.innerHTML = html;
+                })
+                .catch(e => console.error(e));
+        }
+
+        filterTipo.addEventListener('change', filtrar);
+        filterLocalidad.addEventListener('change', filtrar);
+    </script>
 </body>
 </html>
