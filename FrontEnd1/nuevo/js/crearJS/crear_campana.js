@@ -18,6 +18,10 @@ async function handleSubmit(e) {
     const newStart = new Date(formData.get('dia_comienzo'));
     const newEnd = new Date(formData.get('dia_final'));
     const year = Number(formData.get('ano'));
+    if(newStart.getFullYear() !== year || newEnd.getFullYear() !== year) {
+        alert('Las fechas deben ser del mismo año');
+        return;
+    }
 
     if (hasDateOverlap(newStart, newEnd, year)) {
         alert('Ya existe una campaña en ese rango de fechas');
