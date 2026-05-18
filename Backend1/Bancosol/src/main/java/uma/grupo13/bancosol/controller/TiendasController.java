@@ -28,10 +28,10 @@ public class TiendasController {
         return "";
     }
 
-    @PostMapping("/crear")
+    @GetMapping("/crear")
     public  String doCrearTiendas(Model model, HttpSession session) {
         if (!ValidaSesion.verificarSesion(session)) return "redirect:/";
-        return "";
+        return "crear_editar/crear_editar_tienda";
     }
 
     @PostMapping("/borrar")

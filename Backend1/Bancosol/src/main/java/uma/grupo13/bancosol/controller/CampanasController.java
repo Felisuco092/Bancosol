@@ -42,7 +42,7 @@ public class CampanasController {
     @GetMapping("/crear")
     public String doCrearCampana(Model model, HttpSession session) {
         if (!ValidaSesion.verificarSesion(session)) return "redirect:/";
-        return "crear_editar/crear_campana";
+        return "crear_editar/crear_editar_campana";
     }
 
     @PostMapping("/borrar")
