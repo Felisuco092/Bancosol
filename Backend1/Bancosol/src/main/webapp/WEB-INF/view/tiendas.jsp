@@ -16,7 +16,7 @@
     <main class="main-content">
         <header class="header">
             <h1>Gestión de Tiendas</h1>
-            <button class="btn btn-primary" onclick="location.href='crear_editar/crear_editar_tienda.jsp'">+ Nueva Tienda</button>
+            <button class="btn btn-primary" onclick="location.href='/tiendas/crear'">+ Nueva Tienda</button>
         </header>
 
         <div class="card">

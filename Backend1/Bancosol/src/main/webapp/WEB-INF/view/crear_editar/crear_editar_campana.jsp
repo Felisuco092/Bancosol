@@ -11,8 +11,6 @@
     <script src="../../../js/crear_campana.js" type="module"></script>
 </head>
 <body>
-    <% request.setAttribute("paginaActual", "campanas"); %>
-    <jsp:include page="../aside.jsp"/>
 
     <main class="main-content">
         <header class="header">
