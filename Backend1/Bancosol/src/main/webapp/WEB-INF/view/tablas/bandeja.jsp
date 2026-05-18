@@ -19,7 +19,12 @@
         <td><%=notificacionAct.getFechaCreacion()%></td>
         <td><%=notificacionAct.getAsunto()%></td>
         <td>
-            <button class="btn btn-primary btn-view" onclick="alert('<%=notificacionAct.getMensaje()%>')">Ver mensaje</button>
+            <form method="post" action="/bandeja/mensaje">
+                <input type="hidden" name="idMensaje" value="<%=notificacionAct.getId()%>" />
+                <button class="btn btn-primary btn-view">
+                    Ver mensaje
+                </button>
+            </form>
         </td>
     </tr>
     <%}%>
