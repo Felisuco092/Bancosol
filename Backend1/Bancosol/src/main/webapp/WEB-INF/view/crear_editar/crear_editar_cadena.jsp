@@ -34,7 +34,7 @@
                        value="<%=cadena.getNombre() != null ? cadena.getNombre() : ""%>" >
             </div>
             <div class="form-group">
-                <label for="codigo">codigo</label>
+                <label for="codigo">Código</label>
                 <input type="text" name="codigo" id="codigo" required
                        value="<%=cadena.getCodigo() != null ? cadena.getCodigo() : ""%>"/>
             </div>

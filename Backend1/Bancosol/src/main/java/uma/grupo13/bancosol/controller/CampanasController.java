@@ -32,7 +32,7 @@ public class CampanasController {
     }
 
     @PostMapping("/editar")
-    public  String doEditarCampana(@RequestParam(value = "", required = false) Integer idCampana,
+    public  String doEditarCampana(@RequestParam(value = "idCampana", required = false) Integer idCampana,
             Model model, HttpSession session) {
         if (!ValidaSesion.verificarSesion(session)) return "redirect:/";
         CampanaEntity campanaEdit = this.campanaRepository.getReferenceById(idCampana);
@@ -41,8 +41,7 @@ public class CampanasController {
     }
 
     @GetMapping("/crear")
-    public String doCrearCampana(@RequestParam(value = "", required = false) Integer idCampana,
-            Model model, HttpSession session) {
+    public String doCrearCampana(Model model, HttpSession session) {
         if (!ValidaSesion.verificarSesion(session)) return "redirect:/";
 
         return "crear_editar/crear_editar_campana";

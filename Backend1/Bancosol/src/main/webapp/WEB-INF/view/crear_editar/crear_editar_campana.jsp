@@ -19,14 +19,13 @@
 
     <main class="main-content">
         <header class="header">
-            <h1><%= (campana.getId()!=null?"Editar":"Crear") %> campaña</h1>
+            <h1><%= (campana.getId()!=null?"Editar ":"Crear ") %> campaña</h1>
         </header>
 
         <div class="formulario">
             <form id="form-crear-campana">
-                <div class="form-group">
-                    <input type="hidden" name="id_campana" value="" required/>
-                </div>
+                <input type="hidden" name="idCampana" value="<%=campana.getId() == null?"" : campana.getId()%>"/>
+
                 <div class="form-group">
                     <label for="nombre">Especifique el nombre de la campaña:</label>
                     <input type="text" name="nombre" id="nombre" required/>
@@ -45,7 +44,9 @@
                 </div>
 
                 <div class="form-actions">
-                    <button type="submit" class="btn btn-primary">Crear Campaña</button>
+                    <button type="submit" class="btn btn-primary">
+                        <%=campana.getId() == null ? "Crear ":"Editar "%>campaña
+                    </button>
                     <button type="button" class="btn btn-secondary" onclick="history.back()">Cancelar</button>
                 </div>
             </form>
