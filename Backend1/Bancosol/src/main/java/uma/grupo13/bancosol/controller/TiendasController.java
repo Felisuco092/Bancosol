@@ -34,7 +34,7 @@ public class TiendasController {
         model.addAttribute("paginaActual", "tiendas");
         List<TiendaEntity> tiendas = tiendasRepo.findAll();
         List<CampanaEntity> campanas = campanaRepo.findAll();
-        List<CadenaEntity> cadena = cadenaRepo.findAll();
+        List<CadenaEntity> cadenas = cadenaRepo.findAll();
         
         Set<String> localidades = tiendas.stream()
                 .map(TiendaEntity::getLocalidad)
@@ -43,7 +43,7 @@ public class TiendasController {
                 
         model.addAttribute("tiendas", tiendas);
         model.addAttribute("campanas", campanas);
-        model.addAttribute("cadena", cadena);
+        model.addAttribute("cadenas", cadenas);
         model.addAttribute("localidades", localidades);
 
         if (!campanas.isEmpty()) {
@@ -51,7 +51,7 @@ public class TiendasController {
         }
 
         return "tiendas";
-        }
+    }
 
     @GetMapping("/editar")
     public String doEditarTiendas(Model model, HttpSession session, @RequestParam("id") Integer id) {
@@ -72,6 +72,26 @@ public class TiendasController {
         return "crear_editar/crear_tienda";
     }
 
+
+    @PostMapping("/filtrar")
+    public String doFiltro(Model model, HttpSession session, 
+                           @RequestParam("idCadena") Integer idCad,
+                           @RequestParam("idCampana") Integer idCamp,
+                           @RequestParam("localidad") String localidad) {
+        if (!ValidaSesion.verificarSesion(session)) return "redirect:/";
+        
+        List<TiendaEntity> tiendas;
+
+        if (idCad!=0) {
+            tiendas = tiendasRepo.filtroLocalidadCadena(localidad, idCad);
+        } else{
+            tiendas = tiendasRepo.filtroLocalidad(localidad);
+        }
+
+        model.addAttribute("tiendas", tiendas);
+        model.addAttribute("idCampanaActual", idCamp);
+        return "tablas/tiendas";
+    }
 
     @PostMapping("/borrar")
     public String doBorrarTiendas(Model model, HttpSession session, @RequestParam("id") Integer id) {
