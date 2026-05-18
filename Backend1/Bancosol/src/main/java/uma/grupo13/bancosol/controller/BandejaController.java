@@ -7,6 +7,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import uma.grupo13.bancosol.dao.NotificacionRepository;
 import uma.grupo13.bancosol.entity.NotificacionEntity;
 import uma.grupo13.bancosol.utils.ValidaSesion;
@@ -21,7 +22,7 @@ public class BandejaController {
 
     @GetMapping("/")
     public String doBandeja(Model model, HttpSession session){
-        if (!ValidaSesion.verificarSesion(session)) return "redirect:/";
+        //if (!ValidaSesion.verificarSesion(session)) return "redirect:/";
 
         model.addAttribute("paginaActual", "bandeja");
         List<NotificacionEntity> notificacionList = this.notificacionRepository.findAll();
@@ -32,9 +33,12 @@ public class BandejaController {
     }
 
     @PostMapping("/mensaje")
-    public String doMensaje(Model model, HttpSession session) {
-        if (!ValidaSesion.verificarSesion(session)) return "redirect:/";
-        return "";
+    public String doMensaje(Model model, HttpSession session,
+                            @RequestParam("idMensaje") Integer idMensaje) {
+        //if (!ValidaSesion.verificarSesion(session)) return "redirect:/";
+        NotificacionEntity notificacion = notificacionRepository.getReferenceById(idMensaje);
+        model.addAttribute("notificacion", notificacion);
+        return "mensajes/ver_mensaje";
     }
 
 }

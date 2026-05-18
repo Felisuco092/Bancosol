@@ -22,7 +22,7 @@ public class ColaboradoresController {
 
     @GetMapping("/")
     public String doColaboradores(Model model, HttpSession session) {
-        //if (!ValidaSesion.verificarSesion(session)) return "redirect:/";
+        if (!ValidaSesion.verificarSesion(session)) return "redirect:/";
 
         model.addAttribute("paginaActual", "colaboradores");
         model.addAttribute("colaboradores", voluntariosRepo.findAll());
@@ -34,7 +34,7 @@ public class ColaboradoresController {
     public String doFiltrar(@RequestParam(required = false) String tipo,
                             @RequestParam(required = false) String localidad,
                             Model model, HttpSession session) {
-        //if (!ValidaSesion.verificarSesion(session)) return "redirect:/";
+        if (!ValidaSesion.verificarSesion(session)) return "redirect:/";
 
         String localidadParam = (localidad == null || localidad.equals("all")) ? "" : localidad;
 
