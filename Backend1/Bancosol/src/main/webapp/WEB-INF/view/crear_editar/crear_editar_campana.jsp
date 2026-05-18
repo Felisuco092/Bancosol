@@ -12,7 +12,6 @@
     <title><%=campana.getNombre() != null ? "Editar " : "Crear "%>campaña</title>
     <link rel="stylesheet" href="../../../css/styles.css">
     <link rel="stylesheet" href="../../../css/formulario.css">
-    <script src="../../../js/crear_campana.js" type="module"></script>
 </head>
 
 <body>
@@ -23,24 +22,24 @@
         </header>
 
         <div class="formulario">
-            <form id="form-crear-campana">
-                <input type="hidden" name="idCampana" value="<%=campana.getId() == null?"" : campana.getId()%>"/>
+            <form id="form-crear-campana" action="/campanas/guardar" method ="post">
+                <input type="hidden" name="idCampana" value="<%=campana.getId() == null?"":campana.getId()%>"/>
 
                 <div class="form-group">
                     <label for="nombre">Especifique el nombre de la campaña:</label>
-                    <input type="text" name="nombre" id="nombre" required/>
+                    <input type="text" name="nombre" id="nombre" value="<%=campana.getNombre() == null ? "":campana.getNombre()%>" required/>
                 </div>
                 <div class="form-group">
                     <label for="anyo">Especifique el año del transcurso de la campaña:</label>
-                    <input type="number" name="anyo" id="anyo" required/>
+                    <input type="number" name="anyo" id="anyo" value="<%=campana.getAno() == null ? "":campana.getAno()%>" required/>
                 </div>
                 <div class="form-group">
                     <label for="fecha-inicio">Especifique el día de comienzo de la campaña:</label>
-                    <input type="date" name="fecha-inicio" id="fecha-inicio" required/>
+                    <input type="date" name="fecha-inicio" id="fecha-inicio" value="<%=campana.getDiaComienzo() == null ? "":campana.getDiaComienzo()%>" required/>
                 </div>
                 <div class="form-group">
                     <label for="fecha-fin">Especifique el día final de la campaña: </label>
-                    <input type="date" name="fecha-fin" id="fecha-fin" required/>
+                    <input type="date" name="fecha-fin" id="fecha-fin" value="<%=campana.getDiaFinal() == null ? "":campana.getDiaFinal()%>" required/>
                 </div>
 
                 <div class="form-actions">

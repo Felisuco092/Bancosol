@@ -33,6 +33,13 @@ public class CampanaEntity {
     @OneToMany(mappedBy = "campana")
     private List<ParticipaEntity> participaciones = new ArrayList<>();
 
+    public void eliminarParticipaciones() {
+        for (ParticipaEntity participa : participaciones) {
+            participa.setCampana(null);
+        }
+        participaciones.clear();
+    }
+
     public long getTiempoRestante() {
         LocalDate fechaActual = LocalDate.now();
         long diasRestantes = java.time.temporal.ChronoUnit.DAYS.between(fechaActual, diaFinal);
