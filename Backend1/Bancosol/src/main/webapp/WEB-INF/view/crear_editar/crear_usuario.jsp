@@ -72,19 +72,17 @@ List<RolEntity> roles= (List<RolEntity>) request.getAttribute("roles");
                     <input type="text" name="area" id="area" value="<%=usuario.getAreaAsignada() == null ? "" : usuario.getAreaAsignada()%>"/>
                 </div>
                 <div class="form-group">
-                    <label>Rol:
+                    <label for="rol">Rol</label>
+                    <select name="rol" id="rol">
+                        <option value="">-- Seleccione una cadena --</option>
                         <%
-                            for(RolEntity rol: roles){
-                                String check="";
-                                if(usuario.getRol()!=null && rol.getId().equals(usuario.getRol().getId())) check="checked";
-                                %>
-                        <input type="radio" name="rol" id="rol_<%=rol.getId()%>" value="<%=rol.getId()%>" <%=check%> required>
-                        <label for="rol_<%=rol.getId()%>"><%=rol.getNombre()%></label>
+                            for(RolEntity rol : roles) {
+                        %>
+                        <option value="<%=rol.getId()%>"><%=rol.getNombre()%></option>
                         <%
                             }
-
                         %>
-                    </label>
+                    </select>
                 </div>
 
                 <div class="form-actions">
