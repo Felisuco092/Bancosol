@@ -22,7 +22,7 @@ public class BandejaController {
 
     @GetMapping("/")
     public String doBandeja(Model model, HttpSession session){
-        //if (!ValidaSesion.verificarSesion(session)) return "redirect:/";
+        if (!ValidaSesion.verificarSesion(session)) return "redirect:/";
 
         model.addAttribute("paginaActual", "bandeja");
         List<NotificacionEntity> notificacionList = this.notificacionRepository.findAll();
@@ -35,7 +35,7 @@ public class BandejaController {
     @PostMapping("/mensaje")
     public String doMensaje(Model model, HttpSession session,
                             @RequestParam("idMensaje") Integer idMensaje) {
-        //if (!ValidaSesion.verificarSesion(session)) return "redirect:/";
+        if (!ValidaSesion.verificarSesion(session)) return "redirect:/";
         NotificacionEntity notificacion = notificacionRepository.getReferenceById(idMensaje);
         model.addAttribute("notificacion", notificacion);
         return "mensajes/ver_mensaje";
