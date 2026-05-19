@@ -19,7 +19,4 @@ public class VoluntarioFisicoEntity extends VoluntarioBaseEntity {
     @Column(columnDefinition = "TEXT")
     private String apellidos;
 
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "id_coordinador", nullable = false)
-    private UsuarioEntity coordinador;
 }

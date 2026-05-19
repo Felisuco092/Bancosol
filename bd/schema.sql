@@ -59,8 +59,7 @@ CREATE TABLE "voluntario_base" (
 CREATE TABLE "voluntario_fisico" (
   "id_voluntario" integer PRIMARY KEY,
   "nombre" text,
-  "apellidos" text,
-  "id_coordinador" integer NOT NULL
+  "apellidos" text
 );
 
 CREATE TABLE "voluntario_entidad" (
@@ -99,8 +98,6 @@ ALTER TABLE "tienda" ADD FOREIGN KEY ("id_capitan") REFERENCES "usuario" ("id") 
 ALTER TABLE "notificacion" ADD FOREIGN KEY ("id_usuario_destino") REFERENCES "usuario" ("id") DEFERRABLE INITIALLY IMMEDIATE;
 
 ALTER TABLE "voluntario_fisico" ADD FOREIGN KEY ("id_voluntario") REFERENCES "voluntario_base" ("id") DEFERRABLE INITIALLY IMMEDIATE;
-
-ALTER TABLE "voluntario_fisico" ADD FOREIGN KEY ("id_coordinador") REFERENCES "usuario" ("id") DEFERRABLE INITIALLY IMMEDIATE;
 
 ALTER TABLE "voluntario_entidad" ADD FOREIGN KEY ("id_voluntario") REFERENCES "voluntario_base" ("id") DEFERRABLE INITIALLY IMMEDIATE;
 
