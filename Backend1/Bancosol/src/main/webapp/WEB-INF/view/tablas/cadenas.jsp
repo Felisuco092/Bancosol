@@ -7,9 +7,9 @@
 <table id="tabla-cadenas" class="tabla-cadenas">
     <thead>
         <tr>
-            <th>Nombre de Cadena</th>
-            <th>Código</th>
-            <th>Acciones</th>
+            <th><b>Nombre de Cadena</b></th>
+            <th><b>Código</b></th>
+            <th><b>Acciones</b></th>
         </tr>
     </thead>
     <tbody id="chain-table-body">
