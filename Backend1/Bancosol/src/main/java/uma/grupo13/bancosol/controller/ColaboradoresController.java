@@ -86,8 +86,11 @@ public class ColaboradoresController {
     }
 
     @PostMapping("/borrar")
-    public String doBorrarColaboradores(Model model, HttpSession session) {
+    public String doBorrarColaboradores(Model model, HttpSession session,
+                                        @RequestParam("id") Integer id) {
         if (!ValidaSesion.verificarSesion(session)) return "redirect:/";
+        VoluntarioBaseEntity voluntarioABorrar = voluntariosRepo.getReferenceById(id);
+        voluntariosRepo.delete(voluntarioABorrar);
         return "redirect:/colaboradores/";
     }
 
