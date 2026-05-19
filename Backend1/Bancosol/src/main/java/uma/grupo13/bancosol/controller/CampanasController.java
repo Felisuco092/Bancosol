@@ -51,8 +51,8 @@ public class CampanasController {
     }
 
     @PostMapping("/borrar")
-    public  String doBorrarCampana(@RequestParam("id") Integer idCampana,
-            Model model, HttpSession session) {
+    public  String doBorrarCampana(@RequestParam("idTurno") Integer idCampana,
+                                   Model model, HttpSession session) {
         if (!ValidaSesion.verificarSesion(session)) return "redirect:/";
         CampanaEntity campanaDelete = campanaRepository.getReferenceById(idCampana);
         campanaDelete.eliminarParticipaciones();
