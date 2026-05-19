@@ -29,9 +29,9 @@
             <form id="form-crear-colaborador" action="/colaboradores/guardar" method="post">
                 <input type="hidden" value="<%=voluntario.getId() != null ? voluntario.getId() : ""%>" name="id"/>
 
-                <div class="form-group">
+                <div class="form-group" style="display: <%=voluntario.getId() != null ? "none" : "block" %>">
                     <label for="tipo_colaborador">Tipo de Colaborador<span class="required">*</span></label>
-                    <select name="tipo_colaborador" id="tipo_colaborador" required <%=voluntario.getId() == null ? "disabled" : ""%>>
+                    <select name="tipo_colaborador" id="tipo_colaborador" required >
                         <option value="">-- Seleccione un tipo --</option>
                         <option value="fisico" <%= esFisico ? "selected" : "" %>>Persona Física</option>
                         <option value="entidad" <%= esEntidad ? "selected" : "" %>>Entidad / Grupo</option>
