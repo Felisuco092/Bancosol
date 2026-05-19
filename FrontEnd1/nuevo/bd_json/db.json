@@ -11,10 +11,6 @@
     {
       "id": "3",
       "nombre": "Coordinador"
-    },
-    {
-      "id": "4",
-      "nombre": "Responsable entidad"
     }
   ],
   "usuarios": [
@@ -27,7 +23,7 @@
       "email": "juan.perez@email.com",
       "telefono": "600123456",
       "area_asignada": "Málaga Este",
-      "id_rol": 2
+      "id_rol": 1
     },
     {
       "id": "2",
