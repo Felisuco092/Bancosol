@@ -19,8 +19,12 @@
         <td><%=turnoAct.getDia()%></td>
         <td><%=turnoAct.getHoraInicio()%></td>
         <td><%=turnoAct.getHoraFin()%></td>
+        <td><%=turnoAct.getVoluntario()%></td>
         <td>
-            <button class="btn btn-danger btn-incidence">Incidencia</button>
+            <form action = "/turnos/incidencia" method = "POST">
+                <input type="hidden" name="idTurno" value="<%=turnoAct.getId()%>"/>
+                <button class="btn btn-danger btn-incidence">Incidencia</button>
+            </form>
         </td>
         </tr>
     <%}%>

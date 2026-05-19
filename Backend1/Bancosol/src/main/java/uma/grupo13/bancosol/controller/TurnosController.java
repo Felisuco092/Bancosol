@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import uma.grupo13.bancosol.entity.CampanaEntity;
 import uma.grupo13.bancosol.entity.TiendaEntity;
+import uma.grupo13.bancosol.entity.TurnoEntity;
 import uma.grupo13.bancosol.utils.ValidaSesion;
 
 @Controller
@@ -25,25 +26,30 @@ public class TurnosController {
     @PostMapping("/editar")
     public  String doEditarTurnos(Model model, HttpSession session) {
         if (!ValidaSesion.verificarSesion(session)) return "redirect:/";
-        return "";
+
+        return "crear_editar/crear_editar_turno";
     }
 
     @PostMapping("/crear")
     public  String doCrearTurnos(Model model, HttpSession session) {
         if (!ValidaSesion.verificarSesion(session)) return "redirect:/";
-        return "";
+        TurnoEntity newTurno = new TurnoEntity();
+        model.addAttribute("turno", newTurno);
+
+        return "crear_editar/crear_editar_turno";
     }
 
     @PostMapping("/borrar")
     public  String doBorrarTurnos(Model model, HttpSession session) {
         if (!ValidaSesion.verificarSesion(session)) return "redirect:/";
+
         return "";
     }
 
     @PostMapping("/guardar")
     public  String doGuardarTurnos(Model model, HttpSession session) {
         if (!ValidaSesion.verificarSesion(session)) return "redirect:/";
-        return "redirect:/turnos";
+        return "redirect:/turnos/";
     }
 
     @PostMapping("/filtrar")
@@ -53,9 +59,12 @@ public class TurnosController {
     }
 
     @PostMapping("/incidencia")
-    public String doIncidencia(Model model, HttpSession session) {
+    public String doIncidencia(@RequestParam(value="idTurno") Integer idTurno,
+            Model model, HttpSession session) {
         if (!ValidaSesion.verificarSesion(session)) return "redirect:/";
-        return "";
+        model.addAttribute("idTurno", idTurno);
+
+        return "crear_editar/incidencia";
     }
 
     @PostMapping("/anadir")

@@ -44,8 +44,10 @@
                 <div class="cuadrante-header">
                     <h3>Cuadrante de Turnos</h3>
                     <div class="cuadrante-actions">
-                        <span>Capitán: <strong id="capitan-nombre">Juan Pérez</strong></span>
-                        <button class="btn btn-success btn-add-extra">+ Añadir Turno Extra</button>
+                        <span>Capitán: <strong id="capitan-nombre"></strong></span>
+                        <a href="/turnos/crear">
+                            <button class="btn btn-success btn-add-extra">+ Añadir Turno Extra</button>
+                        </a>
                     </div>
                 </div>
                 <jsp:include page="tablas/turnos.jsp"/>
