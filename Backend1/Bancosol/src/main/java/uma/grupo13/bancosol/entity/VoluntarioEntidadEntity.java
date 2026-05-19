@@ -18,7 +18,4 @@ public class VoluntarioEntidadEntity extends VoluntarioBaseEntity {
 
     private Integer nVoluntarios;
 
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "id_responsable", nullable = false)
-    private UsuarioEntity responsable;
 }
