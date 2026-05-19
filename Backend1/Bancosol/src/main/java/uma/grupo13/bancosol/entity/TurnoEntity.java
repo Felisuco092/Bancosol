@@ -39,4 +39,11 @@ public class TurnoEntity {
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "id_tienda", nullable = false)
     private TiendaEntity tienda;
+
+    public void eliminarDatos(){
+        this.campana = null;
+        this.voluntario = null;
+        this.tienda = null;
+        this.dia = null;
+    }
 }

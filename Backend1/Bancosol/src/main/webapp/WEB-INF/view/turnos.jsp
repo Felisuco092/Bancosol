@@ -18,42 +18,8 @@
             <h1>Asignación de Turnos</h1>
         </header>
 
-        <div class="card filtros-turnos">
-            <div>
-                <label for="select-campana">Campaña:</label>
-                <select id="select-campana">
-                    <option value="">-- Seleccione Campaña --</option>
-                    <option value="1">Gran Recogida Primavera 2026</option>
-                    <option value="2">Campaña Navidad 2025</option>
-                </select>
-            </div>
-            <div>
-                <label for="select-tienda">Tienda:</label>
-                <select id="select-tienda">
-                    <option value="">-- Seleccione Tienda --</option>
-                    <option value="101">Mercadona - Av. Andalucía</option>
-                    <option value="102">Carrefour - Rincón</option>
-                    <option value="103">Lidl - El Palo</option>
-                </select>
-            </div>
-            <button id="btn-buscar" class="btn btn-primary">Ver Cuadrante</button>
-        </div>
+        <jsp:include page="tablas/turnos.jsp"/>
 
-        <div id="cuadrante-container">
-            <div class="card">
-                <div class="cuadrante-header">
-                    <h3>Cuadrante de Turnos</h3>
-                    <div class="cuadrante-actions">
-                        <span>Capitán: <strong id="capitan-nombre"></strong></span>
-                        <a href="/turnos/crear">
-                            <button class="btn btn-success btn-add-extra">+ Añadir Turno Extra</button>
-                        </a>
-                    </div>
-                </div>
-                <jsp:include page="tablas/turnos.jsp"/>
-
-            </div>
-        </div>
     </main>
 </body>
 </html>
