@@ -8,7 +8,7 @@
     <tr>
         <th>Entidad / Nombre</th>
         <th>Tipo</th>
-        <th>Localidad</th>
+        <th>Zona Geográfica</th>
         <th>C.P.</th>
         <th>Voluntarios</th>
         <th>Acciones</th>
@@ -42,8 +42,12 @@
             <td><%=v.getCodigoPostal()%></td>
             <td><%=nVol%></td>
             <td>
-                <button class="btn btn-primary btn-sm">Editar</button>
-                <button class="btn btn-danger btn-sm">Borrar</button>
+                <a href="/colaboradores/editar?id=<%=v.getId()%>"><button class="btn btn-primary btn-sm">Editar</button></a>
+                <form action="/colaboradores/borrar" method="post"
+                      onsubmit="return confirm('¿Eliminar esta cadena? Se borrarán todas sus tiendas.')">
+                    <input type="hidden" name="id" value="<%=v.getId()%>" />
+                    <button class="btn btn-danger btn-sm">Eliminar</button>
+                </form>
             </td>
         </tr>
     <% } else { %>
