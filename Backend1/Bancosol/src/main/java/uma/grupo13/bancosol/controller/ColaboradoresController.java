@@ -8,7 +8,9 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import uma.grupo13.bancosol.dao.TurnoRepository;
 import uma.grupo13.bancosol.dao.VoluntariosRepository;
+import uma.grupo13.bancosol.entity.TurnoEntity;
 import uma.grupo13.bancosol.entity.VoluntarioBaseEntity;
 import uma.grupo13.bancosol.entity.VoluntarioEntidadEntity;
 import uma.grupo13.bancosol.entity.VoluntarioFisicoEntity;
@@ -21,6 +23,10 @@ import java.util.List;
 public class ColaboradoresController {
     @Autowired
     protected VoluntariosRepository voluntariosRepo;
+
+    @Autowired
+    protected TurnoRepository turnoRepo;
+
 
     @GetMapping("/")
     public String doColaboradores(Model model, HttpSession session) {
@@ -86,8 +92,14 @@ public class ColaboradoresController {
     }
 
     @PostMapping("/borrar")
-    public String doBorrarColaboradores(Model model, HttpSession session) {
+    public String doBorrarColaboradores(Model model, HttpSession session,
+                                        @RequestParam("id") Integer id) {
         if (!ValidaSesion.verificarSesion(session)) return "redirect:/";
+
+        List<TurnoEntity> turnos = turnoRepo.findByVoluntarioId(id);
+        turnoRepo.deleteAll(turnos);
+
+        voluntariosRepo.deleteById(id);
         return "redirect:/colaboradores/";
     }
 
