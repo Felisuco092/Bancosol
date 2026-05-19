@@ -48,36 +48,8 @@
                         <button class="btn btn-success btn-add-extra">+ Añadir Turno Extra</button>
                     </div>
                 </div>
-                
-                <table class="cuadrante-tabla">
-                    <thead>
-                        <tr>
-                            <th>Día</th>
-                            <th>Inicio</th>
-                            <th>Fin</th>
-                            <th>Voluntarios Asignados</th>
-                            <th>Acciones</th>
-                        </tr>
-                    </thead>
-                    <tbody id="tabla-turnos-body">
-                        <!-- Filas de ejemplo -->
-                        <tr>
-                            <td>Viernes 01/04</td>
-                            <td>09:00</td>
-                            <td>15:00</td>
-                            <td>
-                                <div class="voluntarios-cell">
-                                    <span class="voluntario-tag">Carlos Ruiz <button class="btn-remove">×</button></span>
-                                    <span class="voluntario-tag">Ana Belén <button class="btn-remove">×</button></span>
-                                    <button class="btn btn-sm btn-add">+ Añadir</button>
-                                </div>
-                            </td>
-                            <td>
-                                <button class="btn btn-danger btn-incidence">Incidencia</button>
-                            </td>
-                        </tr>
-                    </tbody>
-                </table>
+                <jsp:include page="tablas/turnos.jsp"/>
+
             </div>
         </div>
     </main>

@@ -5,7 +5,7 @@
 
 <%
     List<CampanaEntity> campanasList = (List<CampanaEntity>) request.getAttribute("campanas");
-    LocalDate today = LocalDate.now();
+    LocalDate today = LocalDate.now(); // traer fecha local actual para comparar
 %>
 <table>
     <thead>
@@ -19,7 +19,8 @@
     </tr>
     </thead>
     <tbody id="campaign-table-body">
-        <% if (campanasList != null) { 
+        <% if (campanasList != null) {
+            // comparación de fechas entre la actual y la que se muestra en la tabla para ver el estado de la misma
             for(CampanaEntity campanaAct: campanasList){ 
                 String status = "activa";
                 String label = "Activa";
