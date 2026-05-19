@@ -15,7 +15,7 @@
     <main class="main-content">
         <header class="header">
             <h1>Gestión de Colaboradores</h1>
-            <button class="btn btn-primary">+ Nuevo Colaborador</button>
+            <a href="/colaboradores/crear"><button class="btn btn-primary">+ Nuevo Colaborador</button></a>
         </header>
 
         <div class="card">

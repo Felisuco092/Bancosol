@@ -42,7 +42,7 @@
             <td><%=v.getCodigoPostal()%></td>
             <td><%=nVol%></td>
             <td>
-                <button class="btn btn-primary btn-sm">Editar</button>
+                <a href="/colaboradores/editar?id=<%=v.getId()%>"><button class="btn btn-primary btn-sm">Editar</button></a>
                 <button class="btn btn-danger btn-sm">Borrar</button>
             </td>
         </tr>
