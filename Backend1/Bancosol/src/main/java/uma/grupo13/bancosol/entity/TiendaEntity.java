@@ -37,6 +37,9 @@ public class TiendaEntity {
     @JoinColumn(name = "id_capitan")
     private UsuarioEntity capitan; // Relación con Usuario (Rol Capitán)
 
-    @OneToMany(mappedBy = "tienda")
+    @OneToMany(mappedBy = "tienda", orphanRemoval = true)
     private List<ParticipaEntity> participaciones = new ArrayList<>();
+
+    @OneToMany(mappedBy = "tienda", orphanRemoval = true)
+    private List<TurnoEntity> turnos = new ArrayList<>();
 }
