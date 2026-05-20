@@ -93,27 +93,19 @@ Importante seleccionar la base de datos de PostgreSQL y clicar en apply.
 - 1º HTML/css y js de todas las páginas.
   - Listas index, campañas, bandeja, turnos y editarCrear
 - 2º Controlador con gets y post
-  - Para cada una de los controladores (gets ya creados y algunos posts(botones+login+logout))
-    - Pulir Gets (atributos) y hacer los posts(login y logout PUNTO 3.2) Tener en cuenta 3.1
-    - Seperar tablas a jsp aparte y modificar lo q haga falta de los jsp de las 8 páginas + aside.
-    - Pasar los js a controler(solo los q haga falta)
-    - Paginas de editar/crear(necesita datos)(las q necesiten)
-  - HECHO(contando todos los jsp relacionados): Aside; ControllerBase, UsuariosController, CadenaController.
-  - HACIENDO: BandejaController CampanaController
-  - PENDIENTE: 
+  TurnosController
 - 3º Control de sesion(necesita datos)
-  - Si sesion, redirect a dashboard y los demas a index sino sesión(todos los gets y posts)
   - /login (medio hecho) /logout hecho
 - 4º Control de roles
 - 5º Extraer en clase a parte la sidebar en una clase a parte y añadir en cada clase .jsp dentro de Frontend1
 - 6º Crear js para emular petición y que devuelve un json. mock de base de datos con un timeout
 - 7º Service
-- 8º Crear clase cadena en frontend y backend que visualice todas las cadenas existentes y las que participen en las campañas ajustandose al modelo de otras clases existentes
-- 9º DTO y Service
+- 8º Confirmación al borrar
+- 9º DTO y Mappers
 - 10º Recarga de tablas(script de fetch)(necesita datos)
 - 11º Limpieza de capitanes si no se confirman en x tiempo
 - 12º React
-- 13º Confirmación al borrar
+
 
 ![Paso 0](https://img.shields.io/badge/Paso_0-Completo-green)
 ![Paso 1](https://img.shields.io/badge/Paso_1-Completo-green)
@@ -123,12 +115,12 @@ Importante seleccionar la base de datos de PostgreSQL y clicar en apply.
 ![Paso 5](https://img.shields.io/badge/Paso_5-Completo-green)
 ![Paso 6](https://img.shields.io/badge/Paso_6-Completo-green)
 ![Paso 7](https://img.shields.io/badge/Paso_7-Pendiente-red)
-![Paso 8](https://img.shields.io/badge/Paso_8-En_proceso-yellow)
+![Paso 8](https://img.shields.io/badge/Paso_13-Completo-green)
 ![Paso 9](https://img.shields.io/badge/Paso_9-Pendiente-red)
-![Paso 10](https://img.shields.io/badge/Paso_10-A_empezar-orange)
+![Paso 10](https://img.shields.io/badge/Paso_10-En_proceso-yellow)
 ![Paso 11](https://img.shields.io/badge/Paso_11-Opcional-purple)
 ![Paso 12](https://img.shields.io/badge/Paso_12-Pendiente-red)
-![Paso 13](https://img.shields.io/badge/Paso_13-Opcional-purple)
+
 
 ![LC](https://tenor.com/es/view/agnes-tachyon-low-cortisol-gif-6147390476112029717.gif)
 

@@ -42,4 +42,14 @@ public class TiendaEntity {
 
     @OneToMany(mappedBy = "tienda", orphanRemoval = true)
     private List<TurnoEntity> turnos = new ArrayList<>();
+
+    public boolean participaEn(Integer idCampana) {
+        if (idCampana == null || participaciones == null) return false;
+        return participaciones.stream()
+                .anyMatch(p -> p.getId().getIdCampana().equals(idCampana));
+    }
+
+    public void deleteTurnos() {
+        turnos.clear();
+    }
 }
