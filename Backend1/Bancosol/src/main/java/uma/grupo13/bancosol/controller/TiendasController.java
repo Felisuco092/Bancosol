@@ -8,12 +8,8 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
-import uma.grupo13.bancosol.dao.CadenaRepository;
-import uma.grupo13.bancosol.dao.CampanaRepository;
-import uma.grupo13.bancosol.dao.TiendasRepository;
-import uma.grupo13.bancosol.entity.CadenaEntity;
-import uma.grupo13.bancosol.entity.CampanaEntity;
-import uma.grupo13.bancosol.entity.TiendaEntity;
+import uma.grupo13.bancosol.dao.*;
+import uma.grupo13.bancosol.entity.*;
 import uma.grupo13.bancosol.utils.ValidaSesion;
 
 import java.util.List;
@@ -27,6 +23,9 @@ public class TiendasController {
     private final TiendasRepository tiendasRepo;
     private final CampanaRepository campanaRepo;
     private final CadenaRepository cadenaRepo;
+    private final ParticipaRepository participaRepo;
+    private final UserRepository userRepo;
+
 
     @GetMapping("/")
     public String doTiendas(Model model, HttpSession session) {
@@ -60,6 +59,10 @@ public class TiendasController {
         model.addAttribute("tienda", tienda);
         List<CadenaEntity> cadenas = cadenaRepo.findAll();
         model.addAttribute("cadenas", cadenas);
+        List<CampanaEntity> campanas= campanaRepo.findAll();
+        model.addAttribute("campanas", campanas);
+        List<UsuarioEntity> capitanes=userRepo.findCapitanes();
+        model.addAttribute("capitanes", capitanes);
         return "crear_editar/crear_tienda";
     }
 
@@ -69,6 +72,10 @@ public class TiendasController {
         model.addAttribute("tienda", new TiendaEntity());
         List<CadenaEntity> cadenas = cadenaRepo.findAll();
         model.addAttribute("cadenas", cadenas);
+        List<CampanaEntity> campanas= campanaRepo.findAll();
+        model.addAttribute("campanas", campanas);
+        List<UsuarioEntity> capitanes=userRepo.findCapitanes();
+        model.addAttribute("capitanes", capitanes);
         return "crear_editar/crear_tienda";
     }
 
@@ -96,6 +103,11 @@ public class TiendasController {
     @PostMapping("/borrar")
     public String doBorrarTiendas(Model model, HttpSession session, @RequestParam("id") Integer id) {
         if (!ValidaSesion.verificarSesion(session)) return "redirect:/";
+        TiendaEntity tienda=tiendasRepo.getById(id);
+        List<ParticipaEntity> participaciones=tienda.getParticipaciones();
+        for(ParticipaEntity p:participaciones){
+            participaRepo.delete(p);
+        }
         tiendasRepo.deleteById(id);
         return "redirect:/tiendas/";
     }
@@ -108,7 +120,9 @@ public class TiendasController {
                                    @RequestParam("domicilio") String domicilio,
                                    @RequestParam("cPostal") String cPostal,
                                    @RequestParam("zonaGeografica") String zonaGeografica,
-                                   @RequestParam("cadena") Integer idCadena) {
+                                   @RequestParam("cadena") Integer idCadena,
+                                   @RequestParam("capitan") Integer idCapitan,
+                                   @RequestParam(value = "campanasParticipa", required = false) List<Integer> idCampanas) {
         if (!ValidaSesion.verificarSesion(session)) return "redirect:/";
 
         TiendaEntity tienda;
@@ -127,7 +141,31 @@ public class TiendasController {
         CadenaEntity cadena = cadenaRepo.findById(idCadena).orElse(null);
         tienda.setCadena(cadena);
 
-        tiendasRepo.save(tienda);
+        UsuarioEntity capitan = userRepo.findById(idCapitan).orElse(null);
+        tienda.setCapitan(capitan);
+
+        tienda = tiendasRepo.save(tienda);
+
+        // Actualizar participaciones
+        if (id != null) {
+            // Borrar participaciones anteriores si es edición
+            List<ParticipaEntity> actuales = participaRepo.findByIdTienda(id);
+            participaRepo.deleteAll(actuales);
+        }
+
+        if (idCampanas != null) {
+            for (Integer idCampana : idCampanas) {
+                ParticipaEntity participa = new ParticipaEntity();
+                participa.getId().setIdTienda(tienda.getId());
+                participa.getId().setIdCampana(idCampana);
+                
+                CampanaEntity campana = campanaRepo.findById(idCampana).orElse(null);
+                participa.setCampana(campana);
+                participa.setTienda(tienda);
+                
+                participaRepo.save(participa);
+            }
+        }
 
         return "redirect:/tiendas/";
     }
