@@ -13,7 +13,6 @@
 %>
 <html lang="es">
 <%
-    TiendaEntity tienda = (TiendaEntity) request.getAttribute("tienda");
     if(tienda == null){
         tienda = new TiendaEntity();
     }
@@ -29,9 +28,7 @@
 
     <main class="main-content">
         <header class="header">
-<<<<<<< HEAD
             <h1><%= (tienda.getId()!=null?"Editar":"Crear") %> tienda</h1>
-=======
             <%
                 if(tienda.getId()==null){
             %>
@@ -42,11 +39,10 @@
             <%
                 }
             %>
->>>>>>> be2f90a (filtro tienda)
         </header>
 
         <div class="formulario">
-            <form id="form-crear-tienda" action="tiendas/guardar" method="post">
+            <form id="form-crear-tienda" action="/tiendas/guardar" method="post">
                 <%
                     if(tienda.getId()!=null){
                 %>

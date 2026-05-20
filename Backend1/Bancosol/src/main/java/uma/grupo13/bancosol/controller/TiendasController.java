@@ -63,7 +63,7 @@ public class TiendasController {
         model.addAttribute("campanas", campanas);
         List<UsuarioEntity> capitanes=userRepo.findCapitanes();
         model.addAttribute("capitanes", capitanes);
-        return "crear_editar/crear_tienda";
+        return "crear_editar/crear_editar_tienda";
     }
 
     @GetMapping("/crear")
@@ -76,7 +76,7 @@ public class TiendasController {
         model.addAttribute("campanas", campanas);
         List<UsuarioEntity> capitanes=userRepo.findCapitanes();
         model.addAttribute("capitanes", capitanes);
-        return "crear_editar/crear_tienda";
+        return "crear_editar/crear_editar_tienda";
     }
 
 
