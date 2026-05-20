@@ -22,10 +22,10 @@ import java.util.List;
 @RequestMapping("/colaboradores")
 public class ColaboradoresController {
     @Autowired
-    protected VoluntariosRepository voluntariosRepo;
+    protected VoluntariosRepository voluntariosRepository;
 
     @Autowired
-    protected TurnoRepository turnoRepo;
+    protected TurnoRepository turnoRepository;
 
 
     @GetMapping("/")
@@ -33,8 +33,8 @@ public class ColaboradoresController {
         if (!ValidaSesion.verificarSesion(session)) return "redirect:/";
 
         model.addAttribute("paginaActual", "colaboradores");
-        model.addAttribute("colaboradores", voluntariosRepo.findAll());
-        model.addAttribute("localidades", voluntariosRepo.findLocalidadesDistintas());
+        model.addAttribute("colaboradores", voluntariosRepository.findAll());
+        model.addAttribute("localidades", voluntariosRepository.findLocalidadesDistintas());
         return "colaboradores";
     }
 
@@ -48,13 +48,13 @@ public class ColaboradoresController {
 
         List<VoluntarioBaseEntity> todos;
         if (tipo == null || tipo.equals("all")) {
-            todos = voluntariosRepo.findAllByLocalidad(localidadParam);
+            todos = voluntariosRepository.findAllByLocalidad(localidadParam);
         } else if (tipo.equals("true")) {
-            todos = voluntariosRepo.findBaseFisicos(localidadParam);
+            todos = voluntariosRepository.findBaseFisicos(localidadParam);
         } else if (tipo.equals("false")) {
-            todos = voluntariosRepo.findBaseEntidades(localidadParam);
+            todos = voluntariosRepository.findBaseEntidades(localidadParam);
         } else {
-            todos = voluntariosRepo.findPendientes(localidadParam);
+            todos = voluntariosRepository.findPendientes(localidadParam);
         }
 
         model.addAttribute("colaboradores", todos);
@@ -71,7 +71,7 @@ public class ColaboradoresController {
     public String doEditarColaboradoresGet(Model model, HttpSession session,
                                            @RequestParam("id") Integer id) {
         if (!ValidaSesion.verificarSesion(session)) return "redirect:/";
-        VoluntarioBaseEntity voluntario = voluntariosRepo.findById(id).orElse(null);
+        VoluntarioBaseEntity voluntario = voluntariosRepository.findById(id).orElse(null);
         model.addAttribute("voluntario", voluntario);
         return "crear_editar/crear_editar_colaboradores";
     }
@@ -80,7 +80,7 @@ public class ColaboradoresController {
     public String doEditarColaboradoresPost(Model model, HttpSession session,
                                             @RequestParam("id") Integer id) {
         if (!ValidaSesion.verificarSesion(session)) return "redirect:/";
-        VoluntarioBaseEntity voluntario = voluntariosRepo.findById(id).orElse(null);
+        VoluntarioBaseEntity voluntario = voluntariosRepository.findById(id).orElse(null);
         model.addAttribute("voluntario", voluntario);
         return "crear_editar/crear_editar_colaboradores";
     }
@@ -96,10 +96,10 @@ public class ColaboradoresController {
                                         @RequestParam("id") Integer id) {
         if (!ValidaSesion.verificarSesion(session)) return "redirect:/";
 
-        List<TurnoEntity> turnos = turnoRepo.findByVoluntarioId(id);
-        turnoRepo.deleteAll(turnos);
+        List<TurnoEntity> turnos = turnoRepository.findByVoluntarioId(id);
+        turnoRepository.deleteAll(turnos);
 
-        voluntariosRepo.deleteById(id);
+        voluntariosRepository.deleteById(id);
         return "redirect:/colaboradores/";
     }
 
@@ -120,7 +120,7 @@ public class ColaboradoresController {
         VoluntarioBaseEntity voluntario;
 
         if (id != null) {
-            voluntario = voluntariosRepo.findById(id).orElse(null);
+            voluntario = voluntariosRepository.findById(id).orElse(null);
         } else {
             if ("fisico".equals(tipo)) {
                 voluntario = new VoluntarioFisicoEntity();
@@ -143,7 +143,7 @@ public class ColaboradoresController {
             entidad.setNVoluntarios(nVoluntarios);
         }
 
-        voluntariosRepo.save(voluntario);
+        voluntariosRepository.save(voluntario);
         return "redirect:/colaboradores/";
     }
 
