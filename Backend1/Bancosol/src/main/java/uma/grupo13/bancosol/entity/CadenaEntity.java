@@ -23,7 +23,7 @@ public class CadenaEntity {
     @Column(nullable = false, unique = true)
     private String codigo; // Ej: CARR, MERC [cite: 489]
 
-    @OneToMany(mappedBy = "cadena")
+    @OneToMany(mappedBy = "cadena", orphanRemoval = true)
     private List<TiendaEntity> tiendas = new ArrayList<>();
 
     public void eliminarTiendas() {

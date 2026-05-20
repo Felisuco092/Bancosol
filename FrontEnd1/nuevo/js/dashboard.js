@@ -92,3 +92,11 @@ Promise.all([
     fetch_data('voluntario_entidad'),
     fetch_data('voluntario_fisico')
 ]).then(renderDashboard).catch(err => console.error(err));
+
+let user = sessionStorage.getItem("user") 
+
+if(user) {
+    user = JSON.parse(user)
+    const bienvenido = document.querySelector("#bienvenido")
+    bienvenido.textContent = `Bienvenido, ${user.nombre}`
+}
