@@ -92,10 +92,22 @@ public class TurnosController {
     }
 
     @PostMapping("/filtrar")
-    public String doFiltrarTurnos(@RequestParam(value = "") Integer idCampana,
-                                  @RequestParam(value = "") Integer idTienda,
+    public String doFiltrarTurnos(@RequestParam(value = "idCampana") Integer idCampana,
+                                  @RequestParam(value = "idTienda") Integer idTienda,
                                   Model model, HttpSession session) {
         if (!ValidaSesion.verificarSesion(session)) return "redirect:/";
+        if(idCampana != null && idTienda != null){
+
+        }else{
+            List<TurnoEntity> turnos = turnoRepository.findAll();
+            List<CampanaEntity> campanas = campanaRepository.findAll();
+            List<TiendaEntity> tiendas = tiendaRepository.findAll();
+            model.addAttribute("paginaActual", "turnos");
+            model.addAttribute("turnos", turnos);
+            model.addAttribute("campanas", campanas);
+            model.addAttribute("tiendas", tiendas);
+            return "turnos";
+        }
 
         return "turnos";
     }
