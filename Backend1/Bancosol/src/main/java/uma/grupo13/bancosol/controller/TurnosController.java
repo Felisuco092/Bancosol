@@ -96,6 +96,7 @@ public class TurnosController {
                                   @RequestParam(value = "") Integer idTienda,
                                   Model model, HttpSession session) {
         if (!ValidaSesion.verificarSesion(session)) return "redirect:/";
+
         return "turnos";
     }
 
