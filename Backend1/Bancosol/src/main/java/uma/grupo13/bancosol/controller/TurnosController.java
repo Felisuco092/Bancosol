@@ -8,6 +8,8 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import uma.grupo13.bancosol.dao.CampanaRepository;
+import uma.grupo13.bancosol.dao.TiendasRepository;
 import uma.grupo13.bancosol.dao.TurnoRepository;
 import uma.grupo13.bancosol.entity.CampanaEntity;
 import uma.grupo13.bancosol.entity.TiendaEntity;
@@ -25,13 +27,23 @@ public class TurnosController {
     @Autowired
     protected TurnoRepository turnoRepository;
 
+    @Autowired
+    protected CampanaRepository campanaRepository;
+
+    @Autowired
+    protected TiendasRepository tiendaRepository;
+
     @GetMapping("/")
     public String doTurnos(Model model, @RequestParam(name="campana", required = false)CampanaEntity campana, HttpSession session){
         if (!ValidaSesion.verificarSesion(session)) return "redirect:/";
 
         List<TurnoEntity> turnos = turnoRepository.findAll();
+        List<CampanaEntity> campanas = campanaRepository.findAll();
+        List<TiendaEntity> tiendas = tiendaRepository.findAll();
         model.addAttribute("paginaActual", "turnos");
         model.addAttribute("turnos", turnos);
+        model.addAttribute("campanas", campanas);
+        model.addAttribute("tiendas", tiendas);
 
         return "turnos";
     }
@@ -80,9 +92,11 @@ public class TurnosController {
     }
 
     @PostMapping("/filtrar")
-    public String doFiltrarTurnos(Model model, HttpSession session) {
+    public String doFiltrarTurnos(@RequestParam(value = "") Integer idCampana,
+                                  @RequestParam(value = "") Integer idTienda,
+                                  Model model, HttpSession session) {
         if (!ValidaSesion.verificarSesion(session)) return "redirect:/";
-        return "";
+        return "turnos";
     }
 
     @PostMapping("/incidencia")

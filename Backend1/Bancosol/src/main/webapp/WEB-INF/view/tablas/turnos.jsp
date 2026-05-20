@@ -1,7 +1,11 @@
 <%@ page import="uma.grupo13.bancosol.entity.*, java.util.*" %>
+<%@ page import="org.hibernate.Hibernate" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%
+    //Gemini ha hecho lo de hibernate unproxy
     List<TurnoEntity> turnosList = (List<TurnoEntity>) request.getAttribute("turnos");
+    List<TiendaEntity> tiendasList = (List<TiendaEntity>) request.getAttribute("tiendas");
+    List<CampanaEntity> campanasList = (List<CampanaEntity>) request.getAttribute("campanas");
 
 %>
     <div class="card filtros-turnos">
@@ -9,17 +13,21 @@
             <label for="select-campana">Campaña:</label>
             <select id="select-campana">
                 <option value="">-- Seleccione Campaña --</option>
-                <option value="1">Gran Recogida Primavera 2026</option>
-                <option value="2">Campaña Navidad 2025</option>
+
+                <%
+                int i = 1;
+                for(CampanaEntity campanaAct: campanasList){%>
+                    <option value="<%=i%>"><%=campanaAct.getNombre()%>-<%=campanaAct.getAno()%></option>
+                <%}%>
             </select>
         </div>
         <div>
             <label for="select-tienda">Tienda:</label>
             <select id="select-tienda">
                 <option value="">-- Seleccione Tienda --</option>
-                <option value="101">Mercadona - Av. Andalucía</option>
-                <option value="102">Carrefour - Rincón</option>
-                <option value="103">Lidl - El Palo</option>
+                <%for(TiendaEntity tiendaAct: tiendasList){%>
+                    <option value="<%=tiendaAct.getId()%>"><%=tiendaAct.getDescripcion()%></option>
+                <%}%>
             </select>
         </div>
         <button id="btn-buscar" class="btn btn-primary">Ver Cuadrante</button>
@@ -42,7 +50,7 @@
                     <th>Día</th>
                     <th>Inicio</th>
                     <th>Fin</th>
-                    <th>Voluntarios Asignados</th>
+                    <th>Voluntario Asignado</th>
                     <th>Acciones</th>
                 </tr>
                 </thead>
@@ -52,7 +60,24 @@
                     <td><%=turnoAct.getDia()%></td>
                     <td><%=turnoAct.getHoraInicio()%></td>
                     <td><%=turnoAct.getHoraFin()%></td>
-                    <td><%=turnoAct.getVoluntario()%></td>
+                    <td>
+                        <%
+                        String nameToDisplay = "Sin asignar";
+                        // try catch eliminado
+                            VoluntarioBaseEntity v = turnoAct.getVoluntario();
+                            if (v != null) {
+                                Object actual = Hibernate.unproxy(v);
+                                if (actual instanceof VoluntarioFisicoEntity) {
+                                    nameToDisplay = ((VoluntarioFisicoEntity) actual).getNombre();
+                                } else if (actual instanceof VoluntarioEntidadEntity) {
+                                    nameToDisplay = ((VoluntarioEntidadEntity) actual).getNombreAsociacion();
+                                } else {
+                                    nameToDisplay = "Voluntario #" + v.getId();
+                                }
+                            }
+                        %>
+                        <%= nameToDisplay %>
+                    </td>
                     <td>
                         <form action = "/turnos/borrar" method = "POST">
                             <input type="hidden" name="idTurno" value="<%=turnoAct.getId()%>"/>
