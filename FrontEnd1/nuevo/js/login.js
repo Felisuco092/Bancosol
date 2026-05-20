@@ -11,7 +11,8 @@ document.getElementById('login-form').addEventListener('submit', (e) => {
             sessionStorage.setItem('user', JSON.stringify(
                 {
                     usuario: data[0].usuario,
-                    id_rol: data[0].id_rol
+                    id_rol: data[0].id_rol,
+                    nombre: data[0].nombre
                 }
             ));
             window.location.href = 'dashboard.html';
