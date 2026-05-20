@@ -29,6 +29,7 @@ public class CadenaEntity {
     public void eliminarTiendas() {
         for (TiendaEntity tienda : tiendas) {
             tienda.getParticipaciones().clear();
+            tienda.getTurnos().clear();
         }
         tiendas.clear();
     }
