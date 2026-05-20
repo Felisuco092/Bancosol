@@ -34,7 +34,7 @@
                     <input type="time" name="hora-fin" id="hora-fin" required/>
                 </div>
                 <div class="form-actions">
-                    <button type="submit" class="btn btn-primary">Crear turno</button>
+                    <button type="submit" class="btn btn-primary">Crear y guardar turno</button>
                     <button type="button" class="btn btn-secondary" onclick="history.back()">Cancelar</button>
                 </div>
             </form>
