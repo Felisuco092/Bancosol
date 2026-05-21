@@ -11,7 +11,7 @@
     <script src="../../js/aside.js" defer></script>
     <%
         List<TiendaEntity> tiendas = (List<TiendaEntity>) request.getAttribute("tiendas");
-        List<VoluntarioEntidadEntity> voluntarios = (List<VoluntarioEntidadEntity>) request.getAttribute("voluntarios");
+        int totalVoluntarios = (int) request.getAttribute("totalVoluntarios");
         CampanaEntity campana = (CampanaEntity) request.getAttribute("campana");
         List<CadenaEntity> cadenas= (List<CadenaEntity>) request.getAttribute("cadenas");
     %>
@@ -35,13 +35,7 @@
             <div class="card dashboard-card">
                 <h3>Total de Voluntarios Movilizados</h3>
                 <p class="dashboard-number blue">
-                    <%
-                        int total = 0;
-                        for (VoluntarioEntidadEntity v : voluntarios){
-                            total += v.getNVoluntarios();
-                        }
-                    %>
-                    <%=total%>
+                    <%=totalVoluntarios%>
                 </p>
                 <p class="dashboard-label">voluntarios registrados</p>
             </div>
