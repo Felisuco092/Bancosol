@@ -31,4 +31,9 @@ public interface VoluntariosRepository extends JpaRepository<VoluntarioBaseEntit
 
     @Query("SELECT DISTINCT v.zonaGeografica FROM VoluntarioBaseEntity v WHERE v.zonaGeografica IS NOT NULL")
     List<String> findLocalidadesDistintas();
+
+    @Query("SELECT " +
+           "(SELECT COUNT(vf) FROM VoluntarioFisicoEntity vf) + " +
+           "(SELECT COALESCE(SUM(ve.nVoluntarios), 0) FROM VoluntarioEntidadEntity ve)")
+    int countTotalPersonasVoluntarias();
 }
