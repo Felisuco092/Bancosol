@@ -114,7 +114,8 @@ public class ColaboradoresController {
                                         @RequestParam(value = "nombre", required = false) String nombre,
                                         @RequestParam(value = "apellidos", required = false) String apellidos,
                                         @RequestParam(value = "nombre_asociacion", required = false) String nombreAsociacion,
-                                        @RequestParam(value = "n_voluntarios", required = false) Integer nVoluntarios) {
+                                        @RequestParam(value = "n_voluntarios", required = false) Integer nVoluntarios,
+                                        @RequestParam(value = "confirmar", required = false) Boolean confirmar) {
         if (!ValidaSesion.verificarSesion(session)) return "redirect:/";
 
         VoluntarioBaseEntity voluntario;
@@ -128,10 +129,15 @@ public class ColaboradoresController {
                 voluntario = new VoluntarioEntidadEntity();
             }
         }
+        if(confirmar == null) confirmar = false;
 
+        //Comprobar si lo pone el admin lo de confirmar
+        voluntario.setAprobado(confirmar);
+        //
         voluntario.setDomicilio(domicilio);
         voluntario.setZonaGeografica(zonaGeografica);
         voluntario.setCodigoPostal(codigoPostal);
+
 
         if (voluntario instanceof VoluntarioFisicoEntity) {
             VoluntarioFisicoEntity fisico = (VoluntarioFisicoEntity) voluntario;
