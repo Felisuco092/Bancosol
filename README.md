@@ -119,7 +119,7 @@ Importante seleccionar la base de datos de PostgreSQL y clicar en apply.
 ![Paso 9](https://img.shields.io/badge/Paso_9-Pendiente-red)
 ![Paso 10](https://img.shields.io/badge/Paso_10-En_proceso-yellow)
 ![Paso 11](https://img.shields.io/badge/Paso_11-Opcional-purple)
-![Paso 12](https://img.shields.io/badge/Paso_12-Pendiente-red)
+![Paso 12](https://img.shields.io/badge/Paso_12-En_proceso-yellow)
 
 
 ![LC](https://tenor.com/es/view/agnes-tachyon-low-cortisol-gif-6147390476112029717.gif)
