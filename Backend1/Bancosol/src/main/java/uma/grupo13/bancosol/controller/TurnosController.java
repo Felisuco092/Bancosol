@@ -58,7 +58,11 @@ public class TurnosController {
     public  String doCrearTurnos(Model model, HttpSession session) {
         if (!ValidaSesion.verificarSesion(session)) return "redirect:/";
         TurnoEntity newTurno = new TurnoEntity();
+        List<CampanaEntity> campanas = campanaRepository.findAll();
+        List<TiendaEntity> tiendas = tiendaRepository.findAll();
         model.addAttribute("turno", newTurno);
+        model.addAttribute("campanas", campanas);
+        model.addAttribute("tiendas", tiendas);
 
         return "crear_editar/crear_turno";
     }
@@ -79,14 +83,34 @@ public class TurnosController {
                                    @RequestParam(value = "dia") LocalDate fecha,
                                    @RequestParam(value = "hora-inicio") LocalTime horaInicio,
                                    @RequestParam(value = "hora-fin") LocalTime horaFin,
+                                   @RequestParam(value = "idCampana") Integer idCampana,
+                                   @RequestParam(value = "idTienda") Integer idTienda,
                                    Model model, HttpSession session) {
         if (!ValidaSesion.verificarSesion(session)) return "redirect:/";
-        TurnoEntity newTurno = new TurnoEntity();
-        newTurno.setTipoTurno(tipoTurno);
-        newTurno.setDia(fecha);
-        newTurno.setHoraInicio(horaInicio);
-        newTurno.setHoraFin(horaFin);
-        turnoRepository.save(newTurno);
+        
+        try {
+            TurnoEntity newTurno = new TurnoEntity();
+            newTurno.setTipoTurno(tipoTurno);
+            newTurno.setDia(fecha);
+            newTurno.setHoraInicio(horaInicio);
+            newTurno.setHoraFin(horaFin);
+            
+            CampanaEntity campana = campanaRepository.findById(idCampana).orElse(null);
+            TiendaEntity tienda = tiendaRepository.findById(idTienda).orElse(null);
+            
+            if (campana == null || tienda == null) {
+                // Si falta alguno, redirigir con error o manejarlo
+                return "redirect:/turnos/crear"; 
+            }
+            
+            newTurno.setCampana(campana);
+            newTurno.setTienda(tienda);
+            
+            turnoRepository.save(newTurno);
+        } catch (Exception e) {
+            e.printStackTrace();
+            return "redirect:/turnos/crear"; // O una página de error específica
+        }
 
         return "redirect:/turnos/";
     }

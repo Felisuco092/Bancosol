@@ -4,6 +4,7 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <!DOCTYPE html>
 <html lang="es">
+<!-- La ia generativa nos ha modificado el contenedor del cuadrante más abajo porque solo aparecía medio segundo y depsués se borraba -->
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -16,6 +17,8 @@
     List<TiendaEntity> tiendasList = (List<TiendaEntity>) request.getAttribute("tiendas");
     List<CampanaEntity> campanasList = (List<CampanaEntity>) request.getAttribute("campanas");
     String capitanNombre = (String) request.getAttribute("capitanNombre");
+    Integer idCampanaSelect = (Integer) request.getAttribute("idCampanaSel");
+    Integer idTiendaSelect = (Integer) request.getAttribute("idTiendaSel");
 %>
 <body>
     <% request.setAttribute("paginaActual", "turnos"); %>
@@ -26,16 +29,15 @@
             <h1>Asignación de Turnos</h1>
         </header>
         <div class="card filtros-turnos">
-            <form action = "/turnos/filtrar" method = "POST">
-                <div>
+            <form action = "/turnos/filtrar" method = "POST" style="display: flex; gap: 20px; align-items: flex-end; width: 100%;">
+                <div style="flex: 1;">
                     <label for="select-campana">Campaña:</label>
-                    <select id="select-campana" name="idCampana">
+                    <select id="select-campana" name="idCampana" style="width: 100%;">
                         <option value="">-- Seleccione Campaña --</option>
 
                         <%
-                        Integer idCampanaSel = (Integer) request.getAttribute("idCampanaSel");
                         for(CampanaEntity campanaAct: campanasList){%>
-                            <option value="<%=campanaAct.getId()%>" <%= (idCampanaSel != null && idCampanaSel.equals(campanaAct.getId())) ? "selected" : "" %>><%=campanaAct.getNombre()%>-<%=campanaAct.getAno()%></option>
+                            <option value="<%=campanaAct.getId()%>" <%= (idCampanaSelect != null && idCampanaSelect.equals(campanaAct.getId())) ? "selected" : "" %>><%=campanaAct.getNombre()%>-<%=campanaAct.getAno()%></option>
                         <%}%>
                     </select>
                 </div>
@@ -44,9 +46,8 @@
                     <select id="select-tienda" name="idTienda">
                         <option value="">-- Seleccione Tienda --</option>
                         <%
-                        Integer idTiendaSel = (Integer) request.getAttribute("idTiendaSel");
                         for(TiendaEntity tiendaAct: tiendasList){%>
-                        <option value="<%=tiendaAct.getId()%>" <%= (idTiendaSel != null && idTiendaSel.equals(tiendaAct.getId())) ? "selected" : "" %>><%=tiendaAct.getDescripcion()%></option>
+                        <option value="<%=tiendaAct.getId()%>" <%= (idTiendaSelect != null && idTiendaSelect.equals(tiendaAct.getId())) ? "selected" : "" %>><%=tiendaAct.getDescripcion()%></option>
                         <%}%>
                     </select>
                 </div>
@@ -55,7 +56,7 @@
             </form>
         </div>
 
-        <div id="cuadrante-container">
+        <div id="cuadrante-container" style="<%=(idCampanaSelect != null && idTiendaSelect != null) ? "display: block;" : "" %>">
             <div class="card">
                 <div class="cuadrante-header">
                     <h3>Cuadrante de Turnos</h3>

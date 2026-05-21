@@ -452,11 +452,15 @@ th {
 
 
 /* ---------- 13. Página Turnos ---------- */
-.filtros-turnos {
-    display: grid;
-    grid-template-columns: 1fr 1fr auto;
+.filtros-turnos form {
+    display: flex;
     gap: 20px;
-    align-items: end;
+    align-items: flex-end;
+    width: 100%;
+}
+
+.filtros-turnos form > div {
+    flex: 1;
 }
 
 .filtros-turnos label {
