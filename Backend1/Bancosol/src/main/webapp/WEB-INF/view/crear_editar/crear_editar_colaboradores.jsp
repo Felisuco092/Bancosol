@@ -29,14 +29,7 @@
             <form id="form-crear-colaborador" action="/colaboradores/guardar" method="post">
                 <input type="hidden" value="<%=voluntario.getId() != null ? voluntario.getId() : ""%>" name="id"/>
 
-                <div class="form-group" style="display: <%=voluntario.getId() != null ? "none" : "block" %>">
-                    <label for="tipo_colaborador">Tipo de Colaborador<span class="required">*</span></label>
-                    <select name="tipo_colaborador" id="tipo_colaborador" required >
-                        <option value="">-- Seleccione un tipo --</option>
-                        <option value="fisico" <%= esFisico ? "selected" : "" %>>Persona Física</option>
-                        <option value="entidad" <%= esEntidad ? "selected" : "" %>>Entidad / Grupo</option>
-                    </select>
-                </div>
+
 
                 <div id="campos-base">
                     <div class="form-group">
@@ -58,6 +51,22 @@
                         <label for="observaciones">Observaciones</label>
                         <textarea name="observaciones" id="observaciones" rows="3"></textarea>
                     </div>
+
+                    <div class="form-group" style="display: <%=voluntario.getAprobado() == false ? "block" : "none"%>">
+                        <label for="confirmar">Confirmar colaborador</label>
+                        <input type="checkbox" id="confirmar" name="confirmar" value="true"
+                            <%=voluntario.getAprobado() == true ? "checked" : ""%>/>
+                    </div>
+                </div>
+
+
+                <div class="form-group" style="display: <%=voluntario.getId() != null ? "none" : "block" %>">
+                    <label for="tipo_colaborador">Tipo de Colaborador<span class="required">*</span></label>
+                    <select name="tipo_colaborador" id="tipo_colaborador" required >
+                        <option value="">-- Seleccione un tipo --</option>
+                        <option value="fisico" <%= esFisico ? "selected" : "" %>>Persona Física</option>
+                        <option value="entidad" <%= esEntidad ? "selected" : "" %>>Entidad / Grupo</option>
+                    </select>
                 </div>
 
                 <% if(esFisico) {
