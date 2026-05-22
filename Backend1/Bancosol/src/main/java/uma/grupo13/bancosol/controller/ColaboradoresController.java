@@ -4,16 +4,10 @@ import jakarta.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.*;
 import uma.grupo13.bancosol.dao.TurnoRepository;
 import uma.grupo13.bancosol.dao.VoluntariosRepository;
-import uma.grupo13.bancosol.entity.TurnoEntity;
-import uma.grupo13.bancosol.entity.VoluntarioBaseEntity;
-import uma.grupo13.bancosol.entity.VoluntarioEntidadEntity;
-import uma.grupo13.bancosol.entity.VoluntarioFisicoEntity;
+import uma.grupo13.bancosol.entity.*;
 import uma.grupo13.bancosol.utils.ValidaSesion;
 
 import java.util.List;
@@ -29,8 +23,8 @@ public class ColaboradoresController {
 
 
     @GetMapping("/")
-    public String doColaboradores(Model model, HttpSession session) {
-        if (!ValidaSesion.verificarSesion(session)) return "redirect:/";
+    public String doColaboradores(Model model, @SessionAttribute(name = "user", required = false) UsuarioEntity user) {
+        if (user == null) return "redirect:/";
 
         model.addAttribute("paginaActual", "colaboradores");
         model.addAttribute("colaboradores", voluntariosRepository.findAll());
@@ -41,8 +35,8 @@ public class ColaboradoresController {
     @PostMapping("/filtrar")
     public String doFiltrar(@RequestParam(required = false) String tipo,
                             @RequestParam(required = false) String localidad,
-                            Model model, HttpSession session) {
-        if (!ValidaSesion.verificarSesion(session)) return "redirect:/";
+                            Model model, @SessionAttribute(name = "user", required = false) UsuarioEntity user) {
+        if (user == null) return "redirect:/";
 
         String localidadParam = (localidad == null || localidad.equals("all")) ? "" : localidad;
 
@@ -62,39 +56,39 @@ public class ColaboradoresController {
     }
 
     @GetMapping("/crear")
-    public String doCrearColaboradores(Model model, HttpSession session) {
-        if (!ValidaSesion.verificarSesion(session)) return "redirect:/";
+    public String doCrearColaboradores(Model model, @SessionAttribute(name = "user", required = false) UsuarioEntity user) {
+        if (user == null) return "redirect:/";
         return "crear_editar/crear_editar_colaboradores";
     }
 
     @GetMapping("/editar")
-    public String doEditarColaboradoresGet(Model model, HttpSession session,
+    public String doEditarColaboradoresGet(Model model, @SessionAttribute(name = "user", required = false) UsuarioEntity user,
                                            @RequestParam("id") Integer id) {
-        if (!ValidaSesion.verificarSesion(session)) return "redirect:/";
+        if (user == null) return "redirect:/";
         VoluntarioBaseEntity voluntario = voluntariosRepository.findById(id).orElse(null);
         model.addAttribute("voluntario", voluntario);
         return "crear_editar/crear_editar_colaboradores";
     }
 
     @PostMapping("/editar")
-    public String doEditarColaboradoresPost(Model model, HttpSession session,
+    public String doEditarColaboradoresPost(Model model, @SessionAttribute(name = "user", required = false) UsuarioEntity user,
                                             @RequestParam("id") Integer id) {
-        if (!ValidaSesion.verificarSesion(session)) return "redirect:/";
+        if (user == null) return "redirect:/";
         VoluntarioBaseEntity voluntario = voluntariosRepository.findById(id).orElse(null);
         model.addAttribute("voluntario", voluntario);
         return "crear_editar/crear_editar_colaboradores";
     }
 
     @PostMapping("/crear")
-    public String doCrearColaboradoresPost(Model model, HttpSession session) {
-        if (!ValidaSesion.verificarSesion(session)) return "redirect:/";
+    public String doCrearColaboradoresPost(Model model, @SessionAttribute(name = "user", required = false) UsuarioEntity user) {
+        if (user == null) return "redirect:/";
         return "crear_editar/crear_editar_colaboradores";
     }
 
     @PostMapping("/borrar")
-    public String doBorrarColaboradores(Model model, HttpSession session,
+    public String doBorrarColaboradores(Model model, @SessionAttribute(name = "user", required = false) UsuarioEntity user,
                                         @RequestParam("id") Integer id) {
-        if (!ValidaSesion.verificarSesion(session)) return "redirect:/";
+        if (user == null) return "redirect:/";
 
         List<TurnoEntity> turnos = turnoRepository.findByVoluntarioId(id);
         turnoRepository.deleteAll(turnos);
@@ -104,7 +98,7 @@ public class ColaboradoresController {
     }
 
     @PostMapping("/guardar")
-    public String doGuardarColaboradores(HttpSession session, Model model,
+    public String doGuardarColaboradores(@SessionAttribute(name = "user", required = false) UsuarioEntity user, Model model,
                                         @RequestParam("tipo_colaborador") String tipo,
                                         @RequestParam("domicilio") String domicilio,
                                         @RequestParam("zona_geografica") String zonaGeografica,
@@ -115,7 +109,7 @@ public class ColaboradoresController {
                                         @RequestParam(value = "apellidos", required = false) String apellidos,
                                         @RequestParam(value = "nombre_asociacion", required = false) String nombreAsociacion,
                                         @RequestParam(value = "n_voluntarios", required = false) Integer nVoluntarios) {
-        if (!ValidaSesion.verificarSesion(session)) return "redirect:/";
+        if (user == null) return "redirect:/";
 
         VoluntarioBaseEntity voluntario;
 

@@ -4,10 +4,7 @@ import jakarta.servlet.http.HttpSession;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.*;
 import uma.grupo13.bancosol.dao.*;
 import uma.grupo13.bancosol.entity.*;
 import uma.grupo13.bancosol.utils.ValidaSesion;
@@ -28,8 +25,8 @@ public class TiendasController {
 
 
     @GetMapping("/")
-    public String doTiendas(Model model, HttpSession session) {
-        if (!ValidaSesion.verificarSesion(session)) return "redirect:/";
+    public String doTiendas(Model model, @SessionAttribute(name = "user", required = false) UsuarioEntity user) {
+        if (user == null) return "redirect:/";
         model.addAttribute("paginaActual", "tiendas");
         List<TiendaEntity> tiendas = tiendasRepo.findAll();
         List<CampanaEntity> campanas = campanaRepo.findAll();
@@ -53,8 +50,8 @@ public class TiendasController {
     }
 
     @GetMapping("/editar")
-    public String doEditarTiendas(Model model, HttpSession session, @RequestParam("id") Integer id) {
-        if (!ValidaSesion.verificarSesion(session)) return "redirect:/";
+    public String doEditarTiendas(Model model, @SessionAttribute(name = "user", required = false) UsuarioEntity user, @RequestParam("id") Integer id) {
+        if (user == null) return "redirect:/";
         TiendaEntity tienda = tiendasRepo.findById(id).orElse(null);
         model.addAttribute("tienda", tienda);
         List<CadenaEntity> cadenas = cadenaRepo.findAll();
@@ -67,8 +64,8 @@ public class TiendasController {
     }
 
     @GetMapping("/crear")
-    public String doCrearTiendas(Model model, HttpSession session) {
-        if (!ValidaSesion.verificarSesion(session)) return "redirect:/";
+    public String doCrearTiendas(Model model, @SessionAttribute(name = "user", required = false) UsuarioEntity user) {
+        if (user == null) return "redirect:/";
         model.addAttribute("tienda", new TiendaEntity());
         List<CadenaEntity> cadenas = cadenaRepo.findAll();
         model.addAttribute("cadenas", cadenas);
@@ -81,11 +78,11 @@ public class TiendasController {
 
 
     @PostMapping("/filtrar")
-    public String doFiltro(Model model, HttpSession session, 
+    public String doFiltro(Model model, @SessionAttribute(name = "user", required = false) UsuarioEntity user, 
                            @RequestParam("idCadena") Integer idCad,
                            @RequestParam("idCampana") Integer idCamp,
                            @RequestParam("localidad") String localidad) {
-        if (!ValidaSesion.verificarSesion(session)) return "redirect:/";
+        if (user == null) return "redirect:/";
         
         List<TiendaEntity> tiendas;
 
@@ -101,8 +98,8 @@ public class TiendasController {
     }
 
     @PostMapping("/borrar")
-    public String doBorrarTiendas(Model model, HttpSession session, @RequestParam("id") Integer id) {
-        if (!ValidaSesion.verificarSesion(session)) return "redirect:/";
+    public String doBorrarTiendas(Model model, @SessionAttribute(name = "user", required = false) UsuarioEntity user, @RequestParam("id") Integer id) {
+        if (user == null) return "redirect:/";
         TiendaEntity tienda=tiendasRepo.getById(id);
         List<ParticipaEntity> participaciones=tienda.getParticipaciones();
         for(ParticipaEntity p:participaciones){
@@ -113,7 +110,7 @@ public class TiendasController {
     }
 
     @PostMapping("/guardar")
-    public String doGuardarTiendas(Model model, HttpSession session,
+    public String doGuardarTiendas(Model model, @SessionAttribute(name = "user", required = false) UsuarioEntity user,
                                    @RequestParam(value = "id", required = false) Integer id,
                                    @RequestParam("descripcion") String descripcion,
                                    @RequestParam("localidad") String localidad,
@@ -123,7 +120,7 @@ public class TiendasController {
                                    @RequestParam("cadena") Integer idCadena,
                                    @RequestParam("capitan") Integer idCapitan,
                                    @RequestParam(value = "campanasParticipa", required = false) List<Integer> idCampanas) {
-        if (!ValidaSesion.verificarSesion(session)) return "redirect:/";
+        if (user == null) return "redirect:/";
 
         TiendaEntity tienda;
         if (id != null) {

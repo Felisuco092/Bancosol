@@ -14,6 +14,7 @@
         int totalVoluntarios = (int) request.getAttribute("totalVoluntarios");
         CampanaEntity campana = (CampanaEntity) request.getAttribute("campana");
         List<CadenaEntity> cadenas= (List<CadenaEntity>) request.getAttribute("cadenas");
+        UsuarioEntity usuario = (UsuarioEntity) request.getAttribute("user");
     %>
 </head>
 <body>
@@ -23,7 +24,7 @@
     <main class="main-content">
         <header class="header">
             <h1>Cuadro de Mando</h1>
-            <span>Bienvenido, Administrador</span>
+            <span>Bienvenid@, <%=usuario.getNombre()%> <%=usuario.getApellidos()%></span>
         </header>
         <div class="dashboard-grid">
             <div class="card dashboard-card">
