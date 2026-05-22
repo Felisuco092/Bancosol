@@ -4,10 +4,7 @@ import jakarta.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.*;
 import uma.grupo13.bancosol.dao.NotificacionRepository;
 import uma.grupo13.bancosol.dao.RolRepository;
 import uma.grupo13.bancosol.dao.UserRepository;
@@ -30,8 +27,8 @@ public class UsuariosController {
 
 
     @GetMapping("/")
-    public String doUsuarios(Model model, HttpSession session){
-        if (!ValidaSesion.verificarSesion(session)) return "redirect:/";
+    public String doUsuarios(Model model, @SessionAttribute(name = "user", required = false) UsuarioEntity user){
+        if (user == null) return "redirect:/";
         model.addAttribute("paginaActual", "usuarios");
         List<UsuarioEntity> usuarios= userRepo.findAll();
         model.addAttribute("users", usuarios);
@@ -39,8 +36,8 @@ public class UsuariosController {
     }
 
     @GetMapping("/editar")
-    public  String doEditarUsuarios(Model model, HttpSession session, @RequestParam("id") Integer id) {
-        if (!ValidaSesion.verificarSesion(session)) return "redirect:/";
+    public  String doEditarUsuarios(Model model, @SessionAttribute(name = "user", required = false) UsuarioEntity user, @RequestParam("id") Integer id) {
+        if (user == null) return "redirect:/";
         UsuarioEntity usuario=userRepo.getById(id);
         model.addAttribute("usuario", usuario);
         List<RolEntity> roles= rolRepo.findAll();
@@ -49,8 +46,8 @@ public class UsuariosController {
     }
 
     @GetMapping("/crear")
-    public  String doCrearUsuarios(Model model, HttpSession session) {
-        if (!ValidaSesion.verificarSesion(session)) return "redirect:/";
+    public  String doCrearUsuarios(Model model, @SessionAttribute(name = "user", required = false) UsuarioEntity user) {
+        if (user == null) return "redirect:/";
         model.addAttribute("usuario", new UsuarioEntity());
         List<RolEntity> roles= rolRepo.findAll();
         model.addAttribute("roles", roles);
@@ -58,8 +55,8 @@ public class UsuariosController {
     }
 
     @PostMapping("/borrar")
-    public  String doBorrarUsuarios(Model model, HttpSession session, @RequestParam("id") Integer id) {
-        if (!ValidaSesion.verificarSesion(session)) return "redirect:/";
+    public  String doBorrarUsuarios(Model model, @SessionAttribute(name = "user", required = false) UsuarioEntity user, @RequestParam("id") Integer id) {
+        if (user == null) return "redirect:/";
         UsuarioEntity usuario=userRepo.getById(id);
         List<NotificacionEntity> notficaciones=usuario.getNotificaciones();
         for(NotificacionEntity notificacion:notficaciones){
@@ -71,7 +68,7 @@ public class UsuariosController {
     }
 
     @PostMapping("/guardar")
-    public String doGuardarUsuarios(Model model, HttpSession session,
+    public String doGuardarUsuarios(Model model, @SessionAttribute(name = "user", required = false) UsuarioEntity user_session,
                                     @RequestParam(value = "id", required = false) Integer id,
                                     @RequestParam("nombre") String nombre,
                                     @RequestParam("apellidos") String apellidos,
@@ -81,7 +78,7 @@ public class UsuariosController {
                                     @RequestParam(value = "telefono", required = false) String telefono,
                                     @RequestParam(value = "area", required = false) String area,
                                     @RequestParam("rol") Integer idRol) {
-        if (!ValidaSesion.verificarSesion(session)) return "redirect:/";
+        if (user_session == null) return "redirect:/";
 
         UsuarioEntity usuario;
         if (id != null) {

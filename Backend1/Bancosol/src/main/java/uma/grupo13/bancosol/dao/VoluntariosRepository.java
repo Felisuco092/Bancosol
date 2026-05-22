@@ -9,7 +9,7 @@ import uma.grupo13.bancosol.entity.VoluntarioFisicoEntity;
 
 import java.util.List;
 
-
+// Función countTotalPersonasVoluntarias lo ha hecho Gemini
 public interface VoluntariosRepository extends JpaRepository<VoluntarioBaseEntity, Integer> {
     @Query("SELECT v FROM VoluntarioFisicoEntity v")
     List<VoluntarioFisicoEntity> findAllFisicos();

@@ -40,10 +40,10 @@ public class TurnoEntity {
     @JoinColumn(name = "id_tienda", nullable = false)
     private TiendaEntity tienda;
 
-    public void eliminarDatos(){
+    /*public void eliminarDatos(){
         this.campana = null;
         this.voluntario = null;
         this.tienda = null;
         this.dia = null;
-    }
+    }*/
 }

@@ -7,6 +7,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.SessionAttribute;
 import uma.grupo13.bancosol.dao.*;
 import uma.grupo13.bancosol.entity.*;
 import uma.grupo13.bancosol.utils.ValidaSesion;
@@ -29,17 +30,17 @@ public class ControllerBase {
 
 
     @GetMapping("/")
-    public String doStart(HttpSession session){
-        if (ValidaSesion.verificarSesion(session)) {
+    public String doStart(@SessionAttribute(name = "user", required = false) UsuarioEntity user){
+        if (user != null) {
             return "redirect:/dashboard";
-        }else {
+        } else {
             return "index";
         }
     }
 
     @GetMapping("/dashboard")
-    public String doDashboard(Model model, HttpSession session) {
-        if (ValidaSesion.verificarSesion(session)) {
+    public String doDashboard(Model model, @SessionAttribute(name = "user", required = false) UsuarioEntity user) {
+        if (user != null) {
             model.addAttribute("paginaActual", "dashboard");
             List<TiendaEntity> tiendas = tiendasRepo.findAll();
             model.addAttribute("tiendas", tiendas);
@@ -52,6 +53,8 @@ public class ControllerBase {
             model.addAttribute("campana", campana);
             List<CadenaEntity> cadenas = cadenaRepo.cadenasPorTiendas().subList(0, Math.min(5, cadenaRepo.findAll().size()));
             model.addAttribute("cadenas", cadenas);
+
+            model.addAttribute("user", user);
             return "dashboard";
         } else {
             return "redirect:/";
@@ -61,22 +64,15 @@ public class ControllerBase {
     @PostMapping("/login")
     public String dologin(@RequestParam("username") String user, @RequestParam("password") String pass,
                           HttpSession session, Model model) {
-        if ("admin".equals(user) && "admin".equals(pass)) {
-            session.setAttribute("user", user);
+        UsuarioEntity usuario = userRepo.autheticate(user, pass);
+
+        if (usuario != null) {
+            session.setAttribute("user", usuario);
             return "redirect:/dashboard";
         } else {
-            model.addAttribute("error", "Usuario no encontrado o error de autenticación");
-            return "index"; // de momento devuelve a la página de inicio
-        }
-        /*UserEditorEntity editor = userEditorRepository.autheticate(username, password);
-        if (editor == null) {
             model.addAttribute("error", "Usuario no encontrado o error de autenticación");
             return "index";
-        } else {
-            session.setAttribute("user", editor);
-            session.setAttribute("rol", editor.getRol())
-            return "redirect:/dashboard";
-        }*/
+        }
     }
 
     @PostMapping("/logout")

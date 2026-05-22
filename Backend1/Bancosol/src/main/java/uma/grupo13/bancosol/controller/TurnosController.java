@@ -4,16 +4,14 @@ import jakarta.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.*;
 import uma.grupo13.bancosol.dao.CampanaRepository;
 import uma.grupo13.bancosol.dao.TiendasRepository;
 import uma.grupo13.bancosol.dao.TurnoRepository;
 import uma.grupo13.bancosol.entity.CampanaEntity;
 import uma.grupo13.bancosol.entity.TiendaEntity;
 import uma.grupo13.bancosol.entity.TurnoEntity;
+import uma.grupo13.bancosol.entity.UsuarioEntity;
 import uma.grupo13.bancosol.utils.ValidaSesion;
 
 import java.time.LocalDate;
@@ -33,8 +31,8 @@ public class TurnosController {
     protected TiendasRepository tiendaRepository;
 
     @GetMapping("/")
-    public String doTurnos(Model model, @RequestParam(name="campana", required = false)CampanaEntity campana, HttpSession session){
-        if (!ValidaSesion.verificarSesion(session)) return "redirect:/";
+    public String doTurnos(Model model, @RequestParam(name="campana", required = false)CampanaEntity campana, @SessionAttribute(name = "user", required = false) UsuarioEntity user){
+        if (user == null) return "redirect:/";
 
         List<TurnoEntity> turnos = turnoRepository.findAll();
         List<CampanaEntity> campanas = campanaRepository.findAll();
@@ -48,15 +46,15 @@ public class TurnosController {
     }
 
     @GetMapping("/editar")
-    public  String doEditarTurnos(Model model, HttpSession session) {
-        if (!ValidaSesion.verificarSesion(session)) return "redirect:/";
+    public  String doEditarTurnos(Model model, @SessionAttribute(name = "user", required = false) UsuarioEntity user) {
+        if (user == null) return "redirect:/";
 
         return "crear_editar/crear_turno";
     }
 
     @GetMapping("/crear")
-    public  String doCrearTurnos(Model model, HttpSession session) {
-        if (!ValidaSesion.verificarSesion(session)) return "redirect:/";
+    public  String doCrearTurnos(Model model, @SessionAttribute(name = "user", required = false) UsuarioEntity user) {
+        if (user == null) return "redirect:/";
         TurnoEntity newTurno = new TurnoEntity();
         List<CampanaEntity> campanas = campanaRepository.findAll();
         List<TiendaEntity> tiendas = tiendaRepository.findAll();
@@ -69,10 +67,10 @@ public class TurnosController {
 
     @PostMapping("/borrar")
     public  String doBorrarTurnos(@RequestParam(value="idTurno") Integer idTurno,
-                                Model model, HttpSession session) {
-        if (!ValidaSesion.verificarSesion(session)) return "redirect:/";
+                                Model model, @SessionAttribute(name = "user", required = false) UsuarioEntity user) {
+        if (user == null) return "redirect:/";
         TurnoEntity turnoDelete = turnoRepository.getReferenceById(idTurno);
-        turnoDelete.eliminarDatos(); // eliminar lo datos restantes: campaña perteneciente, voluntarios, tiendas y día
+        //turnoDelete.eliminarDatos(); // eliminar lo datos restantes: campaña perteneciente, voluntarios, tiendas y día
         turnoRepository.delete(turnoDelete);
 
         return "redirect:/turnos/";
@@ -85,8 +83,8 @@ public class TurnosController {
                                    @RequestParam(value = "hora-fin") LocalTime horaFin,
                                    @RequestParam(value = "idCampana") Integer idCampana,
                                    @RequestParam(value = "idTienda") Integer idTienda,
-                                   Model model, HttpSession session) {
-        if (!ValidaSesion.verificarSesion(session)) return "redirect:/";
+                                   Model model, @SessionAttribute(name = "user", required = false) UsuarioEntity user) {
+        if (user == null) return "redirect:/";
         
         try {
             TurnoEntity newTurno = new TurnoEntity();
@@ -118,8 +116,8 @@ public class TurnosController {
     @PostMapping("/filtrar")
     public String doFiltrarTurnos(@RequestParam(value = "idCampana", required = false) Integer idCampana,
                                   @RequestParam(value = "idTienda", required = false) Integer idTienda,
-                                  Model model, HttpSession session) {
-        if (!ValidaSesion.verificarSesion(session)) return "redirect:/";
+                                  Model model, @SessionAttribute(name = "user", required = false) UsuarioEntity user) {
+        if (user == null) return "redirect:/";
         if(idCampana != null && idTienda != null){
             List<TurnoEntity> turnosFiltrados = turnoRepository.filtrarTurnos(idCampana, idTienda);
             model.addAttribute("turnos", turnosFiltrados);
@@ -146,22 +144,22 @@ public class TurnosController {
 
     @PostMapping("/incidencia")
     public String doIncidencia(@RequestParam(value="idTurno") Integer idTurno,
-            Model model, HttpSession session) {
-        if (!ValidaSesion.verificarSesion(session)) return "redirect:/";
+            Model model, @SessionAttribute(name = "user", required = false) UsuarioEntity user) {
+        if (user == null) return "redirect:/";
         model.addAttribute("idTurno", idTurno);
 
         return "crear_editar/incidencia";
     }
 
     @PostMapping("/anadir")
-    public String doAnadirVoluntario(HttpSession session){
-        if (!ValidaSesion.verificarSesion(session)) return "redirect:/";
+    public String doAnadirVoluntario(@SessionAttribute(name = "user", required = false) UsuarioEntity user){
+        if (user == null) return "redirect:/";
         return "";
     }
 
     @PostMapping("/eliminar")
-    public String doEliminarVoluntario(HttpSession session){
-        if (!ValidaSesion.verificarSesion(session)) return "redirect:/";
+    public String doEliminarVoluntario(@SessionAttribute(name = "user", required = false) UsuarioEntity user){
+        if (user == null) return "redirect:/";
         return "";
     }
 
