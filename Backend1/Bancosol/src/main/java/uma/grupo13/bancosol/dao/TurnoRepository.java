@@ -10,7 +10,12 @@ import java.util.List;
 public interface TurnoRepository extends JpaRepository<TurnoEntity, Integer> {
     List<TurnoEntity> findByVoluntarioId(Integer idVoluntario);
 
-    @Query("select t from TurnoEntity t where t.campana.id = :idCampana and t.tienda.id = :idTienda")
-    public List<TurnoEntity> filtrarTurnos(@Param("idCampana") Integer idCampana,
-                                           @Param("idTienda") Integer idTienda);
+    @Query("select t from TurnoEntity t where t.campana.id = :idCampana")
+    public List<TurnoEntity> filtrarTurnosPorCampana(@Param("idCampana") Integer idTienda);
+
+    @Query("select t from TurnoEntity  t where t.tienda.id = :idTienda")
+    public List<TurnoEntity> filtrarTurnosPorTienda(@Param("idTienda") Integer idTienda);
+
+    @Query("select t from TurnoEntity t where (:idCampana is null or t.campana.id = :idCampana) and (:idTienda is null or t.tienda.id = :idTienda)")
+    public List<TurnoEntity> filtrarTurnos(@Param("idCampana") Integer idCampana, @Param("idTienda") Integer idTienda);
 }

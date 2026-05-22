@@ -4,10 +4,11 @@
 <%
     //Gemini ha hecho lo de hibernate unproxy
     List<TurnoEntity> turnosList = (List<TurnoEntity>) request.getAttribute("turnos");
+    String capitanNombre = (String) request.getAttribute("capitanNombre");
 %>
 
 
-    <table class="cuadrante-tabla">
+    <table class="cuadrante-tabla" data-capitan="<%= capitanNombre != null ? capitanNombre : "" %>">
         <thead>
         <tr>
             <th>Día</th>

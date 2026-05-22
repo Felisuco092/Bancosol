@@ -40,7 +40,8 @@ public class TurnoEntity {
     @JoinColumn(name = "id_tienda", nullable = false)
     private TiendaEntity tienda;
 
-    /*public void eliminarDatos(){
+    /* No hace falta porque TurnoEntity no depende de TiendaEntity
+    public void eliminarDatos(){
         this.campana = null;
         this.voluntario = null;
         this.tienda = null;
