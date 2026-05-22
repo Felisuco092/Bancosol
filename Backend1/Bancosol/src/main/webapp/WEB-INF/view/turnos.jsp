@@ -29,7 +29,7 @@
             <h1>Asignación de Turnos</h1>
         </header>
         <div class="card filtros-turnos">
-            <form action = "/turnos/filtrar" method = "POST" style="display: flex; gap: 20px; align-items: flex-end; width: 100%;">
+            <form id="filter-form" style="display: flex; gap: 20px; align-items: flex-end; width: 100%;">
                 <div style="flex: 1;">
                     <label for="select-campana">Campaña:</label>
                     <select id="select-campana" name="idCampana" style="width: 100%;">
@@ -52,11 +52,10 @@
                     </select>
                 </div>
 
-                <button id="btn-buscar" class="btn btn-primary">Ver Cuadrante</button>
             </form>
         </div>
 
-        <div id="cuadrante-container" style="<%=(idCampanaSelect != null && idTiendaSelect != null) ? "display: block;" : "" %>">
+        <div id="cuadrante-container" style="<%=(idCampanaSelect != null || idTiendaSelect != null) ? "display: block;" : "display: none;" %>">
             <div class="card">
                 <div class="cuadrante-header">
                     <h3>Cuadrante de Turnos</h3>
@@ -77,7 +76,43 @@
                 <jsp:include page="tablas/turnos.jsp"/>
             </div>
         </div>
-
+    </div>
     </main>
+
+    <script>
+        const filterTipo = document.getElementById('select-campana');
+        const filterTienda = document.getElementById('select-tienda');
+        const containerTabla = document.getElementById('tabla-container');
+        const capitanNombreLabel = document.getElementById('capitan-nombre');
+        const cuadranteContainer = document.getElementById('cuadrante-container');
+
+        function filter(){
+            const params = new URLSearchParams();
+            params.set('idCampana', filterTipo.value);
+            params.set('idTienda', filterTienda.value);
+
+            fetch('/turnos/filtrar', {
+                method: 'POST',
+                body: params,
+                headers: { 'Content-Type': 'application/x-www-form-urlencoded' }
+            }).then(r => r.text())
+            .then(html =>{
+                containerTabla.innerHTML = html;
+                const table = containerTabla.querySelector('table');
+                if (table) {
+                    capitanNombreLabel.innerText = table.dataset.capitan || '';
+                }
+                
+                if (filterTipo.value || filterTienda.value) {
+                    cuadranteContainer.style.display = 'block';
+                }
+            })
+            .catch(error => console.error(error));
+        }
+
+        filterTipo.addEventListener('change', filter);
+        filterTienda.addEventListener('change', filter);
+        document.getElementById('btn-buscar').addEventListener('click', filter);
+    </script>
 </body>
 </html>

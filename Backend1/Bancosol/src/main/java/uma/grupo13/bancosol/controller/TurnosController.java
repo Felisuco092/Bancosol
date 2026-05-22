@@ -118,28 +118,18 @@ public class TurnosController {
                                   @RequestParam(value = "idTienda", required = false) Integer idTienda,
                                   Model model, @SessionAttribute(name = "user", required = false) UsuarioEntity user) {
         if (user == null) return "redirect:/";
-        if(idCampana != null && idTienda != null){
-            List<TurnoEntity> turnosFiltrados = turnoRepository.filtrarTurnos(idCampana, idTienda);
-            model.addAttribute("turnos", turnosFiltrados);
-            
+
+        List<TurnoEntity> turnosFiltrados = turnoRepository.filtrarTurnos(idCampana, idTienda);
+        model.addAttribute("turnos", turnosFiltrados);
+
+        if (idTienda != null) {
             TiendaEntity tienda = tiendaRepository.findById(idTienda).orElse(null);
             if (tienda != null && tienda.getCapitan() != null) {
                 model.addAttribute("capitanNombre", tienda.getCapitan().getNombre() + " " + tienda.getCapitan().getApellidos());
             }
-        }else{// Sin filtro aplicado: devolver todos los turnos
-            List<TurnoEntity> turnos = turnoRepository.findAll();
-            model.addAttribute("turnos", turnos);
-
         }
-        List<CampanaEntity> campanas = campanaRepository.findAll();
-        List<TiendaEntity> tiendas = tiendaRepository.findAll();
-        model.addAttribute("paginaActual", "turnos");
-        model.addAttribute("campanas", campanas);
-        model.addAttribute("tiendas", tiendas);
-        model.addAttribute("idCampanaSel", idCampana);
-        model.addAttribute("idTiendaSel", idTienda);
 
-        return "turnos";
+        return "tablas/turnos";
     }
 
     @PostMapping("/incidencia")
