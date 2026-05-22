@@ -122,10 +122,15 @@ public class ColaboradoresController {
                 voluntario = new VoluntarioEntidadEntity();
             }
         }
+        if(confirmar == null) confirmar = false;
 
+        //Comprobar si lo pone el admin lo de confirmar
+        voluntario.setAprobado(confirmar);
+        //
         voluntario.setDomicilio(domicilio);
         voluntario.setZonaGeografica(zonaGeografica);
         voluntario.setCodigoPostal(codigoPostal);
+
 
         if (voluntario instanceof VoluntarioFisicoEntity) {
             VoluntarioFisicoEntity fisico = (VoluntarioFisicoEntity) voluntario;
