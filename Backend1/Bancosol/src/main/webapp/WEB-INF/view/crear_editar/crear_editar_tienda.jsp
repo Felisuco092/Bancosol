@@ -28,7 +28,6 @@
 
     <main class="main-content">
         <header class="header">
-            <h1><%= (tienda.getId()!=null?"Editar":"Crear") %> tienda</h1>
             <%
                 if(tienda.getId()==null){
             %>
