@@ -6,13 +6,11 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
-import uma.grupo13.bancosol.entity.CampanaEntity;
-import uma.grupo13.bancosol.entity.TiendaEntity;
-import uma.grupo13.bancosol.entity.TurnoEntity;
-import uma.grupo13.bancosol.entity.UsuarioEntity;
+import uma.grupo13.bancosol.entity.*;
 import uma.grupo13.bancosol.services.CampanasService;
 import uma.grupo13.bancosol.services.TiendasService;
 import uma.grupo13.bancosol.services.TurnosService;
+import uma.grupo13.bancosol.services.VoluntariosService;
 
 import java.time.LocalDate;
 import java.time.LocalTime;
@@ -27,8 +25,6 @@ public class TurnosController {
     private final TiendasService tiendasService;
     private final VoluntariosService voluntariosService;
 
-    @Autowired
-    protected VoluntariosRepository voluntariosRepository;
 
     @GetMapping("/")
     public String doTurnos(Model model, @RequestParam(name="campana", required = false)CampanaEntity campana, @SessionAttribute(name = "user", required = false) UsuarioEntity user){
@@ -58,7 +54,7 @@ public class TurnosController {
         TurnoEntity newTurno = new TurnoEntity();
         List<CampanaEntity> campanas = campanasService.listarCampanas();
         List<TiendaEntity> tiendas = tiendasService.listarTiendas();
-        //List<VoluntarioBaseEntity> voluntarios = voluntariosRepository.findAll();  mirar
+        List<VoluntarioBaseEntity> voluntarios = voluntariosService.listarVoluntarios();
         model.addAttribute("turno", newTurno);
         model.addAttribute("campanas", campanas);
         model.addAttribute("tiendas", tiendas);
@@ -93,14 +89,6 @@ public class TurnosController {
             TurnoEntity newTurno = new TurnoEntity();
             newTurno.setTipoTurno(tipoTurno);
             
-            CampanaEntity campana = campanasService.buscarPorId(idCampana);
-            TiendaEntity tienda = tiendasService.buscarPorId(idTienda);
-            
-            if (campana == null || tienda == null) {
-                // Si falta alguno, redirigir con error o manejarlo
-                return "redirect:/turnos/crear"; 
-              
-              //mirar
             if (fechaStr != null && !fechaStr.isEmpty()) {
                 newTurno.setDia(LocalDate.parse(fechaStr));
             }
@@ -111,24 +99,20 @@ public class TurnosController {
                 newTurno.setHoraFin(LocalTime.parse(horaFinStr));
             }
 
-            CampanaEntity campana = campanaRepository.findById(idCampana).orElse(null);
-            TiendaEntity tienda = tiendaRepository.findById(idTienda).orElse(null);
-            VoluntarioBaseEntity voluntario = voluntariosRepository.findById(idVoluntario).orElse(null);
+            CampanaEntity campana = campanasService.buscarPorId(idCampana);
+            TiendaEntity tienda = tiendasService.buscarPorId(idTienda);
+            VoluntarioBaseEntity voluntario = voluntariosService.buscarPorId(idVoluntario);
 
             if (campana == null || tienda == null || voluntario == null) {
-                throw new Exception("Campaña o Tienda no encontrada");
+                throw new Exception("Campaña, Tienda o Voluntario no encontrado");
             }
 
             newTurno.setCampana(campana);
             newTurno.setTienda(tienda);
-            
-            turnosService.guardarTurno(newTurno);
-  //mira
             newTurno.setVoluntario(voluntario);
 
-            turnoRepository.save(newTurno);
-              
-              //mira
+            turnosService.guardarTurno(newTurno);
+            
         } catch (Exception e) {
             e.printStackTrace();
             model.addAttribute("error", "Error al guardar el turno: " + e.getMessage());
@@ -140,9 +124,9 @@ public class TurnosController {
             model.addAttribute("idTiendaSel", idTienda);
             model.addAttribute("idVoluntarioSel", idVoluntario);
 
-            List<CampanaEntity> campanas = campanaRepository.findAll();
-            List<TiendaEntity> tiendas = tiendaRepository.findAll();
-            List<VoluntarioBaseEntity> voluntarios = voluntariosRepository.findAll();
+            List<CampanaEntity> campanas = campanasService.listarCampanas();
+            List<TiendaEntity> tiendas = tiendasService.listarTiendas();
+            List<VoluntarioBaseEntity> voluntarios = voluntariosService.listarVoluntarios();
             model.addAttribute("voluntarios", voluntarios);
             model.addAttribute("campanas", campanas);
             model.addAttribute("tiendas", tiendas);
