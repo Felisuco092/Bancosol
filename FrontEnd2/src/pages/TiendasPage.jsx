@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react'
 import { Link } from 'react-router-dom'
-import { fetchData } from '../services/api'
+import { fetchData, deleteData } from '../services/api'
 
 export default function TiendasPage() {
   const [tiendas, setTiendas] = useState([])
@@ -24,15 +24,30 @@ export default function TiendasPage() {
     }).catch(err => console.error(err))
   }, [])
 
-  function getCadenaName(id) {
-    const cadena = cadenas.find(c => Number(c.id) === Number(id))
-    return cadena ? cadena.nombre : 'Desconocida'
+  async function handleDelete(tiendaId) {
+    if (!confirm('¿Estás seguro de que deseas eliminar esta tienda? Se eliminaran los turnos y participaciones asociadas.')) return
+    try {
+      const [participas, turnos] = await Promise.all([
+        fetchData('participa?id_tienda=' + tiendaId),
+        fetchData('turnos?id_tienda=' + tiendaId)
+      ])
+      await Promise.all([
+        ...participas.map(p => deleteData('participa/' + p.id)),
+        ...turnos.map(t => deleteData('turnos/' + t.id))
+      ])
+      await deleteData('tiendas/' + tiendaId)
+      setTiendas(prev => prev.filter(t => String(t.id) !== String(tiendaId)))
+      alert('Tienda eliminada con éxito')
+    } catch (err) {
+      console.error('Error al eliminar tienda:', err)
+      alert('No se pudo eliminar la tienda')
+    }
   }
 
   function getParticipaState(campanaId, tiendaId) {
     return participa.some(p =>
-      Number(p.id_campana) === Number(campanaId) &&
-      Number(p.id_tienda) === Number(tiendaId)
+      String(p.id_campana) === String(campanaId) &&
+      String(p.id_tienda) === String(tiendaId)
     )
   }
 
@@ -112,8 +127,8 @@ export default function TiendasPage() {
                     <td>{tienda.zona_geografica}</td>
                     <td><span className={`status-badge ${statusClass}`}>{statusText}</span></td>
                     <td>
-                      <button className="btn btn-primary btn-sm">Editar</button>
-                      <button className="btn btn-danger btn-sm">Borrar</button>
+                      <Link to={`/tiendas/editar/${tienda.id}`} className="btn btn-primary btn-sm">Editar</Link>
+                      <button className="btn btn-danger btn-sm" onClick={() => handleDelete(tienda.id)}>Borrar</button>
                     </td>
                   </tr>
                 )

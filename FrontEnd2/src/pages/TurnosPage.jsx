@@ -1,4 +1,5 @@
 import { useState, useEffect } from 'react'
+import { Link } from 'react-router-dom'
 import { fetchData } from '../services/api'
 
 export default function TurnosPage() {
@@ -16,11 +17,10 @@ export default function TurnosPage() {
       fetchData('turnos'),
       fetchData('campanas'),
       fetchData('tiendas'),
-      fetchData('voluntario_base'),
       fetchData('voluntario_entidad'),
       fetchData('voluntario_fisico'),
       fetchData('usuarios')
-    ]).then(([t, camp, ti, vb, ve, vf, u]) => {
+    ]).then(([t, camp, ti, ve, vf, u]) => {
       setTurnos(t)
       setCampanas(camp)
       setTiendas(ti)
@@ -94,7 +94,7 @@ export default function TurnosPage() {
               <h3>Cuadrante de Turnos</h3>
               <div className="cuadrante-actions">
                 <span>Capitán: <strong id="capitan-nombre">{capitanNombre}</strong></span>
-                <button className="btn btn-success btn-add-extra">+ Añadir Turno Extra</button>
+                <Link to="/turnos/crear" className="btn btn-success btn-add-extra">+ Añadir Turno Extra</Link>
               </div>
             </div>
             <table className="cuadrante-tabla">

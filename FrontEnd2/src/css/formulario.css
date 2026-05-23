@@ -90,3 +90,29 @@
 .form-actions {
     margin-top: 1.5rem;
 }
+
+/* ---------- Checkbox Group ---------- */
+.checkbox-group {
+    max-height: 200px;
+    overflow-y: auto;
+    border: 1px solid var(--input-border);
+    padding: 10px;
+    border-radius: 4px;
+}
+
+.checkbox-item {
+    display: flex;
+    align-items: center;
+    margin-bottom: 0.5rem;
+}
+
+.checkbox-item input[type="checkbox"] {
+    width: auto;
+    margin-right: 10px;
+}
+
+.checkbox-item label {
+    margin-bottom: 0;
+    display: inline;
+    font-weight: normal;
+}

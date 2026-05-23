@@ -7,6 +7,12 @@ import CampanasPage from './pages/CampanasPage'
 import CadenasPage from './pages/CadenasPage'
 import TiendasPage from './pages/TiendasPage'
 import CrearTiendaPage from './pages/crear_editar_pages/CrearTiendaPage'
+import CrearCadenaPage from './pages/crear_editar_pages/CrearCadenaPage'
+import CrearCampanaPage from './pages/crear_editar_pages/CrearCampanaPage'
+import CrearColaboradorPage from './pages/crear_editar_pages/CrearColaboradorPage'
+import CrearTurnoPage from './pages/crear_editar_pages/CrearTurnoPage'
+import CrearUsuarioPage from './pages/crear_editar_pages/CrearUsuarioPage'
+import VerMensajePage from './pages/crear_editar_pages/VerMensajePage'
 import ColaboradoresPage from './pages/ColaboradoresPage'
 import UsuariosPage from './pages/UsuariosPage'
 import TurnosPage from './pages/TurnosPage'
@@ -38,8 +44,8 @@ function App() {
           <Route index element={<CampanasPage />} />
         </Route>
         <Route element={<MainLayout />}>
-          <Route path="crear" element={<CrearTiendaPage />} />
-          <Route path="editar/:id" element={<CrearTiendaPage />} />
+          <Route path="crear" element={<CrearCampanaPage />} />
+          <Route path="editar/:id" element={<CrearCampanaPage />} />
         </Route>
       </Route>
 
@@ -48,8 +54,8 @@ function App() {
           <Route index element={<ColaboradoresPage />} />
         </Route>
         <Route element={<MainLayout />}>
-          <Route path="crear" element={<CrearTiendaPage />} />
-          <Route path="editar/:id" element={<CrearTiendaPage />} />
+          <Route path="crear" element={<CrearColaboradorPage />} />
+          <Route path="editar/:id" element={<CrearColaboradorPage />} />
         </Route>
       </Route>
 
@@ -58,8 +64,8 @@ function App() {
           <Route index element={<CadenasPage />} />
         </Route>
         <Route element={<MainLayout />}>
-          <Route path="crear" element={<CrearTiendaPage />} />
-          <Route path="editar/:id" element={<CrearTiendaPage />} />
+          <Route path="crear" element={<CrearCadenaPage />} />
+          <Route path="editar/:id" element={<CrearCadenaPage />} />
         </Route>
       </Route>
 
@@ -68,8 +74,8 @@ function App() {
           <Route index element={<UsuariosPage />} />
         </Route>
         <Route element={<MainLayout />}>
-          <Route path="crear" element={<CrearTiendaPage />} />
-          <Route path="editar/:id" element={<CrearTiendaPage />} />
+          <Route path="crear" element={<CrearUsuarioPage />} />
+          <Route path="editar/:id" element={<CrearUsuarioPage />} />
         </Route>
       </Route>
 
@@ -78,8 +84,7 @@ function App() {
           <Route index element={<TurnosPage />} />
         </Route>
         <Route element={<MainLayout />}>
-          <Route path="crear" element={<CrearTiendaPage />} />
-          <Route path="editar/:id" element={<CrearTiendaPage />} />
+          <Route path="crear" element={<CrearTurnoPage />} />
         </Route>
       </Route>
 
@@ -88,7 +93,7 @@ function App() {
           <Route index element={<BandejaPage />} />
         </Route>
         <Route element={<MainLayout />}>
-          <Route path=":id" element={<CrearTiendaPage />} />
+          <Route path="ver/:id" element={<VerMensajePage />} />
         </Route>
       </Route>
     </Routes>
