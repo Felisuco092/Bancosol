@@ -1,4 +1,6 @@
 package uma.grupo13.bancosol.mappers;
+//Gemini nos ha ayudado con la parte de Hibernate.unproxy ya que eso no lo hemos dado en la asignatura, para poder convertirlo a 
+//VoluntarioFisicoEntity o VoluntarioEntidadEntity
 
 import org.springframework.stereotype.Component;
 import uma.grupo13.bancosol.dto.VoluntarioDTO;
