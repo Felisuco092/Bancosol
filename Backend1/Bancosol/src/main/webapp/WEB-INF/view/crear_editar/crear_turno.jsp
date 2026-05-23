@@ -1,7 +1,6 @@
-<%@ page import="uma.grupo13.bancosol.entity.TurnoEntity" %>
-<%@ page import="uma.grupo13.bancosol.entity.CampanaEntity" %>
-<%@ page import="uma.grupo13.bancosol.entity.TiendaEntity" %>
 <%@ page import="java.util.List" %>
+<%@ page import="org.hibernate.Hibernate" %>
+<%@ page import="uma.grupo13.bancosol.entity.*" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <!DOCTYPE html>
 <html lang="es">
@@ -12,15 +11,31 @@
     <title>Página-crear-turno</title>
     <link rel="stylesheet" href="../../../css/styles.css">
     <link rel="stylesheet" href="../../../css/formulario.css">
-    <link rel="stylesheet" href="../../../js/turnos.js">
 </head>
 <%
     List<CampanaEntity> campanas = (List<CampanaEntity>) request.getAttribute("campanas");
     List<TiendaEntity> tiendas = (List<TiendaEntity>) request.getAttribute("tiendas");
+    List<VoluntarioBaseEntity> voluntarios = (List<VoluntarioBaseEntity>) request.getAttribute("voluntarios");
+    String error = (String) request.getAttribute("error");
+    String tipoTurno = (String) request.getAttribute("tipoTurno");
+    String dia = (String) request.getAttribute("dia");
+    String horaInicio = (String) request.getAttribute("horaInicio");
+    String horaFin = (String) request.getAttribute("horaFin");
+    Integer idCampanaSel = (Integer) request.getAttribute("idCampanaSel");
+    Integer idTiendaSel = (Integer) request.getAttribute("idTiendaSel");
+    Integer idVolunarioSel =(Integer) request.getAttribute("idVoluntarioSel");
 %>
 <body>
     <main class="main-content">
-        <h1><b>Crear Turno</b></h1>
+        <header class="header">
+            <h1><b>Crear Turno</b></h1>
+        </header>
+
+        <% if (error != null) { %>
+            <div style="color: red; margin-bottom: 20px; padding: 10px; border: 1px solid red; background-color: #fee;">
+                <%= error %>
+            </div>
+        <% } %>
 
         <div class="formulario">
             <form id= "form-crear-turno" action="/turnos/guardar" method="post">
@@ -29,7 +44,7 @@
                     <select name="idCampana" id="idCampana" required>
                         <option value="">-- Seleccione Campaña --</option>
                         <% for(CampanaEntity c : campanas) { %>
-                            <option value="<%=c.getId()%>"><%=c.getNombre()%>-<%=c.getAno()%></option>
+                            <option value="<%=c.getId()%>" <%= (idCampanaSel != null && idCampanaSel.equals(c.getId())) ? "selected" : "" %>><%=c.getNombre()%>-<%=c.getAno()%></option>
                         <% } %>
                     </select>
                 </div>
@@ -38,25 +53,46 @@
                     <select name="idTienda" id="idTienda" required>
                         <option value="">-- Seleccione Tienda --</option>
                         <% for(TiendaEntity t : tiendas) { %>
-                            <option value="<%=t.getId()%>"><%=t.getDescripcion()%></option>
+                            <option value="<%=t.getId()%>" <%= (idTiendaSel != null && idTiendaSel.equals(t.getId())) ? "selected" : "" %>><%=t.getDescripcion()%></option>
                         <% } %>
                     </select>
                 </div>
                 <div class="form-group">
+                    <label for="idVoluntario">Voluntario:</label>
+                    <select name="idVoluntario" id="idVoluntario" required>
+                        <option value="">-- Seleccione Voluntario --</option>
+                        <% for(VoluntarioBaseEntity v: voluntarios){%>
+                    <option value="<%=v.getId()%>" <%= (idVolunarioSel != null && idVolunarioSel.equals(v.getId())) ? "selected" : "" %>>
+                        <% // lo mismo que en tablas/turnos -> identificar si es voluntario Físico o voluntario Entity
+                            String nameToDisplay = null;
+                            Object actual = Hibernate.unproxy(v);
+                            if (actual instanceof VoluntarioFisicoEntity) {
+                            nameToDisplay = ((VoluntarioFisicoEntity) actual).getNombre();
+                            } else if (actual instanceof VoluntarioEntidadEntity) {
+                            nameToDisplay = ((VoluntarioEntidadEntity) actual).getNombreAsociacion();
+                            } else {
+                            nameToDisplay = "Voluntario #" + v.getId();
+                            }
+                        %>
+                        <%= nameToDisplay %></option>
+                        <%}%>
+                    </select>
+                </div>
+                <div class="form-group">
                     <label for="tipo-turno">Especifica el tipo de turno:</label>
-                    <input type="text" name="tipo-turno" id="tipo-turno" required/>
+                    <input type="text" name="tipo-turno" id="tipo-turno" required value="<%= tipoTurno != null ? tipoTurno : "" %>"/>
                 </div>
                 <div class="form-group">
                     <label for="dia">Especifica el día del turno:</label>
-                    <input type="date" name="dia" id="dia" required/>
+                    <input type="date" name="dia" id="dia" required value="<%= dia != null ? dia : "" %>"/>
                 </div>
                 <div class="form-group">
-                    <label for="">Especifique la hora de comienzo del turno:</label>
-                    <input type="time" name="hora-inicio" id="hora-inicio" required/>
+                    <label for="hora-inicio">Especifique la hora de comienzo del turno:</label>
+                    <input type="time" name="hora-inicio" id="hora-inicio" required value="<%= horaInicio != null ? horaInicio : "" %>"/>
                 </div>
                 <div class="form-group">
-                    <label for="">Especifique la hora final del turno:</label>
-                    <input type="time" name="hora-fin" id="hora-fin" required/>
+                    <label for="hora-fin">Especifique la hora final del turno:</label>
+                    <input type="time" name="hora-fin" id="hora-fin" required value="<%= horaFin != null ? horaFin : "" %>"/>
                 </div>
                 <div class="form-actions">
                     <button type="submit" class="btn btn-primary">Crear y guardar turno</button>

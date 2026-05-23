@@ -50,7 +50,7 @@
                     <a href="/campanas/editar?id=<%=campanaAct.getId()%>"><button class="btn btn-primary btn-sm">Editar</button></a>
                     <form action="/campanas/borrar" method="post" style="display:inline;"
                         onsubmit="return confirm('¿Está seguro de eliminar esta campaña?')">
-                        <input type="hidden" name="id" value="<%=campanaAct.getId()%>">
+                        <input type="hidden" name="idCampana" value="<%=campanaAct.getId()%>">
                         <button class="btn btn-danger btn-sm">Eliminar</button>
                     </form>
                 </td>
