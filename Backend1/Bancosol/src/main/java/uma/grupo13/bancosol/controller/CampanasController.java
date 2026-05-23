@@ -49,7 +49,7 @@ public class CampanasController {
     }
 
     @PostMapping("/borrar")
-    public  String doBorrarCampana(@RequestParam("id") Integer idCampana,
+    public  String doBorrarCampana(@RequestParam("idCampana") Integer idCampana,
                                    Model model, @SessionAttribute(name = "user", required = false) UsuarioEntity user) {
         if (user == null) return "redirect:/";
         CampanaEntity campanaDelete = campanaRepository.getReferenceById(idCampana);

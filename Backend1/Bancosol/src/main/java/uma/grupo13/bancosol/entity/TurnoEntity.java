@@ -33,7 +33,7 @@ public class TurnoEntity {
     private CampanaEntity campana;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "id_voluntario", nullable = false)
+    @JoinColumn(name = "id_voluntario")
     private VoluntarioBaseEntity voluntario;
 
     @ManyToOne(fetch = FetchType.LAZY)
