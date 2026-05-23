@@ -44,12 +44,12 @@
                     </div>
                     <div class="form-group">
                         <label for="codigo_postal">Código Postal<span class="required">*</span></label>
-                        <input type="text" name="codigo_postal" id="codigo_postal" required
+                        <input type="number" name="codigo_postal" id="codigo_postal" required
                                value="<%= voluntario.getCodigoPostal() != null ? voluntario.getCodigoPostal() : "" %>" />
                     </div>
                     <div class="form-group">
                         <label for="observaciones">Observaciones</label>
-                        <textarea name="observaciones" id="observaciones" rows="3"></textarea>
+                        <textarea name="observaciones" id="observaciones" rows="3" style="resize: none;"></textarea>
                     </div>
 
                     <div class="form-group" style="display: <%=voluntario.getAprobado() == false ? "block" : "none"%>">

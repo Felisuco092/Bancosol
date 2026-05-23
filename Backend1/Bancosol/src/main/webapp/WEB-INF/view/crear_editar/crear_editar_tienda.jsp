@@ -85,7 +85,7 @@
                 </div>
                 <div class="form-group">
                     <label for="capitan">Capitán: </label>
-                    <select name="capitan" id="capitan" required>
+                    <select name="capitan" id="capitan">
                         <option value="">-- Seleccione un capitán --</option>
                         <%
                             for(UsuarioEntity capi : capitanes) {

@@ -5,9 +5,8 @@ import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
-import uma.grupo13.bancosol.dao.*;
 import uma.grupo13.bancosol.entity.*;
-import uma.grupo13.bancosol.utils.ValidaSesion;
+import uma.grupo13.bancosol.services.*;
 
 import java.util.List;
 import java.util.Set;
@@ -17,20 +16,20 @@ import java.util.stream.Collectors;
 @RequestMapping("/tiendas")
 @AllArgsConstructor
 public class TiendasController {
-    private final TiendasRepository tiendasRepo;
-    private final CampanaRepository campanaRepo;
-    private final CadenaRepository cadenaRepo;
-    private final ParticipaRepository participaRepo;
-    private final UserRepository userRepo;
+    private final TiendasService tiendasService;
+    private final CampanasService campanasService;
+    private final CadenaService cadenaService;
+    private final ParticipaService participaService;
+    private final UsuariosService usuariosService;
 
 
     @GetMapping("/")
     public String doTiendas(Model model, @SessionAttribute(name = "user", required = false) UsuarioEntity user) {
         if (user == null) return "redirect:/";
         model.addAttribute("paginaActual", "tiendas");
-        List<TiendaEntity> tiendas = tiendasRepo.findAll();
-        List<CampanaEntity> campanas = campanaRepo.findAll();
-        List<CadenaEntity> cadenas = cadenaRepo.findAll();
+        List<TiendaEntity> tiendas = tiendasService.listarTiendas();
+        List<CampanaEntity> campanas = campanasService.listarCampanas();
+        List<CadenaEntity> cadenas = cadenaService.listarCadenas();
         
         Set<String> localidades = tiendas.stream()
                 .map(TiendaEntity::getLocalidad)
@@ -52,13 +51,13 @@ public class TiendasController {
     @GetMapping("/editar")
     public String doEditarTiendas(Model model, @SessionAttribute(name = "user", required = false) UsuarioEntity user, @RequestParam("id") Integer id) {
         if (user == null) return "redirect:/";
-        TiendaEntity tienda = tiendasRepo.findById(id).orElse(null);
+        TiendaEntity tienda = tiendasService.buscarPorId(id);
         model.addAttribute("tienda", tienda);
-        List<CadenaEntity> cadenas = cadenaRepo.findAll();
+        List<CadenaEntity> cadenas = cadenaService.listarCadenas();
         model.addAttribute("cadenas", cadenas);
-        List<CampanaEntity> campanas= campanaRepo.findAll();
+        List<CampanaEntity> campanas= campanasService.listarCampanas();
         model.addAttribute("campanas", campanas);
-        List<UsuarioEntity> capitanes=userRepo.findCapitanes();
+        List<UsuarioEntity> capitanes=usuariosService.findCapitanes();
         model.addAttribute("capitanes", capitanes);
         return "crear_editar/crear_editar_tienda";
     }
@@ -67,11 +66,11 @@ public class TiendasController {
     public String doCrearTiendas(Model model, @SessionAttribute(name = "user", required = false) UsuarioEntity user) {
         if (user == null) return "redirect:/";
         model.addAttribute("tienda", new TiendaEntity());
-        List<CadenaEntity> cadenas = cadenaRepo.findAll();
+        List<CadenaEntity> cadenas = cadenaService.listarCadenas();
         model.addAttribute("cadenas", cadenas);
-        List<CampanaEntity> campanas= campanaRepo.findAll();
+        List<CampanaEntity> campanas= campanasService.listarCampanas();
         model.addAttribute("campanas", campanas);
-        List<UsuarioEntity> capitanes=userRepo.findCapitanes();
+        List<UsuarioEntity> capitanes=usuariosService.findCapitanes();
         model.addAttribute("capitanes", capitanes);
         return "crear_editar/crear_editar_tienda";
     }
@@ -87,9 +86,9 @@ public class TiendasController {
         List<TiendaEntity> tiendas;
 
         if (idCad!=0) {
-            tiendas = tiendasRepo.filtroLocalidadCadena(localidad, idCad);
+            tiendas = tiendasService.filtroLocalidadCadena(localidad, idCad);
         } else{
-            tiendas = tiendasRepo.filtroLocalidad(localidad);
+            tiendas = tiendasService.filtroLocalidad(localidad);
         }
 
         model.addAttribute("tiendas", tiendas);
@@ -100,12 +99,10 @@ public class TiendasController {
     @PostMapping("/borrar")
     public String doBorrarTiendas(Model model, @SessionAttribute(name = "user", required = false) UsuarioEntity user, @RequestParam("id") Integer id) {
         if (user == null) return "redirect:/";
-        TiendaEntity tienda=tiendasRepo.getById(id);
+        TiendaEntity tienda=tiendasService.getReferenceById(id);
         List<ParticipaEntity> participaciones=tienda.getParticipaciones();
-        for(ParticipaEntity p:participaciones){
-            participaRepo.delete(p);
-        }
-        tiendasRepo.deleteById(id);
+        participaService.deleteAll(participaciones);
+        tiendasService.borrarTiendaPorId(id);
         return "redirect:/tiendas/";
     }
 
@@ -118,13 +115,14 @@ public class TiendasController {
                                    @RequestParam("cPostal") String cPostal,
                                    @RequestParam("zonaGeografica") String zonaGeografica,
                                    @RequestParam("cadena") Integer idCadena,
-                                   @RequestParam("capitan") Integer idCapitan,
+                                   @RequestParam(value = "capitan", required = false) Integer idCapitan,
                                    @RequestParam(value = "campanasParticipa", required = false) List<Integer> idCampanas) {
         if (user == null) return "redirect:/";
 
         TiendaEntity tienda;
         if (id != null) {
-            tienda = tiendasRepo.findById(id).orElse(new TiendaEntity());
+            tienda = tiendasService.buscarPorId(id);
+            if (tienda == null) tienda = new TiendaEntity();
         } else {
             tienda = new TiendaEntity();
         }
@@ -135,19 +133,19 @@ public class TiendasController {
         tienda.setCPostal(cPostal);
         tienda.setZonaGeografica(zonaGeografica);
 
-        CadenaEntity cadena = cadenaRepo.findById(idCadena).orElse(null);
+        CadenaEntity cadena = cadenaService.buscarPorId(idCadena);
         tienda.setCadena(cadena);
 
-        UsuarioEntity capitan = userRepo.findById(idCapitan).orElse(null);
+        UsuarioEntity capitan = usuariosService.buscarPorId(idCapitan);
         tienda.setCapitan(capitan);
 
-        tienda = tiendasRepo.save(tienda);
+        tienda = tiendasService.guardarTienda(tienda);
 
         // Actualizar participaciones
         if (id != null) {
             // Borrar participaciones anteriores si es edición
-            List<ParticipaEntity> actuales = participaRepo.findByIdTienda(id);
-            participaRepo.deleteAll(actuales);
+            List<ParticipaEntity> actuales = participaService.findByIdTienda(id);
+            participaService.deleteAll(actuales);
         }
 
         if (idCampanas != null) {
@@ -156,11 +154,11 @@ public class TiendasController {
                 participa.getId().setIdTienda(tienda.getId());
                 participa.getId().setIdCampana(idCampana);
                 
-                CampanaEntity campana = campanaRepo.findById(idCampana).orElse(null);
+                CampanaEntity campana = campanasService.buscarPorId(idCampana);
                 participa.setCampana(campana);
                 participa.setTienda(tienda);
                 
-                participaRepo.save(participa);
+                participaService.guardarParticipacion(participa);
             }
         }
 

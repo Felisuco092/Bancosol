@@ -1,36 +1,34 @@
 package uma.grupo13.bancosol.controller;
 
 import jakarta.servlet.http.HttpSession;
+import lombok.AllArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
-import uma.grupo13.bancosol.dao.NotificacionRepository;
-import uma.grupo13.bancosol.dao.RolRepository;
-import uma.grupo13.bancosol.dao.UserRepository;
 import uma.grupo13.bancosol.entity.NotificacionEntity;
 import uma.grupo13.bancosol.entity.RolEntity;
 import uma.grupo13.bancosol.entity.UsuarioEntity;
-import uma.grupo13.bancosol.utils.ValidaSesion;
+import uma.grupo13.bancosol.services.NotificacionesService;
+import uma.grupo13.bancosol.services.RolService;
+import uma.grupo13.bancosol.services.UsuariosService;
 
 import java.util.List;
 
 @Controller
+@AllArgsConstructor
 @RequestMapping("/usuarios")
 public class UsuariosController {
-    @Autowired
-    protected UserRepository userRepo;
-    @Autowired
-    protected NotificacionRepository notificacionRepo;
-    @Autowired
-    protected RolRepository rolRepo;
+    private final UsuariosService usuariosService;
+    private final NotificacionesService notificacionesService;
+    private final RolService rolService;
 
 
     @GetMapping("/")
     public String doUsuarios(Model model, @SessionAttribute(name = "user", required = false) UsuarioEntity user){
         if (user == null) return "redirect:/";
         model.addAttribute("paginaActual", "usuarios");
-        List<UsuarioEntity> usuarios= userRepo.findAll();
+        List<UsuarioEntity> usuarios= usuariosService.listarUsuarios();
         model.addAttribute("users", usuarios);
         return "usuarios";
     }
@@ -38,9 +36,9 @@ public class UsuariosController {
     @GetMapping("/editar")
     public  String doEditarUsuarios(Model model, @SessionAttribute(name = "user", required = false) UsuarioEntity user, @RequestParam("id") Integer id) {
         if (user == null) return "redirect:/";
-        UsuarioEntity usuario=userRepo.getById(id);
+        UsuarioEntity usuario=usuariosService.getReferenceById(id);
         model.addAttribute("usuario", usuario);
-        List<RolEntity> roles= rolRepo.findAll();
+        List<RolEntity> roles= rolService.listarRoles();
         model.addAttribute("roles", roles);
         return "crear_editar/crear_usuario";
     }
@@ -49,7 +47,7 @@ public class UsuariosController {
     public  String doCrearUsuarios(Model model, @SessionAttribute(name = "user", required = false) UsuarioEntity user) {
         if (user == null) return "redirect:/";
         model.addAttribute("usuario", new UsuarioEntity());
-        List<RolEntity> roles= rolRepo.findAll();
+        List<RolEntity> roles= rolService.listarRoles();
         model.addAttribute("roles", roles);
         return "crear_editar/crear_usuario";
     }
@@ -57,13 +55,11 @@ public class UsuariosController {
     @PostMapping("/borrar")
     public  String doBorrarUsuarios(Model model, @SessionAttribute(name = "user", required = false) UsuarioEntity user, @RequestParam("id") Integer id) {
         if (user == null) return "redirect:/";
-        UsuarioEntity usuario=userRepo.getById(id);
+        UsuarioEntity usuario=usuariosService.getReferenceById(id);
         List<NotificacionEntity> notficaciones=usuario.getNotificaciones();
-        for(NotificacionEntity notificacion:notficaciones){
-            notificacionRepo.delete(notificacion);
-        }
+        notificacionesService.deleteAll(notficaciones);
         usuario.deleteTiendas();
-        userRepo.delete(usuario);
+        usuariosService.borrarUsuario(usuario);
         return "redirect:/usuarios/";
     }
 
@@ -82,7 +78,7 @@ public class UsuariosController {
 
         UsuarioEntity usuario;
         if (id != null) {
-            usuario = userRepo.getById(id);
+            usuario = usuariosService.getReferenceById(id);
         } else {
             usuario = new UsuarioEntity();
         }
@@ -99,14 +95,14 @@ public class UsuariosController {
         } else if (id == null) {
             model.addAttribute("error", "La contraseña es obligatoria para nuevos usuarios.");
             model.addAttribute("usuario", usuario);
-            model.addAttribute("roles", rolRepo.findAll());
+            model.addAttribute("roles", rolService.listarRoles());
             return "crear_editar/crear_usuario";
         }
 
-        RolEntity rol = rolRepo.getById(idRol);
+        RolEntity rol = rolService.getReferenceById(idRol);
         usuario.setRol(rol);
 
-        userRepo.save(usuario);
+        usuariosService.guardarUsuario(usuario);
 
         return "redirect:/usuarios/";
     }

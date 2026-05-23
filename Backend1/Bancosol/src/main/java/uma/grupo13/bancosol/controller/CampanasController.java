@@ -6,10 +6,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
-import uma.grupo13.bancosol.dao.CampanaRepository;
 import uma.grupo13.bancosol.entity.CampanaEntity;
 import uma.grupo13.bancosol.entity.UsuarioEntity;
-import uma.grupo13.bancosol.utils.ValidaSesion;
+import uma.grupo13.bancosol.services.CampanasService;
 
 import java.time.LocalDate;
 import java.util.Date;
@@ -19,14 +18,14 @@ import java.util.List;
 @RequestMapping("/campanas")
 public class CampanasController {
     @Autowired
-    protected CampanaRepository campanaRepository;
+    protected CampanasService campanasService;
 
 
     @GetMapping("/")
     public String doCampanas(Model model, @SessionAttribute(name = "user", required = false) UsuarioEntity user) {
         if (user == null) return "redirect:/";
 
-        List<CampanaEntity> campanas = campanaRepository.findAll();
+        List<CampanaEntity> campanas = campanasService.listarCampanas();
         model.addAttribute("paginaActual", "campanas");
         model.addAttribute("campanas", campanas);
         return "campanas";
@@ -36,7 +35,7 @@ public class CampanasController {
     public  String doEditarCampana(@RequestParam("id") Integer idCampana,
             Model model, @SessionAttribute(name = "user", required = false) UsuarioEntity user) {
         if (user == null) return "redirect:/";
-        CampanaEntity campanaEdit = campanaRepository.getReferenceById(idCampana);
+        CampanaEntity campanaEdit = campanasService.getReferenceById(idCampana);
         model.addAttribute("campana", campanaEdit);
         return "crear_editar/crear_editar_campana";
     }
@@ -52,9 +51,9 @@ public class CampanasController {
     public  String doBorrarCampana(@RequestParam("idCampana") Integer idCampana,
                                    Model model, @SessionAttribute(name = "user", required = false) UsuarioEntity user) {
         if (user == null) return "redirect:/";
-        CampanaEntity campanaDelete = campanaRepository.getReferenceById(idCampana);
+        CampanaEntity campanaDelete = campanasService.getReferenceById(idCampana);
         campanaDelete.eliminarParticipaciones();
-        campanaRepository.delete(campanaDelete);
+        campanasService.borrarCampana(campanaDelete);
         return "redirect:/campanas/";
     }
 
@@ -70,13 +69,13 @@ public class CampanasController {
         if(idCampana == null){
             campana= new CampanaEntity();
         }else{
-            campana = this.campanaRepository.getReferenceById(idCampana);
+            campana = this.campanasService.getReferenceById(idCampana);
         }
         campana.setNombre(nombre);
         campana.setAno(anyo);
         campana.setDiaComienzo(fechaInic);
         campana.setDiaFinal(fechaFin);
-        campanaRepository.save(campana);
+        campanasService.guardarCampana(campana);
 
         return "redirect:/campanas/";
     }

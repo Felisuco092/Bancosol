@@ -1,25 +1,27 @@
 package uma.grupo13.bancosol.controller;
 
 import jakarta.servlet.http.HttpSession;
+import lombok.AllArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
-import uma.grupo13.bancosol.dao.TurnoRepository;
-import uma.grupo13.bancosol.dao.VoluntariosRepository;
-import uma.grupo13.bancosol.entity.*;
-import uma.grupo13.bancosol.utils.ValidaSesion;
+import uma.grupo13.bancosol.entity.TurnoEntity;
+import uma.grupo13.bancosol.entity.UsuarioEntity;
+import uma.grupo13.bancosol.entity.VoluntarioBaseEntity;
+import uma.grupo13.bancosol.services.TurnosService;
+import uma.grupo13.bancosol.services.VoluntariosService;
+import uma.grupo13.bancosol.entity.VoluntarioFisicoEntity;
+import uma.grupo13.bancosol.entity.VoluntarioEntidadEntity;
 
 import java.util.List;
 
 @Controller
+@AllArgsConstructor
 @RequestMapping("/colaboradores")
 public class ColaboradoresController {
-    @Autowired
-    protected VoluntariosRepository voluntariosRepository;
-
-    @Autowired
-    protected TurnoRepository turnoRepository;
+    private final VoluntariosService voluntariosService;
+    private final TurnosService turnosService;
 
 
     @GetMapping("/")
@@ -27,8 +29,8 @@ public class ColaboradoresController {
         if (user == null) return "redirect:/";
 
         model.addAttribute("paginaActual", "colaboradores");
-        model.addAttribute("colaboradores", voluntariosRepository.findAll());
-        model.addAttribute("localidades", voluntariosRepository.findLocalidadesDistintas());
+        model.addAttribute("colaboradores", voluntariosService.listarVoluntarios());
+        model.addAttribute("localidades", voluntariosService.findLocalidadesDistintas());
         return "colaboradores";
     }
 
@@ -42,13 +44,13 @@ public class ColaboradoresController {
 
         List<VoluntarioBaseEntity> todos;
         if (tipo == null || tipo.equals("all")) {
-            todos = voluntariosRepository.findAllByLocalidad(localidadParam);
+            todos = voluntariosService.findAllByLocalidad(localidadParam);
         } else if (tipo.equals("true")) {
-            todos = voluntariosRepository.findBaseFisicos(localidadParam);
+            todos = voluntariosService.findBaseFisicos(localidadParam);
         } else if (tipo.equals("false")) {
-            todos = voluntariosRepository.findBaseEntidades(localidadParam);
+            todos = voluntariosService.findBaseEntidades(localidadParam);
         } else {
-            todos = voluntariosRepository.findPendientes(localidadParam);
+            todos = voluntariosService.findPendientes(localidadParam);
         }
 
         model.addAttribute("colaboradores", todos);
@@ -65,7 +67,7 @@ public class ColaboradoresController {
     public String doEditarColaboradoresGet(Model model, @SessionAttribute(name = "user", required = false) UsuarioEntity user,
                                            @RequestParam("id") Integer id) {
         if (user == null) return "redirect:/";
-        VoluntarioBaseEntity voluntario = voluntariosRepository.findById(id).orElse(null);
+        VoluntarioBaseEntity voluntario = voluntariosService.buscarPorId(id);
         model.addAttribute("voluntario", voluntario);
         return "crear_editar/crear_editar_colaboradores";
     }
@@ -74,7 +76,7 @@ public class ColaboradoresController {
     public String doEditarColaboradoresPost(Model model, @SessionAttribute(name = "user", required = false) UsuarioEntity user,
                                             @RequestParam("id") Integer id) {
         if (user == null) return "redirect:/";
-        VoluntarioBaseEntity voluntario = voluntariosRepository.findById(id).orElse(null);
+        VoluntarioBaseEntity voluntario = voluntariosService.buscarPorId(id);
         model.addAttribute("voluntario", voluntario);
         return "crear_editar/crear_editar_colaboradores";
     }
@@ -90,10 +92,10 @@ public class ColaboradoresController {
                                         @RequestParam("id") Integer id) {
         if (user == null) return "redirect:/";
 
-        List<TurnoEntity> turnos = turnoRepository.findByVoluntarioId(id);
-        turnoRepository.deleteAll(turnos);
+        List<TurnoEntity> turnos = turnosService.findByVoluntarioId(id);
+        turnosService.deleteAll(turnos);
 
-        voluntariosRepository.deleteById(id);
+        voluntariosService.deleteById(id);
         return "redirect:/colaboradores/";
     }
 
@@ -115,7 +117,7 @@ public class ColaboradoresController {
         VoluntarioBaseEntity voluntario;
 
         if (id != null) {
-            voluntario = voluntariosRepository.findById(id).orElse(null);
+            voluntario = voluntariosService.buscarPorId(id);
         } else {
             if ("fisico".equals(tipo)) {
                 voluntario = new VoluntarioFisicoEntity();
@@ -142,7 +144,7 @@ public class ColaboradoresController {
             entidad.setNVoluntarios(nVoluntarios);
         }
 
-        voluntariosRepository.save(voluntario);
+        voluntariosService.guardarVoluntario(voluntario);
         return "redirect:/colaboradores/";
     }
 

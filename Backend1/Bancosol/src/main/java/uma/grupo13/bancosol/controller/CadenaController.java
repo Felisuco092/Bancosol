@@ -6,10 +6,9 @@ import org.springframework.boot.autoconfigure.AutoConfigureOrder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
-import uma.grupo13.bancosol.dao.CadenaRepository;
 import uma.grupo13.bancosol.entity.CadenaEntity;
 import uma.grupo13.bancosol.entity.UsuarioEntity;
-import uma.grupo13.bancosol.utils.ValidaSesion;
+import uma.grupo13.bancosol.services.CadenaService;
 
 import java.util.List;
 
@@ -17,14 +16,14 @@ import java.util.List;
 @RequestMapping("/cadenas")
 public class CadenaController {
     @Autowired
-    protected CadenaRepository  cadenaRepository;
+    protected CadenaService cadenaService;
 
     @GetMapping("/")
     public String doCadena(@SessionAttribute(name = "user", required = false) UsuarioEntity user, Model model) {
         if (user == null) return "redirect:/";
 
         model.addAttribute("paginaActual", "cadenas");
-        List<CadenaEntity> cadenaslist = cadenaRepository.findAll();
+        List<CadenaEntity> cadenaslist = cadenaService.listarCadenas();
         model.addAttribute("cadenas", cadenaslist);
         return "cadenas";
     }
@@ -33,7 +32,7 @@ public class CadenaController {
     public  String doEditarCadena(@SessionAttribute(name = "user", required = false) UsuarioEntity user, Model model,
                                   @RequestParam("id") Integer id) {
         if (user == null) return "redirect:/";
-        CadenaEntity cadena = cadenaRepository.getReferenceById(id);
+        CadenaEntity cadena = cadenaService.getReferenceById(id);
         model.addAttribute("cadena", cadena);
         return "crear_editar/crear_editar_cadena";
     }
@@ -48,9 +47,9 @@ public class CadenaController {
     public  String doBorrarCadena(@SessionAttribute(name = "user", required = false) UsuarioEntity user, Model model,
                                   @RequestParam("id") Integer id){
         if (user == null) return "redirect:/";
-        CadenaEntity cadena = cadenaRepository.getReferenceById(id);
+        CadenaEntity cadena = cadenaService.getReferenceById(id);
         cadena.eliminarTiendas();
-        cadenaRepository.delete(cadena);
+        cadenaService.borrarCadena(cadena);
         return "redirect:/cadenas/";
     }
 
@@ -64,11 +63,11 @@ public class CadenaController {
         if (id == null) {
             cadena = new CadenaEntity();
         } else {
-            cadena = cadenaRepository.getReferenceById(id);
+            cadena = cadenaService.getReferenceById(id);
         }
         cadena.setNombre(nombre);
         cadena.setCodigo(codigo);
-        cadenaRepository.save(cadena);
+        cadenaService.guardarCadena(cadena);
         return "redirect:/cadenas/";
     }
 }

@@ -1,6 +1,5 @@
 <%@ page import="uma.grupo13.bancosol.entity.NotificacionEntity" %>
 <%@ page import="java.util.List" %>
-<%@ page import="uma.grupo13.bancosol.dao.NotificacionRepository" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%
     List<NotificacionEntity> notificacionList = (List<NotificacionEntity>) request.getAttribute("notificacionesList");
