@@ -1,5 +1,6 @@
 import { useState, useEffect } from 'react'
-import { fetchData } from '../services/api'
+import { Link } from 'react-router-dom'
+import { fetchData, deleteData } from '../services/api'
 
 function formatTipo(esPersona, pendiente) {
   if (pendiente) {
@@ -56,6 +57,28 @@ export default function ColaboradoresPage() {
     }).catch(console.error)
   }, [])
 
+  async function handleDelete(id) {
+    if (!confirm('¿Estás seguro de que deseas eliminar este colaborador? También se eliminarán sus turnos asociados.')) return
+    try {
+      const [fisicos, entidades, turnos] = await Promise.all([
+        fetchData('voluntario_fisico?id_voluntario=' + id),
+        fetchData('voluntario_entidad?id_voluntario=' + id),
+        fetchData('turnos?id_voluntario=' + id)
+      ])
+      await Promise.all([
+        ...fisicos.map(f => deleteData('voluntario_fisico/' + f.id)),
+        ...entidades.map(e => deleteData('voluntario_entidad/' + e.id)),
+        ...turnos.map(t => deleteData('turnos/' + t.id))
+      ])
+      await deleteData('voluntario_base/' + id)
+      setRows(prev => prev.filter(r => String(r.id) !== String(id)))
+      alert('Colaborador eliminado con éxito')
+    } catch (err) {
+      console.error('Error al eliminar colaborador:', err)
+      alert('No se pudo eliminar el colaborador')
+    }
+  }
+
   const localidades = [...new Set(rows.map(r => r.localidad).filter(Boolean))]
 
   const filtered = rows.filter(row => {
@@ -71,7 +94,7 @@ export default function ColaboradoresPage() {
     <>
       <header className="header">
         <h1>Gestión de Colaboradores</h1>
-        <button className="btn btn-primary">+ Nuevo Colaborador</button>
+        <Link to="/colaboradores/crear" className="btn btn-primary">+ Nuevo Colaborador</Link>
       </header>
       <div className="card">
         <div className="filtros-grid">
@@ -119,8 +142,8 @@ export default function ColaboradoresPage() {
                   <td>{row.n_voluntarios}</td>
                   <td>{row.observaciones || ''}</td>
                   <td>
-                    <button className="btn btn-primary btn-sm">Editar</button>
-                    <button className="btn btn-danger btn-sm">Borrar</button>
+                    <Link to={`/colaboradores/editar/${row.id}`} className="btn btn-primary btn-sm">Editar</Link>
+                    <button className="btn btn-danger btn-sm" onClick={() => handleDelete(row.id)}>Borrar</button>
                   </td>
                 </tr>
               )

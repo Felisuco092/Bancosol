@@ -1,0 +1,207 @@
+import { useState, useEffect } from 'react'
+import { useNavigate, Link, useParams } from 'react-router-dom'
+import { fetchData, postData, putData } from '../../services/api'
+
+export default function CrearColaboradorPage() {
+  const { id } = useParams()
+  const editando = !!id
+  const navigate = useNavigate()
+  const [tipo, setTipo] = useState('')
+  const [form, setForm] = useState({
+    domicilio: '',
+    zona_geografica: '',
+    codigo_postal: '',
+    observaciones: '',
+    aprobado: false,
+    nombre: '',
+    apellidos: '',
+    nombre_asociacion: '',
+    n_voluntarios: ''
+  })
+
+  function handleChange(e) {
+    const { name, value, type, checked } = e.target
+    setForm(prev => ({ ...prev, [name]: type === 'checkbox' ? checked : value }))
+  }
+
+  useEffect(() => {
+    async function load() {
+      try {
+        if (editando) {
+          const vb = await fetchData('voluntario_base/' + id)
+          let nombreFisico = '', apellidosFisico = '', nombreAsoc = '', nVol = ''
+          let tipoDetectado = ''
+
+          const vf = await fetchData('voluntario_fisico?id_voluntario=' + id).catch(() => [])
+          if (vf && vf.length > 0) {
+            tipoDetectado = 'fisico'
+            nombreFisico = vf[0].nombre || ''
+            apellidosFisico = vf[0].apellidos || ''
+          }
+
+          const ve = await fetchData('voluntario_entidad?id_voluntario=' + id).catch(() => [])
+          if (ve && ve.length > 0) {
+            tipoDetectado = 'entidad'
+            nombreAsoc = ve[0].nombre_asociacion || ''
+            nVol = ve[0].n_voluntarios || ''
+          }
+
+          setTipo(tipoDetectado)
+          setForm({
+            domicilio: vb.domicilio || '',
+            zona_geografica: vb.zona_geografica || '',
+            codigo_postal: vb.codigo_postal || '',
+            observaciones: vb.observaciones || '',
+            aprobado: vb.aprobado === true || vb.aprobado === 'true',
+            nombre: nombreFisico,
+            apellidos: apellidosFisico,
+            nombre_asociacion: nombreAsoc,
+            n_voluntarios: nVol
+          })
+        }
+      } catch (err) {
+        console.error(err)
+      }
+    }
+    load()
+  }, [])
+
+  async function handleSubmit(e) {
+    e.preventDefault()
+    try {
+      if (editando) {
+        await putData('voluntario_base/' + id, {
+          domicilio: form.domicilio,
+          zona_geografica: form.zona_geografica,
+          codigo_postal: form.codigo_postal,
+          observaciones: form.observaciones,
+          aprobado: form.aprobado
+        })
+        if (tipo === 'fisico') {
+          await putData('voluntario_fisico/' + id, {
+            id_voluntario: id,
+            nombre: form.nombre,
+            apellidos: form.apellidos
+          })
+        } else if (tipo === 'entidad') {
+          await putData('voluntario_entidad/' + id, {
+            id_voluntario: id,
+            nombre_asociacion: form.nombre_asociacion,
+            n_voluntarios: form.n_voluntarios
+          })
+        }
+        alert('Colaborador actualizado con éxito')
+      } else {
+        const vb = await postData('voluntario_base', {
+          domicilio: form.domicilio,
+          zona_geografica: form.zona_geografica,
+          codigo_postal: form.codigo_postal,
+          observaciones: form.observaciones,
+          aprobado: form.aprobado
+        })
+        const voluntarioId = vb.id
+        if (tipo === 'fisico') {
+          await postData('voluntario_fisico', {
+            id_voluntario: voluntarioId,
+            nombre: form.nombre,
+            apellidos: form.apellidos
+          })
+        } else if (tipo === 'entidad') {
+          await postData('voluntario_entidad', {
+            id_voluntario: voluntarioId,
+            nombre_asociacion: form.nombre_asociacion,
+            n_voluntarios: form.n_voluntarios
+          })
+        }
+        alert('Colaborador creado con éxito')
+      }
+      navigate('/colaboradores')
+    } catch (err) {
+      console.error('Error:', err)
+      alert('No se pudo conectar con el servidor')
+    }
+  }
+
+  return (
+    <>
+      <header className="header">
+        <h1>{editando ? 'Editar Colaborador' : 'Crear Colaborador'}</h1>
+      </header>
+
+      <div className="formulario">
+        <form onSubmit={handleSubmit}>
+
+          <div className="form-group">
+            <label htmlFor="domicilio">Domicilio<span className="required">*</span></label>
+            <input type="text" name="domicilio" id="domicilio" value={form.domicilio} onChange={handleChange} required />
+          </div>
+
+          <div className="form-group">
+            <label htmlFor="zona_geografica">Zona Geográfica<span className="required">*</span></label>
+            <input type="text" name="zona_geografica" id="zona_geografica" value={form.zona_geografica} onChange={handleChange} required />
+          </div>
+
+          <div className="form-group">
+            <label htmlFor="codigo_postal">Código Postal<span className="required">*</span></label>
+            <input type="text" name="codigo_postal" id="codigo_postal" value={form.codigo_postal} onChange={handleChange} required />
+          </div>
+
+          <div className="form-group">
+            <label htmlFor="observaciones">Observaciones</label>
+            <textarea name="observaciones" id="observaciones" rows="3" value={form.observaciones} onChange={handleChange} />
+          </div>
+
+          {!editando && (
+            <div className="form-group">
+              <label htmlFor="tipo_colaborador">Tipo de Colaborador<span className="required">*</span></label>
+              <select name="tipo_colaborador" id="tipo_colaborador" value={tipo} onChange={e => setTipo(e.target.value)} required>
+                <option value="">-- Seleccione un tipo --</option>
+                <option value="fisico">Persona Física</option>
+                <option value="entidad">Entidad / Grupo</option>
+              </select>
+            </div>
+          )}
+
+          {tipo === 'fisico' && (
+            <>
+              <div className="form-group">
+                <label htmlFor="nombre">Nombre<span className="required">*</span></label>
+                <input type="text" name="nombre" id="nombre" value={form.nombre} onChange={handleChange} required />
+              </div>
+              <div className="form-group">
+                <label htmlFor="apellidos">Apellidos<span className="required">*</span></label>
+                <input type="text" name="apellidos" id="apellidos" value={form.apellidos} onChange={handleChange} required />
+              </div>
+            </>
+          )}
+
+          {tipo === 'entidad' && (
+            <>
+              <div className="form-group">
+                <label htmlFor="nombre_asociacion">Nombre de Asociación<span className="required">*</span></label>
+                <input type="text" name="nombre_asociacion" id="nombre_asociacion" value={form.nombre_asociacion} onChange={handleChange} required />
+              </div>
+              <div className="form-group">
+                <label htmlFor="n_voluntarios">Número de Voluntarios<span className="required">*</span></label>
+                <input type="number" name="n_voluntarios" id="n_voluntarios" value={form.n_voluntarios} onChange={handleChange} required />
+              </div>
+            </>
+          )}
+
+          {!form.aprobado && (
+            <div className="form-group">
+              <label htmlFor="confirmar">Confirmar colaborador</label>
+              <input type="checkbox" id="confirmar" name="aprobado" checked={form.aprobado} onChange={handleChange} />
+            </div>
+          )}
+
+          <div className="form-actions">
+            <button type="submit" className="btn btn-primary">{editando ? 'Guardar cambios' : 'Crear Colaborador'}</button>
+            <Link to="/colaboradores" className="btn btn-secondary">Cancelar</Link>
+          </div>
+
+        </form>
+      </div>
+    </>
+  )
+}

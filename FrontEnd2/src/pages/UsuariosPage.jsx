@@ -1,5 +1,6 @@
 import { useState, useEffect } from 'react'
-import { fetchData } from '../services/api'
+import { Link } from 'react-router-dom'
+import { fetchData, deleteData } from '../services/api'
 import { quitarTildes } from '../utils/stringUtils'
 
 export default function UsuariosPage() {
@@ -21,11 +22,25 @@ export default function UsuariosPage() {
     return rol ? rol.nombre : 'Desconocido'
   }
 
+  async function handleDelete(id) {
+    if (!confirm('¿Estás seguro de que deseas dar de baja a este usuario? También se eliminarán sus notificaciones.')) return
+    try {
+      const notificaciones = await fetchData('notificaciones?id_usuario_destino=' + id)
+      await Promise.all(notificaciones.map(n => deleteData('notificaciones/' + n.id)))
+      await deleteData('usuarios/' + id)
+      setUsuarios(prev => prev.filter(u => String(u.id) !== String(id)))
+      alert('Usuario eliminado con éxito')
+    } catch (err) {
+      console.error('Error al eliminar usuario:', err)
+      alert('No se pudo eliminar el usuario')
+    }
+  }
+
   return (
     <>
       <header className="header">
         <h1>Gestión de Usuarios</h1>
-        <button className="btn btn-primary">+ Crear Usuario</button>
+        <Link to="/usuarios/crear" className="btn btn-primary">+ Crear Usuario</Link>
       </header>
       <div className="card">
         <table>
@@ -52,8 +67,8 @@ export default function UsuariosPage() {
                   <td><span className={`badge-rol badge-${quitarTildes(rolName.toLowerCase())}`}>{rolName}</span></td>
                   <td>{u.area_asignada}</td>
                   <td>
-                    <button className="btn btn-primary btn-sm">Editar</button>
-                    <button className="btn btn-danger btn-sm">Baja</button>
+                    <Link to={`/usuarios/editar/${u.id}`} className="btn btn-primary btn-sm">Editar</Link>
+                    <button className="btn btn-danger btn-sm" onClick={() => handleDelete(u.id)}>Baja</button>
                   </td>
                 </tr>
               )

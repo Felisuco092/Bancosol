@@ -1,5 +1,6 @@
 import { useState, useEffect } from 'react'
-import { fetchData } from '../services/api'
+import { Link } from 'react-router-dom'
+import { fetchData, deleteData } from '../services/api'
 
 function getStatusInfo(start, end) {
   const now = new Date()
@@ -19,6 +20,26 @@ export default function CampanasPage() {
     fetchData('campanas').then(setCampanas).catch(console.error)
   }, [])
 
+  async function handleDelete(id) {
+    if (!confirm('¿Estás seguro de que deseas eliminar esta campaña? También se eliminarán las participaciones y turnos asociados.')) return
+    try {
+      const [participas, turnos] = await Promise.all([
+        fetchData('participa?id_campana=' + id),
+        fetchData('turnos?id_campana=' + id)
+      ])
+      await Promise.all([
+        ...participas.map(p => deleteData('participa/' + p.id)),
+        ...turnos.map(t => deleteData('turnos/' + t.id))
+      ])
+      await deleteData('campanas/' + id)
+      setCampanas(prev => prev.filter(c => String(c.id) !== String(id)))
+      alert('Campaña eliminada con éxito')
+    } catch (err) {
+      console.error('Error al eliminar campaña:', err)
+      alert('No se pudo eliminar la campaña')
+    }
+  }
+
   const filtered = filter === 'all'
     ? campanas
     : campanas.filter(c => getStatusInfo(c.dia_comienzo, c.dia_final).status === filter)
@@ -27,7 +48,7 @@ export default function CampanasPage() {
     <>
       <header className="header">
         <h1>Gestión de Campañas</h1>
-        <button className="btn btn-primary">+ Nueva Campaña</button>
+        <Link to="/campanas/crear" className="btn btn-primary">+ Nueva Campaña</Link>
       </header>
       <div className="card filtros-campanas">
         {['all', 'activa', 'terminada', 'proximamente'].map(f => (
@@ -63,11 +84,8 @@ export default function CampanasPage() {
                   <td>{campana.dia_final}</td>
                   <td><span style={{ padding: '4px 8px', borderRadius: '4px', fontSize: '0.85rem', ...info.style }}>{info.label}</span></td>
                   <td>
-                    <button className="btn btn-primary btn-sm">Editar</button><br />
-                    <button className="btn btn-action btn-info">Tiendas</button><br />
-                    <button className="btn btn-action btn-warning">Colaboradores</button><br />
-                    <button className="btn btn-action btn-turnos">Turnos</button><br />
-                    <button className="btn btn-action btn-delete-campana">Borrar</button><br />
+                    <Link to={`/campanas/editar/${campana.id}`} className="btn btn-primary btn-sm">Editar</Link>
+                    <button className="btn btn-danger btn-sm" onClick={() => handleDelete(campana.id)}>Eliminar</button>
                   </td>
                 </tr>
               )

@@ -1,23 +1,9 @@
-import { useEffect } from 'react'
-import { Outlet, useNavigate } from 'react-router-dom'
-import Sidebar from './Sidebar'
+import { Outlet } from 'react-router-dom'
 
 export default function MainLayout() {
-  const navigate = useNavigate()
-
-  useEffect(() => {
-    const user = sessionStorage.getItem('user')
-    if (!user) {
-      navigate('/')
-    }
-  }, [navigate])
-
   return (
-    <>
-      <Sidebar />
-      <main className="main-content">
-        <Outlet />
-      </main>
-    </>
+    <main className="main-content">
+      <Outlet />
+    </main>
   )
 }

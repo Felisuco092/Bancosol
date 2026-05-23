@@ -1,4 +1,5 @@
 import { useState, useEffect } from 'react'
+import { Link } from 'react-router-dom'
 import { fetchData } from '../services/api'
 
 export default function BandejaPage() {
@@ -33,7 +34,7 @@ export default function BandejaPage() {
                 <td>{dateToString(n.fecha_creacion)}</td>
                 <td>{n.asunto}</td>
                 <td>
-                  <button className="btn btn-primary btn-view" onClick={() => alert(n.mensaje)}>Ver mensaje</button>
+                  <Link to={`/bandeja/ver/${n.id}`} className="btn btn-primary btn-view">Ver mensaje</Link>
                 </td>
               </tr>
             ))}

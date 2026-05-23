@@ -15,3 +15,21 @@ export async function postData(ruta, data) {
   if (!res.ok) throw new Error(`Error HTTP ${res.status}`);
   return res.json();
 }
+
+export async function putData(ruta, data) {
+  const res = await fetch(`${API_BASE}/${ruta}`, {
+    method: 'PUT',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify(data),
+  });
+  if (!res.ok) throw new Error(`Error HTTP ${res.status}`);
+  return res.json();
+}
+
+export async function deleteData(ruta) {
+  const res = await fetch(`${API_BASE}/${ruta}`, {
+    method: 'DELETE',
+  });
+  if (!res.ok) throw new Error(`Error HTTP ${res.status}`);
+  return res.json();
+}

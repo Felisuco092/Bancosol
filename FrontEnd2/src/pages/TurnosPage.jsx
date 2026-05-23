@@ -1,4 +1,5 @@
 import { useState, useEffect } from 'react'
+import { Link } from 'react-router-dom'
 import { fetchData } from '../services/api'
 
 export default function TurnosPage() {
@@ -10,18 +11,16 @@ export default function TurnosPage() {
   const [usuarios, setUsuarios] = useState([])
   const [selectedCampana, setSelectedCampana] = useState('')
   const [selectedTienda, setSelectedTienda] = useState('')
-  const [showCuadrante, setShowCuadrante] = useState(false)
 
   useEffect(() => {
     Promise.all([
       fetchData('turnos'),
       fetchData('campanas'),
       fetchData('tiendas'),
-      fetchData('voluntario_base'),
       fetchData('voluntario_entidad'),
       fetchData('voluntario_fisico'),
       fetchData('usuarios')
-    ]).then(([t, camp, ti, vb, ve, vf, u]) => {
+    ]).then(([t, camp, ti, ve, vf, u]) => {
       setTurnos(t)
       setCampanas(camp)
       setTiendas(ti)
@@ -44,9 +43,6 @@ export default function TurnosPage() {
     return user ? `${user.nombre} ${user.apellidos}` : 'No asignado'
   }
 
-  function handleBuscar() {
-    setShowCuadrante(true)
-  }
 
   const filteredTurnos = selectedCampana && selectedTienda
     ? turnos.filter(t =>
@@ -85,21 +81,20 @@ export default function TurnosPage() {
           <select id="select-tienda" value={selectedTienda} onChange={e => setSelectedTienda(e.target.value)}>
             <option value="">-- Seleccione Tienda --</option>
             {tiendas.map(t => (
-              <option key={t.id} value={t.id}>{t.descripcion}</option>
+              <option key={t.id} value={t.id}>{t.nombre}</option>
             ))}
           </select>
         </div>
-        <button id="btn-buscar" className="btn btn-primary" onClick={handleBuscar}>Ver Cuadrante</button>
       </div>
 
-      {showCuadrante && (
+      
         <div id="cuadrante-container">
           <div className="card">
             <div className="cuadrante-header">
               <h3>Cuadrante de Turnos</h3>
               <div className="cuadrante-actions">
                 <span>Capitán: <strong id="capitan-nombre">{capitanNombre}</strong></span>
-                <button className="btn btn-success btn-add-extra">+ Añadir Turno Extra</button>
+                <Link to="/turnos/crear" className="btn btn-success btn-add-extra">+ Añadir Turno Extra</Link>
               </div>
             </div>
             <table className="cuadrante-tabla">
@@ -139,7 +134,7 @@ export default function TurnosPage() {
             </table>
           </div>
         </div>
-      )}
+      
     </>
   )
 }
