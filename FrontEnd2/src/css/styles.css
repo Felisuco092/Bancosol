@@ -1,3 +1,9 @@
+/* ================================================
+   FrontEnd1/nuevo/styles.css
+   Estilos principales - Sistema Bancosol
+   ================================================ */
+
+/* ---------- 1. Variables ---------- */
 :root {
     --primary-color: #0056b3;
     --primary-hover: #004494;
@@ -15,6 +21,7 @@
     --sidebar-hover: rgb(12, 190, 225);
 }
 
+/* ---------- 2. Reset & Base ---------- */
 * {
     box-sizing: border-box;
 }
@@ -31,6 +38,7 @@ body.no-sidebar {
     display: block;
 }
 
+/* ---------- 3. Layout: Sidebar ---------- */
 .sidebar {
     width: 0;
     min-width: 0;
@@ -77,6 +85,11 @@ body.no-sidebar {
     opacity: 1;
 }
 
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(-10px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
 .sidebar h2 {
     text-align: center;
     font-size: 1.5rem;
@@ -107,6 +120,7 @@ body.no-sidebar {
     color: white;
 }
 
+/* ---------- 4. Layout: Main Content ---------- */
 .main-content {
     margin-left: 0;
     padding: 40px;
@@ -123,6 +137,7 @@ body.no-sidebar {
     padding-bottom: 10px;
 }
 
+/* ---------- 5. Componentes: Botones ---------- */
 .btn {
     padding: 10px 20px;
     border: none;
@@ -192,6 +207,7 @@ body.no-sidebar {
     background-color: var(--primary-color);
 }
 
+/* ---------- 6. Componentes: Cards ---------- */
 .card {
     background: white;
     padding: 20px;
@@ -201,6 +217,7 @@ body.no-sidebar {
     overflow-x: auto;
 }
 
+/* ---------- 7. Componentes: Tablas ---------- */
 table {
     width: 100%;
     border-collapse: collapse;
@@ -217,6 +234,7 @@ th {
     background-color: #e9ecef;
 }
 
+/* ---------- 8. Componentes: Estados ---------- */
 .status-badge {
     padding: 6px 12px;
     border-radius: 6px;
@@ -265,6 +283,7 @@ th {
     color: #7b1fa2;
 }
 
+/* ---------- 9. Página Dashboard ---------- */
 .dashboard-grid {
     display: grid;
     grid-template-columns: repeat(2, 1fr);
@@ -315,6 +334,7 @@ th {
     font-weight: bold;
 }
 
+/* ---------- 10. Página Colaboradores ---------- */
 .filtros-grid {
     display: grid;
     grid-template-columns: 1fr 1fr auto;
@@ -336,11 +356,12 @@ th {
     border: 1px solid #ddd;
 }
 
-.btn.btn-sm {
+.btn-sm {
     padding: 5px 8px;
     font-size: 0.75rem;
 }
 
+/* ---------- 11. Página Campañas ---------- */
 .filtros-campanas {
     display: flex;
     gap: 10px;
@@ -357,7 +378,7 @@ th {
     font-size: 0.75rem;
 }
 
-.btn.btn-info {
+.btn-info {
     background: #17a2b8;
     color: white;
 }
@@ -392,11 +413,33 @@ th {
     cursor: pointer;
 }
 
+.btn-info {
+    background: #17a2b8;
+    color: white;
+}
+
+.btn-warning {
+    background: #ffc107;
+    color: #212529;
+}
+
+.btn-turnos {
+    background: #28a745;
+    color: white;
+}
+
+.btn-delete-campana {
+    background: #dc3545;
+    color: white;
+}
+
+/* ---------- 12. Página Tiendas ---------- */
 .tiendas-layout {
     display: flex;
     gap: 20px;
 }
 
+/* Se eliminan estilos específicos antiguos de tiendas para favorecer el uso de .filtros-grid y .card genéricos */
 .check-participa {
     width: 18px;
     height: 18px;
@@ -407,11 +450,17 @@ th {
     background-color: #f1f8ff;
 }
 
-.filtros-turnos {
-    display: grid;
-    grid-template-columns: 1fr 1fr auto;
+
+/* ---------- 13. Página Turnos ---------- */
+.filtros-turnos form {
+    display: flex;
     gap: 20px;
-    align-items: end;
+    align-items: flex-end;
+    width: 100%;
+}
+
+.filtros-turnos form > div {
+    flex: 1;
 }
 
 .filtros-turnos label {
@@ -486,6 +535,10 @@ th {
     font-weight: bold;
 }
 
+.cuadrante-tabla {
+    width: 100%;
+}
+
 .cuadrante-actions {
     display: flex;
     align-items: center;
@@ -495,6 +548,7 @@ th {
     margin-right: 10px;
 }
 
+/* ---------- 14. Página Usuarios ---------- */
 .badge-rol {
     padding: 4px 8px;
     border-radius: 4px;
@@ -509,6 +563,12 @@ th {
     background: #fff3e0;
     color: #fb8c00;
 }
+.badge-administrador {
+    background: #ffd5f8;
+    color: #ff29d4;
+}
+
+/* ---------- 15. Página Cadenas -------------*/
 
 .filtros-cadenas {
     display: flex;
@@ -516,7 +576,8 @@ th {
     margin-bottom: 20px;
 }
 
-.sidebar nav ul li a.text-logout {
+/* ---------- 16. Miscellaneous ---------- */
+.sidebar nav ul li .btn-logout {
     background: none;
     border: none;
     padding: 15px 25px;
@@ -530,7 +591,7 @@ th {
     transition: 0.3s;
 }
 
-.sidebar nav ul li a.text-logout:hover {
+.sidebar nav ul li .btn-logout:hover {
     background-color: #f8dcdc;
     color: #a71d2a;
 }
@@ -543,28 +604,29 @@ th {
     width: 100%;
 }
 
-/* ========== Login Page ========== */
-.login-page {
-    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-    margin: 0;
-    padding: 0;
+/* ---------- 9. Login Page ---------- */
+.login-body {
     display: flex;
     justify-content: center;
     align-items: center;
-    min-height: 100vh;
+    height: 100vh;
     width: 100%;
-    background-color: #f8f9fa;
-    color: #343a40;
+    margin: 0;
+    padding: 0;
 }
 
 .login-card {
-    background: white;
-    border-radius: 8px;
-    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
-    padding: 40px;
     width: 100%;
     max-width: 400px;
+}
+
+.login-subtitle {
     text-align: center;
+}
+
+.login-card {
+    width: 100%;
+    max-width: 400px;
 }
 
 .login-card .logo_login {
@@ -573,17 +635,6 @@ th {
     width: 280px;
     max-width: 100%;
     height: auto;
-}
-
-.login-page .login-subtitle {
-    text-align: center;
-    color: #6c757d;
-    margin-bottom: 30px;
-    font-size: 0.95rem;
-}
-
-#login-form {
-    text-align: left;
 }
 
 .input_login {
@@ -605,29 +656,7 @@ th {
     font-size: 1rem;
 }
 
-#login-submit-btn {
-    width: 100%;
-    padding: 12px;
-    border: none;
-    border-radius: 4px;
-    cursor: pointer;
-    font-weight: bold;
-    font-size: 1rem;
-    background-color: #0056b3;
-    color: white;
-    transition: background-color 0.3s, transform 0.1s;
-    margin-top: 10px;
-}
-
-#login-submit-btn:hover {
-    background-color: #004494;
-    transform: translateY(-1px);
-}
-
-#login-submit-btn:active {
-    transform: translateY(0);
-}
-
+/* ---------- 10. Responsive ---------- */
 @media (min-width: 1200px) {
     .login-card {
         max-width: 500px;
@@ -636,7 +665,7 @@ th {
     .login-card .logo_login {
         width: 350px;
     }
-    .login-page {
+    .login-body {
         font-size: 1.15rem;
     }
     .input_login input {
@@ -653,105 +682,15 @@ th {
     .login-card .logo_login {
         width: 450px;
     }
-    .login-page {
+    .login-body {
         font-size: 1.3rem;
     }
     .input_login input {
         font-size: 1.3rem;
         padding: 18px;
     }
-    .login-page .btn {
+    .btn {
         font-size: 1.25rem;
         padding: 15px 30px;
     }
-}
-
-/* ========== Form Page (Crear Tienda) ========== */
-.form-page {
-    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-    margin: 0;
-    background-color: var(--light-bg);
-    color: var(--dark-text);
-    text-align: center;
-    height: 100dvh;
-    width: 100%;
-}
-
-.form-page .formulario {
-    width: 70%;
-    max-width: 600px;
-    height: 75%;
-    background: white;
-    border-radius: 8px;
-    box-shadow: 0 2px 8px rgba(0,0,0,0.1);
-    margin: 2rem auto;
-    overflow-y: auto;
-    text-align: left;
-    padding: 2rem;
-    padding-bottom: 0.5rem;
-}
-
-.form-page h1 {
-    color: var(--primary-color);
-    margin-top: 1rem;
-}
-
-.form-group {
-    margin-bottom: 1.25rem;
-}
-
-.form-group label {
-    display: block;
-    font-weight: 600;
-    margin-bottom: 0.5rem;
-    color: var(--dark-text);
-}
-
-.form-group input,
-.form-group select,
-.form-group textarea {
-    width: 100%;
-    padding: 0.75rem;
-    border: 1px solid var(--input-border);
-    border-radius: 4px;
-    font-size: 1rem;
-    box-sizing: border-box;
-    transition: border-color 0.3s, box-shadow 0.3s;
-}
-
-.form-group input:focus,
-.form-group select:focus,
-.form-group textarea:focus {
-    outline: none;
-    border-color: var(--primary-color);
-    box-shadow: 0 0 0 3px rgba(0, 86, 179, 0.1);
-}
-
-.form-actions {
-    display: flex;
-    gap: 1rem;
-    margin-top: 1.5rem;
-}
-
-.form-actions .btn {
-    padding: 0.75rem 1.5rem;
-    border: none;
-    border-radius: 4px;
-    font-size: 1rem;
-    cursor: pointer;
-    transition: background-color 0.3s, transform 0.1s;
-}
-
-.form-actions .btn:hover {
-    transform: translateY(-1px);
-}
-
-.form-actions .btn:active {
-    transform: translateY(0);
-}
-
-/* ========== React Root ========== */
-#root {
-    width: 100%;
-    min-height: 100vh;
 }

@@ -44,19 +44,6 @@ export default function TiendasPage() {
     return matchCadena && matchLocalidad
   })
 
-  function toggleParticipa(tiendaId, checked) {
-    setParticipa(prev => {
-      const exists = prev.some(p =>
-        Number(p.id_campana) === Number(selectedCampana) &&
-        Number(p.id_tienda) === Number(tiendaId)
-      )
-      if (checked && !exists) {
-        return [...prev, { id_campana: selectedCampana, id_tienda: tiendaId }]
-      }
-      return prev
-    })
-  }
-
   return (
     <>
       <header className="header">
@@ -103,7 +90,6 @@ export default function TiendasPage() {
             <thead>
               <tr>
                 <th>Tienda</th>
-                <th>Participación</th>
                 <th>Localidad</th>
                 <th>Domicilio</th>
                 <th>C.P.</th>
@@ -116,18 +102,10 @@ export default function TiendasPage() {
               {filteredTiendas.map(tienda => {
                 const participates = getParticipaState(selectedCampana, tienda.id)
                 const statusClass = participates ? 'status-activa' : 'status-inactiva'
-                const statusText = participates ? 'Activa' : 'Sin activar'
+                const statusText = participates ? 'Participa' : 'No participa'
                 return (
                   <tr key={tienda.id} className="clickable">
-                    <td>{tienda.descripcion}</td>
-                    <td>
-                      <input
-                        type="checkbox"
-                        className="check-participa"
-                        checked={participates}
-                        onChange={e => toggleParticipa(tienda.id, e.target.checked)}
-                      />
-                    </td>
+                    <td>{tienda.nombre}</td>
                     <td>{tienda.localidad.toUpperCase()}</td>
                     <td>{tienda.domicilio}</td>
                     <td>{tienda.c_postal}</td>

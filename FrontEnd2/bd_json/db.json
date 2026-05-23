@@ -105,7 +105,7 @@
   "tiendas": [
     {
       "id": "1",
-      "descripcion": "Mercadona el Cónsul",
+      "nombre": "Mercadona el Cónsul",
       "localidad": "Málaga",
       "domicilio": "c/ Aristófanes, nºxx",
       "c_postal": "29010",
@@ -115,7 +115,7 @@
     },
     {
       "id": "2",
-      "descripcion": "Lidl el Polígono",
+      "nombre": "Lidl el Polígono",
       "localidad": "Marbella",
       "domicilio": "c/ Industrial, 5",
       "c_postal": "29600",
@@ -125,7 +125,7 @@
     },
     {
       "id": "3",
-      "descripcion": "Lidl Antequera",
+      "nombre": "Lidl Antequera",
       "localidad": "Antequera",
       "domicilio": "Av. Principal, 10",
       "c_postal": "29200",
@@ -135,7 +135,7 @@
     },
     {
       "id": "4",
-      "descripcion": "Carrefour Alameda",
+      "nombre": "Carrefour Alameda",
       "localidad": "Málaga",
       "domicilio": "Av. de la Aurora",
       "c_postal": "29007",
@@ -145,7 +145,7 @@
     },
     {
       "id": "5",
-      "descripcion": "Covirán Puerto de la Torre",
+      "nombre": "Covirán Puerto de la Torre",
       "localidad": "Málaga",
       "domicilio": "c/ Lope de Vega",
       "c_postal": "29010",
@@ -155,7 +155,7 @@
     },
     {
       "id": "6",
-      "descripcion": "Dia Mármoles",
+      "nombre": "Dia Mármoles",
       "localidad": "Málaga",
       "domicilio": "c/ Mármoles, nº xx",
       "c_postal": "29007",
@@ -165,7 +165,7 @@
     },
     {
       "id": "7",
-      "descripcion": "Mercadona Campanillas",
+      "nombre": "Mercadona Campanillas",
       "localidad": "Málaga",
       "domicilio": "c/ Principal, s/n",
       "c_postal": "29590",
@@ -175,7 +175,7 @@
     },
     {
       "id": "8",
-      "descripcion": "Dia Carretera Cádiz",
+      "nombre": "Dia Carretera Cádiz",
       "localidad": "Málaga",
       "domicilio": "Av. Velázquez, 45",
       "c_postal": "29004",
@@ -185,7 +185,7 @@
     },
     {
       "id": "9",
-      "descripcion": "Covirán Bailén-Miraflores",
+      "nombre": "Covirán Bailén-Miraflores",
       "localidad": "Málaga",
       "domicilio": "c/ Martínez de la Rosa",
       "c_postal": "29010",
@@ -195,7 +195,7 @@
     },
     {
       "id": "10",
-      "descripcion": "Dia Capuchinos",
+      "nombre": "Dia Capuchinos",
       "localidad": "Málaga",
       "domicilio": "Alameda de Capuchinos",
       "c_postal": "29013",
@@ -205,7 +205,7 @@
     },
     {
       "id": "11",
-      "descripcion": "El Corte Inglés Bahía Málaga",
+      "nombre": "El Corte Inglés Bahía Málaga",
       "localidad": "Málaga",
       "domicilio": "c/ Hamlet, 2",
       "c_postal": "29006",
@@ -215,7 +215,7 @@
     },
     {
       "id": "12",
-      "descripcion": "El Corte Inglés Av. Andalucía",
+      "nombre": "El Corte Inglés Av. Andalucía",
       "localidad": "Málaga",
       "domicilio": "Av. Andalucía, 4",
       "c_postal": "29007",

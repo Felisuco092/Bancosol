@@ -10,7 +10,6 @@ export default function TurnosPage() {
   const [usuarios, setUsuarios] = useState([])
   const [selectedCampana, setSelectedCampana] = useState('')
   const [selectedTienda, setSelectedTienda] = useState('')
-  const [showCuadrante, setShowCuadrante] = useState(false)
 
   useEffect(() => {
     Promise.all([
@@ -44,9 +43,6 @@ export default function TurnosPage() {
     return user ? `${user.nombre} ${user.apellidos}` : 'No asignado'
   }
 
-  function handleBuscar() {
-    setShowCuadrante(true)
-  }
 
   const filteredTurnos = selectedCampana && selectedTienda
     ? turnos.filter(t =>
@@ -85,14 +81,13 @@ export default function TurnosPage() {
           <select id="select-tienda" value={selectedTienda} onChange={e => setSelectedTienda(e.target.value)}>
             <option value="">-- Seleccione Tienda --</option>
             {tiendas.map(t => (
-              <option key={t.id} value={t.id}>{t.descripcion}</option>
+              <option key={t.id} value={t.id}>{t.nombre}</option>
             ))}
           </select>
         </div>
-        <button id="btn-buscar" className="btn btn-primary" onClick={handleBuscar}>Ver Cuadrante</button>
       </div>
 
-      {showCuadrante && (
+      
         <div id="cuadrante-container">
           <div className="card">
             <div className="cuadrante-header">
@@ -139,7 +134,7 @@ export default function TurnosPage() {
             </table>
           </div>
         </div>
-      )}
+      
     </>
   )
 }

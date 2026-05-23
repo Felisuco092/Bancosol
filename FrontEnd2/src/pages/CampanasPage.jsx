@@ -63,11 +63,8 @@ export default function CampanasPage() {
                   <td>{campana.dia_final}</td>
                   <td><span style={{ padding: '4px 8px', borderRadius: '4px', fontSize: '0.85rem', ...info.style }}>{info.label}</span></td>
                   <td>
-                    <button className="btn btn-primary btn-sm">Editar</button><br />
-                    <button className="btn btn-action btn-info">Tiendas</button><br />
-                    <button className="btn btn-action btn-warning">Colaboradores</button><br />
-                    <button className="btn btn-action btn-turnos">Turnos</button><br />
-                    <button className="btn btn-action btn-delete-campana">Borrar</button><br />
+                    <button className="btn btn-primary btn-sm">Editar</button>
+                    <button className="btn btn-danger btn-sm">Eliminar</button>
                   </td>
                 </tr>
               )
