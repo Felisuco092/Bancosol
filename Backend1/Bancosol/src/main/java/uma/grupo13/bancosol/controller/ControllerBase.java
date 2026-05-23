@@ -1,6 +1,7 @@
 package uma.grupo13.bancosol.controller;
 
 import jakarta.servlet.http.HttpSession;
+import lombok.AllArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -8,25 +9,23 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.SessionAttribute;
-import uma.grupo13.bancosol.dao.*;
-import uma.grupo13.bancosol.entity.*;
-import uma.grupo13.bancosol.utils.ValidaSesion;
+import uma.grupo13.bancosol.entity.CadenaEntity;
+import uma.grupo13.bancosol.entity.CampanaEntity;
+import uma.grupo13.bancosol.entity.TiendaEntity;
+import uma.grupo13.bancosol.entity.UsuarioEntity;
+import uma.grupo13.bancosol.services.*;
 
 import java.util.List;
 import java.util.Optional;
 
 @Controller
+@AllArgsConstructor
 public class ControllerBase {
-    @Autowired
-    protected UserRepository userRepo;
-    @Autowired
-    protected TiendasRepository tiendasRepo;
-    @Autowired
-    protected VoluntariosRepository voluntariosRepo;
-    @Autowired
-    protected CampanaRepository campanaRepo;
-    @Autowired
-    protected CadenaRepository cadenaRepo;
+    private final UsuariosService usuariosService;
+    private final TiendasService tiendasServ;
+    private final VoluntariosService voluntariosService;
+    private final CampanasService campanasService;
+    private final CadenaService cadenaService;
 
 
     @GetMapping("/")
@@ -42,16 +41,17 @@ public class ControllerBase {
     public String doDashboard(Model model, @SessionAttribute(name = "user", required = false) UsuarioEntity user) {
         if (user != null) {
             model.addAttribute("paginaActual", "dashboard");
-            List<TiendaEntity> tiendas = tiendasRepo.findAll();
+            List<TiendaEntity> tiendas = tiendasServ.listarTiendas();
             model.addAttribute("tiendas", tiendas);
             
-            int totalVoluntarios = voluntariosRepo.countTotalPersonasVoluntarias();
+            int totalVoluntarios = voluntariosService.countTotalPersonasVoluntarias();
             model.addAttribute("totalVoluntarios", totalVoluntarios);
 
-            Optional<CampanaEntity> campanaOpt = campanaRepo.findCampanaActiva();
+            Optional<CampanaEntity> campanaOpt = campanasService.findCampanaActiva();
             CampanaEntity campana = campanaOpt.orElse(null);
             model.addAttribute("campana", campana);
-            List<CadenaEntity> cadenas = cadenaRepo.cadenasPorTiendas().subList(0, Math.min(5, cadenaRepo.findAll().size()));
+            List<CadenaEntity> cadenas = cadenaService.cadenasPorTiendas();
+            if (cadenas.size() > 5) cadenas = cadenas.subList(0, 5);
             model.addAttribute("cadenas", cadenas);
 
             model.addAttribute("user", user);
@@ -64,7 +64,7 @@ public class ControllerBase {
     @PostMapping("/login")
     public String dologin(@RequestParam("username") String user, @RequestParam("password") String pass,
                           HttpSession session, Model model) {
-        UsuarioEntity usuario = userRepo.autheticate(user, pass);
+        UsuarioEntity usuario = usuariosService.autheticate(user, pass);
 
         if (usuario != null) {
             session.setAttribute("user", usuario);
