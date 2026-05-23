@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react'
 import { useNavigate, Link } from 'react-router-dom'
-import { fetchData, postData } from '../services/api'
+import { fetchData, postData } from '../../services/api'
 
 export default function CrearTiendaPage() {
   const [cadenas, setCadenas] = useState([])
