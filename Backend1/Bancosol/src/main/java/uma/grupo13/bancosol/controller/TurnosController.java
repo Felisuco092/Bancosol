@@ -25,6 +25,10 @@ public class TurnosController {
     private final TurnosService turnosService;
     private final CampanasService campanasService;
     private final TiendasService tiendasService;
+    private final VoluntariosService voluntariosService;
+
+    @Autowired
+    protected VoluntariosRepository voluntariosRepository;
 
     @GetMapping("/")
     public String doTurnos(Model model, @RequestParam(name="campana", required = false)CampanaEntity campana, @SessionAttribute(name = "user", required = false) UsuarioEntity user){
@@ -54,9 +58,11 @@ public class TurnosController {
         TurnoEntity newTurno = new TurnoEntity();
         List<CampanaEntity> campanas = campanasService.listarCampanas();
         List<TiendaEntity> tiendas = tiendasService.listarTiendas();
+        //List<VoluntarioBaseEntity> voluntarios = voluntariosRepository.findAll();  mirar
         model.addAttribute("turno", newTurno);
         model.addAttribute("campanas", campanas);
         model.addAttribute("tiendas", tiendas);
+        model.addAttribute("voluntarios", voluntarios);
 
         return "crear_editar/crear_turno";
     }
@@ -73,21 +79,19 @@ public class TurnosController {
     }
 
     @PostMapping("/guardar")
-    public  String doGuardarTurnos(@RequestParam(value = "tipo-turno") String tipoTurno,
-                                   @RequestParam(value = "dia") LocalDate fecha,
-                                   @RequestParam(value = "hora-inicio") LocalTime horaInicio,
-                                   @RequestParam(value = "hora-fin") LocalTime horaFin,
-                                   @RequestParam(value = "idCampana") Integer idCampana,
-                                   @RequestParam(value = "idTienda") Integer idTienda,
-                                   Model model, @SessionAttribute(name = "user", required = false) UsuarioEntity user) {
+    public String doGuardarTurnos(@RequestParam(value = "tipo-turno") String tipoTurno,
+                                  @RequestParam(value = "dia") String fechaStr,
+                                  @RequestParam(value = "hora-inicio") String horaInicioStr,
+                                  @RequestParam(value = "hora-fin") String horaFinStr,
+                                  @RequestParam(value = "idCampana") Integer idCampana,
+                                  @RequestParam(value = "idTienda") Integer idTienda,
+                                  @RequestParam(value = "idVoluntario") Integer idVoluntario,
+                                  Model model, @SessionAttribute(name = "user", required = false) UsuarioEntity user) {
         if (user == null) return "redirect:/";
-        
+
         try {
             TurnoEntity newTurno = new TurnoEntity();
             newTurno.setTipoTurno(tipoTurno);
-            newTurno.setDia(fecha);
-            newTurno.setHoraInicio(horaInicio);
-            newTurno.setHoraFin(horaFin);
             
             CampanaEntity campana = campanasService.buscarPorId(idCampana);
             TiendaEntity tienda = tiendasService.buscarPorId(idTienda);
@@ -95,15 +99,55 @@ public class TurnosController {
             if (campana == null || tienda == null) {
                 // Si falta alguno, redirigir con error o manejarlo
                 return "redirect:/turnos/crear"; 
+              
+              //mirar
+            if (fechaStr != null && !fechaStr.isEmpty()) {
+                newTurno.setDia(LocalDate.parse(fechaStr));
             }
-            
+            if (horaInicioStr != null && !horaInicioStr.isEmpty()) {
+                newTurno.setHoraInicio(LocalTime.parse(horaInicioStr));
+            }
+            if (horaFinStr != null && !horaFinStr.isEmpty()) {
+                newTurno.setHoraFin(LocalTime.parse(horaFinStr));
+            }
+
+            CampanaEntity campana = campanaRepository.findById(idCampana).orElse(null);
+            TiendaEntity tienda = tiendaRepository.findById(idTienda).orElse(null);
+            VoluntarioBaseEntity voluntario = voluntariosRepository.findById(idVoluntario).orElse(null);
+
+            if (campana == null || tienda == null || voluntario == null) {
+                throw new Exception("Campaña o Tienda no encontrada");
+            }
+
             newTurno.setCampana(campana);
             newTurno.setTienda(tienda);
             
             turnosService.guardarTurno(newTurno);
+  //mira
+            newTurno.setVoluntario(voluntario);
+
+            turnoRepository.save(newTurno);
+              
+              //mira
         } catch (Exception e) {
             e.printStackTrace();
-            return "redirect:/turnos/crear"; // O una página de error específica
+            model.addAttribute("error", "Error al guardar el turno: " + e.getMessage());
+            model.addAttribute("tipoTurno", tipoTurno);
+            model.addAttribute("dia", fechaStr);
+            model.addAttribute("horaInicio", horaInicioStr);
+            model.addAttribute("horaFin", horaFinStr);
+            model.addAttribute("idCampanaSel", idCampana);
+            model.addAttribute("idTiendaSel", idTienda);
+            model.addAttribute("idVoluntarioSel", idVoluntario);
+
+            List<CampanaEntity> campanas = campanaRepository.findAll();
+            List<TiendaEntity> tiendas = tiendaRepository.findAll();
+            List<VoluntarioBaseEntity> voluntarios = voluntariosRepository.findAll();
+            model.addAttribute("voluntarios", voluntarios);
+            model.addAttribute("campanas", campanas);
+            model.addAttribute("tiendas", tiendas);
+            
+            return "crear_editar/crear_turno";
         }
 
         return "redirect:/turnos/";
