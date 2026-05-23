@@ -58,8 +58,18 @@ export default function ColaboradoresPage() {
   }, [])
 
   async function handleDelete(id) {
-    if (!confirm('¿Estás seguro de que deseas eliminar este colaborador?')) return
+    if (!confirm('¿Estás seguro de que deseas eliminar este colaborador? También se eliminarán sus turnos asociados.')) return
     try {
+      const [fisicos, entidades, turnos] = await Promise.all([
+        fetchData('voluntario_fisico?id_voluntario=' + id),
+        fetchData('voluntario_entidad?id_voluntario=' + id),
+        fetchData('turnos?id_voluntario=' + id)
+      ])
+      await Promise.all([
+        ...fisicos.map(f => deleteData('voluntario_fisico/' + f.id)),
+        ...entidades.map(e => deleteData('voluntario_entidad/' + e.id)),
+        ...turnos.map(t => deleteData('turnos/' + t.id))
+      ])
       await deleteData('voluntario_base/' + id)
       setRows(prev => prev.filter(r => String(r.id) !== String(id)))
       alert('Colaborador eliminado con éxito')

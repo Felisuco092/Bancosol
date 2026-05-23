@@ -21,8 +21,16 @@ export default function CampanasPage() {
   }, [])
 
   async function handleDelete(id) {
-    if (!confirm('¿Estás seguro de que deseas eliminar esta campaña?')) return
+    if (!confirm('¿Estás seguro de que deseas eliminar esta campaña? También se eliminarán las participaciones y turnos asociados.')) return
     try {
+      const [participas, turnos] = await Promise.all([
+        fetchData('participa?id_campana=' + id),
+        fetchData('turnos?id_campana=' + id)
+      ])
+      await Promise.all([
+        ...participas.map(p => deleteData('participa/' + p.id)),
+        ...turnos.map(t => deleteData('turnos/' + t.id))
+      ])
       await deleteData('campanas/' + id)
       setCampanas(prev => prev.filter(c => String(c.id) !== String(id)))
       alert('Campaña eliminada con éxito')

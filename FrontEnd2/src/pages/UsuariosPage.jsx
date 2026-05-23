@@ -23,8 +23,10 @@ export default function UsuariosPage() {
   }
 
   async function handleDelete(id) {
-    if (!confirm('¿Estás seguro de que deseas dar de baja a este usuario?')) return
+    if (!confirm('¿Estás seguro de que deseas dar de baja a este usuario? También se eliminarán sus notificaciones.')) return
     try {
+      const notificaciones = await fetchData('notificaciones?id_usuario_destino=' + id)
+      await Promise.all(notificaciones.map(n => deleteData('notificaciones/' + n.id)))
       await deleteData('usuarios/' + id)
       setUsuarios(prev => prev.filter(u => String(u.id) !== String(id)))
       alert('Usuario eliminado con éxito')

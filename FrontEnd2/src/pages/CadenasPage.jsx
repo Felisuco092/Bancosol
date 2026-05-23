@@ -16,8 +16,20 @@ export default function CadenasPage() {
   }, [])
 
   async function handleDelete(id) {
-    if (!confirm('¿Estás seguro de que deseas eliminar esta cadena?')) return
+    if (!confirm('¿Estás seguro de que deseas eliminar esta cadena? También se eliminarán las tiendas asociadas.')) return
     try {
+      const tiendas = await fetchData('tiendas?id_cadena=' + id)
+      for (const tienda of tiendas) {
+        const [participas, turnos] = await Promise.all([
+          fetchData('participa?id_tienda=' + tienda.id),
+          fetchData('turnos?id_tienda=' + tienda.id)
+        ])
+        await Promise.all([
+          ...participas.map(p => deleteData('participa/' + p.id)),
+          ...turnos.map(t => deleteData('turnos/' + t.id)),
+          deleteData('tiendas/' + tienda.id)
+        ])
+      }
       await deleteData('cadenas/' + id)
       setCadenas(prev => prev.filter(c => String(c.id) !== String(id)))
       alert('Cadena eliminada con éxito')
