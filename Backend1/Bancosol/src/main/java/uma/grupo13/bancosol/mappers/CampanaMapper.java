@@ -1,0 +1,20 @@
+package uma.grupo13.bancosol.mappers;
+
+import org.springframework.stereotype.Component;
+import uma.grupo13.bancosol.dto.CampanaDTO;
+import uma.grupo13.bancosol.entity.CampanaEntity;
+
+@Component
+public class CampanaMapper extends MapperDTO<CampanaDTO, CampanaEntity> {
+    @Override
+    public CampanaDTO toDTO(CampanaEntity entity) {
+        CampanaDTO dto = new CampanaDTO();
+        dto.setId(entity.getId());
+        dto.setNombre(entity.getNombre());
+        dto.setAno(entity.getAno());
+        dto.setDiaComienzo(entity.getDiaComienzo());
+        dto.setDiaFinal(entity.getDiaFinal());
+        dto.setTiempoRestante(entity.getTiempoRestante());
+        return dto;
+    }
+}
