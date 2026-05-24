@@ -13,6 +13,7 @@ public class TiendaMapper extends MapperDTO<TiendaDTO, TiendaEntity> {
 
     @Override
     public TiendaDTO toDTO(TiendaEntity entity) {
+        if (entity == null) return null;
         TiendaDTO dto = new TiendaDTO();
         dto.setId(entity.getId());
         dto.setDescripcion(entity.getDescripcion());

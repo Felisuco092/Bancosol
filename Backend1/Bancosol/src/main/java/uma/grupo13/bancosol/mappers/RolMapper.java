@@ -8,6 +8,7 @@ import uma.grupo13.bancosol.entity.RolEntity;
 public class RolMapper extends MapperDTO<RolDTO, RolEntity> {
     @Override
     public RolDTO toDTO(RolEntity entity) {
+        if (entity == null) return null;
         RolDTO dto = new RolDTO();
         dto.setId(entity.getId());
         dto.setNombre(entity.getNombre());

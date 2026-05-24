@@ -4,8 +4,12 @@ import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 import uma.grupo13.bancosol.dao.CampanaRepository;
 import uma.grupo13.bancosol.dao.ParticipaRepository;
+import uma.grupo13.bancosol.dto.CampanaDTO;
+import uma.grupo13.bancosol.dto.TiendaDTO;
 import uma.grupo13.bancosol.entity.CampanaEntity;
 import uma.grupo13.bancosol.entity.TiendaEntity;
+import uma.grupo13.bancosol.mappers.CampanaMapper;
+import uma.grupo13.bancosol.mappers.TiendaMapper;
 
 import java.util.List;
 import java.util.Optional;
@@ -15,17 +19,24 @@ import java.util.Optional;
 public class CampanasService {
     private final CampanaRepository campanaRepository;
     private final ParticipaRepository participaRepository;
+    private final CampanaMapper campanaMapper;
+    private final TiendaMapper tiendaMapper;
 
-    public List<CampanaEntity> listarCampanas() {
-        return campanaRepository.findAll();
+    public List<CampanaDTO> listarCampanas() {
+        List<CampanaEntity> lista= campanaRepository.findAll();
+        return campanaMapper.toDTOList(lista);
     }
 
-    public CampanaEntity buscarPorId(Integer id) {
-        return campanaRepository.findById(id).orElse(null);
+    public CampanaDTO buscarPorId(Integer id) {
+        if (id==null) {return null;}
+        CampanaEntity campana = campanaRepository.findById(id).orElse(null);
+        return campanaMapper.toDTO(campana);
     }
 
-    public CampanaEntity getReferenceById(Integer id) {
-        return campanaRepository.getReferenceById(id);
+    public CampanaDTO getReferenceById(Integer id) {
+        if (id==null) {return null;}
+        CampanaEntity campana = campanaRepository.getReferenceById(id);
+        return campanaMapper.toDTO(campana);
     }
 
     public void borrarCampana(CampanaEntity campana) {
@@ -36,11 +47,13 @@ public class CampanasService {
         campanaRepository.save(campana);
     }
 
-    public Optional<CampanaEntity> findCampanaActiva() {
-        return campanaRepository.findCampanaActiva();
+    public Optional<CampanaDTO> findCampanaActiva() {
+        Optional<CampanaEntity> campana = campanaRepository.findCampanaActiva();
+        return campana.map(campanaMapper::toDTO);
     }
 
-    public List<TiendaEntity> filtrarTiendasParticipaCampana(Integer idCampana) {
-        return participaRepository.findTiendasByCampanaId(idCampana);
+    public List<TiendaDTO> filtrarTiendasParticipaCampana(Integer idCampana) {
+        List<TiendaEntity> tiendas = participaRepository.findTiendasByCampanaId(idCampana);
+        return tiendaMapper.toDTOList(tiendas);
     }
 }
