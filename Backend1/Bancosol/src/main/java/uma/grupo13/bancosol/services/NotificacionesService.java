@@ -30,7 +30,9 @@ public class NotificacionesService {
         notificacionRepository.deleteById(id);
     }
 
-    public void deleteAll(List<NotificacionEntity> notificaciones) {
-        notificacionRepository.deleteAll(notificaciones);
+    public void deleteAll(List<NotificacionDTO> notificaciones) {
+        for(NotificacionDTO n: notificaciones){
+            notificacionRepository.deleteById(n.getId());
+        }
     }
 }
