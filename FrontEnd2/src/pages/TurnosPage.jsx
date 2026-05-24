@@ -31,27 +31,27 @@ export default function TurnosPage() {
   }, [])
 
   function getVoluntarioDisplay(idVoluntario) {
-    const fisico = voluntarioFisico.find(v => Number(v.id_voluntario) === Number(idVoluntario))
+    const fisico = voluntarioFisico.find(v => String(v.id_voluntario) === String(idVoluntario))
     if (fisico) return `${fisico.nombre} ${fisico.apellidos}`
-    const entidad = voluntarioEntidad.find(v => Number(v.id_voluntario) === Number(idVoluntario))
+    const entidad = voluntarioEntidad.find(v => String(v.id_voluntario) === String(idVoluntario))
     if (entidad) return `${entidad.nombre_asociacion} (${entidad.n_voluntarios})`
     return `Voluntario #${idVoluntario}`
   }
 
   function getUsuarioName(id) {
-    const user = usuarios.find(u => Number(u.id) === Number(id))
+    const user = usuarios.find(u => String(u.id) === String(id))
     return user ? `${user.nombre} ${user.apellidos}` : 'No asignado'
   }
 
 
   const filteredTurnos = selectedCampana && selectedTienda
     ? turnos.filter(t =>
-        Number(t.id_campana) === Number(selectedCampana) &&
-        Number(t.id_tienda) === Number(selectedTienda)
+        String(t.id_campana) === String(selectedCampana) &&
+        String(t.id_tienda) === String(selectedTienda)
       )
     : []
 
-  const tiendaSel = selectedTienda ? tiendas.find(t => Number(t.id) === Number(selectedTienda)) : null
+  const tiendaSel = selectedTienda ? tiendas.find(t => String(t.id) === String(selectedTienda)) : null
   const capitanNombre = tiendaSel && tiendaSel.id_capitan
     ? getUsuarioName(tiendaSel.id_capitan)
     : 'Sin asignar'

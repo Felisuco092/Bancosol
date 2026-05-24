@@ -35,7 +35,7 @@ export default function DashboardPage() {
     .sort((a, b) => b[1] - a[1])
     .slice(0, 4)
     .map(([id, count]) => {
-      const cadena = cadenas.find(c => Number(c.id) === Number(id))
+      const cadena = cadenas.find(c => String(c.id) === String(id))
       return { nombre: cadena ? cadena.nombre : 'Desconocida', tiendas: count }
     })
 

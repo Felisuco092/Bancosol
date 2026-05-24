@@ -18,7 +18,7 @@ export default function UsuariosPage() {
   }, [])
 
   function getRolName(id) {
-    const rol = roles.find(r => Number(r.id) === Number(id))
+    const rol = roles.find(r => String(r.id) === String(id))
     return rol ? rol.nombre : 'Desconocido'
   }
 

@@ -22,11 +22,11 @@ export default function ColaboradoresPage() {
       fetchData('voluntario_fisico'),
       fetchData('voluntario_entidad')
     ]).then(([voluntariosBase, voluntariosFisico, voluntariosEntidad]) => {
-      const fisicoIds = new Set(voluntariosFisico.map(v => Number(v.id_voluntario)))
-      const entidadIds = new Set(voluntariosEntidad.map(v => Number(v.id_voluntario)))
+      const fisicoIds = new Set(voluntariosFisico.map(v => String(v.id_voluntario)))
+      const entidadIds = new Set(voluntariosEntidad.map(v => String(v.id_voluntario)))
 
       function getVoluntarioType(id) {
-        const nid = Number(id)
+        const nid = String(id)
         if (fisicoIds.has(nid)) return 'fisico'
         if (entidadIds.has(nid)) return 'entidad'
         return 'desconocido'
@@ -35,7 +35,7 @@ export default function ColaboradoresPage() {
       const result = voluntariosBase.map(vb => {
         const type = getVoluntarioType(vb.id)
         if (type === 'fisico') {
-          const f = voluntariosFisico.find(v => Number(v.id_voluntario) === Number(vb.id))
+          const f = voluntariosFisico.find(v => String(v.id_voluntario) === String(vb.id))
           return {
             ...vb,
             nombre: `${f.nombre} ${f.apellidos}`,
@@ -44,7 +44,7 @@ export default function ColaboradoresPage() {
             localidad: f.localidad || vb.localidad || ''
           }
         }
-        const e = voluntariosEntidad.find(v => Number(v.id_voluntario) === Number(vb.id))
+        const e = voluntariosEntidad.find(v => String(v.id_voluntario) === String(vb.id))
         return {
           ...vb,
           nombre: e ? e.nombre_asociacion : 'Desconocido',
