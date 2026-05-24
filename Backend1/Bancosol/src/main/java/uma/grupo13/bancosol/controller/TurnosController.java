@@ -168,6 +168,7 @@ public class TurnosController {
 
     @GetMapping("/tiendas-por-campana")
     @ResponseBody
+    // Para este hemos recurrido a la IA generativa
     public List<Map<String, Object>> doTiendasPorCampana(@RequestParam("idCampana") Integer idCampana,
                                                          @SessionAttribute(name = "user", required = false) UsuarioEntity user) {
         if (user == null) return List.of();
