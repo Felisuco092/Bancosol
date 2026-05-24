@@ -1,17 +1,19 @@
 import { useState } from 'react'
 import { NavLink, useNavigate } from 'react-router-dom'
+import { useAuth } from '../auth/useAuthHook'
 import logoSrc from '../assets/logo.png'
 
 export default function Sidebar() {
   const [open, setOpen] = useState(false)
   const navigate = useNavigate()
+  const { logout } = useAuth()
 
   function toggle() {
     setOpen(prev => !prev)
   }
 
   function handleLogout() {
-    sessionStorage.removeItem('user')
+    logout()
     navigate('/')
   }
 

@@ -1,22 +1,33 @@
 import { useState } from 'react'
 import { useNavigate } from 'react-router-dom'
+import { useAuth } from '../auth/useAuthHook'
+import { loginUser } from '../services/api'
 import logoSrc from '../assets/logo.png'
 
 export default function LoginPage() {
   const [username, setUsername] = useState('')
   const [password, setPassword] = useState('')
+  const [error, setError] = useState('')
   const navigate = useNavigate()
+  const { login } = useAuth()
 
-  function handleSubmit(e) {
+  async function handleSubmit(e) {
     e.preventDefault()
-    sessionStorage.setItem('user', username || 'admin')
-    navigate('/dashboard')
+    setError('')
+    try {
+      const data = await loginUser(username, password)
+      login(data.user, data.accessToken)
+      navigate('/dashboard')
+    } catch (err) {
+      setError(err.message)
+    }
   }
 
   return (
     <div className="login-card">
       <img src={logoSrc} alt="Logo BANCOSOL" className="logo_login" />
       <p className="login-subtitle">Acceso al sistema de gestión</p>
+      {error && <p className="error-message">{error}</p>}
       <form id="login-form" onSubmit={handleSubmit}>
         <div className="input_login">
           <label htmlFor="username">Usuario:</label>
