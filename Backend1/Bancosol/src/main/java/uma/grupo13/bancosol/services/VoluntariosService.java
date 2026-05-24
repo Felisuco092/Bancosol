@@ -3,7 +3,9 @@ package uma.grupo13.bancosol.services;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 import uma.grupo13.bancosol.dao.VoluntariosRepository;
+import uma.grupo13.bancosol.dto.VoluntarioDTO;
 import uma.grupo13.bancosol.entity.VoluntarioBaseEntity;
+import uma.grupo13.bancosol.mappers.VoluntarioMapper;
 
 import java.util.List;
 
@@ -11,33 +13,41 @@ import java.util.List;
 @AllArgsConstructor
 public class VoluntariosService {
     private final VoluntariosRepository voluntariosRepository;
+    private final VoluntarioMapper voluntarioMapper;
 
-    public List<VoluntarioBaseEntity> listarVoluntarios() {
-        return voluntariosRepository.findAll();
+    public List<VoluntarioDTO> listarVoluntarios() {
+        List<VoluntarioBaseEntity> lista= voluntariosRepository.findAll();
+        return voluntarioMapper.toDTOList(lista);
     }
 
     public List<String> findLocalidadesDistintas() {
         return voluntariosRepository.findLocalidadesDistintas();
     }
 
-    public List<VoluntarioBaseEntity> findAllByLocalidad(String localidad) {
-        return voluntariosRepository.findAllByLocalidad(localidad);
+    public List<VoluntarioDTO> findAllByLocalidad(String localidad) {
+        List<VoluntarioBaseEntity> lista= voluntariosRepository.findAllByLocalidad(localidad);
+        return voluntarioMapper.toDTOList(lista);
     }
 
-    public List<VoluntarioBaseEntity> findBaseFisicos(String localidad) {
-        return voluntariosRepository.findBaseFisicos(localidad);
+    public List<VoluntarioDTO> findBaseFisicos(String localidad) {
+        List<VoluntarioBaseEntity> lista= voluntariosRepository.findBaseFisicos(localidad);
+        return voluntarioMapper.toDTOList(lista);
     }
 
-    public List<VoluntarioBaseEntity> findBaseEntidades(String localidad) {
-        return voluntariosRepository.findBaseEntidades(localidad);
+    public List<VoluntarioDTO> findBaseEntidades(String localidad) {
+        List<VoluntarioBaseEntity> lista= voluntariosRepository.findBaseEntidades(localidad);
+        return voluntarioMapper.toDTOList(lista);
     }
 
-    public List<VoluntarioBaseEntity> findPendientes(String localidad) {
-        return voluntariosRepository.findPendientes(localidad);
+    public List<VoluntarioDTO> findPendientes(String localidad) {
+        List<VoluntarioBaseEntity> lista= voluntariosRepository.findPendientes(localidad);
+        return voluntarioMapper.toDTOList(lista);
     }
 
-    public VoluntarioBaseEntity buscarPorId(Integer id) {
-        return voluntariosRepository.findById(id).orElse(null);
+    public VoluntarioDTO buscarPorId(Integer id) {
+        if (id==null) {return null;}
+        VoluntarioBaseEntity voluntario = voluntariosRepository.findById(id).orElse(null);
+        return voluntarioMapper.toDTO(voluntario);
     }
 
     public void deleteById(Integer id) {

@@ -12,6 +12,7 @@ public class UsuarioMapper extends MapperDTO<UsuarioDTO, UsuarioEntity> {
 
     @Override
     public UsuarioDTO toDTO(UsuarioEntity entity) {
+        if (entity == null) return null;
         UsuarioDTO dto = new UsuarioDTO();
         dto.setId(entity.getId());
         dto.setNombre(entity.getNombre());

@@ -8,6 +8,7 @@ import uma.grupo13.bancosol.entity.NotificacionEntity;
 public class NotificacionMapper extends MapperDTO<NotificacionDTO, NotificacionEntity> {
     @Override
     public NotificacionDTO toDTO(NotificacionEntity entity) {
+        if (entity == null) return null;
         NotificacionDTO dto = new NotificacionDTO();
         dto.setId(entity.getId());
         dto.setUsuarioDestinoId(entity.getUsuarioDestino() != null ? entity.getUsuarioDestino().getId() : null);

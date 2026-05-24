@@ -13,6 +13,8 @@ import org.hibernate.Hibernate;
 public class VoluntarioMapper extends MapperDTO<VoluntarioDTO, VoluntarioBaseEntity> {
     @Override
     public VoluntarioDTO toDTO(VoluntarioBaseEntity entity) {
+        if (entity == null) return null;
+
         VoluntarioDTO dto = new VoluntarioDTO();
         dto.setId(entity.getId());
         dto.setDomicilio(entity.getDomicilio());

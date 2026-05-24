@@ -3,7 +3,9 @@ package uma.grupo13.bancosol.services;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 import uma.grupo13.bancosol.dao.TiendasRepository;
+import uma.grupo13.bancosol.dto.TiendaDTO;
 import uma.grupo13.bancosol.entity.TiendaEntity;
+import uma.grupo13.bancosol.mappers.TiendaMapper;
 
 import java.util.List;
 
@@ -11,25 +13,32 @@ import java.util.List;
 @AllArgsConstructor
 public class TiendasService {
     private final TiendasRepository tiendasRepo;
+    private final TiendaMapper tiendaMapper;
 
-    public List<TiendaEntity> listarTiendas(){
-        return tiendasRepo.findAll();
+    public List<TiendaDTO> listarTiendas(){
+        List<TiendaEntity> lista = tiendasRepo.findAll();
+        return tiendaMapper.toDTOList(lista);
     }
 
-    public TiendaEntity buscarPorId(Integer id) {
-        return tiendasRepo.findById(id).orElse(null);
+    public TiendaDTO buscarPorId(Integer id) {
+        TiendaEntity tienda = tiendasRepo.findById(id).orElse(null);
+        return tiendaMapper.toDTO(tienda);
     }
 
-    public TiendaEntity getReferenceById(Integer id) {
-        return tiendasRepo.getReferenceById(id);
+    public TiendaDTO getReferenceById(Integer id) {
+        if (id==null) {return null;}
+        TiendaEntity tienda = tiendasRepo.getReferenceById(id);
+        return tiendaMapper.toDTO(tienda);
     }
 
-    public List<TiendaEntity> filtroLocalidad(String local) {
-        return tiendasRepo.filtroLocalidad(local);
+    public List<TiendaDTO> filtroLocalidad(String local) {
+        List<TiendaEntity> lista = tiendasRepo.filtroLocalidad(local);
+        return tiendaMapper.toDTOList(lista);
     }
 
-    public List<TiendaEntity> filtroLocalidadCadena(String local, Integer idCad) {
-        return tiendasRepo.filtroLocalidadCadena(local, idCad);
+    public List<TiendaDTO> filtroLocalidadCadena(String local, Integer idCad) {
+        List<TiendaEntity> lista = tiendasRepo.filtroLocalidadCadena(local, idCad);
+        return tiendaMapper.toDTOList(lista);
     }
 
     public void borrarTiendaPorId(Integer id) {
