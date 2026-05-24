@@ -54,7 +54,7 @@ export default function TiendasPage() {
   const localidades = [...new Set(tiendas.map(t => t.localidad))]
 
   const filteredTiendas = !selectedCampana ? [] : tiendas.filter(tienda => {
-    const matchCadena = selectedCadena === 'todas' || Number(tienda.id_cadena) === Number(selectedCadena)
+    const matchCadena = selectedCadena === 'todas' || String(tienda.id_cadena) === String(selectedCadena)
     const matchLocalidad = selectedLocalidad === 'todas' || tienda.localidad.toLowerCase() === selectedLocalidad
     return matchCadena && matchLocalidad
   })
