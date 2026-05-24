@@ -6,6 +6,8 @@ export default function CrearCampanaPage() {
   const { id } = useParams()
   const editando = !!id
   const navigate = useNavigate()
+  const [cadenas, setCadenas] = useState([])
+  const [cadenasSeleccion, setCadenasSeleccion] = useState([])
   const [form, setForm] = useState({
     nombre: '',
     ano: '',
@@ -18,9 +20,20 @@ export default function CrearCampanaPage() {
     setForm(prev => ({ ...prev, [name]: value }))
   }
 
+  function toggleCadena(idCadena) {
+    setCadenasSeleccion(prev =>
+      prev.includes(idCadena)
+        ? prev.filter(c => c !== idCadena)
+        : [...prev, idCadena]
+    )
+  }
+
   useEffect(() => {
     async function load() {
       try {
+        const cads = await fetchData('cadenas')
+        setCadenas(cads)
+
         if (editando) {
           const c = await fetchData('campanas/' + id)
           setForm({
@@ -42,10 +55,25 @@ export default function CrearCampanaPage() {
     try {
       if (editando) {
         await putData('campanas/' + id, form)
+        alert('Campaña actualizada con éxito')
       } else {
-        await postData('campanas', form)
+        const campanaRes = await postData('campanas', form)
+        const campanaId = campanaRes.id
+
+        if (cadenasSeleccion.length > 0) {
+          const tiendasArrays = await Promise.all(
+            cadenasSeleccion.map(cadId => fetchData('tiendas?id_cadena=' + cadId))
+          )
+          const todasTiendas = tiendasArrays.flat()
+          await Promise.all(
+            todasTiendas.map(t =>
+              postData('participa', { id_campana: campanaId, id_tienda: t.id, id_coordinador: null })
+            )
+          )
+        }
+
+        alert('Campaña creada con éxito')
       }
-      alert(editando ? 'Campaña actualizada con éxito' : 'Campaña creada con éxito')
       navigate('/campanas')
     } catch (err) {
       console.error('Error:', err)
@@ -81,6 +109,24 @@ export default function CrearCampanaPage() {
             <label htmlFor="dia_final">Fecha de fin<span className="required">*</span></label>
             <input type="date" name="dia_final" id="dia_final" value={form.dia_final} onChange={handleChange} required />
           </div>
+
+          {!editando && (
+            <div className="form-group">
+              <label>Cadenas que participan:</label>
+              <div className="checkbox-group">
+                {cadenas.map(cad => (
+                  <div key={cad.id} className="checkbox-item">
+                    <input
+                      type="checkbox"
+                      checked={cadenasSeleccion.includes(String(cad.id))}
+                      onChange={() => toggleCadena(String(cad.id))}
+                    />
+                    <label>{cad.nombre}</label>
+                  </div>
+                ))}
+              </div>
+            </div>
+          )}
 
           <div className="form-actions">
             <button type="submit" className="btn btn-primary">{editando ? 'Guardar cambios' : 'Crear Campaña'}</button>
