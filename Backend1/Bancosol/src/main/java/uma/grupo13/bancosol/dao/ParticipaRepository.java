@@ -10,4 +10,7 @@ import java.util.List;
 public interface ParticipaRepository extends JpaRepository<ParticipaEntity, Integer> {
     @Query("select p from ParticipaEntity p where p.id.idTienda = :id ")
     public List<ParticipaEntity> findByIdTienda(@Param("id")Integer id);
+
+    @Query("select p from ParticipaEntity p where p.coordinador.id = :id")
+    public List<ParticipaEntity> findByCoordinadorId(@Param("id") Integer id);
 }

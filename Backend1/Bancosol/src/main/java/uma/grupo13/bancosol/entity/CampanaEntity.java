@@ -30,13 +30,10 @@ public class CampanaEntity {
     @Column(name = "dia_final", nullable = false)
     private LocalDate diaFinal;
 
-    @OneToMany(mappedBy = "campana")
+    @OneToMany(mappedBy = "campana", orphanRemoval = true)
     private List<ParticipaEntity> participaciones = new ArrayList<>();
 
     public void eliminarParticipaciones() {
-        for (ParticipaEntity participa : participaciones) {
-            participa.setCampana(null);
-        }
         participaciones.clear();
     }
 
