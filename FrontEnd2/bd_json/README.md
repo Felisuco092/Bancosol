@@ -1,4 +1,6 @@
-# JSON Server - Configuración
+# JSON Server con Autenticación JWT y Control de Roles
+
+Servidor REST fake con autenticación mediante JWT y control de acceso basado en roles.
 
 ## Requisitos previos
 
@@ -6,48 +8,62 @@ Asegúrate de tener **Node.js** instalado en tu sistema.
 
 ## Instalación de dependencias
 
-1. Abre una terminal
-2. Navega a la carpeta `Frontend1/nuevo/bd_json`:
-   ```bash
-   cd Frontend1/nuevo/bd_json
-   ```
-3. Instala las dependencias:
-   ```bash
-   npm install
-   ```
-
-Este comando instala json-server y sus dependencias desde el `package.json`.
-
-## Inicializar la DB
-
-Con las dependencias instaladas, para iniciar json-server con el archivo `db.json`, ejecuta:
-
 ```bash
-npx json-server db.json --port 3001
+cd bd_json
+pnpm install
 ```
 
-Esto levantará un servidor REST fake en `http://localhost:3001`.
+## Iniciar el servidor
 
-## Estructura del archivo db.json
+```bash
+pnpm start
+```
 
-El archivo `db.json` contiene las siguientes colecciones de datos:
+Esto levantará el servidor en `http://localhost:3001`.
 
-- **roles**: id, nombre (Administrador, Capitán, Coordinador, Responsable entidad)
-- **usuarios**: id, nombre, apellidos, usuario, contrasena, email, telefono, area_asignada, id_rol
-- **cadenas**: id, nombre, codigo
-- **tiendas**: id, descripcion, localidad, domicilio, c_postal, zona_geografica, id_cadena, id_capitan
-- **campanas**: id, nombre, ano, dia_comienzo, dia_final
-- **voluntarios**: id, nombre_entidad, persona_fisica, domicilio, localidad, codigo_postal, n_voluntarios, observaciones
-- **turnos**: id, dia, hora_inicio, hora_fin, id_campana, id_voluntario, id_tienda
-- **notificaciones**: id, id_usuario_destino, fecha_creacion, mensaje
-- **participa**: id, id_campana, id_tienda, id_coordinador
+## Endpoints
 
-Ejemplo de estructura:
+### POST /login (público)
+Inicia sesión con usuario y contraseña.
 
-JSON Server generará automáticamente los endpoints:
-- `GET /usuarios`
-- `GET /usuarios/1`
-- `POST /usuarios`
-- `PUT /usuarios/1`
-- `DELETE /usuarios/1`
-- etc.
+```json
+{
+  "usuario": "jperez",
+  "password": "hash123"
+}
+```
+
+Respuesta:
+```json
+{
+  "accessToken": "eyJhbGciOiJIUzI1NiIs...",
+  "user": { "id": "1", "nombre": "Juan", ... }
+}
+```
+
+### Rutas protegidas (requieren token)
+Todas las demás rutas (`/usuarios`, `/tiendas`, `/cadenas`, etc.) requieren el header:
+
+```
+Authorization: Bearer <accessToken>
+```
+
+## Control de Roles
+
+| Rol     | id_rol | Permisos |
+|---------|--------|----------|
+| Admin   | 1      | CRUD completo en todas las tablas |
+| Capitán | 2      | Lectura de todo, gestión de turnos |
+| Coordinador | 3 | Lectura de todo, gestión de voluntarios/colaboradores |
+
+Los permisos se definen en `server.js` en el objeto `PERMISOS`.
+
+## Usuarios de prueba
+
+| Usuario  | Contraseña | Rol         |
+|----------|-----------|-------------|
+| jperez   | hash123   | Admin       |
+| mlopez   | hash456   | Coordinador |
+| aruiz    | hash789   | Capitán     |
+| cgomez   | hash101   | Capitán     |
+| psanchez | hash202   | Coordinador |

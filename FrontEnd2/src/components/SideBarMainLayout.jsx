@@ -2,15 +2,10 @@ import { useEffect } from 'react'
 import { Outlet, useNavigate } from 'react-router-dom'
 import Sidebar from './Sidebar'
 
-export default function MainLayout() {
+
+export default function SideBarMainLayout() {
   const navigate = useNavigate()
 
-  useEffect(() => {
-    const user = sessionStorage.getItem('user')
-    if (!user) {
-      navigate('/')
-    }
-  }, [navigate])
 
   return (
     <>
