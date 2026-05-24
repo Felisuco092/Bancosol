@@ -1,8 +1,6 @@
 package uma.grupo13.bancosol.controller;
 
-import jakarta.servlet.http.HttpSession;
 import lombok.AllArgsConstructor;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -14,7 +12,10 @@ import uma.grupo13.bancosol.services.VoluntariosService;
 
 import java.time.LocalDate;
 import java.time.LocalTime;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
+import java.util.stream.Collectors;
 
 @Controller
 @AllArgsConstructor
@@ -163,6 +164,21 @@ public class TurnosController {
         model.addAttribute("idTurno", idTurno);
 
         return "crear_editar/incidencia";
+    }
+
+    @GetMapping("/tiendas-por-campana")
+    @ResponseBody
+    public List<Map<String, Object>> doTiendasPorCampana(@RequestParam("idCampana") Integer idCampana,
+                                                         @SessionAttribute(name = "user", required = false) UsuarioEntity user) {
+        if (user == null) return List.of();
+
+        List<TiendaEntity> tiendas = campanasService.filtrarTiendasParticipaCampana(idCampana);
+        return tiendas.stream().map(t -> {
+            Map<String, Object> m = new HashMap<>();
+            m.put("id", t.getId());
+            m.put("descripcion", t.getDescripcion());
+            return m;
+        }).collect(Collectors.toList());
     }
 
     @PostMapping("/anadir")
