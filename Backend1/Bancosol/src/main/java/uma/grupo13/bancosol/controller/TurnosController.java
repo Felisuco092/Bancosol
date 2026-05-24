@@ -4,6 +4,7 @@ import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
+import uma.grupo13.bancosol.dto.*;
 import uma.grupo13.bancosol.entity.*;
 import uma.grupo13.bancosol.services.CampanasService;
 import uma.grupo13.bancosol.services.TiendasService;
@@ -28,12 +29,12 @@ public class TurnosController {
 
 
     @GetMapping("/")
-    public String doTurnos(Model model, @RequestParam(name="campana", required = false)CampanaEntity campana, @SessionAttribute(name = "user", required = false) UsuarioEntity user){
+    public String doTurnos(Model model, @RequestParam(name="campana", required = false)CampanaEntity campana, @SessionAttribute(name = "user", required = false) UsuarioDTO user){
         if (user == null) return "redirect:/";
 
-        List<TurnoEntity> turnos = turnosService.listarTurnos();
-        List<CampanaEntity> campanas = campanasService.listarCampanas();
-        List<TiendaEntity> tiendas = tiendasService.listarTiendas();
+        List<TurnoDTO> turnos = turnosService.listarTurnos();
+        List<CampanaDTO> campanas = campanasService.listarCampanas();
+        List<TiendaDTO> tiendas = tiendasService.listarTiendas();
         model.addAttribute("paginaActual", "turnos");
         model.addAttribute("turnos", turnos);
         model.addAttribute("campanas", campanas);
@@ -43,19 +44,19 @@ public class TurnosController {
     }
 
     @GetMapping("/editar")
-    public  String doEditarTurnos(Model model, @SessionAttribute(name = "user", required = false) UsuarioEntity user) {
+    public  String doEditarTurnos(Model model, @SessionAttribute(name = "user", required = false) UsuarioDTO user) {
         if (user == null) return "redirect:/";
 
         return "crear_editar/crear_turno";
     }
 
     @GetMapping("/crear")
-    public  String doCrearTurnos(Model model, @SessionAttribute(name = "user", required = false) UsuarioEntity user) {
+    public  String doCrearTurnos(Model model, @SessionAttribute(name = "user", required = false) UsuarioDTO user) {
         if (user == null) return "redirect:/";
-        TurnoEntity newTurno = new TurnoEntity();
-        List<CampanaEntity> campanas = campanasService.listarCampanas();
-        List<TiendaEntity> tiendas = tiendasService.listarTiendas();
-        List<VoluntarioBaseEntity> voluntarios = voluntariosService.listarVoluntarios();
+        TurnoDTO newTurno = new TurnoDTO();
+        List<CampanaDTO> campanas = campanasService.listarCampanas();
+        List<TiendaDTO> tiendas = tiendasService.listarTiendas();
+        List<VoluntarioDTO> voluntarios = voluntariosService.listarVoluntarios();
         model.addAttribute("turno", newTurno);
         model.addAttribute("campanas", campanas);
         model.addAttribute("tiendas", tiendas);
@@ -66,11 +67,10 @@ public class TurnosController {
 
     @PostMapping("/borrar")
     public  String doBorrarTurnos(@RequestParam(value="idTurno") Integer idTurno,
-                                Model model, @SessionAttribute(name = "user", required = false) UsuarioEntity user) {
+                                Model model, @SessionAttribute(name = "user", required = false) UsuarioDTO user) {
         if (user == null) return "redirect:/";
-        TurnoEntity turnoDelete = turnosService.getReferenceById(idTurno);
         //turnoDelete.eliminarDatos(); // eliminar lo datos restantes: campaña perteneciente, voluntarios, tiendas y día
-        turnosService.borrarTurno(turnoDelete);
+        turnosService.borrarTurnoId(idTurno);
 
         return "redirect:/turnos/";
     }
@@ -83,37 +83,11 @@ public class TurnosController {
                                   @RequestParam(value = "idCampana") Integer idCampana,
                                   @RequestParam(value = "idTienda") Integer idTienda,
                                   @RequestParam(value = "idVoluntario") Integer idVoluntario,
-                                  Model model, @SessionAttribute(name = "user", required = false) UsuarioEntity user) {
+                                  Model model, @SessionAttribute(name = "user", required = false) UsuarioDTO user) {
         if (user == null) return "redirect:/";
 
         try {
-            TurnoEntity newTurno = new TurnoEntity();
-            newTurno.setTipoTurno(tipoTurno);
-            
-            if (fechaStr != null && !fechaStr.isEmpty()) {
-                newTurno.setDia(LocalDate.parse(fechaStr));
-            }
-            if (horaInicioStr != null && !horaInicioStr.isEmpty()) {
-                newTurno.setHoraInicio(LocalTime.parse(horaInicioStr));
-            }
-            if (horaFinStr != null && !horaFinStr.isEmpty()) {
-                newTurno.setHoraFin(LocalTime.parse(horaFinStr));
-            }
-
-            CampanaEntity campana = campanasService.buscarPorId(idCampana);
-            TiendaEntity tienda = tiendasService.buscarPorId(idTienda);
-            VoluntarioBaseEntity voluntario = voluntariosService.buscarPorId(idVoluntario);
-
-            if (campana == null || tienda == null || voluntario == null) {
-                throw new Exception("Campaña, Tienda o Voluntario no encontrado");
-            }
-
-            newTurno.setCampana(campana);
-            newTurno.setTienda(tienda);
-            newTurno.setVoluntario(voluntario);
-
-            turnosService.guardarTurno(newTurno);
-            
+            turnosService.guardarTurno(tipoTurno, fechaStr, horaInicioStr, horaFinStr, idCampana, idTienda, idVoluntario);
         } catch (Exception e) {
             e.printStackTrace();
             model.addAttribute("error", "Error al guardar el turno: " + e.getMessage());
@@ -125,9 +99,9 @@ public class TurnosController {
             model.addAttribute("idTiendaSel", idTienda);
             model.addAttribute("idVoluntarioSel", idVoluntario);
 
-            List<CampanaEntity> campanas = campanasService.listarCampanas();
-            List<TiendaEntity> tiendas = tiendasService.listarTiendas();
-            List<VoluntarioBaseEntity> voluntarios = voluntariosService.listarVoluntarios();
+            List<CampanaDTO> campanas = campanasService.listarCampanas();
+            List<TiendaDTO> tiendas = tiendasService.listarTiendas();
+            List<VoluntarioDTO> voluntarios = voluntariosService.listarVoluntarios();
             model.addAttribute("voluntarios", voluntarios);
             model.addAttribute("campanas", campanas);
             model.addAttribute("tiendas", tiendas);
@@ -141,14 +115,14 @@ public class TurnosController {
     @PostMapping("/filtrar")
     public String doFiltrarTurnos(@RequestParam(value = "idCampana", required = false) Integer idCampana,
                                   @RequestParam(value = "idTienda", required = false) Integer idTienda,
-                                  Model model, @SessionAttribute(name = "user", required = false) UsuarioEntity user) {
+                                  Model model, @SessionAttribute(name = "user", required = false) UsuarioDTO user) {
         if (user == null) return "redirect:/";
 
-        List<TurnoEntity> turnosFiltrados = turnosService.filtrarTurnos(idCampana, idTienda);
+        List<TurnoDTO> turnosFiltrados = turnosService.filtrarTurnos(idCampana, idTienda);
         model.addAttribute("turnos", turnosFiltrados);
 
         if (idTienda != null) {
-            TiendaEntity tienda = tiendasService.buscarPorId(idTienda);
+            TiendaDTO tienda = tiendasService.buscarPorId(idTienda);
             if (tienda != null && tienda.getCapitan() != null) {
                 model.addAttribute("capitanNombre", tienda.getCapitan().getNombre() + " " + tienda.getCapitan().getApellidos());
             }
@@ -159,7 +133,7 @@ public class TurnosController {
 
     @PostMapping("/incidencia")
     public String doIncidencia(@RequestParam(value="idTurno") Integer idTurno,
-            Model model, @SessionAttribute(name = "user", required = false) UsuarioEntity user) {
+            Model model, @SessionAttribute(name = "user", required = false) UsuarioDTO user) {
         if (user == null) return "redirect:/";
         model.addAttribute("idTurno", idTurno);
 
@@ -170,10 +144,10 @@ public class TurnosController {
     @ResponseBody
     // Para este hemos recurrido a la IA generativa
     public List<Map<String, Object>> doTiendasPorCampana(@RequestParam("idCampana") Integer idCampana,
-                                                         @SessionAttribute(name = "user", required = false) UsuarioEntity user) {
+                                                         @SessionAttribute(name = "user", required = false) UsuarioDTO user) {
         if (user == null) return List.of();
 
-        List<TiendaEntity> tiendas = campanasService.filtrarTiendasParticipaCampana(idCampana);
+        List<TiendaDTO> tiendas = campanasService.filtrarTiendasParticipaCampana(idCampana);
         return tiendas.stream().map(t -> {
             Map<String, Object> m = new HashMap<>();
             m.put("id", t.getId());
@@ -183,13 +157,13 @@ public class TurnosController {
     }
 
     @PostMapping("/anadir")
-    public String doAnadirVoluntario(@SessionAttribute(name = "user", required = false) UsuarioEntity user){
+    public String doAnadirVoluntario(@SessionAttribute(name = "user", required = false) UsuarioDTO user){
         if (user == null) return "redirect:/";
         return "";
     }
 
     @PostMapping("/eliminar")
-    public String doEliminarVoluntario(@SessionAttribute(name = "user", required = false) UsuarioEntity user){
+    public String doEliminarVoluntario(@SessionAttribute(name = "user", required = false) UsuarioDTO user){
         if (user == null) return "redirect:/";
         return "";
     }
