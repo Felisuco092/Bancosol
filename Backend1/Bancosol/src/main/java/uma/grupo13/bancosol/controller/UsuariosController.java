@@ -9,7 +9,9 @@ import org.springframework.web.bind.annotation.*;
 import uma.grupo13.bancosol.entity.NotificacionEntity;
 import uma.grupo13.bancosol.entity.RolEntity;
 import uma.grupo13.bancosol.entity.UsuarioEntity;
+import uma.grupo13.bancosol.entity.ParticipaEntity;
 import uma.grupo13.bancosol.services.NotificacionesService;
+import uma.grupo13.bancosol.services.ParticipaService;
 import uma.grupo13.bancosol.services.RolService;
 import uma.grupo13.bancosol.services.UsuariosService;
 
@@ -21,6 +23,7 @@ import java.util.List;
 public class UsuariosController {
     private final UsuariosService usuariosService;
     private final NotificacionesService notificacionesService;
+    private final ParticipaService participaService;
     private final RolService rolService;
 
 
@@ -58,6 +61,13 @@ public class UsuariosController {
         UsuarioEntity usuario=usuariosService.getReferenceById(id);
         List<NotificacionEntity> notficaciones=usuario.getNotificaciones();
         notificacionesService.deleteAll(notficaciones);
+
+        List<ParticipaEntity> participacionesCoord = participaService.findByCoordinadorId(id);
+        for (ParticipaEntity p : participacionesCoord) {
+            p.setCoordinador(null);
+        }
+        participaService.guardarParticipaciones(participacionesCoord);
+
         usuario.deleteTiendas();
         usuariosService.borrarUsuario(usuario);
         return "redirect:/usuarios/";

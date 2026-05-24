@@ -99,9 +99,9 @@ public class TiendasController {
     @PostMapping("/borrar")
     public String doBorrarTiendas(Model model, @SessionAttribute(name = "user", required = false) UsuarioEntity user, @RequestParam("id") Integer id) {
         if (user == null) return "redirect:/";
-        TiendaEntity tienda=tiendasService.getReferenceById(id);
-        List<ParticipaEntity> participaciones=tienda.getParticipaciones();
-        participaService.deleteAll(participaciones);
+        TiendaEntity tienda = tiendasService.getReferenceById(id);
+        tienda.getParticipaciones().clear();
+        tienda.getTurnos().clear();
         tiendasService.borrarTiendaPorId(id);
         return "redirect:/tiendas/";
     }

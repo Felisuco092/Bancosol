@@ -7,8 +7,10 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import uma.grupo13.bancosol.entity.CampanaEntity;
+import uma.grupo13.bancosol.entity.TurnoEntity;
 import uma.grupo13.bancosol.entity.UsuarioEntity;
 import uma.grupo13.bancosol.services.CampanasService;
+import uma.grupo13.bancosol.services.TurnosService;
 
 import java.time.LocalDate;
 import java.util.Date;
@@ -19,6 +21,9 @@ import java.util.List;
 public class CampanasController {
     @Autowired
     protected CampanasService campanasService;
+
+    @Autowired
+    protected TurnosService turnosService;
 
 
     @GetMapping("/")
@@ -52,6 +57,8 @@ public class CampanasController {
                                    Model model, @SessionAttribute(name = "user", required = false) UsuarioEntity user) {
         if (user == null) return "redirect:/";
         CampanaEntity campanaDelete = campanasService.getReferenceById(idCampana);
+        List<TurnoEntity> turnos = turnosService.filtrarTurnos(idCampana, null);
+        turnosService.deleteAll(turnos);
         campanaDelete.eliminarParticipaciones();
         campanasService.borrarCampana(campanaDelete);
         return "redirect:/campanas/";

@@ -16,6 +16,10 @@ public class ParticipaService {
         return participaRepository.findByIdTienda(id);
     }
 
+    public List<ParticipaEntity> findByCoordinadorId(Integer id) {
+        return participaRepository.findByCoordinadorId(id);
+    }
+
     public void borrarParticipacion(ParticipaEntity participa) {
         participaRepository.delete(participa);
     }
@@ -26,5 +30,9 @@ public class ParticipaService {
 
     public void guardarParticipacion(ParticipaEntity participa) {
         participaRepository.save(participa);
+    }
+
+    public void guardarParticipaciones(List<ParticipaEntity> participaciones) {
+        participaRepository.saveAll(participaciones);
     }
 }
