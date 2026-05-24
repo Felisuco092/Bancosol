@@ -85,6 +85,7 @@
         const containerTabla = document.getElementById('tabla-container');
         const capitanNombreLabel = document.getElementById('capitan-nombre');
         const cuadranteContainer = document.getElementById('cuadrante-container');
+        const originalStoreOptions = filterTienda.innerHTML;
 
         function filter(){
             const params = new URLSearchParams();
@@ -105,14 +106,47 @@
                 
                 if (filterTipo.value || filterTienda.value) {
                     cuadranteContainer.style.display = 'block';
+                } else {
+                    cuadranteContainer.style.display = 'none';
                 }
             })
             .catch(error => console.error(error));
         }
 
-        filterTipo.addEventListener('change', filter);
+        function actualizarTiendas() {
+            const idCampana = filterTipo.value;
+
+            if (idCampana) {
+                fetch('/turnos/tiendas-por-campana?idCampana=' + idCampana)
+                    .then(r => r.json())
+                    .then(tiendas => {
+                        filterTienda.innerHTML = '';
+                        const defaultOpt = document.createElement('option');
+                        defaultOpt.value = '';
+                        defaultOpt.textContent = '-- Seleccione Tienda --';
+                        filterTienda.appendChild(defaultOpt);
+                        tiendas.forEach(t => {
+                            const opt = document.createElement('option');
+                            opt.value = t.id;
+                            opt.textContent = t.descripcion;
+                            filterTienda.appendChild(opt);
+                        });
+                        filter();
+                    })
+                    .catch(error => console.error(error));
+            } else {
+                filterTienda.innerHTML = originalStoreOptions;
+                filterTienda.value = '';
+                filter();
+            }
+        }
+
+        filterTipo.addEventListener('change', actualizarTiendas);
         filterTienda.addEventListener('change', filter);
-        document.getElementById('btn-buscar').addEventListener('click', filter);
+
+        if (filterTipo.value) {
+            actualizarTiendas();
+        }
     </script>
 </body>
 </html>

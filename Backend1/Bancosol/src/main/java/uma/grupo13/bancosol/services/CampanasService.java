@@ -3,7 +3,9 @@ package uma.grupo13.bancosol.services;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 import uma.grupo13.bancosol.dao.CampanaRepository;
+import uma.grupo13.bancosol.dao.ParticipaRepository;
 import uma.grupo13.bancosol.entity.CampanaEntity;
+import uma.grupo13.bancosol.entity.TiendaEntity;
 
 import java.util.List;
 import java.util.Optional;
@@ -12,6 +14,7 @@ import java.util.Optional;
 @AllArgsConstructor
 public class CampanasService {
     private final CampanaRepository campanaRepository;
+    private final ParticipaRepository participaRepository;
 
     public List<CampanaEntity> listarCampanas() {
         return campanaRepository.findAll();
@@ -35,5 +38,9 @@ public class CampanasService {
 
     public Optional<CampanaEntity> findCampanaActiva() {
         return campanaRepository.findCampanaActiva();
+    }
+
+    public List<TiendaEntity> filtrarTiendasParticipaCampana(Integer idCampana) {
+        return participaRepository.findTiendasByCampanaId(idCampana);
     }
 }
