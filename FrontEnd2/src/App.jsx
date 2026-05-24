@@ -18,7 +18,7 @@ import UsuariosPage from './pages/UsuariosPage'
 import TurnosPage from './pages/TurnosPage'
 import BandejaPage from './pages/BandejaPage'
 import SideBarMainLayout from './components/SideBarMainLayout'
-import { ProtectedRoute } from './RutaProtegida'
+import { ProtectedRoute } from './components/RutaProtegida'
 
 function App() {
   return (
