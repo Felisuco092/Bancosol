@@ -18,6 +18,7 @@ import UsuariosPage from './pages/UsuariosPage'
 import TurnosPage from './pages/TurnosPage'
 import BandejaPage from './pages/BandejaPage'
 import SideBarMainLayout from './components/SideBarMainLayout'
+import { ProtectedRoute } from './RutaProtegida'
 
 function App() {
   return (
@@ -25,75 +26,79 @@ function App() {
       <Route element={<LoginLayout />}>
         <Route path="/" element={<LoginPage />} />
       </Route>
-      <Route element={<SideBarMainLayout />}>
-        <Route path="/dashboard" element={<DashboardPage />} />
-      </Route>
 
-      <Route path="/tiendas">
+      {/*Rutas protegidas, solo accesibles si el usuario está autenticado*/}
+      <Route element={<ProtectedRoute />}>
         <Route element={<SideBarMainLayout />}>
-          <Route index element={<TiendasPage />} />
+          <Route path="/dashboard" element={<DashboardPage />} />
         </Route>
-        <Route element={<MainLayout />}>
-          <Route path="crear" element={<CrearTiendaPage />} />
-          <Route path="editar/:id" element={<CrearTiendaPage />} />
-        </Route>
-      </Route>
 
-      <Route path="/campanas">
-        <Route element={<SideBarMainLayout />}>
-          <Route index element={<CampanasPage />} />
+        <Route path="/tiendas">
+          <Route element={<SideBarMainLayout />}>
+            <Route index element={<TiendasPage />} />
+          </Route>
+          <Route element={<MainLayout />}>
+            <Route path="crear" element={<CrearTiendaPage />} />
+            <Route path="editar/:id" element={<CrearTiendaPage />} />
+          </Route>
         </Route>
-        <Route element={<MainLayout />}>
-          <Route path="crear" element={<CrearCampanaPage />} />
-          <Route path="editar/:id" element={<CrearCampanaPage />} />
-        </Route>
-      </Route>
 
-      <Route path="/colaboradores">
-        <Route element={<SideBarMainLayout />}>
-          <Route index element={<ColaboradoresPage />} />
+        <Route path="/campanas">
+          <Route element={<SideBarMainLayout />}>
+            <Route index element={<CampanasPage />} />
+          </Route>
+          <Route element={<MainLayout />}>
+            <Route path="crear" element={<CrearCampanaPage />} />
+            <Route path="editar/:id" element={<CrearCampanaPage />} />
+          </Route>
         </Route>
-        <Route element={<MainLayout />}>
-          <Route path="crear" element={<CrearColaboradorPage />} />
-          <Route path="editar/:id" element={<CrearColaboradorPage />} />
-        </Route>
-      </Route>
 
-      <Route path="/cadenas">
-        <Route element={<SideBarMainLayout />}>
-          <Route index element={<CadenasPage />} />
+        <Route path="/colaboradores">
+          <Route element={<SideBarMainLayout />}>
+            <Route index element={<ColaboradoresPage />} />
+          </Route>
+          <Route element={<MainLayout />}>
+            <Route path="crear" element={<CrearColaboradorPage />} />
+            <Route path="editar/:id" element={<CrearColaboradorPage />} />
+          </Route>
         </Route>
-        <Route element={<MainLayout />}>
-          <Route path="crear" element={<CrearCadenaPage />} />
-          <Route path="editar/:id" element={<CrearCadenaPage />} />
-        </Route>
-      </Route>
 
-      <Route path="/usuarios">
-        <Route element={<SideBarMainLayout />}>
-          <Route index element={<UsuariosPage />} />
+        <Route path="/cadenas">
+          <Route element={<SideBarMainLayout />}>
+            <Route index element={<CadenasPage />} />
+          </Route>
+          <Route element={<MainLayout />}>
+            <Route path="crear" element={<CrearCadenaPage />} />
+            <Route path="editar/:id" element={<CrearCadenaPage />} />
+          </Route>
         </Route>
-        <Route element={<MainLayout />}>
-          <Route path="crear" element={<CrearUsuarioPage />} />
-          <Route path="editar/:id" element={<CrearUsuarioPage />} />
-        </Route>
-      </Route>
 
-      <Route path="/turnos">
-        <Route element={<SideBarMainLayout />}>
-          <Route index element={<TurnosPage />} />
+        <Route path="/usuarios">
+          <Route element={<SideBarMainLayout />}>
+            <Route index element={<UsuariosPage />} />
+          </Route>
+          <Route element={<MainLayout />}>
+            <Route path="crear" element={<CrearUsuarioPage />} />
+            <Route path="editar/:id" element={<CrearUsuarioPage />} />
+          </Route>
         </Route>
-        <Route element={<MainLayout />}>
-          <Route path="crear" element={<CrearTurnoPage />} />
-        </Route>
-      </Route>
 
-      <Route path="/bandeja">
-        <Route element={<SideBarMainLayout />}>
-          <Route index element={<BandejaPage />} />
+        <Route path="/turnos">
+          <Route element={<SideBarMainLayout />}>
+            <Route index element={<TurnosPage />} />
+          </Route>
+          <Route element={<MainLayout />}>
+            <Route path="crear" element={<CrearTurnoPage />} />
+          </Route>
         </Route>
-        <Route element={<MainLayout />}>
-          <Route path="ver/:id" element={<VerMensajePage />} />
+
+        <Route path="/bandeja">
+          <Route element={<SideBarMainLayout />}>
+            <Route index element={<BandejaPage />} />
+          </Route>
+          <Route element={<MainLayout />}>
+            <Route path="ver/:id" element={<VerMensajePage />} />
+          </Route>
         </Route>
       </Route>
     </Routes>
