@@ -63,6 +63,7 @@ public class ColaboradoresController {
     @GetMapping("/crear")
     public String doCrearColaboradores(Model model, @SessionAttribute(name = "user", required = false) UsuarioDTO user) {
         if (user == null) return "redirect:/";
+        model.addAttribute("voluntario", new VoluntarioDTO());
         return "crear_editar/crear_editar_colaboradores";
     }
 
@@ -87,6 +88,7 @@ public class ColaboradoresController {
     @PostMapping("/crear")
     public String doCrearColaboradoresPost(Model model, @SessionAttribute(name = "user", required = false) UsuarioDTO user) {
         if (user == null) return "redirect:/";
+        model.addAttribute("voluntario", new VoluntarioDTO());
         return "crear_editar/crear_editar_colaboradores";
     }
 

@@ -63,7 +63,7 @@ public class TiendasController {
     @GetMapping("/crear")
     public String doCrearTiendas(Model model, @SessionAttribute(name = "user", required = false) UsuarioDTO user) {
         if (user == null) return "redirect:/";
-        model.addAttribute("tienda", new TiendaEntity());
+        model.addAttribute("tienda", new TiendaDTO());
         List<CadenaDTO> cadenas = cadenaService.listarCadenas();
         model.addAttribute("cadenas", cadenas);
         List<CampanaDTO> campanas= campanasService.listarCampanas();
@@ -95,14 +95,14 @@ public class TiendasController {
     }
 
     @PostMapping("/borrar")
-    public String doBorrarTiendas(Model model, @SessionAttribute(name = "user", required = false) UsuarioEntity user, @RequestParam("id") Integer id) {
+    public String doBorrarTiendas(Model model, @SessionAttribute(name = "user", required = false) UsuarioDTO user, @RequestParam("id") Integer id) {
         if (user == null) return "redirect:/";
         tiendasService.borrarTiendaPorId(id);
         return "redirect:/tiendas/";
     }
 
     @PostMapping("/guardar")
-    public String doGuardarTiendas(Model model, @SessionAttribute(name = "user", required = false) UsuarioEntity user,
+    public String doGuardarTiendas(Model model, @SessionAttribute(name = "user", required = false) UsuarioDTO user,
                                    @RequestParam(value = "id", required = false) Integer id,
                                    @RequestParam("descripcion") String descripcion,
                                    @RequestParam("localidad") String localidad,

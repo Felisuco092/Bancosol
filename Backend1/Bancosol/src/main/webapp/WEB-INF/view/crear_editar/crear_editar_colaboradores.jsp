@@ -8,8 +8,8 @@
     if(voluntario == null) {
         voluntario = new VoluntarioDTO();
     }
-    boolean esFisico = voluntario.getTipo()=="FISICO";
-    boolean esEntidad = voluntario.getTipo()=="ENTIDAD";
+    boolean esFisico = "FISICO".equals(voluntario.getTipo());
+    boolean esEntidad = "ENTIDAD".equals(voluntario.getTipo());
     boolean esCreacion = voluntario.getId() == null;
 %>
 <!DOCTYPE html>
