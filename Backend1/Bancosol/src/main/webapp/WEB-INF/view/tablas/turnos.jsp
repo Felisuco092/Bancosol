@@ -4,7 +4,7 @@
 <%@ page import="uma.grupo13.bancosol.dto.VoluntarioDTO" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%
-    //Gemini ha hecho lo de hibernate unproxy
+    //Gemini nos ha ayudado la conversión de los tipos de voluntarios Entity que existen
     List<TurnoDTO> turnosList = (List<TurnoDTO>) request.getAttribute("turnos");
     String capitanNombre = (String) request.getAttribute("capitanNombre");
 %>
