@@ -3,6 +3,7 @@ package uma.grupo13.bancosol.mappers;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Component;
 import uma.grupo13.bancosol.dto.TiendaDTO;
+import uma.grupo13.bancosol.entity.ParticipaEntity;
 import uma.grupo13.bancosol.entity.TiendaEntity;
 
 @Component
@@ -23,6 +24,9 @@ public class TiendaMapper extends MapperDTO<TiendaDTO, TiendaEntity> {
         dto.setZonaGeografica(entity.getZonaGeografica());
         dto.setCadena(cadenaMapper.toDTO(entity.getCadena()));
         dto.setCapitan(usuarioMapper.toDTO(entity.getCapitan()));
+        for(ParticipaEntity p : entity.getParticipaciones()){
+            dto.getCampanas().add(p.getId().getIdCampana());
+        }
         return dto;
     }
 }

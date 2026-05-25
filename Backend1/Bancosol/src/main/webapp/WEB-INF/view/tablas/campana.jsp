@@ -1,10 +1,11 @@
 <%@ page import="uma.grupo13.bancosol.entity.CampanaEntity" %>
 <%@ page import="java.util.List" %>
 <%@ page import="java.time.LocalDate" %>
+<%@ page import="uma.grupo13.bancosol.dto.CampanaDTO" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 
 <%
-    List<CampanaEntity> campanasList = (List<CampanaEntity>) request.getAttribute("campanas");
+    List<CampanaDTO> campanasList = (List<CampanaDTO>) request.getAttribute("campanas");
     LocalDate today = LocalDate.now(); // traer fecha local actual para comparar
 %>
 <table>
@@ -21,7 +22,7 @@
     <tbody id="campaign-table-body">
         <% if (campanasList != null) {
             // comparación de fechas entre la actual y la que se muestra en la tabla para ver el estado de la misma
-            for(CampanaEntity campanaAct: campanasList){ 
+            for(CampanaDTO campanaAct: campanasList){
                 String status = "activa";
                 String label = "Activa";
                 String style = "background: #d4edda; color: #155724;";

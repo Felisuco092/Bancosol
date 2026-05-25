@@ -1,4 +1,5 @@
-<%@ page import="uma.grupo13.bancosol.entity.NotificacionEntity" %>
+<%@ page import="uma.grupo13.bancosol.dto.NotificacionDTO" %>
+
 <%@ page import="org.aspectj.weaver.ast.Not" %><%--
   Created by IntelliJ IDEA.
   User: felix
@@ -8,7 +9,7 @@
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%
-    NotificacionEntity notificacion = (NotificacionEntity) request.getAttribute("notificacion");
+    NotificacionDTO notificacion = (NotificacionDTO) request.getAttribute("notificacion");
 %>
 <html>
 <head>

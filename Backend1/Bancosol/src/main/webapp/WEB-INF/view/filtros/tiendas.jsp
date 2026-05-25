@@ -1,11 +1,11 @@
-<%@ page import="uma.grupo13.bancosol.entity.CadenaEntity" %>
 <%@ page import="java.util.List" %>
-<%@ page import="uma.grupo13.bancosol.entity.CampanaEntity" %>
 <%@ page import="java.util.Set" %>
+<%@ page import="uma.grupo13.bancosol.dto.CadenaDTO" %>
+<%@ page import="uma.grupo13.bancosol.dto.CampanaDTO" %>
 <%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
 <%
-    List<CadenaEntity> cadenas = (List<CadenaEntity>) request.getAttribute("cadenas");
-    List<CampanaEntity> campanas = (List<CampanaEntity>) request.getAttribute("campanas");
+    List<CadenaDTO> cadenas = (List<CadenaDTO>) request.getAttribute("cadenas");
+    List<CampanaDTO> campanas = (List<CampanaDTO>) request.getAttribute("campanas");
     Set<String> localidades = (Set<String>) request.getAttribute("localidades");
     Integer idCampanaActual = (Integer) request.getAttribute("idCampanaActual");
 %>
@@ -14,7 +14,7 @@
     <label for="select-filtro-campanas">Campaña:</label>
     <select id="select-filtro-campanas" name="campanas">
         <%
-            for (CampanaEntity cam : campanas) {
+            for (CampanaDTO cam : campanas) {
                 String selected = "";
                 if (cam.getId() == idCampanaActual) selected = "selected";
         %>
@@ -30,7 +30,7 @@
     <select id="filtro-por-cadenas" name="cadenas">
         <option value="0" selected>Ver todas</option>
         <%
-            for (CadenaEntity cad : cadenas) {
+            for (CadenaDTO cad : cadenas) {
         %>
         <option value=<%=cad.getId()%>><%=cad.getNombre()%>
         </option>

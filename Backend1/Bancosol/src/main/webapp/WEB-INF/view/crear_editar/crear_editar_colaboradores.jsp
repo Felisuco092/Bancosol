@@ -1,14 +1,15 @@
 <%@ page import="uma.grupo13.bancosol.entity.VoluntarioBaseEntity" %>
 <%@ page import="uma.grupo13.bancosol.entity.VoluntarioFisicoEntity" %>
 <%@ page import="uma.grupo13.bancosol.entity.VoluntarioEntidadEntity" %>
+<%@ page import="uma.grupo13.bancosol.dto.VoluntarioDTO" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%
-    VoluntarioBaseEntity voluntario = (VoluntarioBaseEntity) request.getAttribute("voluntario");
+    VoluntarioDTO voluntario = (VoluntarioDTO) request.getAttribute("voluntario");
     if(voluntario == null) {
-        voluntario = new VoluntarioBaseEntity();
+        voluntario = new VoluntarioDTO();
     }
-    boolean esFisico = voluntario instanceof VoluntarioFisicoEntity;
-    boolean esEntidad = voluntario instanceof VoluntarioEntidadEntity;
+    boolean esFisico = voluntario.getTipo()=="FISICO";
+    boolean esEntidad = voluntario.getTipo()=="ENTIDAD";
     boolean esCreacion = voluntario.getId() == null;
 %>
 <!DOCTYPE html>
@@ -69,18 +70,17 @@
                     </select>
                 </div>
 
-                <% if(esFisico) {
-                    VoluntarioFisicoEntity f = (VoluntarioFisicoEntity) voluntario; %>
+                <% if(esFisico) {%>
                 <div id="campos-fisico">
                     <div class="form-group">
                         <label for="nombre">Nombre<span class="required">*</span></label>
                         <input type="text" name="nombre" id="nombre" required
-                               value="<%= f.getNombre() != null ? f.getNombre() : "" %>" />
+                               value="<%= voluntario.getNombre() != null ? voluntario.getNombre() : "" %>" />
                     </div>
                     <div class="form-group">
                         <label for="apellidos">Apellidos<span class="required">*</span></label>
                         <input type="text" name="apellidos" id="apellidos" required
-                               value="<%= f.getApellidos() != null ? f.getApellidos() : "" %>" />
+                               value="<%= voluntario.getApellidos() != null ? voluntario.getApellidos() : "" %>" />
                     </div>
                 </div>
                 <% } else { %>
@@ -96,18 +96,17 @@
                 </div>
                 <% } %>
 
-                <% if(esEntidad) {
-                    VoluntarioEntidadEntity e = (VoluntarioEntidadEntity) voluntario; %>
+                <% if(esEntidad) { %>
                 <div id="campos-entidad">
                     <div class="form-group">
                         <label for="nombre_asociacion">Nombre de Asociación<span class="required">*</span></label>
                         <input type="text" name="nombre_asociacion" id="nombre_asociacion" required
-                               value="<%= e.getNombreAsociacion() != null ? e.getNombreAsociacion() : "" %>" />
+                               value="<%= voluntario.getNombreAsociacion() != null ? voluntario.getNombreAsociacion() : "" %>" />
                     </div>
                     <div class="form-group">
                         <label for="n_voluntarios">Número de Voluntarios<span class="required">*</span></label>
                         <input type="number" name="n_voluntarios" id="n_voluntarios" required
-                               value="<%= e.getNVoluntarios() != null ? e.getNVoluntarios() : "" %>" />
+                               value="<%= voluntario.getNVoluntarios() != null ? voluntario.getNVoluntarios() : "" %>" />
                     </div>
                 </div>
                 <% } else { %>

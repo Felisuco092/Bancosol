@@ -2,8 +2,9 @@
 <%@ page import="uma.grupo13.bancosol.entity.TiendaEntity" %>
 <%@ page import="uma.grupo13.bancosol.entity.ParticipaEntity" %>
 <%@ page import="java.util.List" %>
+<%@ page import="uma.grupo13.bancosol.dto.TiendaDTO" %>
 <%
-    List<TiendaEntity> tiendas = (List<TiendaEntity>) request.getAttribute("tiendas");
+    List<TiendaDTO> tiendas = (List<TiendaDTO>) request.getAttribute("tiendas");
     Integer idCampanaActual = (Integer) request.getAttribute("idCampanaActual");
 %>
 <table class="tabla-tiendas">
@@ -21,7 +22,7 @@
     <tbody id="tabla-tiendas-body">
     <%
         if (tiendas != null) {
-            for(TiendaEntity t : tiendas){ 
+            for(TiendaDTO t : tiendas){
                 boolean participa = t.participaEn(idCampanaActual);
     %>
     <tr class="clickable">

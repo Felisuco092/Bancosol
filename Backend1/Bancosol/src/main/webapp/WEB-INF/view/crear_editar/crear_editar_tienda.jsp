@@ -3,18 +3,22 @@
 <%@ page import="uma.grupo13.bancosol.entity.CampanaEntity" %>
 <%@ page import="java.util.List" %>
 <%@ page import="uma.grupo13.bancosol.entity.UsuarioEntity" %>
+<%@ page import="uma.grupo13.bancosol.dto.TiendaDTO" %>
+<%@ page import="uma.grupo13.bancosol.dto.CadenaDTO" %>
+<%@ page import="uma.grupo13.bancosol.dto.CampanaDTO" %>
+<%@ page import="uma.grupo13.bancosol.dto.UsuarioDTO" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <!DOCTYPE html>
 <%
-    TiendaEntity tienda = (TiendaEntity) request.getAttribute("tienda");
-    List<CadenaEntity> cadenas = (List<CadenaEntity>) request.getAttribute("cadenas");
-    List<CampanaEntity> campanas = (List<CampanaEntity>) request.getAttribute("campanas");
-    List<UsuarioEntity> capitanes= (List<UsuarioEntity>) request.getAttribute("capitanes");
+    TiendaDTO tienda = (TiendaDTO) request.getAttribute("tienda");
+    List<CadenaDTO> cadenas = (List<CadenaDTO>) request.getAttribute("cadenas");
+    List<CampanaDTO> campanas = (List<CampanaDTO>) request.getAttribute("campanas");
+    List<UsuarioDTO> capitanes= (List<UsuarioDTO>) request.getAttribute("capitanes");
 %>
 <html lang="es">
 <%
     if(tienda == null){
-        tienda = new TiendaEntity();
+        tienda = new TiendaDTO();
     }
 %>
 <head>
@@ -74,7 +78,7 @@
                     <select name="cadena" id="cadena" required>
                         <option value="">-- Seleccione una cadena --</option>
                         <%
-                            for(CadenaEntity cad : cadenas) {
+                            for(CadenaDTO cad : cadenas) {
                         %>
                         <option value="<%=cad.getId()%>" <%= (tienda.getCadena() != null && tienda.getCadena().getId().equals(cad.getId())) ? "selected" : "" %>><%=cad.getNombre()%></option>
                         <%
@@ -87,7 +91,7 @@
                     <select name="capitan" id="capitan">
                         <option value="">-- Seleccione un capitán --</option>
                         <%
-                            for(UsuarioEntity capi : capitanes) {
+                            for(UsuarioDTO capi : capitanes) {
                         %>
                         <option value="<%=capi.getId()%>" <%= (tienda.getCapitan() != null && tienda.getCapitan().getId().equals(capi.getId())) ? "selected" : "" %>><%=capi.getNombre()%></option>
                         <%
@@ -99,7 +103,7 @@
                     <label>Campañas en la que participa: </label>
                     <div class="checkbox-group" style="max-height: 200px; overflow-y: auto; border: 1px solid var(--input-border); padding: 10px; border-radius: 4px;">
                         <%
-                            for(CampanaEntity campana : campanas) {
+                            for(CampanaDTO campana : campanas) {
                                 boolean seleccionado = tienda.participaEn(campana.getId());
                         %>
                         <div class="checkbox-item" style="display: flex; align-items: center; margin-bottom: 0.5rem;">

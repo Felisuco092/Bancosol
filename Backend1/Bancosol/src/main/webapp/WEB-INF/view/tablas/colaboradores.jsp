@@ -1,7 +1,8 @@
 <%@ page import="uma.grupo13.bancosol.entity.*, java.util.*" %>
+<%@ page import="uma.grupo13.bancosol.dto.VoluntarioDTO" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%
-    List<VoluntarioBaseEntity> cols = (List<VoluntarioBaseEntity>) request.getAttribute("colaboradores");
+    List<VoluntarioDTO> cols = (List<VoluntarioDTO>) request.getAttribute("colaboradores");
 %>
 <table>
     <thead>
@@ -15,22 +16,20 @@
     </tr>
     </thead>
     <tbody id="colaboradores-tbody">
-    <% if (cols != null) for (VoluntarioBaseEntity v : cols) {
-        if (!(v instanceof VoluntarioFisicoEntity) && !(v instanceof VoluntarioEntidadEntity)) continue;
-        boolean esPersona = v instanceof VoluntarioFisicoEntity;
+    <% if (cols != null) for (VoluntarioDTO v : cols) {
+        if (!(v.getTipo()=="FISICO") && !(v.getTipo()== "ENTIDAD")) continue;
+        boolean esPersona = v.getTipo()=="FISICO";
         boolean pendiente = v.getAprobado() == null || !v.getAprobado();
         String badgeClass = pendiente ? "badge-confirmar" : (esPersona ? "badge-persona" : "badge-entidad");
         String badgeText = pendiente ? "Por confirmar" : (esPersona ? "Persona Física" : "Entidad / Grupo");
         String nombre;
         int nVol;
         if (esPersona) {
-            VoluntarioFisicoEntity f = (VoluntarioFisicoEntity) v;
-            nombre = f.getNombre() + " " + f.getApellidos();
+            nombre = v.getNombre() + " " + v.getApellidos();
             nVol = 1;
         } else {
-            VoluntarioEntidadEntity e = (VoluntarioEntidadEntity) v;
-            nombre = e.getNombreAsociacion();
-            nVol = e.getNVoluntarios();
+            nombre = v.getNombreAsociacion();
+            nVol = v.getNVoluntarios();
         }
     %>
         <tr data-es-persona="<%=esPersona%>" data-localidad="<%=v.getZonaGeografica()%>">

@@ -1,8 +1,8 @@
-<%@ page import="uma.grupo13.bancosol.entity.NotificacionEntity" %>
 <%@ page import="java.util.List" %>
+<%@ page import="uma.grupo13.bancosol.dto.NotificacionDTO" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%
-    List<NotificacionEntity> notificacionList = (List<NotificacionEntity>) request.getAttribute("notificacionesList");
+    List<NotificacionDTO> notificacionList = (List<NotificacionDTO>) request.getAttribute("notificacionesList");
 %>
 <table id ="tabla-notificaciones">
     <thead>
@@ -13,7 +13,7 @@
     </tr>
     </thead>
     <tbody>
-    <%for(NotificacionEntity notificacionAct: notificacionList){%>
+    <%for(NotificacionDTO notificacionAct: notificacionList){%>
     <tr>
         <td><%=notificacionAct.getFechaCreacion()%></td>
         <td><%=notificacionAct.getAsunto()%></td>
