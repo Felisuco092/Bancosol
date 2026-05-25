@@ -11,6 +11,7 @@ import uma.grupo13.bancosol.entity.TiendaEntity;
 import uma.grupo13.bancosol.mappers.CampanaMapper;
 import uma.grupo13.bancosol.mappers.TiendaMapper;
 
+import java.time.LocalDate;
 import java.util.List;
 import java.util.Optional;
 
@@ -39,11 +40,25 @@ public class CampanasService {
         return campanaMapper.toDTO(campana);
     }
 
-    public void borrarCampana(CampanaEntity campana) {
-        campanaRepository.delete(campana);
+    public void borrarCampana(Integer idCampana) {
+        CampanaEntity campanaDelete = campanaRepository.getReferenceById(idCampana);
+        campanaDelete.eliminarParticipaciones();
+        campanaRepository.delete(campanaDelete);
     }
 
-    public void guardarCampana(CampanaEntity campana) {
+    public void guardarCampana(Integer idCampana, String nombre, Integer anyo, LocalDate fechaInic, LocalDate fechaFin) {
+        CampanaEntity campana;
+        if(idCampana == null){
+            campana= new CampanaEntity();
+        }else{
+            campana = this.campanaRepository.getReferenceById(idCampana);
+        }
+
+        campana.setNombre(nombre);
+        campana.setAno(anyo);
+        campana.setDiaComienzo(fechaInic);
+        campana.setDiaFinal(fechaFin);
+
         campanaRepository.save(campana);
     }
 

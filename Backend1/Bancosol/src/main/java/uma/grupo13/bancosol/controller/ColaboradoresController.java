@@ -6,8 +6,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
+import uma.grupo13.bancosol.dto.TurnoDTO;
+import uma.grupo13.bancosol.dto.UsuarioDTO;
+import uma.grupo13.bancosol.dto.VoluntarioDTO;
 import uma.grupo13.bancosol.entity.TurnoEntity;
-import uma.grupo13.bancosol.entity.UsuarioEntity;
 import uma.grupo13.bancosol.entity.VoluntarioBaseEntity;
 import uma.grupo13.bancosol.services.TurnosService;
 import uma.grupo13.bancosol.services.VoluntariosService;
@@ -25,7 +27,7 @@ public class ColaboradoresController {
 
 
     @GetMapping("/")
-    public String doColaboradores(Model model, @SessionAttribute(name = "user", required = false) UsuarioEntity user) {
+    public String doColaboradores(Model model, @SessionAttribute(name = "user", required = false) UsuarioDTO user) {
         if (user == null) return "redirect:/";
 
         model.addAttribute("paginaActual", "colaboradores");
@@ -37,14 +39,15 @@ public class ColaboradoresController {
     @PostMapping("/filtrar")
     public String doFiltrar(@RequestParam(required = false) String tipo,
                             @RequestParam(required = false) String localidad,
-                            Model model, @SessionAttribute(name = "user", required = false) UsuarioEntity user) {
+                            Model model, @SessionAttribute(name = "user", required = false) UsuarioDTO user) {
         if (user == null) return "redirect:/";
 
         String localidadParam = (localidad == null || localidad.equals("all")) ? "" : localidad;
 
-        List<VoluntarioBaseEntity> todos;
+        List<VoluntarioDTO> todos;
         if (tipo == null || tipo.equals("all")) {
             todos = voluntariosService.findAllByLocalidad(localidadParam);
+
         } else if (tipo.equals("true")) {
             todos = voluntariosService.findBaseFisicos(localidadParam);
         } else if (tipo.equals("false")) {
@@ -58,41 +61,41 @@ public class ColaboradoresController {
     }
 
     @GetMapping("/crear")
-    public String doCrearColaboradores(Model model, @SessionAttribute(name = "user", required = false) UsuarioEntity user) {
+    public String doCrearColaboradores(Model model, @SessionAttribute(name = "user", required = false) UsuarioDTO user) {
         if (user == null) return "redirect:/";
         return "crear_editar/crear_editar_colaboradores";
     }
 
     @GetMapping("/editar")
-    public String doEditarColaboradoresGet(Model model, @SessionAttribute(name = "user", required = false) UsuarioEntity user,
+    public String doEditarColaboradoresGet(Model model, @SessionAttribute(name = "user", required = false) UsuarioDTO user,
                                            @RequestParam("id") Integer id) {
         if (user == null) return "redirect:/";
-        VoluntarioBaseEntity voluntario = voluntariosService.buscarPorId(id);
+        VoluntarioDTO voluntario = voluntariosService.buscarPorId(id);
         model.addAttribute("voluntario", voluntario);
         return "crear_editar/crear_editar_colaboradores";
     }
 
     @PostMapping("/editar")
-    public String doEditarColaboradoresPost(Model model, @SessionAttribute(name = "user", required = false) UsuarioEntity user,
+    public String doEditarColaboradoresPost(Model model, @SessionAttribute(name = "user", required = false) UsuarioDTO user,
                                             @RequestParam("id") Integer id) {
         if (user == null) return "redirect:/";
-        VoluntarioBaseEntity voluntario = voluntariosService.buscarPorId(id);
+        VoluntarioDTO voluntario = voluntariosService.buscarPorId(id);
         model.addAttribute("voluntario", voluntario);
         return "crear_editar/crear_editar_colaboradores";
     }
 
     @PostMapping("/crear")
-    public String doCrearColaboradoresPost(Model model, @SessionAttribute(name = "user", required = false) UsuarioEntity user) {
+    public String doCrearColaboradoresPost(Model model, @SessionAttribute(name = "user", required = false) UsuarioDTO user) {
         if (user == null) return "redirect:/";
         return "crear_editar/crear_editar_colaboradores";
     }
 
     @PostMapping("/borrar")
-    public String doBorrarColaboradores(Model model, @SessionAttribute(name = "user", required = false) UsuarioEntity user,
+    public String doBorrarColaboradores(Model model, @SessionAttribute(name = "user", required = false) UsuarioDTO user,
                                         @RequestParam("id") Integer id) {
         if (user == null) return "redirect:/";
 
-        List<TurnoEntity> turnos = turnosService.findByVoluntarioId(id);
+        List<TurnoDTO> turnos = turnosService.findByVoluntarioId(id);
         turnosService.deleteAll(turnos);
 
         voluntariosService.deleteById(id);
@@ -100,7 +103,7 @@ public class ColaboradoresController {
     }
 
     @PostMapping("/guardar")
-    public String doGuardarColaboradores(@SessionAttribute(name = "user", required = false) UsuarioEntity user, Model model,
+    public String doGuardarColaboradores(@SessionAttribute(name = "user", required = false) UsuarioDTO user, Model model,
                                         @RequestParam("tipo_colaborador") String tipo,
                                         @RequestParam("domicilio") String domicilio,
                                         @RequestParam("zona_geografica") String zonaGeografica,
@@ -114,37 +117,8 @@ public class ColaboradoresController {
                                         @RequestParam(value = "confirmar", required = false) Boolean confirmar) {
         if (user == null) return "redirect:/";
 
-        VoluntarioBaseEntity voluntario;
-
-        if (id != null) {
-            voluntario = voluntariosService.buscarPorId(id);
-        } else {
-            if ("fisico".equals(tipo)) {
-                voluntario = new VoluntarioFisicoEntity();
-            } else {
-                voluntario = new VoluntarioEntidadEntity();
-            }
-        }
-
-        if (confirmar == null) { confirmar = false; }
-
-        voluntario.setAprobado(confirmar);
-        voluntario.setDomicilio(domicilio);
-        voluntario.setZonaGeografica(zonaGeografica);
-        voluntario.setCodigoPostal(codigoPostal);
-
-
-        if (voluntario instanceof VoluntarioFisicoEntity) {
-            VoluntarioFisicoEntity fisico = (VoluntarioFisicoEntity) voluntario;
-            fisico.setNombre(nombre);
-            fisico.setApellidos(apellidos);
-        } else if (voluntario instanceof VoluntarioEntidadEntity) {
-            VoluntarioEntidadEntity entidad = (VoluntarioEntidadEntity) voluntario;
-            entidad.setNombreAsociacion(nombreAsociacion);
-            entidad.setNVoluntarios(nVoluntarios);
-        }
-
-        voluntariosService.guardarVoluntario(voluntario);
+        voluntariosService.guardarVoluntario(id, tipo, domicilio, zonaGeografica, codigoPostal, observaciones, nombre,
+                apellidos, nombreAsociacion, nVoluntarios, confirmar);
         return "redirect:/colaboradores/";
     }
 

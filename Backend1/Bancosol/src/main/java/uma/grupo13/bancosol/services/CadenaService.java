@@ -31,11 +31,22 @@ public class CadenaService {
         return cadenaMapper.toDTO(cadena);
     }
 
-    public void borrarCadena(CadenaEntity cadena) {
+    public void borrarCadenaId(Integer id) {
+        CadenaEntity cadena = cadenaRepository.getReferenceById(id);
+        cadena.eliminarTiendas();
         cadenaRepository.delete(cadena);
     }
 
-    public void guardarCadena(CadenaEntity cadena) {
+    public void guardarCadena(Integer id, String nombre, String codigo) {
+        CadenaEntity cadena;
+        if (id == null) {
+            cadena = new CadenaEntity();
+        } else {
+            cadena = cadenaRepository.getReferenceById(id);
+        }
+
+        cadena.setNombre(nombre);
+        cadena.setCodigo(codigo);
         cadenaRepository.save(cadena);
     }
 

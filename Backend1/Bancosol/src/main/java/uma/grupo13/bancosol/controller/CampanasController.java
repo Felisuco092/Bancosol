@@ -6,6 +6,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
+import uma.grupo13.bancosol.dto.CampanaDTO;
+import uma.grupo13.bancosol.dto.TurnoDTO;
+import uma.grupo13.bancosol.dto.UsuarioDTO;
 import uma.grupo13.bancosol.entity.CampanaEntity;
 import uma.grupo13.bancosol.entity.TurnoEntity;
 import uma.grupo13.bancosol.entity.UsuarioEntity;
@@ -27,10 +30,10 @@ public class CampanasController {
 
 
     @GetMapping("/")
-    public String doCampanas(Model model, @SessionAttribute(name = "user", required = false) UsuarioEntity user) {
+    public String doCampanas(Model model, @SessionAttribute(name = "user", required = false) UsuarioDTO user) {
         if (user == null) return "redirect:/";
 
-        List<CampanaEntity> campanas = campanasService.listarCampanas();
+        List<CampanaDTO> campanas = campanasService.listarCampanas();
         model.addAttribute("paginaActual", "campanas");
         model.addAttribute("campanas", campanas);
         return "campanas";
@@ -38,15 +41,15 @@ public class CampanasController {
 
     @GetMapping("/editar")
     public  String doEditarCampana(@RequestParam("id") Integer idCampana,
-            Model model, @SessionAttribute(name = "user", required = false) UsuarioEntity user) {
+            Model model, @SessionAttribute(name = "user", required = false) UsuarioDTO user) {
         if (user == null) return "redirect:/";
-        CampanaEntity campanaEdit = campanasService.getReferenceById(idCampana);
+        CampanaDTO campanaEdit = campanasService.getReferenceById(idCampana);
         model.addAttribute("campana", campanaEdit);
         return "crear_editar/crear_editar_campana";
     }
 
     @GetMapping("/crear")
-    public String doCrearCampana(Model model, @SessionAttribute(name = "user", required = false) UsuarioEntity user) {
+    public String doCrearCampana(Model model, @SessionAttribute(name = "user", required = false) UsuarioDTO user) {
         if (user == null) return "redirect:/";
         model.addAttribute("campana", new CampanaEntity());
         return "crear_editar/crear_editar_campana";
@@ -54,13 +57,13 @@ public class CampanasController {
 
     @PostMapping("/borrar")
     public  String doBorrarCampana(@RequestParam("idCampana") Integer idCampana,
-                                   Model model, @SessionAttribute(name = "user", required = false) UsuarioEntity user) {
+                                   Model model, @SessionAttribute(name = "user", required = false) UsuarioDTO user) {
         if (user == null) return "redirect:/";
-        CampanaEntity campanaDelete = campanasService.getReferenceById(idCampana);
-        List<TurnoEntity> turnos = turnosService.filtrarTurnos(idCampana, null);
+
+
+        List<TurnoDTO> turnos = turnosService.filtrarTurnos(idCampana, null);
         turnosService.deleteAll(turnos);
-        campanaDelete.eliminarParticipaciones();
-        campanasService.borrarCampana(campanaDelete);
+        campanasService.borrarCampana(idCampana);
         return "redirect:/campanas/";
     }
 
@@ -72,17 +75,8 @@ public class CampanasController {
                                     @RequestParam(value="fecha-fin", required = false) LocalDate fechaFin,
             Model model, @SessionAttribute(name = "user", required = false) UsuarioEntity user) {
         if (user == null) return "redirect:/";
-        CampanaEntity campana;
-        if(idCampana == null){
-            campana= new CampanaEntity();
-        }else{
-            campana = this.campanasService.getReferenceById(idCampana);
-        }
-        campana.setNombre(nombre);
-        campana.setAno(anyo);
-        campana.setDiaComienzo(fechaInic);
-        campana.setDiaFinal(fechaFin);
-        campanasService.guardarCampana(campana);
+
+        campanasService.guardarCampana(idCampana, nombre, anyo, fechaInic, fechaFin);
 
         return "redirect:/campanas/";
     }

@@ -5,6 +5,8 @@ import org.springframework.stereotype.Service;
 import uma.grupo13.bancosol.dao.VoluntariosRepository;
 import uma.grupo13.bancosol.dto.VoluntarioDTO;
 import uma.grupo13.bancosol.entity.VoluntarioBaseEntity;
+import uma.grupo13.bancosol.entity.VoluntarioEntidadEntity;
+import uma.grupo13.bancosol.entity.VoluntarioFisicoEntity;
 import uma.grupo13.bancosol.mappers.VoluntarioMapper;
 
 import java.util.List;
@@ -54,7 +56,39 @@ public class VoluntariosService {
         voluntariosRepository.deleteById(id);
     }
 
-    public void guardarVoluntario(VoluntarioBaseEntity voluntario) {
+    public void guardarVoluntario(Integer id, String tipo, String domicilio, String zonaGeografica, String codigoPostal,
+                                  String observaciones, String nombre, String apellidos, String nombreAsociacion,
+                                  Integer nVoluntarios, Boolean confirmar) {
+        VoluntarioBaseEntity voluntario;
+
+        if (id != null) {
+            voluntario = voluntariosRepository.getReferenceById(id);
+        } else {
+            if ("fisico".equals(tipo)) {
+                voluntario = new VoluntarioFisicoEntity();
+            } else {
+                voluntario = new VoluntarioEntidadEntity();
+            }
+        }
+
+        if (confirmar == null) { confirmar = false; }
+
+        voluntario.setAprobado(confirmar);
+        voluntario.setDomicilio(domicilio);
+        voluntario.setZonaGeografica(zonaGeografica);
+        voluntario.setCodigoPostal(codigoPostal);
+
+
+        if (voluntario instanceof VoluntarioFisicoEntity) {
+            VoluntarioFisicoEntity fisico = (VoluntarioFisicoEntity) voluntario;
+            fisico.setNombre(nombre);
+            fisico.setApellidos(apellidos);
+        } else if (voluntario instanceof VoluntarioEntidadEntity) {
+            VoluntarioEntidadEntity entidad = (VoluntarioEntidadEntity) voluntario;
+            entidad.setNombreAsociacion(nombreAsociacion);
+            entidad.setNVoluntarios(nVoluntarios);
+        }
+
         voluntariosRepository.save(voluntario);
     }
 

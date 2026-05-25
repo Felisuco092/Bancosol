@@ -82,7 +82,9 @@ public class TurnosService {
         return turnoMapper.toDTOList(lista);
     }
 
-    public void deleteAll(List<Integer> turnosId) {
-        turnoRepository.deleteAllById(turnosId);
+    public void deleteAll(List<TurnoDTO> turnos) {
+        for(TurnoDTO t: turnos){
+            turnoRepository.deleteById(t.getId());
+        }
     }
 }
