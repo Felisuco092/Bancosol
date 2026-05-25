@@ -83,7 +83,7 @@ public class TurnosService {
     }
 
     public void deleteAll(List<TurnoDTO> turnos) {
-        for(TurnoDTO t: turnos){
+        for (TurnoDTO t : turnos) {
             turnoRepository.deleteById(t.getId());
         }
     }
