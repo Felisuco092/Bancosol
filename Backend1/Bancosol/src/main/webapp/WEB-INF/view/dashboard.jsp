@@ -1,5 +1,9 @@
 <%@ page import="java.util.List" %>
 <%@ page import="uma.grupo13.bancosol.entity.*" %>
+<%@ page import="uma.grupo13.bancosol.dto.TiendaDTO" %>
+<%@ page import="uma.grupo13.bancosol.dto.CampanaDTO" %>
+<%@ page import="uma.grupo13.bancosol.dto.UsuarioDTO" %>
+<%@ page import="uma.grupo13.bancosol.dto.CadenaDTO" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <!DOCTYPE html>
 <html lang="es">
@@ -10,11 +14,11 @@
     <link rel="stylesheet" href="../../css/styles.css">
     <script src="../../js/aside.js" defer></script>
     <%
-        List<TiendaEntity> tiendas = (List<TiendaEntity>) request.getAttribute("tiendas");
+        List<TiendaDTO> tiendas = (List<TiendaDTO>) request.getAttribute("tiendas");
         int totalVoluntarios = (int) request.getAttribute("totalVoluntarios");
-        CampanaEntity campana = (CampanaEntity) request.getAttribute("campana");
-        List<CadenaEntity> cadenas= (List<CadenaEntity>) request.getAttribute("cadenas");
-        UsuarioEntity usuario = (UsuarioEntity) request.getAttribute("user");
+        CampanaDTO campana = (CampanaDTO) request.getAttribute("campana");
+        List<CadenaDTO> cadenas= (List<CadenaDTO>) request.getAttribute("cadenas");
+        UsuarioDTO usuario = (UsuarioDTO) request.getAttribute("user");
     %>
 </head>
 <body>
@@ -52,10 +56,10 @@
                     </thead>
                     <tbody>
                         <%
-                            for(CadenaEntity c : cadenas){ %>
+                            for(CadenaDTO c : cadenas){ %>
                                 <tr>
                                     <td><%=c.getNombre()%></td>
-                                    <td><strong><%=c.getTiendas().size()%></strong></td>
+                                    <td><strong><%=c.getNumeroTiendas()%></strong></td>
                                 </tr>
                         <%
                             }

@@ -1,9 +1,11 @@
 <%@ page import="uma.grupo13.bancosol.entity.*, java.util.*" %>
 <%@ page import="org.hibernate.Hibernate" %>
+<%@ page import="uma.grupo13.bancosol.dto.TurnoDTO" %>
+<%@ page import="uma.grupo13.bancosol.dto.VoluntarioDTO" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%
     //Gemini ha hecho lo de hibernate unproxy
-    List<TurnoEntity> turnosList = (List<TurnoEntity>) request.getAttribute("turnos");
+    List<TurnoDTO> turnosList = (List<TurnoDTO>) request.getAttribute("turnos");
     String capitanNombre = (String) request.getAttribute("capitanNombre");
 %>
 
@@ -19,7 +21,7 @@
         </tr>
         </thead>
         <tbody id="tabla-turnos-body">
-        <%for(TurnoEntity turnoAct: turnosList){%>
+        <%for(TurnoDTO turnoAct: turnosList){%>
             <tr>
             <td><%=turnoAct.getDia()%></td>
             <td><%=turnoAct.getHoraInicio()%></td>
@@ -28,13 +30,12 @@
                 <%
                 String nameToDisplay = "Sin asignar";
                 // try catch eliminado
-                    VoluntarioBaseEntity v = turnoAct.getVoluntario();
+                    VoluntarioDTO v = turnoAct.getVoluntario();
                     if (v != null) {
-                        Object actual = Hibernate.unproxy(v);
-                        if (actual instanceof VoluntarioFisicoEntity) {
-                            nameToDisplay = ((VoluntarioFisicoEntity) actual).getNombre();
-                        } else if (actual instanceof VoluntarioEntidadEntity) {
-                            nameToDisplay = ((VoluntarioEntidadEntity) actual).getNombreAsociacion();
+                        if (v.getTipo()=="FISICO") {
+                            nameToDisplay = v.getNombre();
+                        } else if (v.getTipo()=="ENTIDAD") {
+                            nameToDisplay = v.getNombreAsociacion();
                         } else {
                             nameToDisplay = "Voluntario #" + v.getId();
                         }

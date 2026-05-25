@@ -1,6 +1,8 @@
 <%@ page import="uma.grupo13.bancosol.entity.TiendaEntity" %>
 <%@ page import="uma.grupo13.bancosol.entity.CampanaEntity" %>
 <%@ page import="java.util.List" %>
+<%@ page import="uma.grupo13.bancosol.dto.TiendaDTO" %>
+<%@ page import="uma.grupo13.bancosol.dto.CampanaDTO" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <!DOCTYPE html>
 <html lang="es">
@@ -14,8 +16,8 @@
     <script src="../../js/turnos.js" defer></script>
 </head>
 <%
-    List<TiendaEntity> tiendasList = (List<TiendaEntity>) request.getAttribute("tiendas");
-    List<CampanaEntity> campanasList = (List<CampanaEntity>) request.getAttribute("campanas");
+    List<TiendaDTO> tiendasList = (List<TiendaDTO>) request.getAttribute("tiendas");
+    List<CampanaDTO> campanasList = (List<CampanaDTO>) request.getAttribute("campanas");
     String capitanNombre = (String) request.getAttribute("capitanNombre");
     Integer idCampanaSelect = (Integer) request.getAttribute("idCampanaSel");
     Integer idTiendaSelect = (Integer) request.getAttribute("idTiendaSel");
@@ -36,7 +38,7 @@
                         <option value="">-- Seleccione Campaña --</option>
 
                         <%
-                        for(CampanaEntity campanaAct: campanasList){%>
+                        for(CampanaDTO campanaAct: campanasList){%>
                             <option value="<%=campanaAct.getId()%>" <%= (idCampanaSelect != null && idCampanaSelect.equals(campanaAct.getId())) ? "selected" : "" %>><%=campanaAct.getNombre()%>-<%=campanaAct.getAno()%></option>
                         <%}%>
                     </select>
@@ -46,7 +48,7 @@
                     <select id="select-tienda" name="idTienda">
                         <option value="">-- Seleccione Tienda --</option>
                         <%
-                        for(TiendaEntity tiendaAct: tiendasList){%>
+                        for(TiendaDTO tiendaAct: tiendasList){%>
                         <option value="<%=tiendaAct.getId()%>" <%= (idTiendaSelect != null && idTiendaSelect.equals(tiendaAct.getId())) ? "selected" : "" %>><%=tiendaAct.getDescripcion()%></option>
                         <%}%>
                     </select>

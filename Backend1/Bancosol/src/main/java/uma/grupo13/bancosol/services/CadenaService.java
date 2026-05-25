@@ -3,7 +3,9 @@ package uma.grupo13.bancosol.services;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 import uma.grupo13.bancosol.dao.CadenaRepository;
+import uma.grupo13.bancosol.dto.CadenaDTO;
 import uma.grupo13.bancosol.entity.CadenaEntity;
+import uma.grupo13.bancosol.mappers.CadenaMapper;
 
 import java.util.List;
 
@@ -11,28 +13,45 @@ import java.util.List;
 @AllArgsConstructor
 public class CadenaService {
     private final CadenaRepository cadenaRepository;
+    private final CadenaMapper cadenaMapper;
 
-    public List<CadenaEntity> listarCadenas() {
-        return cadenaRepository.findAll();
+
+    public List<CadenaDTO> listarCadenas() {
+        List<CadenaEntity> lista= cadenaRepository.findAll();
+        return cadenaMapper.toDTOList(lista);
     }
 
-    public CadenaEntity buscarPorId(Integer id) {
-        return cadenaRepository.findById(id).orElse(null);
+    public CadenaDTO buscarPorId(Integer id) {
+        CadenaEntity cadena = cadenaRepository.findById(id).orElse(null);
+        return cadenaMapper.toDTO(cadena);
     }
 
-    public CadenaEntity getReferenceById(Integer id) {
-        return cadenaRepository.getReferenceById(id);
+    public CadenaDTO getReferenceById(Integer id) {
+        CadenaEntity cadena = cadenaRepository.getReferenceById(id);
+        return cadenaMapper.toDTO(cadena);
     }
 
-    public void borrarCadena(CadenaEntity cadena) {
+    public void borrarCadenaId(Integer id) {
+        CadenaEntity cadena = cadenaRepository.getReferenceById(id);
+        cadena.eliminarTiendas();
         cadenaRepository.delete(cadena);
     }
 
-    public void guardarCadena(CadenaEntity cadena) {
+    public void guardarCadena(Integer id, String nombre, String codigo) {
+        CadenaEntity cadena;
+        if (id == null) {
+            cadena = new CadenaEntity();
+        } else {
+            cadena = cadenaRepository.getReferenceById(id);
+        }
+
+        cadena.setNombre(nombre);
+        cadena.setCodigo(codigo);
         cadenaRepository.save(cadena);
     }
 
-    public List<CadenaEntity> cadenasPorTiendas() {
-        return cadenaRepository.cadenasPorTiendas();
+    public List<CadenaDTO> cadenasPorTiendas() {
+        List<CadenaEntity> lista= cadenaRepository.cadenasPorTiendas();
+        return cadenaMapper.toDTOList(lista);
     }
 }

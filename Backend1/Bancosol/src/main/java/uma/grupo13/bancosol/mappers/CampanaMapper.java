@@ -8,6 +8,7 @@ import uma.grupo13.bancosol.entity.CampanaEntity;
 public class CampanaMapper extends MapperDTO<CampanaDTO, CampanaEntity> {
     @Override
     public CampanaDTO toDTO(CampanaEntity entity) {
+        if (entity == null) return null;
         CampanaDTO dto = new CampanaDTO();
         dto.setId(entity.getId());
         dto.setNombre(entity.getNombre());

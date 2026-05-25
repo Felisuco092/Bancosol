@@ -14,6 +14,7 @@ public class TurnoMapper extends MapperDTO<TurnoDTO, TurnoEntity> {
 
     @Override
     public TurnoDTO toDTO(TurnoEntity entity) {
+        if (entity == null) return null;
         TurnoDTO dto = new TurnoDTO();
         dto.setId(entity.getId());
         dto.setTipoTurno(entity.getTipoTurno());

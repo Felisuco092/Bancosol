@@ -2,6 +2,9 @@ package uma.grupo13.bancosol.dto;
 
 import lombok.Data;
 
+import java.util.ArrayList;
+import java.util.List;
+
 @Data
 public class TiendaDTO {
     private Integer id;
@@ -12,5 +15,9 @@ public class TiendaDTO {
     private String zonaGeografica;
     private CadenaDTO cadena;
     private UsuarioDTO capitan;
-    private boolean participaEnCampanaActual;
+    private List<Integer> campanas = new ArrayList<>();
+
+    public boolean participaEn(Integer idCampanaActual){
+        return campanas.contains(idCampanaActual);
+    }
 }

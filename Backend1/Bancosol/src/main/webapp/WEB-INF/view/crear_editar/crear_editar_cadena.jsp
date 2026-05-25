@@ -1,4 +1,5 @@
-<%@ page import="uma.grupo13.bancosol.entity.CadenaEntity" %><%--
+<%@ page import="uma.grupo13.bancosol.entity.CadenaEntity" %>
+<%@ page import="uma.grupo13.bancosol.dto.CadenaDTO" %><%--
   Created by IntelliJ IDEA.
   User: felix
   Date: 11/05/2026
@@ -7,8 +8,8 @@
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%
-    CadenaEntity cadena = (CadenaEntity) request.getAttribute("cadena");
-    if(cadena == null) {cadena = new CadenaEntity();}
+    CadenaDTO cadena = (CadenaDTO) request.getAttribute("cadena");
+    if(cadena == null) {cadena = new CadenaDTO();}
 %>
 <html>
 <head>

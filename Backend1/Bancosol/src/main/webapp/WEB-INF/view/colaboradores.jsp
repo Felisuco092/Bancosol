@@ -1,3 +1,4 @@
+<%@ page import="java.util.List" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <!DOCTYPE html>
 <html lang="es">
@@ -33,7 +34,7 @@
                     <label for="filter-localidad">Localidad:</label>
                     <select id="filter-localidad">
                         <option value="all">Todas</option>
-                        <% for (String loc : (java.util.List<String>) request.getAttribute("localidades")) { %>
+                        <% for (String loc : (List<String>) request.getAttribute("localidades")) { %>
                             <option value="<%=loc%>"><%=loc%></option>
                         <% } %>
                     </select>

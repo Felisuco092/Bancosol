@@ -1,10 +1,11 @@
 <%@ page import="uma.grupo13.bancosol.entity.CampanaEntity" %>
+<%@ page import="uma.grupo13.bancosol.dto.CampanaDTO" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <!DOCTYPE html>
 <html lang="es">
 <%
-    CampanaEntity campana = (CampanaEntity) request.getAttribute("campana");
-    if(campana == null) campana = new CampanaEntity();
+    CampanaDTO campana = (CampanaDTO) request.getAttribute("campana");
+    if(campana == null) campana = new CampanaDTO();
 %>
 <head>
     <meta charset="UTF-8">

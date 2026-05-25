@@ -8,6 +8,7 @@ import uma.grupo13.bancosol.entity.CadenaEntity;
 public class CadenaMapper extends MapperDTO<CadenaDTO, CadenaEntity> {
     @Override
     public CadenaDTO toDTO(CadenaEntity entity) {
+        if (entity == null) return null;
         CadenaDTO dto = new CadenaDTO();
         dto.setId(entity.getId());
         dto.setNombre(entity.getNombre());

@@ -8,7 +8,7 @@ public class VoluntarioDTO {
     private String domicilio;
     private String zonaGeografica;
     private String codigoPostal;
-    private Boolean aprobado;
+    private Boolean aprobado = false;
     private String tipo; // "FISICO" or "ENTIDAD"
     
     // Fisico specific

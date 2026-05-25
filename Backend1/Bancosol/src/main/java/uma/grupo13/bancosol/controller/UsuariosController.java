@@ -6,6 +6,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
+import uma.grupo13.bancosol.dto.NotificacionDTO;
+import uma.grupo13.bancosol.dto.RolDTO;
+import uma.grupo13.bancosol.dto.UsuarioDTO;
 import uma.grupo13.bancosol.entity.NotificacionEntity;
 import uma.grupo13.bancosol.entity.RolEntity;
 import uma.grupo13.bancosol.entity.UsuarioEntity;
@@ -28,53 +31,48 @@ public class UsuariosController {
 
 
     @GetMapping("/")
-    public String doUsuarios(Model model, @SessionAttribute(name = "user", required = false) UsuarioEntity user){
+    public String doUsuarios(Model model, @SessionAttribute(name = "user", required = false) UsuarioDTO user){
         if (user == null) return "redirect:/";
         model.addAttribute("paginaActual", "usuarios");
-        List<UsuarioEntity> usuarios= usuariosService.listarUsuarios();
+        List<UsuarioDTO> usuarios= usuariosService.listarUsuarios();
         model.addAttribute("users", usuarios);
         return "usuarios";
     }
 
     @GetMapping("/editar")
-    public  String doEditarUsuarios(Model model, @SessionAttribute(name = "user", required = false) UsuarioEntity user, @RequestParam("id") Integer id) {
+    public  String doEditarUsuarios(Model model, @SessionAttribute(name = "user", required = false) UsuarioDTO user, @RequestParam("id") Integer id) {
         if (user == null) return "redirect:/";
-        UsuarioEntity usuario=usuariosService.getReferenceById(id);
+        UsuarioDTO usuario=usuariosService.getReferenceById(id);
         model.addAttribute("usuario", usuario);
-        List<RolEntity> roles= rolService.listarRoles();
+        List<RolDTO> roles= rolService.listarRoles();
         model.addAttribute("roles", roles);
         return "crear_editar/crear_usuario";
     }
 
     @GetMapping("/crear")
-    public  String doCrearUsuarios(Model model, @SessionAttribute(name = "user", required = false) UsuarioEntity user) {
+    public  String doCrearUsuarios(Model model, @SessionAttribute(name = "user", required = false) UsuarioDTO user) {
         if (user == null) return "redirect:/";
-        model.addAttribute("usuario", new UsuarioEntity());
-        List<RolEntity> roles= rolService.listarRoles();
+        model.addAttribute("usuario", new UsuarioDTO());
+        List<RolDTO> roles= rolService.listarRoles();
         model.addAttribute("roles", roles);
         return "crear_editar/crear_usuario";
     }
 
     @PostMapping("/borrar")
-    public  String doBorrarUsuarios(Model model, @SessionAttribute(name = "user", required = false) UsuarioEntity user, @RequestParam("id") Integer id) {
+    public  String doBorrarUsuarios(Model model, @SessionAttribute(name = "user", required = false) UsuarioDTO user, @RequestParam("id") Integer id) {
         if (user == null) return "redirect:/";
-        UsuarioEntity usuario=usuariosService.getReferenceById(id);
-        List<NotificacionEntity> notficaciones=usuario.getNotificaciones();
+        UsuarioDTO usuario=usuariosService.getReferenceById(id);
+        List<NotificacionDTO> notficaciones=usuariosService.getNotificaciones(id);
         notificacionesService.deleteAll(notficaciones);
 
-        List<ParticipaEntity> participacionesCoord = participaService.findByCoordinadorId(id);
-        for (ParticipaEntity p : participacionesCoord) {
-            p.setCoordinador(null);
-        }
-        participaService.guardarParticipaciones(participacionesCoord);
+        participaService.editarParticipaCoordinador(id);
 
-        usuario.deleteTiendas();
-        usuariosService.borrarUsuario(usuario);
+        usuariosService.borrarUsuario(id);
         return "redirect:/usuarios/";
     }
 
     @PostMapping("/guardar")
-    public String doGuardarUsuarios(Model model, @SessionAttribute(name = "user", required = false) UsuarioEntity user_session,
+    public String doGuardarUsuarios(Model model, @SessionAttribute(name = "user", required = false) UsuarioDTO user_session,
                                     @RequestParam(value = "id", required = false) Integer id,
                                     @RequestParam("nombre") String nombre,
                                     @RequestParam("apellidos") String apellidos,
@@ -86,33 +84,22 @@ public class UsuariosController {
                                     @RequestParam("rol") Integer idRol) {
         if (user_session == null) return "redirect:/";
 
-        UsuarioEntity usuario;
-        if (id != null) {
-            usuario = usuariosService.getReferenceById(id);
-        } else {
-            usuario = new UsuarioEntity();
-        }
-
-        usuario.setNombre(nombre);
-        usuario.setApellidos(apellidos);
-        usuario.setUsuario(user);
-        usuario.setEmail(email);
-        usuario.setTelefono(telefono);
-        usuario.setAreaAsignada(area);
-
-        if (password != null && !password.isEmpty()) {
-            usuario.setContrasena(password);
-        } else if (id == null) {
+        if (id == null && (password.isEmpty() || password == null)) {
             model.addAttribute("error", "La contraseña es obligatoria para nuevos usuarios.");
+            UsuarioDTO usuario = new UsuarioDTO();
+            usuario.setNombre(nombre);
+            usuario.setApellidos(apellidos);
+            usuario.setUsuario(user);
+            usuario.setEmail(email);
+            usuario.setTelefono(telefono);
+            usuario.setAreaAsignada(area);
+            usuario.setRol(rolService.getReferenceById(idRol));
             model.addAttribute("usuario", usuario);
             model.addAttribute("roles", rolService.listarRoles());
             return "crear_editar/crear_usuario";
         }
 
-        RolEntity rol = rolService.getReferenceById(idRol);
-        usuario.setRol(rol);
-
-        usuariosService.guardarUsuario(usuario);
+        usuariosService.guardarUsuario(id, nombre, apellidos, user, email, telefono, area, password, idRol);
 
         return "redirect:/usuarios/";
     }

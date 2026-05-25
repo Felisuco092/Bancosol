@@ -9,6 +9,10 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.SessionAttribute;
+import uma.grupo13.bancosol.dto.CadenaDTO;
+import uma.grupo13.bancosol.dto.CampanaDTO;
+import uma.grupo13.bancosol.dto.TiendaDTO;
+import uma.grupo13.bancosol.dto.UsuarioDTO;
 import uma.grupo13.bancosol.entity.CadenaEntity;
 import uma.grupo13.bancosol.entity.CampanaEntity;
 import uma.grupo13.bancosol.entity.TiendaEntity;
@@ -29,7 +33,7 @@ public class ControllerBase {
 
 
     @GetMapping("/")
-    public String doStart(@SessionAttribute(name = "user", required = false) UsuarioEntity user){
+    public String doStart(@SessionAttribute(name = "user", required = false) UsuarioDTO user){
         if (user != null) {
             return "redirect:/dashboard";
         } else {
@@ -38,19 +42,19 @@ public class ControllerBase {
     }
 
     @GetMapping("/dashboard")
-    public String doDashboard(Model model, @SessionAttribute(name = "user", required = false) UsuarioEntity user) {
+    public String doDashboard(Model model, @SessionAttribute(name = "user", required = false) UsuarioDTO user) {
         if (user != null) {
             model.addAttribute("paginaActual", "dashboard");
-            List<TiendaEntity> tiendas = tiendasServ.listarTiendas();
+            List<TiendaDTO> tiendas = tiendasServ.listarTiendas();
             model.addAttribute("tiendas", tiendas);
             
             int totalVoluntarios = voluntariosService.countTotalPersonasVoluntarias();
             model.addAttribute("totalVoluntarios", totalVoluntarios);
 
-            Optional<CampanaEntity> campanaOpt = campanasService.findCampanaActiva();
-            CampanaEntity campana = campanaOpt.orElse(null);
+            Optional<CampanaDTO> campanaOpt = campanasService.findCampanaActiva();
+            CampanaDTO campana = campanaOpt.orElse(null);
             model.addAttribute("campana", campana);
-            List<CadenaEntity> cadenas = cadenaService.cadenasPorTiendas();
+            List<CadenaDTO> cadenas = cadenaService.cadenasPorTiendas();
             if (cadenas.size() > 5) cadenas = cadenas.subList(0, 5);
             model.addAttribute("cadenas", cadenas);
 
@@ -64,7 +68,7 @@ public class ControllerBase {
     @PostMapping("/login")
     public String dologin(@RequestParam("username") String user, @RequestParam("password") String pass,
                           HttpSession session, Model model) {
-        UsuarioEntity usuario = usuariosService.autheticate(user, pass);
+        UsuarioDTO usuario = usuariosService.autheticate(user, pass);
 
         if (usuario != null) {
             session.setAttribute("user", usuario);

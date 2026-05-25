@@ -1,6 +1,9 @@
 <%@ page import="java.util.List" %>
 <%@ page import="org.hibernate.Hibernate" %>
 <%@ page import="uma.grupo13.bancosol.entity.*" %>
+<%@ page import="uma.grupo13.bancosol.dto.CampanaDTO" %>
+<%@ page import="uma.grupo13.bancosol.dto.TiendaDTO" %>
+<%@ page import="uma.grupo13.bancosol.dto.VoluntarioDTO" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <!DOCTYPE html>
 <html lang="es">
@@ -13,9 +16,9 @@
     <link rel="stylesheet" href="../../../css/formulario.css">
 </head>
 <%
-    List<CampanaEntity> campanas = (List<CampanaEntity>) request.getAttribute("campanas");
-    List<TiendaEntity> tiendas = (List<TiendaEntity>) request.getAttribute("tiendas");
-    List<VoluntarioBaseEntity> voluntarios = (List<VoluntarioBaseEntity>) request.getAttribute("voluntarios");
+    List<CampanaDTO> campanas = (List<CampanaDTO>) request.getAttribute("campanas");
+    List<TiendaDTO> tiendas = (List<TiendaDTO>) request.getAttribute("tiendas");
+    List<VoluntarioDTO> voluntarios = (List<VoluntarioDTO>) request.getAttribute("voluntarios");
     String error = (String) request.getAttribute("error");
     String tipoTurno = (String) request.getAttribute("tipoTurno");
     String dia = (String) request.getAttribute("dia");
@@ -43,7 +46,7 @@
                     <label for="idCampana">Campaña:</label>
                     <select name="idCampana" id="idCampana" required>
                         <option value="">-- Seleccione Campaña --</option>
-                        <% for(CampanaEntity c : campanas) { %>
+                        <% for(CampanaDTO c : campanas) { %>
                             <option value="<%=c.getId()%>" <%= (idCampanaSel != null && idCampanaSel.equals(c.getId())) ? "selected" : "" %>><%=c.getNombre()%>-<%=c.getAno()%></option>
                         <% } %>
                     </select>
@@ -52,7 +55,7 @@
                     <label for="idTienda">Tienda:</label>
                     <select name="idTienda" id="idTienda" required>
                         <option value="">-- Seleccione Tienda --</option>
-                        <% for(TiendaEntity t : tiendas) { %>
+                        <% for(TiendaDTO t : tiendas) { %>
                             <option value="<%=t.getId()%>" <%= (idTiendaSel != null && idTiendaSel.equals(t.getId())) ? "selected" : "" %>><%=t.getDescripcion()%></option>
                         <% } %>
                     </select>
@@ -61,7 +64,7 @@
                     <label for="idVoluntario">Voluntario:</label>
                     <select name="idVoluntario" id="idVoluntario" required>
                         <option value="">-- Seleccione Voluntario --</option>
-                        <% for(VoluntarioBaseEntity v: voluntarios){%>
+                        <% for(VoluntarioDTO v: voluntarios){%>
                     <option value="<%=v.getId()%>" <%= (idVolunarioSel != null && idVolunarioSel.equals(v.getId())) ? "selected" : "" %>>
                         <% // lo mismo que en tablas/turnos -> identificar si es voluntario Físico o voluntario Entity
                             String nameToDisplay = null;

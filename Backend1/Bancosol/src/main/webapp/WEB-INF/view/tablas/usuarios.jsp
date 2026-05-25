@@ -1,9 +1,10 @@
-<%@ page import="uma.grupo13.bancosol.entity.UsuarioEntity" %>
 <%@ page import="java.util.List" %>
 <%@ page import="uma.grupo13.bancosol.entity.RolEntity" %>
+<%@ page import="uma.grupo13.bancosol.dto.UsuarioDTO" %>
+<%@ page import="uma.grupo13.bancosol.dto.RolDTO" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%
-    List<UsuarioEntity> usuarios=(List<UsuarioEntity>) request.getAttribute("users");
+    List<UsuarioDTO> usuarios=(List<UsuarioDTO>) request.getAttribute("users");
 %>
 
 <table>
@@ -20,8 +21,8 @@
     </thead>
     <tbody>
     <%
-        for(UsuarioEntity u:usuarios){
-            RolEntity rol= u.getRol();
+        for(UsuarioDTO u:usuarios){
+            RolDTO rol= u.getRol();
             String rolNombre = rol.getNombre();
             String rolClass = rolNombre.toLowerCase()
                 .replace("á", "a")
