@@ -35,7 +35,7 @@
         </header>
 
         <% if (error != null) { %>
-            <div style="color: red; margin-bottom: 20px; padding: 10px; border: 1px solid red; background-color: #fee;">
+            <div style="color: red; background-color: #fee;">
                 <%= error %>
             </div>
         <% } %>
@@ -105,5 +105,43 @@
         </div>
 
     </main>
+
+    <script>
+        const filterTipo = document.getElementById('idCampana');
+        const filterTienda = document.getElementById('idTienda');
+        const originalStoreOptions = filterTienda.innerHTML;
+
+        function actualizarTiendas() {
+            const idCampana = filterTipo.value;
+
+            if (idCampana) {
+                fetch('/turnos/tiendas-por-campana?idCampana=' + idCampana)
+                    .then(r => r.json())
+                    .then(tiendas => {
+                        filterTienda.innerHTML = '';
+                        const defaultOpt = document.createElement('option');
+                        defaultOpt.value = '';
+                        defaultOpt.textContent = '-- Seleccione Tienda --';
+                        filterTienda.appendChild(defaultOpt);
+                        tiendas.forEach(t => {
+                            const opt = document.createElement('option');
+                            opt.value = t.id;
+                            opt.textContent = t.descripcion;
+                            filterTienda.appendChild(opt);
+                        });
+                    })
+                    .catch(error => console.error(error));
+            } else {
+                filterTienda.innerHTML = originalStoreOptions;
+                filterTienda.value = '';
+            }
+        }
+
+        filterTipo.addEventListener('change', actualizarTiendas);
+
+        if (filterTipo.value) {
+            actualizarTiendas();
+        }
+    </script>
 </body>
 </html>
