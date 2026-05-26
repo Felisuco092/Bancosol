@@ -10,6 +10,7 @@ import uma.grupo13.bancosol.entity.*;
 import uma.grupo13.bancosol.services.*;
 import uma.grupo13.bancosol.services.utils.ValidaSesion;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Set;
 import java.util.stream.Collectors;
@@ -32,7 +33,16 @@ public class TiendasController {
         if (user == null) return "redirect:/";
         if (!validaSesion.tienePermiso(user.getRol().getId(), "tiendas")) return "redirect:/dashboard";
         model.addAttribute("paginaActual", "tiendas");
-        List<TiendaDTO> tiendas = tiendasService.listarTiendas();
+        List<TiendaDTO> tiendas= new ArrayList<>();
+        if(user.getRol().getId()==1){
+            tiendas = tiendasService.listarTiendas();
+        }else if (user.getRol().getId()==2){
+            tiendas = tiendasService.listarTiendasCoord(user.getId());
+        }else if (user.getRol().getId()==3){
+            tiendas = tiendasService.listarTiendasCapi(user.getId());
+        }
+
+
         List<CampanaDTO> campanas = campanasService.listarCampanas();
         List<CadenaDTO> cadenas = cadenaService.listarCadenas();
         
@@ -89,13 +99,29 @@ public class TiendasController {
         if (user == null) return "redirect:/";
         if (!validaSesion.tienePermiso(user.getRol().getId(), "editarTienda")) return "redirect:/dashboard";
 
-        List<TiendaDTO> tiendas;
+        List<TiendaDTO> tiendas= new ArrayList<>();
 
-        if (idCad!=0) {
-            tiendas = tiendasService.filtroLocalidadCadena(localidad, idCad);
-        } else{
-            tiendas = tiendasService.filtroLocalidad(localidad);
+        if(user.getRol().getId()==1){
+            if (idCad!=0) {
+                tiendas = tiendasService.filtroLocalidadCadena(localidad, idCad);
+            } else{
+                tiendas = tiendasService.filtroLocalidad(localidad);
+            }
+        }else if (user.getRol().getId()==2){
+            if (idCad!=0) {
+                tiendas = tiendasService.filtroLocalidadCadenaCoord(localidad, idCad, user.getId());
+            } else{
+                tiendas = tiendasService.filtroLocalidadCoord(localidad, user.getId());
+            }
+        }else if (user.getRol().getId()==3){
+            if (idCad!=0) {
+                tiendas = tiendasService.filtroLocalidadCadenaCapi(localidad, idCad, user.getId());
+            } else{
+                tiendas = tiendasService.filtroLocalidadCapi(localidad, user.getId());
+            }
         }
+
+
 
         model.addAttribute("tiendas", tiendas);
         model.addAttribute("idCampanaActual", idCamp);

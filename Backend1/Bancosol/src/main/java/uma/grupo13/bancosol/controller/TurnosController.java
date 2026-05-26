@@ -14,6 +14,7 @@ import uma.grupo13.bancosol.services.utils.ValidaSesion;
 
 import java.time.LocalDate;
 import java.time.LocalTime;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -35,7 +36,14 @@ public class TurnosController {
         if (!validaSesion.tienePermiso(user.getRol().getId(), "turnos")) return "redirect:/dashboard";
         List<TurnoDTO> turnos = turnosService.listarTurnos();
         List<CampanaDTO> campanas = campanasService.listarCampanas();
-        List<TiendaDTO> tiendas = tiendasService.listarTiendas();
+        List<TiendaDTO> tiendas= new ArrayList<>();
+        if(user.getRol().getId()==1){
+            tiendas = tiendasService.listarTiendas();
+        }else if (user.getRol().getId()==2){
+            tiendas = tiendasService.listarTiendasCoord(user.getId());
+        }else if (user.getRol().getId()==3){
+            tiendas = tiendasService.listarTiendasCapi(user.getId());
+        }
         model.addAttribute("paginaActual", "turnos");
         model.addAttribute("turnos", turnos);
         model.addAttribute("campanas", campanas);
