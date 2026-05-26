@@ -5,6 +5,7 @@ import org.springframework.stereotype.Service;
 import uma.grupo13.bancosol.dao.NotificacionRepository;
 import uma.grupo13.bancosol.dto.NotificacionDTO;
 import uma.grupo13.bancosol.entity.NotificacionEntity;
+import uma.grupo13.bancosol.entity.UsuarioEntity;
 import uma.grupo13.bancosol.mappers.NotificacionMapper;
 
 import java.util.List;
@@ -34,5 +35,11 @@ public class NotificacionesService {
         for(NotificacionDTO n: notificaciones){
             notificacionRepository.deleteById(n.getId());
         }
+    }
+
+    public void crearNotificacionColaborador(Integer idColab){
+        NotificacionEntity notificacionCrearColab = new NotificacionEntity();
+        List<UsuarioEntity> listaAdmins = notificacionRepository.listaAdmins(); // traer todos los admins c
+
     }
 }
