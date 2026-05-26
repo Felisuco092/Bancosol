@@ -55,7 +55,8 @@ public class CampanasController {
     public String doCrearCampana(Model model, @SessionAttribute(name = "user", required = false) UsuarioDTO user) {
         if (user == null) return "redirect:/";
         if (!validaSesion.tienePermiso(user.getRol().getId(), "campanas")) return "redirect:/dashboard";
-        model.addAttribute("campana", new CampanaEntity());
+        model.addAttribute("campana", new CampanaDTO());
+
         return "crear_editar/crear_editar_campana";
     }
 
@@ -77,7 +78,7 @@ public class CampanasController {
                                     @RequestParam(value="anyo", required = false) Integer anyo,
                                     @RequestParam(value="fecha-inicio", required = false) LocalDate fechaInic,
                                     @RequestParam(value="fecha-fin", required = false) LocalDate fechaFin,
-            Model model, @SessionAttribute(name = "user", required = false) UsuarioEntity user) {
+            Model model, @SessionAttribute(name = "user", required = false) UsuarioDTO user) {
         if (user == null) return "redirect:/";
         if (!validaSesion.tienePermiso(user.getRol().getId(), "campanas")) return "redirect:/dashboard";
 

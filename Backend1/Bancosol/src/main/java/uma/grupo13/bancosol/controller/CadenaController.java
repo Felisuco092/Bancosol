@@ -62,7 +62,7 @@ public class CadenaController {
     }
 
     @PostMapping("/guardar")
-    public  String doGuardarCadena(@SessionAttribute(name = "user", required = false) UsuarioEntity user, Model model,
+    public  String doGuardarCadena(@SessionAttribute(name = "user", required = false) UsuarioDTO user, Model model,
                                    @RequestParam("nombre") String nombre,
                                    @RequestParam("codigo") String codigo,
                                    @RequestParam(value = "id",required = false) Integer id) {

@@ -6,6 +6,9 @@ import uma.grupo13.bancosol.dto.TiendaDTO;
 import uma.grupo13.bancosol.entity.ParticipaEntity;
 import uma.grupo13.bancosol.entity.TiendaEntity;
 
+import java.util.ArrayList;
+import java.util.List;
+
 @Component
 @AllArgsConstructor
 public class TiendaMapper extends MapperDTO<TiendaDTO, TiendaEntity> {

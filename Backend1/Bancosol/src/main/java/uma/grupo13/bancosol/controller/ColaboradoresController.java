@@ -69,6 +69,7 @@ public class ColaboradoresController {
     public String doCrearColaboradores(Model model, @SessionAttribute(name = "user", required = false) UsuarioDTO user) {
         if (user == null) return "redirect:/";
         if (!validaSesion.tienePermiso(user.getRol().getId(), "editarColaboradores")) return "redirect:/dashboard";
+        model.addAttribute("voluntario", new VoluntarioDTO());
         return "crear_editar/crear_editar_colaboradores";
     }
 
@@ -99,6 +100,7 @@ public class ColaboradoresController {
         if (user == null) return "redirect:/";
         if (!validaSesion.tienePermiso(user.getRol().getId(), "editarColaboradores")) return "redirect:/dashboard";
 
+        model.addAttribute("voluntario", new VoluntarioDTO());
         return "crear_editar/crear_editar_colaboradores";
     }
 

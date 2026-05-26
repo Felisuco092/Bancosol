@@ -17,8 +17,8 @@
     </thead>
     <tbody id="colaboradores-tbody">
     <% if (cols != null) for (VoluntarioDTO v : cols) {
-        if (!(v.getTipo()=="FISICO") && !(v.getTipo()== "ENTIDAD")) continue;
-        boolean esPersona = v.getTipo()=="FISICO";
+        if (!("FISICO".equals(v.getTipo())) && !("ENTIDAD".equals(v.getTipo()))) continue;
+        boolean esPersona = "FISICO".equals(v.getTipo());
         boolean pendiente = v.getAprobado() == null || !v.getAprobado();
         String badgeClass = pendiente ? "badge-confirmar" : (esPersona ? "badge-persona" : "badge-entidad");
         String badgeText = pendiente ? "Por confirmar" : (esPersona ? "Persona Física" : "Entidad / Grupo");
