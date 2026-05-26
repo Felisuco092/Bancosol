@@ -2,7 +2,6 @@ package uma.grupo13.bancosol.controller;
 
 import jakarta.servlet.http.HttpSession;
 import lombok.AllArgsConstructor;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -13,10 +12,6 @@ import uma.grupo13.bancosol.dto.CadenaDTO;
 import uma.grupo13.bancosol.dto.CampanaDTO;
 import uma.grupo13.bancosol.dto.TiendaDTO;
 import uma.grupo13.bancosol.dto.UsuarioDTO;
-import uma.grupo13.bancosol.entity.CadenaEntity;
-import uma.grupo13.bancosol.entity.CampanaEntity;
-import uma.grupo13.bancosol.entity.TiendaEntity;
-import uma.grupo13.bancosol.entity.UsuarioEntity;
 import uma.grupo13.bancosol.services.*;
 
 import java.util.List;

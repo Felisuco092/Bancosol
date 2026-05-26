@@ -17,6 +17,7 @@ import uma.grupo13.bancosol.services.NotificacionesService;
 import uma.grupo13.bancosol.services.ParticipaService;
 import uma.grupo13.bancosol.services.RolService;
 import uma.grupo13.bancosol.services.UsuariosService;
+import uma.grupo13.bancosol.services.utils.ValidaSesion;
 
 import java.util.List;
 
@@ -28,11 +29,13 @@ public class UsuariosController {
     private final NotificacionesService notificacionesService;
     private final ParticipaService participaService;
     private final RolService rolService;
+    private final ValidaSesion validaSesion;
 
 
     @GetMapping("/")
     public String doUsuarios(Model model, @SessionAttribute(name = "user", required = false) UsuarioDTO user){
         if (user == null) return "redirect:/";
+        if (!validaSesion.tienePermiso(user.getRol().getId(), "usuarios")) return "redirect:/dashboard";
         model.addAttribute("paginaActual", "usuarios");
         List<UsuarioDTO> usuarios= usuariosService.listarUsuarios();
         model.addAttribute("users", usuarios);
@@ -42,6 +45,7 @@ public class UsuariosController {
     @GetMapping("/editar")
     public  String doEditarUsuarios(Model model, @SessionAttribute(name = "user", required = false) UsuarioDTO user, @RequestParam("id") Integer id) {
         if (user == null) return "redirect:/";
+        if (!validaSesion.tienePermiso(user.getRol().getId(), "usuarios")) return "redirect:/dashboard";
         UsuarioDTO usuario=usuariosService.getReferenceById(id);
         model.addAttribute("usuario", usuario);
         List<RolDTO> roles= rolService.listarRoles();
@@ -52,6 +56,7 @@ public class UsuariosController {
     @GetMapping("/crear")
     public  String doCrearUsuarios(Model model, @SessionAttribute(name = "user", required = false) UsuarioDTO user) {
         if (user == null) return "redirect:/";
+        if (!validaSesion.tienePermiso(user.getRol().getId(), "usuarios")) return "redirect:/dashboard";
         model.addAttribute("usuario", new UsuarioDTO());
         List<RolDTO> roles= rolService.listarRoles();
         model.addAttribute("roles", roles);
@@ -61,6 +66,7 @@ public class UsuariosController {
     @PostMapping("/borrar")
     public  String doBorrarUsuarios(Model model, @SessionAttribute(name = "user", required = false) UsuarioDTO user, @RequestParam("id") Integer id) {
         if (user == null) return "redirect:/";
+        if (!validaSesion.tienePermiso(user.getRol().getId(), "usuarios")) return "redirect:/dashboard";
         UsuarioDTO usuario=usuariosService.getReferenceById(id);
         List<NotificacionDTO> notficaciones=usuariosService.getNotificaciones(id);
         notificacionesService.deleteAll(notficaciones);
@@ -83,6 +89,7 @@ public class UsuariosController {
                                     @RequestParam(value = "area", required = false) String area,
                                     @RequestParam("rol") Integer idRol) {
         if (user_session == null) return "redirect:/";
+        if (!validaSesion.tienePermiso(user_session.getRol().getId(), "usuarios")) return "redirect:/dashboard";
 
         if (id == null && (password.isEmpty() || password == null)) {
             model.addAttribute("error", "La contraseña es obligatoria para nuevos usuarios.");
