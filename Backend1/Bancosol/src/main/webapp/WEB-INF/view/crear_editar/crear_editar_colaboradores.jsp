@@ -48,10 +48,6 @@
                         <input type="number" name="codigo_postal" id="codigo_postal" required
                                value="<%= voluntario.getCodigoPostal() != null ? voluntario.getCodigoPostal() : "" %>" />
                     </div>
-                    <div class="form-group">
-                        <label for="observaciones">Observaciones</label>
-                        <textarea name="observaciones" id="observaciones" rows="3" style="resize: none;"></textarea>
-                    </div>
 
                     <div class="form-group" style="display: <%=voluntario.getAprobado() == false ? "block" : "none"%>">
                         <label for="confirmar">Confirmar colaborador</label>

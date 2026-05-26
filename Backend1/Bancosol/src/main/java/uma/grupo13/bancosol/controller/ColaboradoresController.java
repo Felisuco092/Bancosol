@@ -6,15 +6,14 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
+import uma.grupo13.bancosol.dto.NotificacionDTO;
 import uma.grupo13.bancosol.dto.TurnoDTO;
 import uma.grupo13.bancosol.dto.UsuarioDTO;
 import uma.grupo13.bancosol.dto.VoluntarioDTO;
-import uma.grupo13.bancosol.entity.TurnoEntity;
-import uma.grupo13.bancosol.entity.VoluntarioBaseEntity;
+import uma.grupo13.bancosol.entity.*;
+import uma.grupo13.bancosol.services.NotificacionesService;
 import uma.grupo13.bancosol.services.TurnosService;
 import uma.grupo13.bancosol.services.VoluntariosService;
-import uma.grupo13.bancosol.entity.VoluntarioFisicoEntity;
-import uma.grupo13.bancosol.entity.VoluntarioEntidadEntity;
 import uma.grupo13.bancosol.services.utils.ValidaSesion;
 
 import java.util.List;
@@ -26,8 +25,7 @@ public class ColaboradoresController {
     private final VoluntariosService voluntariosService;
     private final TurnosService turnosService;
     private final ValidaSesion validaSesion;
-
-
+    private final NotificacionesService  notificacionesService;
 
     @GetMapping("/")
     public String doColaboradores(Model model, @SessionAttribute(name = "user", required = false) UsuarioDTO user) {
@@ -70,6 +68,7 @@ public class ColaboradoresController {
         if (user == null) return "redirect:/";
         if (!validaSesion.tienePermiso(user.getRol().getId(), "editarColaboradores")) return "redirect:/dashboard";
         model.addAttribute("voluntario", new VoluntarioDTO());
+
         return "crear_editar/crear_editar_colaboradores";
     }
 
@@ -124,7 +123,6 @@ public class ColaboradoresController {
                                         @RequestParam("domicilio") String domicilio,
                                         @RequestParam("zona_geografica") String zonaGeografica,
                                         @RequestParam("codigo_postal") String codigoPostal,
-                                        @RequestParam(value = "observaciones", required = false) String observaciones,
                                         @RequestParam(value = "id", required = false) Integer id,
                                         @RequestParam(value = "nombre", required = false) String nombre,
                                         @RequestParam(value = "apellidos", required = false) String apellidos,
@@ -135,8 +133,12 @@ public class ColaboradoresController {
         if (!validaSesion.tienePermiso(user.getRol().getId(), "editarColaboradores")) return "redirect:/dashboard";
 
 
-        voluntariosService.guardarVoluntario(id, tipo, domicilio, zonaGeografica, codigoPostal, observaciones, nombre,
+        VoluntarioDTO voluntarioDTO = voluntariosService.guardarVoluntario(id, tipo, domicilio, zonaGeografica, codigoPostal, nombre,
                 apellidos, nombreAsociacion, nVoluntarios, confirmar);
+        if(!user.getRol().getId().equals(1) && id==null){// el admin no es el que crea al nuevo colaborador
+            notificacionesService.crearNotificacionColabYEnviar(nombre);
+
+        }
         return "redirect:/colaboradores/";
     }
 
