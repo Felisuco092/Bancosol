@@ -41,14 +41,16 @@ public class NotificacionesService {
         }
     }
 
-    public void crearNotificacionColabYEnviar(String nombreColab){
+    public void crearNotificacionColabYEnviar(String nombreColab, String apellidosColab, String nickCoordinador){
 
         List<UsuarioEntity> listaAdmins = userRepository.listaAdmins(); // traer todos los admins c
         for(UsuarioEntity admin: listaAdmins){
             NotificacionEntity notificacionCrearColab = new NotificacionEntity();
             notificacionCrearColab.setAsunto("Nuevo colaborador por confirmar");
             notificacionCrearColab.setFechaCreacion(LocalDateTime.now()); // añadir fecha actual
-            notificacionCrearColab.setMensaje("Se ha creado un nuevo colaborador: "+nombreColab+ "a espensas de la confirmación de " + admin.getNombre());
+            notificacionCrearColab.setMensaje("El usuario coordinador " + nickCoordinador +
+                                        " ha creado un nuevo colaborador: "+ nombreColab + " " + apellidosColab +
+                                        ", a espensas de la confirmación del administrador " + admin.getUsuario());
             notificacionCrearColab.setUsuarioDestino(admin);
 
             admin.getNotificaciones().add(notificacionCrearColab);

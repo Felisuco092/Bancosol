@@ -24,6 +24,12 @@
                     Ver mensaje
                 </button>
             </form>
+            <form action="/bandeja/delete" method="post">
+                <input type="hidden" name="idMensaje" value="<%=notificacionAct.getId()%>" />
+                <button class="btn btn-primary btn-view">
+                    Eliminar
+                </button>
+            </form>
         </td>
     </tr>
     <%}%>
