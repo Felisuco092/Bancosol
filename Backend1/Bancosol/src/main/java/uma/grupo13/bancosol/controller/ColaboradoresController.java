@@ -14,8 +14,6 @@ import uma.grupo13.bancosol.entity.*;
 import uma.grupo13.bancosol.services.NotificacionesService;
 import uma.grupo13.bancosol.services.TurnosService;
 import uma.grupo13.bancosol.services.VoluntariosService;
-import uma.grupo13.bancosol.entity.VoluntarioFisicoEntity;
-import uma.grupo13.bancosol.entity.VoluntarioEntidadEntity;
 import uma.grupo13.bancosol.services.utils.ValidaSesion;
 
 import java.util.List;
@@ -70,6 +68,7 @@ public class ColaboradoresController {
         if (user == null) return "redirect:/";
         if (!validaSesion.tienePermiso(user.getRol().getId(), "editarColaboradores")) return "redirect:/dashboard";
         model.addAttribute("voluntario", new VoluntarioDTO());
+
         return "crear_editar/crear_editar_colaboradores";
     }
 
@@ -124,7 +123,6 @@ public class ColaboradoresController {
                                         @RequestParam("domicilio") String domicilio,
                                         @RequestParam("zona_geografica") String zonaGeografica,
                                         @RequestParam("codigo_postal") String codigoPostal,
-                                        @RequestParam(value = "observaciones", required = false) String observaciones,
                                         @RequestParam(value = "id", required = false) Integer id,
                                         @RequestParam(value = "nombre", required = false) String nombre,
                                         @RequestParam(value = "apellidos", required = false) String apellidos,
