@@ -15,9 +15,9 @@ server.use(middlewares)
 server.use(jsonServer.bodyParser)
 
 const ROLES = {
-  ADMIN: 1,
-  CAPITAN: 2,
-  COORDINADOR: 3
+  ADMIN: "1",
+  CAPITAN: "2",
+  COORDINADOR: "3"
 }
 
 const PERMISOS = {
@@ -150,14 +150,22 @@ server.use((req, res, next) => {
   try {
     const decoded = jwt.verify(authHeader.split(' ')[1], JWT_SECRET)
     req.user = decoded
-
-    if (req.user.id_rol === ROLES.ADMIN) {
-      return next()
-    }
-
     const path = req.path.startsWith('/') ? req.path.slice(1) : req.path
     const recurso = getRecurso(path)
     const method = getMethod(req)
+
+    if (method === 'post' && recurso === 'usuarios') {
+      const { password } = req.body
+      if (password) {
+        req.body.password = bcrypt.hashSync(password, 12)
+      }
+    }
+
+    if (String(req.user.id_rol) === String(ROLES.ADMIN)) {
+      return next()
+    }
+
+    
 
     if (!recurso || !method) {
       return next()
@@ -169,9 +177,10 @@ server.use((req, res, next) => {
     }
 
     const rolesPermitidos = permiso[method]
-    if (!rolesPermitidos || !rolesPermitidos.includes(req.user.id_rol)) {
+    if (!rolesPermitidos || !rolesPermitidos.includes(String(req.user.id_rol))) {
       return res.status(403).json({ error: 'No tienes permisos para esta operación' })
     }
+    
 
     next()
   } catch (err) {
