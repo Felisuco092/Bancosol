@@ -26,7 +26,7 @@ public class ValidaSesion {
         permisosRol0.put("editarColaboradores", true);
         permisosRol0.put("borrarColaboradores", true);
         permisosRol0.put("confirmarColaboradores", true);
-        permisos.put(0, permisosRol0);
+        permisos.put(1, permisosRol0);
 
         Map<String, Boolean> permisosRol1 = new HashMap<>();
         permisosRol1.put("usuarios", false);
@@ -41,7 +41,7 @@ public class ValidaSesion {
         permisosRol1.put("editarColaboradores", true);
         permisosRol1.put("borrarColaboradores", false);
         permisosRol1.put("confirmarColaboradores", false);
-        permisos.put(1, permisosRol1);
+        permisos.put(2, permisosRol1);
 
         Map<String, Boolean> permisosRol2 = new HashMap<>();
         permisosRol2.put("usuarios", false);
@@ -56,7 +56,7 @@ public class ValidaSesion {
         permisosRol2.put("editarColaboradores", false);
         permisosRol2.put("borrarColaboradores", false);
         permisosRol2.put("confirmarColaboradores", false);
-        permisos.put(2, permisosRol2);
+        permisos.put(3, permisosRol2);
     }
 
     public boolean verificarSesion(HttpSession session){
