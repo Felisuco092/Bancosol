@@ -136,7 +136,7 @@ public class ColaboradoresController {
         VoluntarioDTO voluntarioDTO = voluntariosService.guardarVoluntario(id, tipo, domicilio, zonaGeografica, codigoPostal, nombre,
                 apellidos, nombreAsociacion, nVoluntarios, confirmar);
         if(!user.getRol().getId().equals(1) && id==null){// el admin no es el que crea al nuevo colaborador
-            notificacionesService.crearNotificacionColabYEnviar(nombre);
+            notificacionesService.crearNotificacionColabYEnviar(nombre, apellidos, user.getUsuario());
 
         }
         return "redirect:/colaboradores/";
