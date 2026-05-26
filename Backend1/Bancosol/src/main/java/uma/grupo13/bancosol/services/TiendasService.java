@@ -84,4 +84,33 @@ public class TiendasService {
     public Set<String> getLocalidades() {
         return tiendasRepo.getLocalidades();
     }
+
+    public List<TiendaDTO> listarTiendasCoord(Integer id){
+        List<TiendaEntity> lista = tiendasRepo.getAllCoord(id);
+        return tiendaMapper.toDTOList(lista);
+    }
+    public List<TiendaDTO> listarTiendasCapi(Integer id){
+        List<TiendaEntity> lista = tiendasRepo.getAllCapi(id);
+        return tiendaMapper.toDTOList(lista);
+    }
+
+    public List<TiendaDTO> filtroLocalidadCoord(String local, Integer idCoord) {
+        List<TiendaEntity> lista = tiendasRepo.filtroLocalidadCoord(local, idCoord);
+        return tiendaMapper.toDTOList(lista);
+    }
+
+    public List<TiendaDTO> filtroLocalidadCadenaCoord(String local, Integer idCad, Integer idCoord) {
+        List<TiendaEntity> lista = tiendasRepo.filtroLocalidadCadenaCoord(local, idCad, idCoord);
+        return tiendaMapper.toDTOList(lista);
+    }
+
+    public List<TiendaDTO> filtroLocalidadCapi(String local, Integer idCapi) {
+        List<TiendaEntity> lista = tiendasRepo.filtroLocalidadCapi(local, idCapi);
+        return tiendaMapper.toDTOList(lista);
+    }
+
+    public List<TiendaDTO> filtroLocalidadCadenaCapi(String local, Integer idCad, Integer idCapi) {
+        List<TiendaEntity> lista = tiendasRepo.filtroLocalidadCadenaCapi(local, idCad, idCapi);
+        return tiendaMapper.toDTOList(lista);
+    }
 }
