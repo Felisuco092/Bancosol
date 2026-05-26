@@ -3,11 +3,14 @@ package uma.grupo13.bancosol.services;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 import uma.grupo13.bancosol.dao.NotificacionRepository;
+import uma.grupo13.bancosol.dao.UserRepository;
 import uma.grupo13.bancosol.dto.NotificacionDTO;
 import uma.grupo13.bancosol.entity.NotificacionEntity;
 import uma.grupo13.bancosol.entity.UsuarioEntity;
 import uma.grupo13.bancosol.mappers.NotificacionMapper;
 
+import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.List;
 
 @Service
@@ -15,6 +18,7 @@ import java.util.List;
 public class NotificacionesService {
     private final NotificacionRepository notificacionRepository;
     private final NotificacionMapper notificacionMapper;
+    private final UserRepository userRepository;
 
 
     public List<NotificacionDTO> listarNotificaciones() {
@@ -37,9 +41,18 @@ public class NotificacionesService {
         }
     }
 
-    public void crearNotificacionColaborador(Integer idColab){
-        NotificacionEntity notificacionCrearColab = new NotificacionEntity();
-        List<UsuarioEntity> listaAdmins = notificacionRepository.listaAdmins(); // traer todos los admins c
+    public void crearNotificacionColabYEnviar(String nombreColab){
 
+        List<UsuarioEntity> listaAdmins = userRepository.listaAdmins(); // traer todos los admins c
+        for(UsuarioEntity admin: listaAdmins){
+            NotificacionEntity notificacionCrearColab = new NotificacionEntity();
+            notificacionCrearColab.setAsunto("Nuevo colaborador por confirmar");
+            notificacionCrearColab.setFechaCreacion(LocalDateTime.now()); // añadir fecha actual
+            notificacionCrearColab.setMensaje("Se ha creado un nuevo colaborador: "+nombreColab+ "a espensas de la confirmación de " + admin.getNombre());
+            notificacionCrearColab.setUsuarioDestino(admin);
+
+            admin.getNotificaciones().add(notificacionCrearColab);
+            notificacionRepository.save(notificacionCrearColab);
+        }
     }
 }

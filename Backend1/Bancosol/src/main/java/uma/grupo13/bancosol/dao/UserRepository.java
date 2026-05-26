@@ -14,4 +14,7 @@ public interface UserRepository extends JpaRepository<UsuarioEntity, Integer> {
 
     @Query("select u from UsuarioEntity u where u.rol.id = 3")
     public List<UsuarioEntity> findCapitanes();
+
+    @Query("select ad from UsuarioEntity ad where ad.id = 1") // devolver todos los admins que existan en la bd
+    public List<UsuarioEntity> listaAdmins();
 }
