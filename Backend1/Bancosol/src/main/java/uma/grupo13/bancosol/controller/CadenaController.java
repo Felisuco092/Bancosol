@@ -11,6 +11,7 @@ import uma.grupo13.bancosol.dto.UsuarioDTO;
 import uma.grupo13.bancosol.entity.CadenaEntity;
 import uma.grupo13.bancosol.entity.UsuarioEntity;
 import uma.grupo13.bancosol.services.CadenaService;
+import uma.grupo13.bancosol.services.utils.ValidaSesion;
 
 import java.util.List;
 
@@ -19,10 +20,14 @@ import java.util.List;
 public class CadenaController {
     @Autowired
     protected CadenaService cadenaService;
+    @Autowired
+    protected ValidaSesion validaSesion;
+
 
     @GetMapping("/")
     public String doCadena(@SessionAttribute(name = "user", required = false) UsuarioDTO user, Model model) {
         if (user == null) return "redirect:/";
+        if (!validaSesion.tienePermiso(user.getRol().getId(), "cadenas")) return "redirect:/dashboard";
 
         model.addAttribute("paginaActual", "cadenas");
         List<CadenaDTO> cadenaslist = cadenaService.listarCadenas();
@@ -34,6 +39,7 @@ public class CadenaController {
     public  String doEditarCadena(@SessionAttribute(name = "user", required = false) UsuarioDTO user, Model model,
                                   @RequestParam("id") Integer id) {
         if (user == null) return "redirect:/";
+        if (!validaSesion.tienePermiso(user.getRol().getId(), "cadenas")) return "redirect:/dashboard";
         CadenaDTO cadena = cadenaService.getReferenceById(id);
         model.addAttribute("cadena", cadena);
         return "crear_editar/crear_editar_cadena";
@@ -42,6 +48,7 @@ public class CadenaController {
     @GetMapping("/crear")
     public  String doCrearCadena(@SessionAttribute(name = "user", required = false) UsuarioDTO user, Model model) {
         if (user == null) return "redirect:/";
+        if (!validaSesion.tienePermiso(user.getRol().getId(), "cadenas")) return "redirect:/dashboard";
         return "crear_editar/crear_editar_cadena";
     }
 
@@ -49,6 +56,7 @@ public class CadenaController {
     public  String doBorrarCadena(@SessionAttribute(name = "user", required = false) UsuarioDTO user, Model model,
                                   @RequestParam("id") Integer id){
         if (user == null) return "redirect:/";
+        if (!validaSesion.tienePermiso(user.getRol().getId(), "cadenas")) return "redirect:/dashboard";
         cadenaService.borrarCadenaId(id);
         return "redirect:/cadenas/";
     }
@@ -59,6 +67,7 @@ public class CadenaController {
                                    @RequestParam("codigo") String codigo,
                                    @RequestParam(value = "id",required = false) Integer id) {
         if (user == null) return "redirect:/";
+        if (!validaSesion.tienePermiso(user.getRol().getId(), "cadenas")) return "redirect:/dashboard";
         cadenaService.guardarCadena(id, nombre, codigo);
         return "redirect:/cadenas/";
     }

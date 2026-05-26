@@ -8,6 +8,7 @@ import org.springframework.web.bind.annotation.*;
 import uma.grupo13.bancosol.dto.*;
 import uma.grupo13.bancosol.entity.*;
 import uma.grupo13.bancosol.services.*;
+import uma.grupo13.bancosol.services.utils.ValidaSesion;
 
 import java.util.List;
 import java.util.Set;
@@ -22,11 +23,14 @@ public class TiendasController {
     private final CadenaService cadenaService;
     private final ParticipaService participaService;
     private final UsuariosService usuariosService;
+    private final ValidaSesion validaSesion;
+
 
 
     @GetMapping("/")
     public String doTiendas(Model model, @SessionAttribute(name = "user", required = false) UsuarioDTO user) {
         if (user == null) return "redirect:/";
+        if (!validaSesion.tienePermiso(user.getRol().getId(), "tiendas")) return "redirect:/dashboard";
         model.addAttribute("paginaActual", "tiendas");
         List<TiendaDTO> tiendas = tiendasService.listarTiendas();
         List<CampanaDTO> campanas = campanasService.listarCampanas();
@@ -49,6 +53,7 @@ public class TiendasController {
     @GetMapping("/editar")
     public String doEditarTiendas(Model model, @SessionAttribute(name = "user", required = false) UsuarioDTO user, @RequestParam("id") Integer id) {
         if (user == null) return "redirect:/";
+        if (!validaSesion.tienePermiso(user.getRol().getId(), "editarTienda")) return "redirect:/dashboard";
         TiendaDTO tienda = tiendasService.buscarPorId(id);
         model.addAttribute("tienda", tienda);
         List<CadenaDTO> cadenas = cadenaService.listarCadenas();
@@ -63,6 +68,7 @@ public class TiendasController {
     @GetMapping("/crear")
     public String doCrearTiendas(Model model, @SessionAttribute(name = "user", required = false) UsuarioDTO user) {
         if (user == null) return "redirect:/";
+        if (!validaSesion.tienePermiso(user.getRol().getId(), "editarTienda")) return "redirect:/dashboard";
         model.addAttribute("tienda", new TiendaEntity());
         List<CadenaDTO> cadenas = cadenaService.listarCadenas();
         model.addAttribute("cadenas", cadenas);
@@ -80,7 +86,8 @@ public class TiendasController {
                            @RequestParam("idCampana") Integer idCamp,
                            @RequestParam("localidad") String localidad) {
         if (user == null) return "redirect:/";
-        
+        if (!validaSesion.tienePermiso(user.getRol().getId(), "editarTienda")) return "redirect:/dashboard";
+
         List<TiendaDTO> tiendas;
 
         if (idCad!=0) {
@@ -97,6 +104,7 @@ public class TiendasController {
     @PostMapping("/borrar")
     public String doBorrarTiendas(Model model, @SessionAttribute(name = "user", required = false) UsuarioEntity user, @RequestParam("id") Integer id) {
         if (user == null) return "redirect:/";
+        if (!validaSesion.tienePermiso(user.getRol().getId(), "editarTienda")) return "redirect:/dashboard";
         tiendasService.borrarTiendaPorId(id);
         return "redirect:/tiendas/";
     }
@@ -113,6 +121,7 @@ public class TiendasController {
                                    @RequestParam(value = "capitan", required = false) Integer idCapitan,
                                    @RequestParam(value = "campanasParticipa", required = false) List<Integer> idCampanas) {
         if (user == null) return "redirect:/";
+        if (!validaSesion.tienePermiso(user.getRol().getId(), "editarTienda")) return "redirect:/dashboard";
 
         TiendaDTO tienda;
         tienda=tiendasService.guardarTienda(id, descripcion, localidad, domicilio, cPostal, zonaGeografica, idCadena, idCapitan);

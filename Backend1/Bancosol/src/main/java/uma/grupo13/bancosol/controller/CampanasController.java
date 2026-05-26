@@ -2,6 +2,7 @@ package uma.grupo13.bancosol.controller;
 
 import jakarta.persistence.PreUpdate;
 import jakarta.servlet.http.HttpSession;
+import lombok.AllArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -14,24 +15,25 @@ import uma.grupo13.bancosol.entity.TurnoEntity;
 import uma.grupo13.bancosol.entity.UsuarioEntity;
 import uma.grupo13.bancosol.services.CampanasService;
 import uma.grupo13.bancosol.services.TurnosService;
+import uma.grupo13.bancosol.services.utils.ValidaSesion;
 
 import java.time.LocalDate;
 import java.util.Date;
 import java.util.List;
 
 @Controller
+@AllArgsConstructor
 @RequestMapping("/campanas")
 public class CampanasController {
-    @Autowired
-    protected CampanasService campanasService;
-
-    @Autowired
-    protected TurnosService turnosService;
+    private final CampanasService campanasService;
+    private final TurnosService turnosService;
+    private final ValidaSesion validaSesion;
 
 
     @GetMapping("/")
     public String doCampanas(Model model, @SessionAttribute(name = "user", required = false) UsuarioDTO user) {
         if (user == null) return "redirect:/";
+        if (!validaSesion.tienePermiso(user.getRol().getId(), "campanas")) return "redirect:/dashboard";
 
         List<CampanaDTO> campanas = campanasService.listarCampanas();
         model.addAttribute("paginaActual", "campanas");
@@ -43,6 +45,7 @@ public class CampanasController {
     public  String doEditarCampana(@RequestParam("id") Integer idCampana,
             Model model, @SessionAttribute(name = "user", required = false) UsuarioDTO user) {
         if (user == null) return "redirect:/";
+        if (!validaSesion.tienePermiso(user.getRol().getId(), "campanas")) return "redirect:/dashboard";
         CampanaDTO campanaEdit = campanasService.getReferenceById(idCampana);
         model.addAttribute("campana", campanaEdit);
         return "crear_editar/crear_editar_campana";
@@ -51,6 +54,7 @@ public class CampanasController {
     @GetMapping("/crear")
     public String doCrearCampana(Model model, @SessionAttribute(name = "user", required = false) UsuarioDTO user) {
         if (user == null) return "redirect:/";
+        if (!validaSesion.tienePermiso(user.getRol().getId(), "campanas")) return "redirect:/dashboard";
         model.addAttribute("campana", new CampanaEntity());
         return "crear_editar/crear_editar_campana";
     }
@@ -59,7 +63,7 @@ public class CampanasController {
     public  String doBorrarCampana(@RequestParam("idCampana") Integer idCampana,
                                    Model model, @SessionAttribute(name = "user", required = false) UsuarioDTO user) {
         if (user == null) return "redirect:/";
-
+        if (!validaSesion.tienePermiso(user.getRol().getId(), "campanas")) return "redirect:/dashboard";
 
         List<TurnoDTO> turnos = turnosService.filtrarTurnos(idCampana, null);
         turnosService.deleteAll(turnos);
@@ -75,6 +79,7 @@ public class CampanasController {
                                     @RequestParam(value="fecha-fin", required = false) LocalDate fechaFin,
             Model model, @SessionAttribute(name = "user", required = false) UsuarioEntity user) {
         if (user == null) return "redirect:/";
+        if (!validaSesion.tienePermiso(user.getRol().getId(), "campanas")) return "redirect:/dashboard";
 
         campanasService.guardarCampana(idCampana, nombre, anyo, fechaInic, fechaFin);
 

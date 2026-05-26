@@ -15,6 +15,7 @@ import uma.grupo13.bancosol.services.TurnosService;
 import uma.grupo13.bancosol.services.VoluntariosService;
 import uma.grupo13.bancosol.entity.VoluntarioFisicoEntity;
 import uma.grupo13.bancosol.entity.VoluntarioEntidadEntity;
+import uma.grupo13.bancosol.services.utils.ValidaSesion;
 
 import java.util.List;
 
@@ -24,11 +25,14 @@ import java.util.List;
 public class ColaboradoresController {
     private final VoluntariosService voluntariosService;
     private final TurnosService turnosService;
+    private final ValidaSesion validaSesion;
+
 
 
     @GetMapping("/")
     public String doColaboradores(Model model, @SessionAttribute(name = "user", required = false) UsuarioDTO user) {
         if (user == null) return "redirect:/";
+        if (!validaSesion.tienePermiso(user.getRol().getId(), "colaboradores")) return "redirect:/dashboard";
 
         model.addAttribute("paginaActual", "colaboradores");
         model.addAttribute("colaboradores", voluntariosService.listarVoluntarios());
@@ -41,6 +45,7 @@ public class ColaboradoresController {
                             @RequestParam(required = false) String localidad,
                             Model model, @SessionAttribute(name = "user", required = false) UsuarioDTO user) {
         if (user == null) return "redirect:/";
+        if (!validaSesion.tienePermiso(user.getRol().getId(), "colaboradores")) return "redirect:/dashboard";
 
         String localidadParam = (localidad == null || localidad.equals("all")) ? "" : localidad;
 
@@ -63,6 +68,7 @@ public class ColaboradoresController {
     @GetMapping("/crear")
     public String doCrearColaboradores(Model model, @SessionAttribute(name = "user", required = false) UsuarioDTO user) {
         if (user == null) return "redirect:/";
+        if (!validaSesion.tienePermiso(user.getRol().getId(), "editarColaboradores")) return "redirect:/dashboard";
         return "crear_editar/crear_editar_colaboradores";
     }
 
@@ -70,6 +76,8 @@ public class ColaboradoresController {
     public String doEditarColaboradoresGet(Model model, @SessionAttribute(name = "user", required = false) UsuarioDTO user,
                                            @RequestParam("id") Integer id) {
         if (user == null) return "redirect:/";
+        if (!validaSesion.tienePermiso(user.getRol().getId(), "editarColaboradores")) return "redirect:/dashboard";
+
         VoluntarioDTO voluntario = voluntariosService.buscarPorId(id);
         model.addAttribute("voluntario", voluntario);
         return "crear_editar/crear_editar_colaboradores";
@@ -79,6 +87,8 @@ public class ColaboradoresController {
     public String doEditarColaboradoresPost(Model model, @SessionAttribute(name = "user", required = false) UsuarioDTO user,
                                             @RequestParam("id") Integer id) {
         if (user == null) return "redirect:/";
+        if (!validaSesion.tienePermiso(user.getRol().getId(), "editarColaboradores")) return "redirect:/dashboard";
+
         VoluntarioDTO voluntario = voluntariosService.buscarPorId(id);
         model.addAttribute("voluntario", voluntario);
         return "crear_editar/crear_editar_colaboradores";
@@ -87,6 +97,8 @@ public class ColaboradoresController {
     @PostMapping("/crear")
     public String doCrearColaboradoresPost(Model model, @SessionAttribute(name = "user", required = false) UsuarioDTO user) {
         if (user == null) return "redirect:/";
+        if (!validaSesion.tienePermiso(user.getRol().getId(), "editarColaboradores")) return "redirect:/dashboard";
+
         return "crear_editar/crear_editar_colaboradores";
     }
 
@@ -94,6 +106,8 @@ public class ColaboradoresController {
     public String doBorrarColaboradores(Model model, @SessionAttribute(name = "user", required = false) UsuarioDTO user,
                                         @RequestParam("id") Integer id) {
         if (user == null) return "redirect:/";
+        if (!validaSesion.tienePermiso(user.getRol().getId(), "borrarColaboradores")) return "redirect:/dashboard";
+
 
         List<TurnoDTO> turnos = turnosService.findByVoluntarioId(id);
         turnosService.deleteAll(turnos);
@@ -116,6 +130,8 @@ public class ColaboradoresController {
                                         @RequestParam(value = "n_voluntarios", required = false) Integer nVoluntarios,
                                         @RequestParam(value = "confirmar", required = false) Boolean confirmar) {
         if (user == null) return "redirect:/";
+        if (!validaSesion.tienePermiso(user.getRol().getId(), "editarColaboradores")) return "redirect:/dashboard";
+
 
         voluntariosService.guardarVoluntario(id, tipo, domicilio, zonaGeografica, codigoPostal, observaciones, nombre,
                 apellidos, nombreAsociacion, nVoluntarios, confirmar);
