@@ -10,7 +10,6 @@ import java.util.Map;
 @Service
 public class ValidaSesion {
 
-    //El map lo ha hecho la ia(nos daba pereza :v)
     private static final Map<Integer, Map<String, Boolean>> permisos = new HashMap<>();
     static {
         Map<String, Boolean> permisosRol0 = new HashMap<>();
@@ -57,6 +56,36 @@ public class ValidaSesion {
         permisosRol2.put("borrarColaboradores", false);
         permisosRol2.put("confirmarColaboradores", false);
         permisos.put(3, permisosRol2);
+
+        Map<String, Boolean> permisosRol3 = new HashMap<>();
+        permisosRol3.put("usuarios", false);
+        permisosRol3.put("tiendas", true);
+        permisosRol3.put("cadenas", false);
+        permisosRol3.put("campanas", false);
+        permisosRol3.put("turnos", true);
+        permisosRol3.put("colaboradores", true);
+        permisosRol3.put("incidencias", true);
+        permisosRol3.put("editarTienda", false);
+        permisosRol3.put("editarTurnos", false);
+        permisosRol3.put("editarColaboradores", false);
+        permisosRol3.put("borrarColaboradores", false);
+        permisosRol3.put("confirmarColaboradores", false);
+        permisos.put(4, permisosRol3);
+
+        Map<String, Boolean> permisosRol4 = new HashMap<>();
+        permisosRol4.put("usuarios", false);
+        permisosRol4.put("tiendas", true);
+        permisosRol4.put("cadenas", false);
+        permisosRol4.put("campanas", false);
+        permisosRol4.put("turnos", true);
+        permisosRol4.put("colaboradores", true);
+        permisosRol4.put("incidencias", false);
+        permisosRol4.put("editarTienda", false);
+        permisosRol4.put("editarTurnos", false);
+        permisosRol4.put("editarColaboradores", false);
+        permisosRol4.put("borrarColaboradores", false);
+        permisosRol4.put("confirmarColaboradores", false);
+        permisos.put(5, permisosRol4);
     }
 
     public boolean verificarSesion(HttpSession session){
@@ -69,6 +98,8 @@ public class ValidaSesion {
     }
 
     public Boolean tienePermiso(Integer rol, String pagina){
-        return permisos.get(rol).get(pagina);
+        Boolean permiso= permisos.get(rol).get(pagina);
+        if(permiso==null) return false;
+        return permiso;
     }
 }
