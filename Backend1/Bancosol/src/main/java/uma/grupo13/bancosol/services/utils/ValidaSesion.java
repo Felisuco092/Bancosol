@@ -69,6 +69,8 @@ public class ValidaSesion {
     }
 
     public Boolean tienePermiso(Integer rol, String pagina){
-        return permisos.get(rol).get(pagina);
+        Boolean permiso= permisos.get(rol).get(pagina);
+        if(permiso==null) return false;
+        return permiso;
     }
 }
