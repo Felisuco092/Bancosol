@@ -32,6 +32,11 @@ public class UsuariosService {
         return usuarioMapper.toDTOList(lista);
     }
 
+    public List<UsuarioDTO> listarAdmins(){
+        List<UsuarioEntity> listaAdmins = userRepository.listaAdmins();
+        return usuarioMapper.toDTOList(listaAdmins);
+    }
+
     public UsuarioDTO buscarPorId(Integer id) {
         if (id==null) {return null;}
         UsuarioEntity user = userRepository.findById(id).orElse(null);

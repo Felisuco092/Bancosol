@@ -7,6 +7,12 @@
     //Gemini nos ha ayudado la conversión de los tipos de voluntarios Entity que existen
     List<TurnoDTO> turnosList = (List<TurnoDTO>) request.getAttribute("turnos");
     String capitanNombre = (String) request.getAttribute("capitanNombre");
+    Integer idCampanaSelect = (Integer) request.getAttribute("idCampanaSel");
+
+    // Esto para que evitar posible paso de parámetros nulos, por eso usaos getParameter
+    if (idCampanaSelect == null && request.getParameter("idCampana") != null && !request.getParameter("idCampana").isEmpty()) {
+        idCampanaSelect = Integer.parseInt(request.getParameter("idCampana"));
+    }
 %>
 
 
@@ -50,6 +56,7 @@
                 </form>
                 <form action = "/turnos/incidencia" method = "POST">
                     <input type="hidden" name="idTurno" value="<%=turnoAct.getId()%>"/>
+                    <input type="hidden" name="idCampana" value="<%=idCampanaSelect%>"/>
                     <button class="btn btn-info btn-incidence">Incidencia</button>
                 </form>
             </td>
