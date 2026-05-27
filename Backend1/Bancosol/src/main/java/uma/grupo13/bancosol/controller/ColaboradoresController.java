@@ -6,10 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
-import uma.grupo13.bancosol.dto.NotificacionDTO;
-import uma.grupo13.bancosol.dto.TurnoDTO;
-import uma.grupo13.bancosol.dto.UsuarioDTO;
-import uma.grupo13.bancosol.dto.VoluntarioDTO;
+import uma.grupo13.bancosol.dto.*;
 
 import uma.grupo13.bancosol.services.UsuariosService;
 import uma.grupo13.bancosol.entity.*;
@@ -20,6 +17,7 @@ import uma.grupo13.bancosol.services.VoluntariosService;
 import uma.grupo13.bancosol.services.utils.Permiso;
 import uma.grupo13.bancosol.services.utils.ValidaSesion;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Controller
@@ -37,8 +35,15 @@ public class ColaboradoresController {
         if (user == null) return "redirect:/";
         if (!validaSesion.tienePermiso(user.getRol().getId(), Permiso.COLABORADORES)) return "redirect:/dashboard";
 
+        List<VoluntarioDTO> voluntarios= new ArrayList<>();
+        if(user.getRol().getId()==1 || user.getRol().getId()==2 || user.getRol().getId()==3){
+            voluntarios = voluntariosService.listarVoluntarios();
+        }else if (user.getRol().getId()==4){
+            voluntarios = voluntariosService.listarVoluntariosResponsable(user.getId());
+        }
+
         model.addAttribute("paginaActual", "colaboradores");
-        model.addAttribute("colaboradores", voluntariosService.listarVoluntarios());
+        model.addAttribute("colaboradores", voluntarios);
         model.addAttribute("localidades", voluntariosService.findLocalidadesDistintas());
         return "colaboradores";
     }
@@ -52,15 +57,26 @@ public class ColaboradoresController {
 
         String localidadParam = (localidad == null || localidad.equals("all")) ? "" : localidad;
 
-        List<VoluntarioDTO> todos;
-        if (tipo == null || tipo.equals("all")) {
-            todos = voluntariosService.findAllByLocalidad(localidadParam);
-        } else if (tipo.equals("true")) {
-            todos = voluntariosService.findBaseFisicos(localidadParam);
-        } else if (tipo.equals("false")) {
-            todos = voluntariosService.findBaseEntidades(localidadParam);
-        } else {
-            todos = voluntariosService.findPendientes(localidadParam);
+        List<VoluntarioDTO> todos= new ArrayList<>();
+        if(user.getRol().getId()==1 || user.getRol().getId()==2 || user.getRol().getId()==3){
+            if (tipo == null || tipo.equals("all")) {
+                todos = voluntariosService.findAllByLocalidad(localidadParam);
+            } else if (tipo.equals("true")) {
+                todos = voluntariosService.findBaseFisicos(localidadParam);
+            } else if (tipo.equals("false")) {
+                todos = voluntariosService.findBaseEntidades(localidadParam);
+            } else {
+                todos = voluntariosService.findPendientes(localidadParam);
+            }
+        }else if (user.getRol().getId()==4){
+            if (tipo == null || tipo.equals("all")) {
+                todos = voluntariosService.findAllByLocalidadResponsable(localidadParam, user.getId());
+            } else if (tipo.equals("true")) {
+            } else if (tipo.equals("false")) {
+                todos = voluntariosService.findBaseEntidadesResponsable(localidadParam, user.getId());
+            } else {
+                todos = voluntariosService.findPendientesResponsable(localidadParam, user.getId());
+            }
         }
 
         model.addAttribute("colaboradores", todos);
