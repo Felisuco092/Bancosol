@@ -11,6 +11,14 @@
     {
       "id": "3",
       "nombre": "Coordinador"
+    },
+    {
+      "id": "4",
+      "nombre": "Responsable Entidad"
+    },
+    {
+      "id": "5",
+      "nombre": "Responsable Tienda"
     }
   ],
   "usuarios": [
@@ -68,6 +76,28 @@
       "telefono": "644333444",
       "area_asignada": "Antequera",
       "id_rol": 3
+    },
+    {
+      "id": "6",
+      "nombre": "Laura",
+      "apellidos": "Martínez Ruiz",
+      "usuario": "lmartinez",
+      "password": "$2b$12$UGPTaVHVv/7gDRS6/oUs6uvwADymK2k3/phBdNqJiIqaAXEVNJeQ.",
+      "email": "l.martinez@email.com",
+      "telefono": "655444333",
+      "area_asignada": "Málaga Centro",
+      "id_rol": 4
+    },
+    {
+      "id": "7",
+      "nombre": "Ricardo",
+      "apellidos": "Fernández López",
+      "usuario": "rfernandez",
+      "password": "$2b$12$UGPTaVHVv/7gDRS6/oUs6uvwADymK2k3/phBdNqJiIqaAXEVNJeQ.",
+      "email": "r.fernandez@email.com",
+      "telefono": "666555444",
+      "area_asignada": "Málaga Oeste",
+      "id_rol": 5
     }
   ],
   "cadenas": [
@@ -104,14 +134,15 @@
   ],
   "tiendas": [
     {
-      "id": "1",
       "nombre": "Mercadona el Cónsul",
       "localidad": "Málaga",
       "domicilio": "c/ Aristófanes, nºxx",
       "c_postal": "29010",
       "zona_geografica": "Teatinos",
       "id_cadena": 1,
-      "id_capitan": 1
+      "id_capitan": 1,
+      "id_responsable_tienda": null,
+      "id": "1"
     },
     {
       "id": "2",
@@ -141,7 +172,8 @@
       "c_postal": "29007",
       "zona_geografica": "Alameda",
       "id_cadena": 3,
-      "id_capitan": 1
+      "id_capitan": 1,
+      "id_responsable_tienda": null
     },
     {
       "id": "5",
@@ -161,7 +193,8 @@
       "c_postal": "29007",
       "zona_geografica": "Centro",
       "id_cadena": 5,
-      "id_capitan": 1
+      "id_capitan": 1,
+      "id_responsable_tienda": null
     },
     {
       "id": "7",
@@ -181,7 +214,8 @@
       "c_postal": "29004",
       "zona_geografica": "Ctra. Cádiz",
       "id_cadena": 5,
-      "id_capitan": 1
+      "id_capitan": 1,
+      "id_responsable_tienda": null
     },
     {
       "id": "9",
@@ -191,7 +225,8 @@
       "c_postal": "29010",
       "zona_geografica": "Bailén",
       "id_cadena": 4,
-      "id_capitan": 3
+      "id_capitan": 3,
+      "id_responsable_tienda": null
     },
     {
       "id": "10",
@@ -201,7 +236,8 @@
       "c_postal": "29013",
       "zona_geografica": "Capuchinos",
       "id_cadena": 5,
-      "id_capitan": 1
+      "id_capitan": 1,
+      "id_responsable_tienda": null
     },
     {
       "id": "11",
@@ -211,7 +247,8 @@
       "c_postal": "29006",
       "zona_geografica": "Cruz de Humilladero",
       "id_cadena": 6,
-      "id_capitan": 4
+      "id_capitan": 4,
+      "id_responsable_tienda": null
     },
     {
       "id": "12",
@@ -221,7 +258,8 @@
       "c_postal": "29007",
       "zona_geografica": "Centro",
       "id_cadena": 6,
-      "id_capitan": 1
+      "id_capitan": 1,
+      "id_responsable_tienda": null
     }
   ],
   "campanas": [
@@ -295,14 +333,14 @@
       "id_voluntario": 1,
       "nombre_asociacion": "Ayuntamiento de Almáchar",
       "n_voluntarios": 15,
-      "id_responsable": 101
+      "id_responsable_entidad": null
     },
     {
       "id": "4",
       "id_voluntario": 4,
       "nombre_asociacion": "Grupo Scout Malaka",
       "n_voluntarios": 12,
-      "id_responsable": 102
+      "id_responsable_entidad": null
     }
   ],
   "voluntario_fisico": [
