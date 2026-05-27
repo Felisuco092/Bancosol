@@ -59,9 +59,11 @@ public class VoluntariosService {
         voluntariosRepository.deleteById(id);
     }
 
-    public void guardarVoluntario(Integer id, String tipo, String domicilio, String zonaGeografica, String codigoPostal,
-                                  String observaciones, String nombre, String apellidos, String nombreAsociacion,
+
+    public VoluntarioDTO guardarVoluntario(Integer id, String tipo, String domicilio, String zonaGeografica, String codigoPostal,
+                                   String nombre, String apellidos, String nombreAsociacion,
                                   Integer nVoluntarios, Boolean confirmar, Integer idResponsableEntidad) {
+
         VoluntarioBaseEntity voluntario;
 
         if (id != null) {
@@ -98,7 +100,8 @@ public class VoluntariosService {
             }
         }
 
-        voluntariosRepository.save(voluntario);
+        VoluntarioBaseEntity v = voluntariosRepository.save(voluntario);
+        return voluntarioMapper.toDTO(v);
     }
 
     public int countTotalPersonasVoluntarias() {

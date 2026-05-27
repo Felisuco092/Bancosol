@@ -37,4 +37,13 @@ public class BandejaController {
         model.addAttribute("notificacion", notificacion);
         return "mensajes/ver_mensaje";
     }
+
+    @PostMapping("/delete")
+    public String doDelete(Model model, @SessionAttribute(name = "user", required = false) UsuarioDTO user,
+                           @RequestParam("idMensaje") Integer idMensaje){
+        if (user == null) return "redirect:/";
+        this.notificacionesService.borrarNotificacionId(idMensaje);
+
+        return "redirect:/bandeja/";
+    }
 }
