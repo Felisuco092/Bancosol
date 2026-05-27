@@ -15,8 +15,8 @@
 <%
     List<VoluntarioDTO> voluntarioDTOS = (List<VoluntarioDTO>) request.getAttribute("voluntarios");
     Integer idTurno = (Integer) request.getAttribute("idTurno");
-    CampanaDTO campana = (CampanaDTO) request.getAttribute("campana");
-    List<UsuarioDTO> admins = (List<UsuarioDTO>) request.getAttribute("admins");
+    // CampanaDTO campana = (CampanaDTO) request.getAttribute("campana");
+    //List<UsuarioDTO> admins = (List<UsuarioDTO>) request.getAttribute("admins");
 %>
 <body>
 <main class="main-content">
@@ -37,8 +37,11 @@
                 </div>
 
                 <div class="form-group">
-                    <label for="">Especifique </label>
-                    <input type="" name="" id="" required value=""/>
+                    <label for="">Especifique los voluntarios/colaboradores implicados:</label>
+                    <% for(VoluntarioDTO voluntarioAct: voluntarioDTOS){%>
+                        <input type="checkbox" name="idsVoluntariosIncidencia" id="<%=voluntarioAct.getId()%>" value="<%=voluntarioAct.getId()%>"/>
+                        <%=voluntarioAct.getNombre()%> <%= voluntarioAct.getApellidos()%>
+                    <%}%>
                 </div>
 
                 <div class="form-actions">

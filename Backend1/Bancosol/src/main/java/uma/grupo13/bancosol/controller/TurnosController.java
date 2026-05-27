@@ -150,18 +150,28 @@ public class TurnosController {
         List<VoluntarioDTO> voluntarios = voluntariosService.listarVoluntarios();
         CampanaDTO campanaDTO = campanasService.buscarPorId(idCampana);
 
-        List<UsuarioDTO> admins = usuariosService.listarAdmins();
         model.addAttribute("voluntarios", voluntarios);
         model.addAttribute("campana", campanaDTO);
-        model.addAttribute("admins", admins);
+
 
         return "crear_editar/incidencia";
     }
 
     @PostMapping("/reportar-incidencia")
     public String doEnviarIncidencias(@RequestParam("idTurno") Integer idTurno, @RequestParam("idCampana") Integer idCampana,
-                                      @SessionAttribute(name = "user", required = false) UsuarioDTO user){
+                                      @RequestParam("idsVoluntariosIncidencia") List<Integer> idsVoluntarios,
+                                      @SessionAttribute(name = "user", required = false) UsuarioDTO user, Model model){
 
+        if (user == null) return "redirect:/";
+        if (!validaSesion.tienePermiso(user.getRol().getId(), "incidencias")) return "redirect:/dashboard";
+
+        List<UsuarioDTO> admins = usuariosService.listarAdmins();
+        CampanaDTO campanaDTO = campanasService.buscarPorId(idCampana);
+        List<VoluntarioDTO> voluntariosDTOIncidencia = voluntariosService.findAllByIds(idsVoluntarios);
+
+        model.addAttribute("admins", admins);
+        model.addAttribute("campana", campanaDTO);
+        model.addAttribute("voluntariosIncidencias", voluntariosDTOIncidencia);
 
         return "redirect:/turnos";
     }

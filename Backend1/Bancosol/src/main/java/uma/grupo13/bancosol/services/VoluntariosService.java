@@ -55,6 +55,12 @@ public class VoluntariosService {
         return voluntarioMapper.toDTO(voluntario);
     }
 
+    public List<VoluntarioDTO> findAllByIds(List<Integer> ids) {
+        if(ids==null){return null;}
+        List<VoluntarioBaseEntity> listaVolEntity = voluntariosRepository.findAllById(ids);
+        return voluntarioMapper.toDTOList(listaVolEntity);
+    }
+
     public void deleteById(Integer id) {
         voluntariosRepository.deleteById(id);
     }
