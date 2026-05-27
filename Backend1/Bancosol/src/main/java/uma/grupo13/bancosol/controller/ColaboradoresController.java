@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.*;
 import uma.grupo13.bancosol.dto.TurnoDTO;
 import uma.grupo13.bancosol.dto.UsuarioDTO;
 import uma.grupo13.bancosol.dto.VoluntarioDTO;
+import uma.grupo13.bancosol.services.UsuariosService;
 import uma.grupo13.bancosol.entity.TurnoEntity;
 import uma.grupo13.bancosol.entity.VoluntarioBaseEntity;
 import uma.grupo13.bancosol.services.TurnosService;
@@ -25,6 +26,7 @@ import java.util.List;
 public class ColaboradoresController {
     private final VoluntariosService voluntariosService;
     private final TurnosService turnosService;
+    private final UsuariosService usuariosService;
     private final ValidaSesion validaSesion;
 
 
@@ -70,6 +72,8 @@ public class ColaboradoresController {
         if (user == null) return "redirect:/";
         if (!validaSesion.tienePermiso(user.getRol().getId(), "editarColaboradores")) return "redirect:/dashboard";
         model.addAttribute("voluntario", new VoluntarioDTO());
+        List<UsuarioDTO> responsablesEntidad = usuariosService.findResponsablesEntidad();
+        model.addAttribute("responsablesEntidad", responsablesEntidad);
         return "crear_editar/crear_editar_colaboradores";
     }
 
@@ -81,6 +85,8 @@ public class ColaboradoresController {
 
         VoluntarioDTO voluntario = voluntariosService.buscarPorId(id);
         model.addAttribute("voluntario", voluntario);
+        List<UsuarioDTO> responsablesEntidad = usuariosService.findResponsablesEntidad();
+        model.addAttribute("responsablesEntidad", responsablesEntidad);
         return "crear_editar/crear_editar_colaboradores";
     }
 
@@ -92,6 +98,8 @@ public class ColaboradoresController {
 
         VoluntarioDTO voluntario = voluntariosService.buscarPorId(id);
         model.addAttribute("voluntario", voluntario);
+        List<UsuarioDTO> responsablesEntidad = usuariosService.findResponsablesEntidad();
+        model.addAttribute("responsablesEntidad", responsablesEntidad);
         return "crear_editar/crear_editar_colaboradores";
     }
 
@@ -130,13 +138,14 @@ public class ColaboradoresController {
                                         @RequestParam(value = "apellidos", required = false) String apellidos,
                                         @RequestParam(value = "nombre_asociacion", required = false) String nombreAsociacion,
                                         @RequestParam(value = "n_voluntarios", required = false) Integer nVoluntarios,
-                                        @RequestParam(value = "confirmar", required = false) Boolean confirmar) {
+                                        @RequestParam(value = "confirmar", required = false) Boolean confirmar,
+                                        @RequestParam(value = "responsableEntidad", required = false) Integer idResponsableEntidad) {
         if (user == null) return "redirect:/";
         if (!validaSesion.tienePermiso(user.getRol().getId(), "editarColaboradores")) return "redirect:/dashboard";
 
 
         voluntariosService.guardarVoluntario(id, tipo, domicilio, zonaGeografica, codigoPostal, observaciones, nombre,
-                apellidos, nombreAsociacion, nVoluntarios, confirmar);
+                apellidos, nombreAsociacion, nVoluntarios, confirmar, idResponsableEntidad);
         return "redirect:/colaboradores/";
     }
 

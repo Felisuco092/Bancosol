@@ -2,6 +2,7 @@ package uma.grupo13.bancosol.mappers;
 //Gemini nos ha ayudado con la parte de Hibernate.unproxy ya que eso no lo hemos dado en la asignatura, para poder convertirlo a 
 //VoluntarioFisicoEntity o VoluntarioEntidadEntity
 
+import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Component;
 import uma.grupo13.bancosol.dto.VoluntarioDTO;
 import uma.grupo13.bancosol.entity.VoluntarioBaseEntity;
@@ -10,7 +11,9 @@ import uma.grupo13.bancosol.entity.VoluntarioFisicoEntity;
 import org.hibernate.Hibernate;
 
 @Component
+@AllArgsConstructor
 public class VoluntarioMapper extends MapperDTO<VoluntarioDTO, VoluntarioBaseEntity> {
+    private final UsuarioMapper usuarioMapper;
     @Override
     public VoluntarioDTO toDTO(VoluntarioBaseEntity entity) {
         if (entity == null) return null;
@@ -36,6 +39,7 @@ public class VoluntarioMapper extends MapperDTO<VoluntarioDTO, VoluntarioBaseEnt
             dto.setTipo("ENTIDAD");
             dto.setNombreAsociacion(entidad.getNombreAsociacion());
             dto.setNVoluntarios(entidad.getNVoluntarios());
+            dto.setResponsableEntidad(usuarioMapper.toDTO(entidad.getResponsableEntidad()));
             dto.setNombreDisplay(entidad.getNombreAsociacion());
             dto.setNumeroVoluntariosDisplay(entidad.getNVoluntarios());
         }

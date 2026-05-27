@@ -37,6 +37,10 @@ public class TiendaEntity {
     @JoinColumn(name = "id_capitan")
     private UsuarioEntity capitan; // Relación con Usuario (Rol Capitán)
 
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "id_responsable_tienda")
+    private UsuarioEntity responsableTienda;
+
     @OneToMany(mappedBy = "tienda", orphanRemoval = true)
     private List<ParticipaEntity> participaciones = new ArrayList<>();
 

@@ -100,6 +100,22 @@
                     </select>
                 </div>
                 <div class="form-group">
+                    <label for="responsableTienda">Responsable de tienda: </label>
+                    <select name="responsableTienda" id="responsableTienda">
+                        <option value="">-- Seleccione un responsable --</option>
+                        <%
+                            List<UsuarioDTO> responsablesTienda = (List<UsuarioDTO>) request.getAttribute("responsablesTienda");
+                            if (responsablesTienda != null) {
+                                for(UsuarioDTO resp : responsablesTienda) {
+                        %>
+                        <option value="<%=resp.getId()%>" <%= (tienda.getResponsableTienda() != null && tienda.getResponsableTienda().getId().equals(resp.getId())) ? "selected" : "" %>><%=resp.getNombre()%></option>
+                        <%
+                                }
+                            }
+                        %>
+                    </select>
+                </div>
+                <div class="form-group">
                     <label>Campañas en la que participa: </label>
                     <div class="checkbox-group" style="max-height: 200px; overflow-y: auto; border: 1px solid var(--input-border); padding: 10px; border-radius: 4px;">
                         <%
