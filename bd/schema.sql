@@ -29,7 +29,8 @@ CREATE TABLE "tienda" (
   "c_postal" varchar,
   "zona_geografica" varchar,
   "id_cadena" integer NOT NULL,
-  "id_capitan" integer
+  "id_capitan" integer,
+  "id_responsable_tienda" integer
 );
 
 CREATE TABLE "notificacion" (
@@ -65,7 +66,8 @@ CREATE TABLE "voluntario_fisico" (
 CREATE TABLE "voluntario_entidad" (
   "id_voluntario" integer PRIMARY KEY,
   "nombre_asociacion" text,
-  "n_voluntarios" integer
+  "n_voluntarios" integer,
+  "id_responsable_entidad" integer
 );
 
 CREATE TABLE "turno" (
@@ -94,11 +96,15 @@ ALTER TABLE "tienda" ADD FOREIGN KEY ("id_cadena") REFERENCES "cadena" ("id") DE
 
 ALTER TABLE "tienda" ADD FOREIGN KEY ("id_capitan") REFERENCES "usuario" ("id") DEFERRABLE INITIALLY IMMEDIATE;
 
+ALTER TABLE "tienda" ADD FOREIGN KEY ("id_responsable_tienda") REFERENCES "usuario" ("id") DEFERRABLE INITIALLY IMMEDIATE;
+
 ALTER TABLE "notificacion" ADD FOREIGN KEY ("id_usuario_destino") REFERENCES "usuario" ("id") DEFERRABLE INITIALLY IMMEDIATE;
 
 ALTER TABLE "voluntario_fisico" ADD FOREIGN KEY ("id_voluntario") REFERENCES "voluntario_base" ("id") DEFERRABLE INITIALLY IMMEDIATE;
 
 ALTER TABLE "voluntario_entidad" ADD FOREIGN KEY ("id_voluntario") REFERENCES "voluntario_base" ("id") DEFERRABLE INITIALLY IMMEDIATE;
+
+ALTER TABLE "voluntario_entidad" ADD FOREIGN KEY ("id_responsable_entidad") REFERENCES "usuario" ("id") DEFERRABLE INITIALLY IMMEDIATE;
 
 ALTER TABLE "turno" ADD FOREIGN KEY ("id_campana") REFERENCES "campana" ("id") DEFERRABLE INITIALLY IMMEDIATE;
 
