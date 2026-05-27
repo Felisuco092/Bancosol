@@ -153,6 +153,7 @@ public class TurnosController {
         List<UsuarioDTO> admins = usuariosService.listarAdmins();
         model.addAttribute("voluntarios", voluntarios);
         model.addAttribute("campana", campanaDTO);
+        model.addAttribute("admins", admins);
 
         return "crear_editar/incidencia";
     }
