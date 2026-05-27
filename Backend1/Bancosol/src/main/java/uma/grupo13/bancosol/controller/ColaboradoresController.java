@@ -10,8 +10,11 @@ import uma.grupo13.bancosol.dto.NotificacionDTO;
 import uma.grupo13.bancosol.dto.TurnoDTO;
 import uma.grupo13.bancosol.dto.UsuarioDTO;
 import uma.grupo13.bancosol.dto.VoluntarioDTO;
+
+import uma.grupo13.bancosol.services.UsuariosService;
 import uma.grupo13.bancosol.entity.*;
 import uma.grupo13.bancosol.services.NotificacionesService;
+
 import uma.grupo13.bancosol.services.TurnosService;
 import uma.grupo13.bancosol.services.VoluntariosService;
 import uma.grupo13.bancosol.services.utils.ValidaSesion;
@@ -24,6 +27,7 @@ import java.util.List;
 public class ColaboradoresController {
     private final VoluntariosService voluntariosService;
     private final TurnosService turnosService;
+    private final UsuariosService usuariosService;
     private final ValidaSesion validaSesion;
     private final NotificacionesService  notificacionesService;
 
@@ -68,7 +72,8 @@ public class ColaboradoresController {
         if (user == null) return "redirect:/";
         if (!validaSesion.tienePermiso(user.getRol().getId(), "editarColaboradores")) return "redirect:/dashboard";
         model.addAttribute("voluntario", new VoluntarioDTO());
-
+        List<UsuarioDTO> responsablesEntidad = usuariosService.findResponsablesEntidad();
+        model.addAttribute("responsablesEntidad", responsablesEntidad);
         return "crear_editar/crear_editar_colaboradores";
     }
 
@@ -80,6 +85,8 @@ public class ColaboradoresController {
 
         VoluntarioDTO voluntario = voluntariosService.buscarPorId(id);
         model.addAttribute("voluntario", voluntario);
+        List<UsuarioDTO> responsablesEntidad = usuariosService.findResponsablesEntidad();
+        model.addAttribute("responsablesEntidad", responsablesEntidad);
         return "crear_editar/crear_editar_colaboradores";
     }
 
@@ -91,6 +98,8 @@ public class ColaboradoresController {
 
         VoluntarioDTO voluntario = voluntariosService.buscarPorId(id);
         model.addAttribute("voluntario", voluntario);
+        List<UsuarioDTO> responsablesEntidad = usuariosService.findResponsablesEntidad();
+        model.addAttribute("responsablesEntidad", responsablesEntidad);
         return "crear_editar/crear_editar_colaboradores";
     }
 
@@ -128,17 +137,20 @@ public class ColaboradoresController {
                                         @RequestParam(value = "apellidos", required = false) String apellidos,
                                         @RequestParam(value = "nombre_asociacion", required = false) String nombreAsociacion,
                                         @RequestParam(value = "n_voluntarios", required = false) Integer nVoluntarios,
-                                        @RequestParam(value = "confirmar", required = false) Boolean confirmar) {
+                                        @RequestParam(value = "confirmar", required = false) Boolean confirmar,
+                                        @RequestParam(value = "responsableEntidad", required = false) Integer idResponsableEntidad) {
         if (user == null) return "redirect:/";
         if (!validaSesion.tienePermiso(user.getRol().getId(), "editarColaboradores")) return "redirect:/dashboard";
 
 
+
         VoluntarioDTO voluntarioDTO = voluntariosService.guardarVoluntario(id, tipo, domicilio, zonaGeografica, codigoPostal, nombre,
-                apellidos, nombreAsociacion, nVoluntarios, confirmar);
+                apellidos, nombreAsociacion, nVoluntarios, confirmar, idResponsableEntidad);
         if(!user.getRol().getId().equals(1) && id==null){// el admin no es el que crea al nuevo colaborador
             notificacionesService.crearNotificacionColabYEnviar(nombre, apellidos, user.getUsuario());
 
         }
+
         return "redirect:/colaboradores/";
     }
 

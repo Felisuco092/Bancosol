@@ -49,9 +49,20 @@ public class UsuariosService {
         return usuarioMapper.toDTOList(lista);
     }
 
+    public List<UsuarioDTO> findResponsablesTienda() {
+        List<UsuarioEntity> lista = userRepository.findResponsablesTienda();
+        return usuarioMapper.toDTOList(lista);
+    }
+
+    public List<UsuarioDTO> findResponsablesEntidad() {
+        List<UsuarioEntity> lista = userRepository.findResponsablesEntidad();
+        return usuarioMapper.toDTOList(lista);
+    }
+
     public void borrarUsuario(Integer id) {
         UsuarioEntity usuario = userRepository.getReferenceById(id);
         usuario.deleteTiendas();
+        usuario.deleteEntidadesComoResponsable();
         userRepository.delete(usuario);
     }
 

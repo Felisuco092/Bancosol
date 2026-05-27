@@ -15,6 +15,7 @@ public class TiendaDTO {
     private String zonaGeografica;
     private CadenaDTO cadena;
     private UsuarioDTO capitan;
+    private UsuarioDTO responsableTienda;
     private List<Integer> campanas = new ArrayList<>();
 
     public boolean participaEn(Integer idCampanaActual){

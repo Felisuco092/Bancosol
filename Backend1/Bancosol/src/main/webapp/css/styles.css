@@ -572,6 +572,16 @@ th {
     color: #ff29d4;
 }
 
+.badge-responsable-tienda {
+    background: #d4edda;
+    color: #155724;
+}
+
+.badge-responsable-entidad {
+    background: #d1ecf1;
+    color: #0c5460;
+}
+
 /* ---------- 15. Página Cadenas -------------*/
 
 .filtros-cadenas {

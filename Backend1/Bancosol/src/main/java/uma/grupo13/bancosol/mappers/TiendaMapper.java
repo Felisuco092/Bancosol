@@ -27,6 +27,7 @@ public class TiendaMapper extends MapperDTO<TiendaDTO, TiendaEntity> {
         dto.setZonaGeografica(entity.getZonaGeografica());
         dto.setCadena(cadenaMapper.toDTO(entity.getCadena()));
         dto.setCapitan(usuarioMapper.toDTO(entity.getCapitan()));
+        dto.setResponsableTienda(usuarioMapper.toDTO(entity.getResponsableTienda()));
         for(ParticipaEntity p : entity.getParticipaciones()){
             dto.getCampanas().add(p.getId().getIdCampana());
         }

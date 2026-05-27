@@ -56,7 +56,7 @@ public class TiendasService {
         tiendasRepo.deleteById(id);
     }
 
-    public TiendaDTO guardarTienda(Integer id, String descripcion, String localidad, String domicilio, String cPostal, String zonaGeografica, Integer idCadena, Integer idCapitan) {
+    public TiendaDTO guardarTienda(Integer id, String descripcion, String localidad, String domicilio, String cPostal, String zonaGeografica, Integer idCadena, Integer idCapitan, Integer idResponsableTienda) {
         TiendaEntity tienda;
         if (id != null) {
             tienda = tiendasRepo.getReferenceById(id);
@@ -74,8 +74,19 @@ public class TiendasService {
         CadenaEntity cadena = cadenaRepo.getReferenceById(idCadena);
         tienda.setCadena(cadena);
 
-        UsuarioEntity capitan = userRepo.getReferenceById(idCapitan);
-        tienda.setCapitan(capitan);
+        if (idCapitan != null) {
+            UsuarioEntity capitan = userRepo.getReferenceById(idCapitan);
+            tienda.setCapitan(capitan);
+        } else {
+            tienda.setCapitan(null);
+        }
+
+        if (idResponsableTienda != null) {
+            UsuarioEntity responsableTienda = userRepo.getReferenceById(idResponsableTienda);
+            tienda.setResponsableTienda(responsableTienda);
+        } else {
+            tienda.setResponsableTienda(null);
+        }
 
         tienda = tiendasRepo.save(tienda);
         return tiendaMapper.toDTO(tienda);

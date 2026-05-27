@@ -18,6 +18,7 @@ public class VoluntarioDTO {
     // Entidad specific
     private String nombreAsociacion;
     private Integer nVoluntarios;
+    private UsuarioDTO responsableEntidad;
 
     // Helper for table display
     private String nombreDisplay;

@@ -47,10 +47,29 @@ public class UsuarioEntity {
     @OneToMany(mappedBy = "capitan")
     private List<TiendaEntity> tiendasComoCapitan = new ArrayList<>();
 
+    @OneToMany(mappedBy = "responsableTienda")
+    private List<TiendaEntity> tiendasComoResponsable = new ArrayList<>();
+
+    @OneToMany(mappedBy = "responsableEntidad")
+    private List<VoluntarioEntidadEntity> entidadesComoResponsable = new ArrayList<>();
+
     public void deleteTiendas(){
         if(!tiendasComoCapitan.isEmpty()) {
             for (TiendaEntity tienda : tiendasComoCapitan) {
                 tienda.setCapitan(null);
+            }
+        }
+        if(!tiendasComoResponsable.isEmpty()) {
+            for (TiendaEntity tienda : tiendasComoResponsable) {
+                tienda.setResponsableTienda(null);
+            }
+        }
+    }
+
+    public void deleteEntidadesComoResponsable() {
+        if(!entidadesComoResponsable.isEmpty()) {
+            for (VoluntarioEntidadEntity entidad : entidadesComoResponsable) {
+                entidad.setResponsableEntidad(null);
             }
         }
     }

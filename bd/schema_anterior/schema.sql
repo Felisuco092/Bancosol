@@ -59,15 +59,13 @@ CREATE TABLE "voluntario_base" (
 CREATE TABLE "voluntario_fisico" (
   "id_voluntario" integer PRIMARY KEY,
   "nombre" text,
-  "apellidos" text,
-  "id_coordinador" integer NOT NULL
+  "apellidos" text
 );
 
 CREATE TABLE "voluntario_entidad" (
   "id_voluntario" integer PRIMARY KEY,
   "nombre_asociacion" text,
-  "n_voluntarios" integer,
-  "id_responsable" integer NOT NULL
+  "n_voluntarios" integer
 );
 
 CREATE TABLE "turno" (
@@ -100,11 +98,7 @@ ALTER TABLE "notificacion" ADD FOREIGN KEY ("id_usuario_destino") REFERENCES "us
 
 ALTER TABLE "voluntario_fisico" ADD FOREIGN KEY ("id_voluntario") REFERENCES "voluntario_base" ("id") DEFERRABLE INITIALLY IMMEDIATE;
 
-ALTER TABLE "voluntario_fisico" ADD FOREIGN KEY ("id_coordinador") REFERENCES "usuario" ("id") DEFERRABLE INITIALLY IMMEDIATE;
-
 ALTER TABLE "voluntario_entidad" ADD FOREIGN KEY ("id_voluntario") REFERENCES "voluntario_base" ("id") DEFERRABLE INITIALLY IMMEDIATE;
-
-ALTER TABLE "voluntario_entidad" ADD FOREIGN KEY ("id_responsable") REFERENCES "usuario" ("id") DEFERRABLE INITIALLY IMMEDIATE;
 
 ALTER TABLE "turno" ADD FOREIGN KEY ("id_campana") REFERENCES "campana" ("id") DEFERRABLE INITIALLY IMMEDIATE;
 

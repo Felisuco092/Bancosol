@@ -2,6 +2,8 @@
 <%@ page import="uma.grupo13.bancosol.entity.VoluntarioFisicoEntity" %>
 <%@ page import="uma.grupo13.bancosol.entity.VoluntarioEntidadEntity" %>
 <%@ page import="uma.grupo13.bancosol.dto.VoluntarioDTO" %>
+<%@ page import="uma.grupo13.bancosol.dto.UsuarioDTO" %>
+<%@ page import="java.util.List" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%
     VoluntarioDTO voluntario = (VoluntarioDTO) request.getAttribute("voluntario");
@@ -104,6 +106,22 @@
                         <input type="number" name="n_voluntarios" id="n_voluntarios" required
                                value="<%= voluntario.getNVoluntarios() != null ? voluntario.getNVoluntarios() : "" %>" />
                     </div>
+                    <div class="form-group">
+                        <label for="responsableEntidad">Responsable de entidad: </label>
+                        <select name="responsableEntidad" id="responsableEntidad">
+                            <option value="">-- Seleccione un responsable --</option>
+                            <%
+                                List<UsuarioDTO> responsablesEntidad = (List<UsuarioDTO>) request.getAttribute("responsablesEntidad");
+                                if (responsablesEntidad != null) {
+                                    for(UsuarioDTO resp : responsablesEntidad) {
+                            %>
+                            <option value="<%=resp.getId()%>" <%= (voluntario.getResponsableEntidad() != null && voluntario.getResponsableEntidad().getId().equals(resp.getId())) ? "selected" : "" %>><%=resp.getNombre()%></option>
+                            <%
+                                    }
+                                }
+                            %>
+                        </select>
+                    </div>
                 </div>
                 <% } else { %>
                 <div id="campos-entidad" style="display: none;">
@@ -114,6 +132,12 @@
                     <div class="form-group">
                         <label for="n_voluntarios">Número de Voluntarios<span class="required">*</span></label>
                         <input type="number" name="n_voluntarios" id="n_voluntarios" />
+                    </div>
+                    <div class="form-group">
+                        <label for="responsableEntidad">Responsable de entidad: </label>
+                        <select name="responsableEntidad" id="responsableEntidad">
+                            <option value="">-- Seleccione un responsable --</option>
+                        </select>
                     </div>
                 </div>
                 <% } %>

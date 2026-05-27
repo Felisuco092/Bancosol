@@ -72,6 +72,8 @@ public class TiendasController {
         model.addAttribute("campanas", campanas);
         List<UsuarioDTO> capitanes=usuariosService.findCapitanes();
         model.addAttribute("capitanes", capitanes);
+        List<UsuarioDTO> responsablesTienda = usuariosService.findResponsablesTienda();
+        model.addAttribute("responsablesTienda", responsablesTienda);
         return "crear_editar/crear_editar_tienda";
     }
 
@@ -87,6 +89,8 @@ public class TiendasController {
         model.addAttribute("campanas", campanas);
         List<UsuarioDTO> capitanes=usuariosService.findCapitanes();
         model.addAttribute("capitanes", capitanes);
+        List<UsuarioDTO> responsablesTienda = usuariosService.findResponsablesTienda();
+        model.addAttribute("responsablesTienda", responsablesTienda);
         return "crear_editar/crear_editar_tienda";
     }
 
@@ -146,12 +150,13 @@ public class TiendasController {
                                    @RequestParam("zonaGeografica") String zonaGeografica,
                                    @RequestParam("cadena") Integer idCadena,
                                    @RequestParam(value = "capitan", required = false) Integer idCapitan,
+                                   @RequestParam(value = "responsableTienda", required = false) Integer idResponsableTienda,
                                    @RequestParam(value = "campanasParticipa", required = false) List<Integer> idCampanas) {
         if (user == null) return "redirect:/";
         if (!validaSesion.tienePermiso(user.getRol().getId(), "editarTienda")) return "redirect:/dashboard";
 
         TiendaDTO tienda;
-        tienda=tiendasService.guardarTienda(id, descripcion, localidad, domicilio, cPostal, zonaGeografica, idCadena, idCapitan);
+        tienda=tiendasService.guardarTienda(id, descripcion, localidad, domicilio, cPostal, zonaGeografica, idCadena, idCapitan, idResponsableTienda);
 
         // Actualizar participaciones
         if (id != null) {
