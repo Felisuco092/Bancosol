@@ -8,17 +8,18 @@ export default function CrearTiendaPage() {
   const navigate = useNavigate()
   const [cadenas, setCadenas] = useState([])
   const [capitanes, setCapitanes] = useState([])
+  const [responsablesTienda, setResponsablesTienda] = useState([])
   const [campanas, setCampanas] = useState([])
   const [participaSeleccion, setParticipaSeleccion] = useState([])
   const [form, setForm] = useState({
     nombre: '',
-    descripcion: '',
     localidad: '',
     domicilio: '',
     c_postal: '',
     zona_geografica: '',
     id_cadena: '',
-    id_capitan: ''
+    id_capitan: '',
+    id_responsable_tienda: ''
   })
 
   function handleChange(e) {
@@ -29,13 +30,15 @@ export default function CrearTiendaPage() {
   useEffect(() => {
     async function load() {
       try {
-        const [cads, users, camps] = await Promise.all([
+        const [cads, users, respTienda, camps] = await Promise.all([
           fetchData('cadenas'),
           fetchData('usuarios?id_rol=2'),
+          fetchData('usuarios?id_rol=5'),
           fetchData('campanas')
         ])
         setCadenas(cads)
         setCapitanes(users)
+        setResponsablesTienda(respTienda)
         setCampanas(camps)
 
         if (editando) {
@@ -45,13 +48,13 @@ export default function CrearTiendaPage() {
           ])
           setForm({
             nombre: t.nombre || '',
-            descripcion: t.descripcion || '',
             localidad: t.localidad || '',
             domicilio: t.domicilio || '',
             c_postal: t.c_postal || '',
             zona_geografica: t.zona_geografica || '',
             id_cadena: t.id_cadena || '',
-            id_capitan: t.id_capitan || ''
+            id_capitan: t.id_capitan || '',
+            id_responsable_tienda: t.id_responsable_tienda || ''
           })
           setParticipaSeleccion(participaciones.map(p => ({
             id_campana: String(p.id_campana),
@@ -87,7 +90,7 @@ export default function CrearTiendaPage() {
   async function handleSubmit(e) {
     e.preventDefault()
     try {
-      const tiendaData = { ...form, id_capitan: form.id_capitan || null }
+      const tiendaData = { ...form, id_capitan: form.id_capitan || null, id_responsable_tienda: form.id_responsable_tienda || null }
       const tiendaId = editando
         ? await putData('tiendas/' + id, tiendaData).then(() => id)
         : await postData('tiendas', tiendaData).then(res => res.id)
@@ -172,6 +175,16 @@ export default function CrearTiendaPage() {
             <select name="id_capitan" id="id_capitan" value={form.id_capitan} onChange={handleChange}>
               <option value="">-- Seleccione un capitán --</option>
               {capitanes.map(u => (
+                <option key={u.id} value={u.id}>{u.nombre} {u.apellidos}</option>
+              ))}
+            </select>
+          </div>
+
+          <div className="form-group">
+            <label htmlFor="id_responsable_tienda">Responsable de tienda:</label>
+            <select name="id_responsable_tienda" id="id_responsable_tienda" value={form.id_responsable_tienda} onChange={handleChange}>
+              <option value="">-- Seleccione un responsable --</option>
+              {responsablesTienda.map(u => (
                 <option key={u.id} value={u.id}>{u.nombre} {u.apellidos}</option>
               ))}
             </select>

@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react'
 import { Link } from 'react-router-dom'
-import { fetchData, deleteData } from '../services/api'
+import { fetchData, putData, deleteData } from '../services/api'
 import { quitarTildes } from '../utils/stringUtils'
 
 export default function UsuariosPage() {
@@ -25,8 +25,16 @@ export default function UsuariosPage() {
   async function handleDelete(id) {
     if (!confirm('¿Estás seguro de que deseas dar de baja a este usuario? También se eliminarán sus notificaciones.')) return
     try {
-      const notificaciones = await fetchData('notificaciones?id_usuario_destino=' + id)
-      await Promise.all(notificaciones.map(n => deleteData('notificaciones/' + n.id)))
+      const [notificaciones, tiendas, entidades] = await Promise.all([
+        fetchData('notificaciones?id_usuario_destino=' + id),
+        fetchData('tiendas?id_responsable_tienda=' + id),
+        fetchData('voluntario_entidad?id_responsable_entidad=' + id)
+      ])
+      await Promise.all([
+        ...notificaciones.map(n => deleteData('notificaciones/' + n.id)),
+        ...tiendas.map(t => putData('tiendas/' + t.id, { ...t, id_responsable_tienda: null })),
+        ...entidades.map(e => putData('voluntario_entidad/' + e.id, { ...e, id_responsable_entidad: null }))
+      ])
       await deleteData('usuarios/' + id)
       setUsuarios(prev => prev.filter(u => String(u.id) !== String(id)))
       alert('Usuario eliminado con éxito')
@@ -64,7 +72,7 @@ export default function UsuariosPage() {
                   <td>{u.apellidos}</td>
                   <td>{u.email}</td>
                   <td>{u.telefono}</td>
-                  <td><span className={`badge-rol badge-${quitarTildes(rolName.toLowerCase())}`}>{rolName}</span></td>
+                  <td><span className={`badge-rol badge-${quitarTildes(rolName.toLowerCase()).split(' ').join('-')}`}>{rolName}</span></td>
                   <td>{u.area_asignada}</td>
                   <td>
                     <Link to={`/usuarios/editar/${u.id}`} className="btn btn-primary btn-sm">Editar</Link>

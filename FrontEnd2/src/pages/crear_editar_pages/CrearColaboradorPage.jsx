@@ -7,6 +7,7 @@ export default function CrearColaboradorPage() {
   const editando = !!id
   const navigate = useNavigate()
   const [tipo, setTipo] = useState('')
+  const [responsablesEntidad, setResponsablesEntidad] = useState([])
   const [form, setForm] = useState({
     domicilio: '',
     zona_geografica: '',
@@ -16,7 +17,8 @@ export default function CrearColaboradorPage() {
     nombre: '',
     apellidos: '',
     nombre_asociacion: '',
-    n_voluntarios: ''
+    n_voluntarios: '',
+    id_responsable_entidad: ''
   })
 
   function handleChange(e) {
@@ -27,6 +29,9 @@ export default function CrearColaboradorPage() {
   useEffect(() => {
     async function load() {
       try {
+        const respEnt = await fetchData('usuarios?id_rol=4')
+        setResponsablesEntidad(respEnt)
+
         if (editando) {
           const vb = await fetchData('voluntario_base/' + id)
           let nombreFisico = '', apellidosFisico = '', nombreAsoc = '', nVol = ''
@@ -40,10 +45,12 @@ export default function CrearColaboradorPage() {
           }
 
           const ve = await fetchData('voluntario_entidad?id_voluntario=' + id).catch(() => [])
+          let idRespEntidad = ''
           if (ve && ve.length > 0) {
             tipoDetectado = 'entidad'
             nombreAsoc = ve[0].nombre_asociacion || ''
             nVol = ve[0].n_voluntarios || ''
+            idRespEntidad = ve[0].id_responsable_entidad || ''
           }
 
           setTipo(tipoDetectado)
@@ -56,7 +63,8 @@ export default function CrearColaboradorPage() {
             nombre: nombreFisico,
             apellidos: apellidosFisico,
             nombre_asociacion: nombreAsoc,
-            n_voluntarios: nVol
+            n_voluntarios: nVol,
+            id_responsable_entidad: idRespEntidad
           })
         }
       } catch (err) {
@@ -87,7 +95,8 @@ export default function CrearColaboradorPage() {
           await putData('voluntario_entidad/' + id, {
             id_voluntario: id,
             nombre_asociacion: form.nombre_asociacion,
-            n_voluntarios: form.n_voluntarios
+            n_voluntarios: form.n_voluntarios,
+            id_responsable_entidad: form.id_responsable_entidad || null
           })
         }
         alert('Colaborador actualizado con éxito')
@@ -110,7 +119,8 @@ export default function CrearColaboradorPage() {
           await postData('voluntario_entidad', {
             id_voluntario: voluntarioId,
             nombre_asociacion: form.nombre_asociacion,
-            n_voluntarios: form.n_voluntarios
+            n_voluntarios: form.n_voluntarios,
+            id_responsable_entidad: form.id_responsable_entidad || null
           })
         }
         alert('Colaborador creado con éxito')
@@ -184,6 +194,15 @@ export default function CrearColaboradorPage() {
               <div className="form-group">
                 <label htmlFor="n_voluntarios">Número de Voluntarios<span className="required">*</span></label>
                 <input type="number" name="n_voluntarios" id="n_voluntarios" value={form.n_voluntarios} onChange={handleChange} required />
+              </div>
+              <div className="form-group">
+                <label htmlFor="id_responsable_entidad">Responsable de entidad:</label>
+                <select name="id_responsable_entidad" id="id_responsable_entidad" value={form.id_responsable_entidad} onChange={handleChange}>
+                  <option value="">-- Seleccione un responsable --</option>
+                  {responsablesEntidad.map(u => (
+                    <option key={u.id} value={u.id}>{u.nombre} {u.apellidos}</option>
+                  ))}
+                </select>
               </div>
             </>
           )}
