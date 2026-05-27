@@ -55,7 +55,6 @@ public class ColaboradoresController {
         List<VoluntarioDTO> todos;
         if (tipo == null || tipo.equals("all")) {
             todos = voluntariosService.findAllByLocalidad(localidadParam);
-
         } else if (tipo.equals("true")) {
             todos = voluntariosService.findBaseFisicos(localidadParam);
         } else if (tipo.equals("false")) {
@@ -145,7 +144,7 @@ public class ColaboradoresController {
 
 
 
-        VoluntarioDTO voluntarioDTO = voluntariosService.guardarVoluntario(id, tipo, domicilio, zonaGeografica, codigoPostal, nombre,
+        voluntariosService.guardarVoluntario(id, tipo, domicilio, zonaGeografica, codigoPostal, nombre,
                 apellidos, nombreAsociacion, nVoluntarios, confirmar, idResponsableEntidad);
         if(!user.getRol().getId().equals(1) && id==null){// el admin no es el que crea al nuevo colaborador
             notificacionesService.crearNotificacionColabYEnviar(nombre, apellidos, user.getUsuario());

@@ -66,7 +66,7 @@ public class VoluntariosService {
     }
 
 
-    public VoluntarioDTO guardarVoluntario(Integer id, String tipo, String domicilio, String zonaGeografica, String codigoPostal,
+    public void guardarVoluntario(Integer id, String tipo, String domicilio, String zonaGeografica, String codigoPostal,
                                    String nombre, String apellidos, String nombreAsociacion,
                                   Integer nVoluntarios, Boolean confirmar, Integer idResponsableEntidad) {
 
@@ -106,8 +106,7 @@ public class VoluntariosService {
             }
         }
 
-        VoluntarioBaseEntity v = voluntariosRepository.save(voluntario);
-        return voluntarioMapper.toDTO(v);
+        voluntariosRepository.save(voluntario);
     }
 
     public int countTotalPersonasVoluntarias() {
