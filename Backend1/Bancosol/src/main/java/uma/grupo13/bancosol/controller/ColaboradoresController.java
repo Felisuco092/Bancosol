@@ -88,6 +88,7 @@ public class ColaboradoresController {
         if (user == null) return "redirect:/";
         if (!validaSesion.tienePermiso(user.getRol().getId(), Permiso.EDITAR_COLABORADORES)) return "redirect:/dashboard";
         model.addAttribute("voluntario", new VoluntarioDTO());
+        model.addAttribute("userRol", user.getRol().getId());
         List<UsuarioDTO> responsablesEntidad = usuariosService.findResponsablesEntidad();
         model.addAttribute("responsablesEntidad", responsablesEntidad);
         return "crear_editar/crear_editar_colaboradores";
@@ -101,6 +102,7 @@ public class ColaboradoresController {
 
         VoluntarioDTO voluntario = voluntariosService.buscarPorId(id);
         model.addAttribute("voluntario", voluntario);
+        model.addAttribute("userRol", user.getRol().getId());
         List<UsuarioDTO> responsablesEntidad = usuariosService.findResponsablesEntidad();
         model.addAttribute("responsablesEntidad", responsablesEntidad);
         return "crear_editar/crear_editar_colaboradores";
@@ -114,6 +116,7 @@ public class ColaboradoresController {
 
         VoluntarioDTO voluntario = voluntariosService.buscarPorId(id);
         model.addAttribute("voluntario", voluntario);
+        model.addAttribute("userRol", user.getRol().getId());
         List<UsuarioDTO> responsablesEntidad = usuariosService.findResponsablesEntidad();
         model.addAttribute("responsablesEntidad", responsablesEntidad);
         return "crear_editar/crear_editar_colaboradores";
@@ -124,6 +127,7 @@ public class ColaboradoresController {
         if (user == null) return "redirect:/";
         if (!validaSesion.tienePermiso(user.getRol().getId(), Permiso.EDITAR_COLABORADORES)) return "redirect:/dashboard";
 
+        model.addAttribute("userRol", user.getRol().getId());
         model.addAttribute("voluntario", new VoluntarioDTO());
         return "crear_editar/crear_editar_colaboradores";
     }
@@ -164,7 +168,6 @@ public class ColaboradoresController {
                 apellidos, nombreAsociacion, nVoluntarios, confirmar, idResponsableEntidad);
         if(!user.getRol().getId().equals(1) && id==null){// el admin no es el que crea al nuevo colaborador
             notificacionesService.crearNotificacionColabYEnviar(nombre, apellidos, user.getUsuario());
-
         }
 
         return "redirect:/colaboradores/";
