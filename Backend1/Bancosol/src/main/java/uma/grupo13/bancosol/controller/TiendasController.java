@@ -8,6 +8,7 @@ import org.springframework.web.bind.annotation.*;
 import uma.grupo13.bancosol.dto.*;
 import uma.grupo13.bancosol.entity.*;
 import uma.grupo13.bancosol.services.*;
+import uma.grupo13.bancosol.services.utils.Permiso;
 import uma.grupo13.bancosol.services.utils.ValidaSesion;
 
 import java.util.ArrayList;
@@ -31,7 +32,7 @@ public class TiendasController {
     @GetMapping("/")
     public String doTiendas(Model model, @SessionAttribute(name = "user", required = false) UsuarioDTO user) {
         if (user == null) return "redirect:/";
-        if (!validaSesion.tienePermiso(user.getRol().getId(), "tiendas")) return "redirect:/dashboard";
+        if (!validaSesion.tienePermiso(user.getRol().getId(), Permiso.TIENDAS)) return "redirect:/dashboard";
         model.addAttribute("paginaActual", "tiendas");
         List<TiendaDTO> tiendas= new ArrayList<>();
         if(user.getRol().getId()==1){
@@ -63,7 +64,7 @@ public class TiendasController {
     @GetMapping("/editar")
     public String doEditarTiendas(Model model, @SessionAttribute(name = "user", required = false) UsuarioDTO user, @RequestParam("id") Integer id) {
         if (user == null) return "redirect:/";
-        if (!validaSesion.tienePermiso(user.getRol().getId(), "editarTienda")) return "redirect:/dashboard";
+        if (!validaSesion.tienePermiso(user.getRol().getId(), Permiso.EDITAR_TIENDA)) return "redirect:/dashboard";
         TiendaDTO tienda = tiendasService.buscarPorId(id);
         model.addAttribute("tienda", tienda);
         List<CadenaDTO> cadenas = cadenaService.listarCadenas();
@@ -80,7 +81,7 @@ public class TiendasController {
     @GetMapping("/crear")
     public String doCrearTiendas(Model model, @SessionAttribute(name = "user", required = false) UsuarioDTO user) {
         if (user == null) return "redirect:/";
-        if (!validaSesion.tienePermiso(user.getRol().getId(), "editarTienda")) return "redirect:/dashboard";
+        if (!validaSesion.tienePermiso(user.getRol().getId(), Permiso.EDITAR_TIENDA)) return "redirect:/dashboard";
 
         model.addAttribute("tienda", new TiendaDTO());
         List<CadenaDTO> cadenas = cadenaService.listarCadenas();
@@ -101,30 +102,11 @@ public class TiendasController {
                            @RequestParam("idCampana") Integer idCamp,
                            @RequestParam("localidad") String localidad) {
         if (user == null) return "redirect:/";
-        if (!validaSesion.tienePermiso(user.getRol().getId(), "editarTienda")) return "redirect:/dashboard";
+
 
         List<TiendaDTO> tiendas= new ArrayList<>();
 
-        if(user.getRol().getId()==1){
-            if (idCad!=0) {
-                tiendas = tiendasService.filtroLocalidadCadena(localidad, idCad);
-            } else{
-                tiendas = tiendasService.filtroLocalidad(localidad);
-            }
-        }else if (user.getRol().getId()==2){
-            if (idCad!=0) {
-                tiendas = tiendasService.filtroLocalidadCadenaCoord(localidad, idCad, user.getId());
-            } else{
-                tiendas = tiendasService.filtroLocalidadCoord(localidad, user.getId());
-            }
-        }else if (user.getRol().getId()==3){
-            if (idCad!=0) {
-                tiendas = tiendasService.filtroLocalidadCadenaCapi(localidad, idCad, user.getId());
-            } else{
-                tiendas = tiendasService.filtroLocalidadCapi(localidad, user.getId());
-            }
-        }
-
+        tiendas = tiendasService.filtrarTiendasDependiendoDelRol(user, idCad, localidad, tiendas);
 
 
         model.addAttribute("tiendas", tiendas);
@@ -132,10 +114,12 @@ public class TiendasController {
         return "tablas/tiendas";
     }
 
+
+
     @PostMapping("/borrar")
     public String doBorrarTiendas(Model model, @SessionAttribute(name = "user", required = false) UsuarioDTO user, @RequestParam("id") Integer id) {
         if (user == null) return "redirect:/";
-        if (!validaSesion.tienePermiso(user.getRol().getId(), "editarTienda")) return "redirect:/dashboard";
+        if (!validaSesion.tienePermiso(user.getRol().getId(), Permiso.EDITAR_TIENDA)) return "redirect:/dashboard";
         tiendasService.borrarTiendaPorId(id);
         return "redirect:/tiendas/";
     }
@@ -153,7 +137,7 @@ public class TiendasController {
                                    @RequestParam(value = "responsableTienda", required = false) Integer idResponsableTienda,
                                    @RequestParam(value = "campanasParticipa", required = false) List<Integer> idCampanas) {
         if (user == null) return "redirect:/";
-        if (!validaSesion.tienePermiso(user.getRol().getId(), "editarTienda")) return "redirect:/dashboard";
+        if (!validaSesion.tienePermiso(user.getRol().getId(), Permiso.EDITAR_TIENDA)) return "redirect:/dashboard";
 
         TiendaDTO tienda;
         tienda=tiendasService.guardarTienda(id, descripcion, localidad, domicilio, cPostal, zonaGeografica, idCadena, idCapitan, idResponsableTienda);
