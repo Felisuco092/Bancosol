@@ -10,81 +10,81 @@ import java.util.Map;
 @Service
 public class ValidaSesion {
 
-    private static final Map<Integer, Map<String, Boolean>> permisos = new HashMap<>();
+    private static final Map<Integer, Map<Permiso, Boolean>> permisos = new HashMap<>();
     static {
-        Map<String, Boolean> permisosRol0 = new HashMap<>();
-        permisosRol0.put("usuarios", true);
-        permisosRol0.put("tiendas", true);
-        permisosRol0.put("cadenas", true);
-        permisosRol0.put("campanas", true);
-        permisosRol0.put("turnos", true);
-        permisosRol0.put("colaboradores", true);
-        permisosRol0.put("incidencias", true);
-        permisosRol0.put("editarTienda", true);
-        permisosRol0.put("editarTurnos", true);
-        permisosRol0.put("editarColaboradores", true);
-        permisosRol0.put("borrarColaboradores", true);
-        permisosRol0.put("confirmarColaboradores", true);
+        Map<Permiso, Boolean> permisosRol0 = new HashMap<>();
+        permisosRol0.put(Permiso.USUARIOS, true);
+        permisosRol0.put(Permiso.TIENDAS, true);
+        permisosRol0.put(Permiso.CADENAS, true);
+        permisosRol0.put(Permiso.CAMPANAS, true);
+        permisosRol0.put(Permiso.TURNOS, true);
+        permisosRol0.put(Permiso.COLABORADORES, true);
+        permisosRol0.put(Permiso.INCIDENCIAS, true);
+        permisosRol0.put(Permiso.EDITAR_TIENDA, true);
+        permisosRol0.put(Permiso.EDITAR_TURNOS, true);
+        permisosRol0.put(Permiso.EDITAR_COLABORADORES, true);
+        permisosRol0.put(Permiso.BORRAR_COLABORADORES, true);
+        permisosRol0.put(Permiso.CONFIRMAR_COLABORADORES, true);
         permisos.put(1, permisosRol0);
 
-        Map<String, Boolean> permisosRol1 = new HashMap<>();
-        permisosRol1.put("usuarios", false);
-        permisosRol1.put("tiendas", true);
-        permisosRol1.put("cadenas", false);
-        permisosRol1.put("campanas", false);
-        permisosRol1.put("turnos", true);
-        permisosRol1.put("colaboradores", true);
-        permisosRol1.put("incidencias", true);
-        permisosRol1.put("editarTienda", false);
-        permisosRol1.put("editarTurnos", true);
-        permisosRol1.put("editarColaboradores", true);
-        permisosRol1.put("borrarColaboradores", false);
-        permisosRol1.put("confirmarColaboradores", false);
+        Map<Permiso, Boolean> permisosRol1 = new HashMap<>();
+        permisosRol1.put(Permiso.USUARIOS, false);
+        permisosRol1.put(Permiso.TIENDAS, true);
+        permisosRol1.put(Permiso.CADENAS, false);
+        permisosRol1.put(Permiso.CAMPANAS, false);
+        permisosRol1.put(Permiso.TURNOS, true);
+        permisosRol1.put(Permiso.COLABORADORES, true);
+        permisosRol1.put(Permiso.INCIDENCIAS, true);
+        permisosRol1.put(Permiso.EDITAR_TIENDA, false);
+        permisosRol1.put(Permiso.EDITAR_TURNOS, true);
+        permisosRol1.put(Permiso.EDITAR_COLABORADORES, true);
+        permisosRol1.put(Permiso.BORRAR_COLABORADORES, false);
+        permisosRol1.put(Permiso.CONFIRMAR_COLABORADORES, false);
         permisos.put(2, permisosRol1);
 
-        Map<String, Boolean> permisosRol2 = new HashMap<>();
-        permisosRol2.put("usuarios", false);
-        permisosRol2.put("tiendas", true);
-        permisosRol2.put("cadenas", false);
-        permisosRol2.put("campanas", false);
-        permisosRol2.put("turnos", true);
-        permisosRol2.put("colaboradores", true);
-        permisosRol2.put("incidencias", true);
-        permisosRol2.put("editarTienda", false);
-        permisosRol2.put("editarTurnos", false);
-        permisosRol2.put("editarColaboradores", false);
-        permisosRol2.put("borrarColaboradores", false);
-        permisosRol2.put("confirmarColaboradores", false);
+        Map<Permiso, Boolean> permisosRol2 = new HashMap<>();
+        permisosRol2.put(Permiso.USUARIOS, false);
+        permisosRol2.put(Permiso.TIENDAS, true);
+        permisosRol2.put(Permiso.CADENAS, false);
+        permisosRol2.put(Permiso.CAMPANAS, false);
+        permisosRol2.put(Permiso.TURNOS, true);
+        permisosRol2.put(Permiso.COLABORADORES, true);
+        permisosRol2.put(Permiso.INCIDENCIAS, true);
+        permisosRol2.put(Permiso.EDITAR_TIENDA, false);
+        permisosRol2.put(Permiso.EDITAR_TURNOS, false);
+        permisosRol2.put(Permiso.EDITAR_COLABORADORES, false);
+        permisosRol2.put(Permiso.BORRAR_COLABORADORES, false);
+        permisosRol2.put(Permiso.CONFIRMAR_COLABORADORES, false);
         permisos.put(3, permisosRol2);
 
-        Map<String, Boolean> permisosRol3 = new HashMap<>();
-        permisosRol3.put("usuarios", false);
-        permisosRol3.put("tiendas", true);
-        permisosRol3.put("cadenas", false);
-        permisosRol3.put("campanas", false);
-        permisosRol3.put("turnos", true);
-        permisosRol3.put("colaboradores", true);
-        permisosRol3.put("incidencias", true);
-        permisosRol3.put("editarTienda", false);
-        permisosRol3.put("editarTurnos", false);
-        permisosRol3.put("editarColaboradores", false);
-        permisosRol3.put("borrarColaboradores", false);
-        permisosRol3.put("confirmarColaboradores", false);
+        Map<Permiso, Boolean> permisosRol3 = new HashMap<>();
+        permisosRol3.put(Permiso.USUARIOS, false);
+        permisosRol3.put(Permiso.TIENDAS, true);
+        permisosRol3.put(Permiso.CADENAS, false);
+        permisosRol3.put(Permiso.CAMPANAS, false);
+        permisosRol3.put(Permiso.TURNOS, true);
+        permisosRol3.put(Permiso.COLABORADORES, true);
+        permisosRol3.put(Permiso.INCIDENCIAS, true);
+        permisosRol3.put(Permiso.EDITAR_TIENDA, false);
+        permisosRol3.put(Permiso.EDITAR_TURNOS, false);
+        permisosRol3.put(Permiso.EDITAR_COLABORADORES, false);
+        permisosRol3.put(Permiso.BORRAR_COLABORADORES, false);
+        permisosRol3.put(Permiso.CONFIRMAR_COLABORADORES, false);
         permisos.put(4, permisosRol3);
 
-        Map<String, Boolean> permisosRol4 = new HashMap<>();
-        permisosRol4.put("usuarios", false);
-        permisosRol4.put("tiendas", true);
-        permisosRol4.put("cadenas", false);
-        permisosRol4.put("campanas", false);
-        permisosRol4.put("turnos", true);
-        permisosRol4.put("colaboradores", true);
-        permisosRol4.put("incidencias", false);
-        permisosRol4.put("editarTienda", false);
-        permisosRol4.put("editarTurnos", false);
-        permisosRol4.put("editarColaboradores", false);
-        permisosRol4.put("borrarColaboradores", false);
-        permisosRol4.put("confirmarColaboradores", false);
+        Map<Permiso, Boolean> permisosRol4 = new HashMap<>();
+        permisosRol4.put(Permiso.USUARIOS, false);
+        permisosRol4.put(Permiso.TIENDAS, true);
+        permisosRol4.put(Permiso.CADENAS, false);
+        permisosRol4.put(Permiso.CAMPANAS, false);
+        permisosRol4.put(Permiso.TURNOS, true);
+        permisosRol4.put(Permiso.COLABORADORES, true);
+        permisosRol4.put(Permiso.INCIDENCIAS, false);
+        permisosRol4.put(Permiso.EDITAR_TIENDA, false);
+        permisosRol4.put(Permiso.EDITAR_TURNOS, false);
+        permisosRol4.put(Permiso.EDITAR_COLABORADORES, false);
+        permisosRol4.put(Permiso.BORRAR_COLABORADORES, false);
+        permisosRol4.put(Permiso.CONFIRMAR_COLABORADORES, false);
         permisos.put(5, permisosRol4);
     }
 
@@ -97,9 +97,10 @@ public class ValidaSesion {
         return user.getRol().getId();
     }
 
-    public Boolean tienePermiso(Integer rol, String pagina){
-        Boolean permiso= permisos.get(rol).get(pagina);
-        if(permiso==null) return false;
-        return permiso;
+    public Boolean tienePermiso(Integer rol, Permiso permiso){
+        Map<Permiso, Boolean> rolPermisos = permisos.get(rol);
+        if (rolPermisos == null) return false;
+        Boolean permisoValue = rolPermisos.get(permiso);
+        return permisoValue != null && permisoValue;
     }
 }

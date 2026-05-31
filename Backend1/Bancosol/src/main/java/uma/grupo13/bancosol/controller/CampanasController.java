@@ -15,6 +15,7 @@ import uma.grupo13.bancosol.entity.TurnoEntity;
 import uma.grupo13.bancosol.entity.UsuarioEntity;
 import uma.grupo13.bancosol.services.CampanasService;
 import uma.grupo13.bancosol.services.TurnosService;
+import uma.grupo13.bancosol.services.utils.Permiso;
 import uma.grupo13.bancosol.services.utils.ValidaSesion;
 
 import java.time.LocalDate;
@@ -33,7 +34,7 @@ public class CampanasController {
     @GetMapping("/")
     public String doCampanas(Model model, @SessionAttribute(name = "user", required = false) UsuarioDTO user) {
         if (user == null) return "redirect:/";
-        if (!validaSesion.tienePermiso(user.getRol().getId(), "campanas")) return "redirect:/dashboard";
+        if (!validaSesion.tienePermiso(user.getRol().getId(), Permiso.CAMPANAS)) return "redirect:/dashboard";
 
         List<CampanaDTO> campanas = campanasService.listarCampanas();
         model.addAttribute("paginaActual", "campanas");
@@ -45,7 +46,7 @@ public class CampanasController {
     public  String doEditarCampana(@RequestParam("id") Integer idCampana,
             Model model, @SessionAttribute(name = "user", required = false) UsuarioDTO user) {
         if (user == null) return "redirect:/";
-        if (!validaSesion.tienePermiso(user.getRol().getId(), "campanas")) return "redirect:/dashboard";
+        if (!validaSesion.tienePermiso(user.getRol().getId(), Permiso.CAMPANAS)) return "redirect:/dashboard";
         CampanaDTO campanaEdit = campanasService.getReferenceById(idCampana);
         model.addAttribute("campana", campanaEdit);
         return "crear_editar/crear_editar_campana";
@@ -54,7 +55,7 @@ public class CampanasController {
     @GetMapping("/crear")
     public String doCrearCampana(Model model, @SessionAttribute(name = "user", required = false) UsuarioDTO user) {
         if (user == null) return "redirect:/";
-        if (!validaSesion.tienePermiso(user.getRol().getId(), "campanas")) return "redirect:/dashboard";
+        if (!validaSesion.tienePermiso(user.getRol().getId(), Permiso.CAMPANAS)) return "redirect:/dashboard";
         model.addAttribute("campana", new CampanaDTO());
 
         return "crear_editar/crear_editar_campana";
@@ -64,7 +65,7 @@ public class CampanasController {
     public  String doBorrarCampana(@RequestParam("idCampana") Integer idCampana,
                                    Model model, @SessionAttribute(name = "user", required = false) UsuarioDTO user) {
         if (user == null) return "redirect:/";
-        if (!validaSesion.tienePermiso(user.getRol().getId(), "campanas")) return "redirect:/dashboard";
+        if (!validaSesion.tienePermiso(user.getRol().getId(), Permiso.CAMPANAS)) return "redirect:/dashboard";
 
         List<TurnoDTO> turnos = turnosService.filtrarTurnos(idCampana, null);
         turnosService.deleteAll(turnos);
@@ -80,7 +81,7 @@ public class CampanasController {
                                     @RequestParam(value="fecha-fin", required = false) LocalDate fechaFin,
             Model model, @SessionAttribute(name = "user", required = false) UsuarioDTO user) {
         if (user == null) return "redirect:/";
-        if (!validaSesion.tienePermiso(user.getRol().getId(), "campanas")) return "redirect:/dashboard";
+        if (!validaSesion.tienePermiso(user.getRol().getId(), Permiso.CAMPANAS)) return "redirect:/dashboard";
 
         campanasService.guardarCampana(idCampana, nombre, anyo, fechaInic, fechaFin);
 

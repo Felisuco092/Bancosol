@@ -7,6 +7,7 @@ import org.springframework.web.bind.annotation.*;
 import uma.grupo13.bancosol.dto.*;
 import uma.grupo13.bancosol.entity.*;
 import uma.grupo13.bancosol.services.*;
+import uma.grupo13.bancosol.services.utils.Permiso;
 import uma.grupo13.bancosol.services.utils.ValidaSesion;
 
 import java.time.LocalDate;
@@ -31,7 +32,7 @@ public class TurnosController {
     @GetMapping("/")
     public String doTurnos(Model model, @SessionAttribute(name = "user", required = false) UsuarioDTO user){
         if (user == null) return "redirect:/";
-        if (!validaSesion.tienePermiso(user.getRol().getId(), "turnos")) return "redirect:/dashboard";
+        if (!validaSesion.tienePermiso(user.getRol().getId(), Permiso.TURNOS)) return "redirect:/dashboard";
         List<TurnoDTO> turnos = turnosService.listarTurnos();
         List<CampanaDTO> campanas = campanasService.listarCampanas();
         List<TiendaDTO> tiendas= new ArrayList<>();
@@ -53,14 +54,14 @@ public class TurnosController {
     @GetMapping("/editar")
     public  String doEditarTurnos(Model model, @SessionAttribute(name = "user", required = false) UsuarioDTO user) {
         if (user == null) return "redirect:/";
-        if (!validaSesion.tienePermiso(user.getRol().getId(), "editarTurnos")) return "redirect:/dashboard";
+        if (!validaSesion.tienePermiso(user.getRol().getId(), Permiso.EDITAR_TURNOS)) return "redirect:/dashboard";
         return "crear_editar/crear_turno";
     }
 
     @GetMapping("/crear")
     public  String doCrearTurnos(Model model, @SessionAttribute(name = "user", required = false) UsuarioDTO user) {
         if (user == null) return "redirect:/";
-        if (!validaSesion.tienePermiso(user.getRol().getId(), "editarTurnos")) return "redirect:/dashboard";
+        if (!validaSesion.tienePermiso(user.getRol().getId(), Permiso.EDITAR_TURNOS)) return "redirect:/dashboard";
         TurnoDTO newTurno = new TurnoDTO();
         List<CampanaDTO> campanas = campanasService.listarCampanas();
         List<TiendaDTO> tiendas = tiendasService.listarTiendas();
@@ -77,7 +78,7 @@ public class TurnosController {
     public  String doBorrarTurnos(@RequestParam(value="idTurno") Integer idTurno,
                                 Model model, @SessionAttribute(name = "user", required = false) UsuarioDTO user) {
         if (user == null) return "redirect:/";
-        if (!validaSesion.tienePermiso(user.getRol().getId(), "editarTurnos")) return "redirect:/dashboard";
+        if (!validaSesion.tienePermiso(user.getRol().getId(), Permiso.EDITAR_TURNOS)) return "redirect:/dashboard";
         //turnoDelete.eliminarDatos(); // eliminar lo datos restantes: campaña perteneciente, voluntarios, tiendas y día
         turnosService.borrarTurnoId(idTurno);
 
@@ -94,7 +95,7 @@ public class TurnosController {
                                   @RequestParam(value = "idVoluntario") Integer idVoluntario,
                                   Model model, @SessionAttribute(name = "user", required = false) UsuarioDTO user) {
         if (user == null) return "redirect:/";
-        if (!validaSesion.tienePermiso(user.getRol().getId(), "editarTurnos")) return "redirect:/dashboard";
+        if (!validaSesion.tienePermiso(user.getRol().getId(), Permiso.EDITAR_TURNOS)) return "redirect:/dashboard";
         try {
             turnosService.guardarTurno(tipoTurno, fechaStr, horaInicioStr, horaFinStr, idCampana, idTienda, idVoluntario);
         } catch (Exception e) {
@@ -126,7 +127,7 @@ public class TurnosController {
                                   @RequestParam(value = "idTienda", required = false) Integer idTienda,
                                   Model model, @SessionAttribute(name = "user", required = false) UsuarioDTO user) {
         if (user == null) return "redirect:/";
-        if (!validaSesion.tienePermiso(user.getRol().getId(), "turnos")) return "redirect:/dashboard";
+        if (!validaSesion.tienePermiso(user.getRol().getId(), Permiso.TURNOS)) return "redirect:/dashboard";
         List<TurnoDTO> turnosFiltrados = turnosService.filtrarTurnos(idCampana, idTienda);
         model.addAttribute("turnos", turnosFiltrados);
 
@@ -145,7 +146,7 @@ public class TurnosController {
                                @RequestParam(value = "idCampana") Integer idCampana,
             Model model, @SessionAttribute(name = "user", required = false) UsuarioDTO user) {
         if (user == null) return "redirect:/";
-        if (!validaSesion.tienePermiso(user.getRol().getId(), "incidencias")) return "redirect:/dashboard";
+        if (!validaSesion.tienePermiso(user.getRol().getId(), Permiso.INCIDENCIAS)) return "redirect:/dashboard";
         model.addAttribute("idTurno", idTurno);
         List<VoluntarioDTO> voluntarios = voluntariosService.listarVoluntarios();
         CampanaDTO campanaDTO = campanasService.buscarPorId(idCampana);
@@ -163,7 +164,7 @@ public class TurnosController {
                                       @SessionAttribute(name = "user", required = false) UsuarioDTO user, Model model){
 
         if (user == null) return "redirect:/";
-        if (!validaSesion.tienePermiso(user.getRol().getId(), "incidencias")) return "redirect:/dashboard";
+        if (!validaSesion.tienePermiso(user.getRol().getId(), Permiso.INCIDENCIAS)) return "redirect:/dashboard";
 
         List<UsuarioDTO> admins = usuariosService.listarAdmins();
         CampanaDTO campanaDTO = campanasService.buscarPorId(idCampana);

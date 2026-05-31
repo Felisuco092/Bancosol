@@ -6,6 +6,7 @@ import uma.grupo13.bancosol.dao.CadenaRepository;
 import uma.grupo13.bancosol.dao.TiendasRepository;
 import uma.grupo13.bancosol.dao.UserRepository;
 import uma.grupo13.bancosol.dto.TiendaDTO;
+import uma.grupo13.bancosol.dto.UsuarioDTO;
 import uma.grupo13.bancosol.entity.CadenaEntity;
 import uma.grupo13.bancosol.entity.TiendaEntity;
 import uma.grupo13.bancosol.entity.UsuarioEntity;
@@ -123,5 +124,28 @@ public class TiendasService {
     public List<TiendaDTO> filtroLocalidadCadenaCapi(String local, Integer idCad, Integer idCapi) {
         List<TiendaEntity> lista = tiendasRepo.filtroLocalidadCadenaCapi(local, idCad, idCapi);
         return tiendaMapper.toDTOList(lista);
+    }
+
+    public List<TiendaDTO> filtrarTiendasDependiendoDelRol(UsuarioDTO user, Integer idCad, String localidad, List<TiendaDTO> tiendas) {
+        if(user.getRol().getId()==1){
+            if (idCad !=0) {
+                tiendas = this.filtroLocalidadCadena(localidad, idCad);
+            } else{
+                tiendas = this.filtroLocalidad(localidad);
+            }
+        }else if (user.getRol().getId()==2){
+            if (idCad !=0) {
+                tiendas = this.filtroLocalidadCadenaCoord(localidad, idCad, user.getId());
+            } else{
+                tiendas = this.filtroLocalidadCoord(localidad, user.getId());
+            }
+        }else if (user.getRol().getId()==3){
+            if (idCad !=0) {
+                tiendas = this.filtroLocalidadCadenaCapi(localidad, idCad, user.getId());
+            } else{
+                tiendas = this.filtroLocalidadCapi(localidad, user.getId());
+            }
+        }
+        return tiendas;
     }
 }
