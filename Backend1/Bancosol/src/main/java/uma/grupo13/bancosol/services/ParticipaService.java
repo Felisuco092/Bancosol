@@ -46,6 +46,10 @@ public class ParticipaService {
     }
 
     public void guardarParticipacion(Integer idCampana, Integer idTienda) {
+        guardarParticipacion(idCampana, idTienda, null);
+    }
+
+    public void guardarParticipacion(Integer idCampana, Integer idTienda, Integer idCoordinador) {
         TiendaEntity tienda = tiendasRepository.getReferenceById(idTienda);
         CampanaEntity campana = campanaRepository.getReferenceById(idCampana);
 
@@ -57,28 +61,18 @@ public class ParticipaService {
         participa.setId(participaId);
         participa.setCampana(campana);
         participa.setTienda(tienda);
+        if (idCoordinador != null) {
+            participa.setCoordinador(userRepository.getReferenceById(idCoordinador));
+        }
 
         participaRepository.save(participa);
     }
 
     public void guardarParticipaciones(List<Integer> idCampanas, Integer idTienda, HttpServletRequest request) {
-        TiendaEntity tienda = tiendasRepository.getReferenceById(idTienda);
-
         for (Integer idCampana : idCampanas){
-            ParticipaEntity participa = new ParticipaEntity();
-            participa.getId().setIdTienda(idTienda);
-            participa.getId().setIdCampana(idCampana);
-
-            CampanaEntity campana = campanaRepository.getReferenceById(idCampana);
-            participa.setCampana(campana);
-            participa.setTienda(tienda);
-
             String coordParam = request.getParameter("coordinador_" + idCampana);
-            if (coordParam != null && !coordParam.isEmpty()) {
-                participa.setCoordinador(userRepository.getReferenceById(Integer.parseInt(coordParam)));
-            }
-
-            participaRepository.save(participa);
+            Integer idCoordinador = (coordParam != null && !coordParam.isEmpty()) ? Integer.parseInt(coordParam) : null;
+            guardarParticipacion(idCampana, idTienda, idCoordinador);
         }
     }
 
