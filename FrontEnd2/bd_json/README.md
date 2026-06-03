@@ -50,11 +50,13 @@ Authorization: Bearer <accessToken>
 
 ## Control de Roles
 
-| Rol     | id_rol | Permisos |
-|---------|--------|----------|
-| Admin   | 1      | CRUD completo en todas las tablas |
-| Capitán | 2      | Lectura de todo, gestión de turnos |
-| Coordinador | 3 | Lectura de todo, gestión de voluntarios/colaboradores |
+| Rol     | id_rol | GET | POST | PUT | DELETE |
+|---------|--------|-----|------|-----|--------|
+| Admin   | 1      | Todos los recursos | Todos los recursos | Todos los recursos | Todos los recursos |
+| Coordinador | 2 | tiendas, turnos, voluntarios, notificaciones | turnos, voluntarios, notificaciones | turnos, voluntarios | turnos, notificaciones |
+| Capitán | 3 | tiendas, turnos, voluntarios, notificaciones | notificaciones | - | notificaciones |
+| Responsable Entidad | 4 | turnos, voluntarios, notificaciones | notificaciones | - | notificaciones |
+| Responsable Tienda | 5 | tiendas, turnos, notificaciones | notificaciones | - | notificaciones |
 
 Los permisos se definen en `server.js` en el objeto `PERMISOS`.
 
@@ -65,5 +67,7 @@ Los permisos se definen en `server.js` en el objeto `PERMISOS`.
 | jperez   | hash123   | Admin       |
 | mlopez   | hash456   | Coordinador |
 | aruiz    | hash789   | Capitán     |
-| cgomez   | hash101   | Capitán     |
-| psanchez | hash202   | Coordinador |
+| cgomez   | hash101   | Coordinador |
+| psanchez | hash202   | Capitán     |
+| lmartinez | hash123   | Responsable Entidad |
+| rfernandez | hash123  | Responsable Tienda |
