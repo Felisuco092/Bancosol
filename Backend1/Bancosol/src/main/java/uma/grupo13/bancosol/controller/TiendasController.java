@@ -1,5 +1,6 @@
 package uma.grupo13.bancosol.controller;
 
+import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpSession;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Controller;
@@ -77,6 +78,10 @@ public class TiendasController {
         model.addAttribute("capitanes", capitanes);
         List<UsuarioDTO> responsablesTienda = usuariosService.findResponsablesTienda();
         model.addAttribute("responsablesTienda", responsablesTienda);
+        List<UsuarioDTO> coordinadores = usuariosService.findCoordinadores();
+        model.addAttribute("coordinadores", coordinadores);
+        List<ParticipaDTO> participacionesTienda = participaService.findByIdTienda(id);
+        model.addAttribute("participacionesTienda", participacionesTienda);
         return "crear_editar/crear_editar_tienda";
     }
 
@@ -94,6 +99,9 @@ public class TiendasController {
         model.addAttribute("capitanes", capitanes);
         List<UsuarioDTO> responsablesTienda = usuariosService.findResponsablesTienda();
         model.addAttribute("responsablesTienda", responsablesTienda);
+        List<UsuarioDTO> coordinadores = usuariosService.findCoordinadores();
+        model.addAttribute("coordinadores", coordinadores);
+        model.addAttribute("participacionesTienda", new ArrayList<>());
         return "crear_editar/crear_editar_tienda";
     }
 
@@ -136,7 +144,8 @@ public class TiendasController {
                                    @RequestParam("cadena") Integer idCadena,
                                    @RequestParam(value = "capitan", required = false) Integer idCapitan,
                                    @RequestParam(value = "responsableTienda", required = false) Integer idResponsableTienda,
-                                   @RequestParam(value = "campanasParticipa", required = false) List<Integer> idCampanas) {
+                                   @RequestParam(value = "campanasParticipa", required = false) List<Integer> idCampanas,
+                                   HttpServletRequest request) {
         if (user == null) return "redirect:/";
         if (!validaSesion.tienePermiso(user.getRol().getId(), Permiso.EDITAR_TIENDA)) return "redirect:/dashboard";
 
@@ -151,7 +160,7 @@ public class TiendasController {
         }
 
         if (idCampanas != null) {
-            participaService.guardarParticipaciones(idCampanas, tienda.getId());
+            participaService.guardarParticipaciones(idCampanas, tienda.getId(), request);
         }
 
         return "redirect:/tiendas/";

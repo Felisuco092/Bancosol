@@ -7,6 +7,7 @@
 <%@ page import="uma.grupo13.bancosol.dto.CadenaDTO" %>
 <%@ page import="uma.grupo13.bancosol.dto.CampanaDTO" %>
 <%@ page import="uma.grupo13.bancosol.dto.UsuarioDTO" %>
+<%@ page import="uma.grupo13.bancosol.dto.ParticipaDTO" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <!DOCTYPE html>
 <%
@@ -14,6 +15,8 @@
     List<CadenaDTO> cadenas = (List<CadenaDTO>) request.getAttribute("cadenas");
     List<CampanaDTO> campanas = (List<CampanaDTO>) request.getAttribute("campanas");
     List<UsuarioDTO> capitanes= (List<UsuarioDTO>) request.getAttribute("capitanes");
+    List<ParticipaDTO> participacionesTienda = (List<ParticipaDTO>) request.getAttribute("participacionesTienda");
+    List<UsuarioDTO> coordinadores = (List<UsuarioDTO>) request.getAttribute("coordinadores");
 %>
 <html lang="es">
 <%
@@ -117,20 +120,60 @@
                 </div>
                 <div class="form-group">
                     <label>Campañas en la que participa: </label>
-                    <div class="checkbox-group" style="max-height: 200px; overflow-y: auto; border: 1px solid var(--input-border); padding: 10px; border-radius: 4px;">
-                        <%
-                            for(CampanaDTO campana : campanas) {
-                                boolean seleccionado = tienda.participaEn(campana.getId());
-                        %>
-                        <div class="checkbox-item" style="display: flex; align-items: center; margin-bottom: 0.5rem;">
-                            <input type="checkbox" name="campanasParticipa" value="<%=campana.getId()%>" id="campana-<%=campana.getId()%>" <%= seleccionado ? "checked" : "" %> style="width: auto; margin-right: 10px;">
-                            <label for="campana-<%=campana.getId()%>" style="margin-bottom: 0; display: inline; font-weight: normal;"><%=campana.getNombre()%></label>
-                        </div>
-                        <%
-                            }
-                        %>
-                    </div>
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Campaña</th>
+                                <th>Participa</th>
+                                <th>Coordinador</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <%
+                                for (CampanaDTO campana : campanas) {
+                                    boolean seleccionado = tienda.participaEn(campana.getId());
+                                    Integer idCoordAsignado = null;
+                                    for (ParticipaDTO p : participacionesTienda) {
+                                        if (p.getIdCampana().equals(campana.getId()) && p.getCoordinador() != null) {
+                                            idCoordAsignado = p.getCoordinador().getId();
+                                            break;
+                                        }
+                                    }
+                            %>
+                            <tr>
+                                <td><%=campana.getNombre()%></td>
+                                <td>
+                                    <input type="checkbox" name="campanasParticipa" value="<%=campana.getId()%>" id="campana-<%=campana.getId()%>" <%= seleccionado ? "checked" : "" %> class="check-participa" style="width: auto;">
+                                </td>
+                                <td>
+                                    <select name="coordinador_<%=campana.getId()%>" id="coord-<%=campana.getId()%>" <%= seleccionado ? "" : "disabled" %>>
+                                        <option value="">-- Sin coordinador --</option>
+                                        <%
+                                            for (UsuarioDTO coord : coordinadores) {
+                                        %>
+                                        <option value="<%=coord.getId()%>" <%= (idCoordAsignado != null && idCoordAsignado.equals(coord.getId())) ? "selected" : "" %>><%=coord.getNombre()%></option>
+                                        <%
+                                            }
+                                        %>
+                                    </select>
+                                </td>
+                            </tr>
+                            <%
+                                }
+                            %>
+                        </tbody>
+                    </table>
                 </div>
+                <script>
+                    document.querySelectorAll('input[name="campanasParticipa"]').forEach(function(cb) {
+                        cb.addEventListener('change', function() {
+                            var select = document.getElementById('coord-' + this.value);
+                            if (select) {
+                                select.disabled = !this.checked;
+                            }
+                        });
+                    });
+                </script>
                 <div class="form-actions">
                     <button type="submit" class="btn btn-primary">Guardar</button>
                     <button type="button" class="btn btn-secondary" onclick="history.back()">Cancelar</button>

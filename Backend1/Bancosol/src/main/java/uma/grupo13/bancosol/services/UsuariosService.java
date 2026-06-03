@@ -64,6 +64,11 @@ public class UsuariosService {
         return usuarioMapper.toDTOList(lista);
     }
 
+    public List<UsuarioDTO> findCoordinadores() {
+        List<UsuarioEntity> lista = userRepository.findCoordinadores();
+        return usuarioMapper.toDTOList(lista);
+    }
+
     public void borrarUsuario(Integer id) {
         UsuarioEntity usuario = userRepository.getReferenceById(id);
         usuario.deleteTiendas();
