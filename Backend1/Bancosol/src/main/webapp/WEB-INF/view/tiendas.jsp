@@ -1,4 +1,6 @@
 <%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
+<%@ page import="uma.grupo13.bancosol.services.utils.Permiso" %>
+<%@ page import="java.util.Map" %>
 <!DOCTYPE html>
 <html lang="es">
 <head>
@@ -9,13 +11,18 @@
     <script src="../../js/aside.js" defer></script>
 </head>
 <body>
-    <% request.setAttribute("paginaActual", "tiendas"); %>
+    <%
+        request.setAttribute("paginaActual", "tiendas");
+        Map<Permiso, Boolean> permisos = (Map<Permiso, Boolean>) session.getAttribute("permisos");
+    %>
     <jsp:include page="aside.jsp"/>
 
     <main class="main-content">
         <header class="header">
             <h1>Gestión de Tiendas</h1>
-            <a href="/tiendas/crear"><button class="btn btn-primary">+ Crear Tienda</button></a>
+            <% if (Boolean.TRUE.equals(permisos.get(Permiso.EDITAR_TIENDA))) { %>
+                <a href="/tiendas/crear"><button class="btn btn-primary">+ Crear Tienda</button></a>
+            <% } %>
         </header>
 
         <div class="card">

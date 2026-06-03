@@ -3,6 +3,8 @@
 <%@ page import="java.util.List" %>
 <%@ page import="uma.grupo13.bancosol.dto.TiendaDTO" %>
 <%@ page import="uma.grupo13.bancosol.dto.CampanaDTO" %>
+<%@ page import="uma.grupo13.bancosol.services.utils.Permiso" %>
+<%@ page import="java.util.Map" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <!DOCTYPE html>
 <html lang="es">
@@ -21,6 +23,7 @@
     String capitanNombre = (String) request.getAttribute("capitanNombre");
     Integer idCampanaSelect = (Integer) request.getAttribute("idCampanaSel");
     Integer idTiendaSelect = (Integer) request.getAttribute("idTiendaSel");
+    Map<Permiso, Boolean> permisos = (Map<Permiso, Boolean>) session.getAttribute("permisos");
 %>
 <body>
     <% request.setAttribute("paginaActual", "turnos"); %>
@@ -68,9 +71,11 @@
                             <%}else{%>
                               <%=""%>
                             <%}%></strong></span>
-                        <a href="/turnos/crear">
-                            <button class="btn btn-success btn-add-extra">+ Añadir Turno Extra</button>
-                        </a>
+                        <% if (Boolean.TRUE.equals(permisos.get(Permiso.EDITAR_TURNOS))) { %>
+                            <a href="/turnos/crear">
+                                <button class="btn btn-success btn-add-extra">+ Añadir Turno Extra</button>
+                            </a>
+                        <% } %>
                     </div>
                 </div>
 

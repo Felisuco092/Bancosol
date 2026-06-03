@@ -20,13 +20,13 @@
         <td>
             <form method="post" action="/bandeja/mensaje">
                 <input type="hidden" name="idMensaje" value="<%=notificacionAct.getId()%>" />
-                <button class="btn btn-primary btn-view">
+                <button class="btn btn-primary btn-sm">
                     Ver mensaje
                 </button>
             </form>
             <form action="/bandeja/delete" method="post">
                 <input type="hidden" name="idMensaje" value="<%=notificacionAct.getId()%>" />
-                <button class="btn btn-primary btn-view">
+                <button class="btn btn-primary btn-sm">
                     Eliminar
                 </button>
             </form>

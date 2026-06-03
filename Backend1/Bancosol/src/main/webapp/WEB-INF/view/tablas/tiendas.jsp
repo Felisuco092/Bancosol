@@ -3,9 +3,12 @@
 <%@ page import="uma.grupo13.bancosol.entity.ParticipaEntity" %>
 <%@ page import="java.util.List" %>
 <%@ page import="uma.grupo13.bancosol.dto.TiendaDTO" %>
+<%@ page import="uma.grupo13.bancosol.services.utils.Permiso" %>
+<%@ page import="java.util.Map" %>
 <%
     List<TiendaDTO> tiendas = (List<TiendaDTO>) request.getAttribute("tiendas");
     Integer idCampanaActual = (Integer) request.getAttribute("idCampanaActual");
+    Map<Permiso, Boolean> permisos = (Map<Permiso, Boolean>) session.getAttribute("permisos");
 %>
 <table class="tabla-tiendas">
     <thead>
@@ -40,11 +43,13 @@
         <% } %>
         </td>
         <td>
-            <a href="/tiendas/editar?id=<%=t.getId()%>"><button class="btn btn-primary btn-sm">Editar</button></a>
-            <form action="/tiendas/borrar" method="POST" onsubmit="return confirm('¿Seguro que desea eliminar esta tienda?')">
-                <input type="hidden" name="id" value="<%=t.getId()%>">
-                <button type="submit" class="btn btn-danger btn-sm">Borrar</button>
-            </form>
+            <% if (Boolean.TRUE.equals(permisos.get(Permiso.EDITAR_TIENDA))) { %>
+                <a href="/tiendas/editar?id=<%=t.getId()%>"><button class="btn btn-primary btn-sm">Editar</button></a>
+                <form action="/tiendas/borrar" method="POST" onsubmit="return confirm('¿Seguro que desea eliminar esta tienda?')">
+                    <input type="hidden" name="id" value="<%=t.getId()%>">
+                    <button type="submit" class="btn btn-danger btn-sm">Borrar</button>
+                </form>
+            <% } %>
         </td>
     </tr>
     <%
