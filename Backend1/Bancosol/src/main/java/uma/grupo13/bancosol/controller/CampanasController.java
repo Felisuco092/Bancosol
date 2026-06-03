@@ -83,7 +83,12 @@ public class CampanasController {
         if (user == null) return "redirect:/";
         if (!validaSesion.tienePermiso(user.getRol().getId(), Permiso.CAMPANAS)) return "redirect:/dashboard";
 
-        campanasService.guardarCampana(idCampana, nombre, anyo, fechaInic, fechaFin);
+
+
+        boolean hecho = campanasService.guardarCampana(idCampana, nombre, anyo, fechaInic, fechaFin);
+        if (!hecho) {
+            return "redirect:/campanas/crear";
+        }
 
         return "redirect:/campanas/";
     }
