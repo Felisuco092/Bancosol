@@ -6,7 +6,7 @@ import logoSrc from '../assets/logo.png'
 export default function Sidebar() {
   const [open, setOpen] = useState(false)
   const navigate = useNavigate()
-  const { logout } = useAuth()
+  const { logout, usuario: user } = useAuth()
 
   function toggle() {
     setOpen(prev => !prev)
@@ -20,6 +20,17 @@ export default function Sidebar() {
   const sidebarClass = `sidebar${open ? ' abierto' : ''}`
   const enlacesClass = `abierto`
 
+  const menuItems = [
+    { to: '/dashboard', label: 'Cuadro de Mando', roles: [1, 2, 3, 4, 5] },
+    { to: '/campanas', label: 'Gestión de Campañas', roles: [1] },
+    { to: '/cadenas', label: 'Gestión de Cadenas', roles: [1] },
+    { to: '/tiendas', label: 'Gestión de Tiendas', roles: [1, 2, 3, 5] },
+    { to: '/colaboradores', label: 'Colaboradores', roles: [1, 2, 3, 4] },
+    { to: '/usuarios', label: 'Usuarios', roles: [1] },
+    { to: '/turnos', label: 'Asignación de Turnos', roles: [1, 2, 3, 4, 5] },
+    { to: '/bandeja', label: 'Bandeja de Entrada', roles: [1, 2, 3, 4, 5] },
+  ]
+
   return (
     <>
       <button className="btn btn-primary btn-collapsible" onClick={toggle}>
@@ -29,46 +40,15 @@ export default function Sidebar() {
         <img src={logoSrc} alt="Logo BANCOSOL" className="logo_login" />
         <nav id="menu-enlaces" className={enlacesClass}>
           <ul>
-            <li>
-              <NavLink to="/dashboard" className={({ isActive }) => isActive ? 'active' : ''}>
-                Cuadro de Mando
-              </NavLink>
-            </li>
-            <li>
-              <NavLink to="/campanas" className={({ isActive }) => isActive ? 'active' : ''}>
-                Gestión de Campañas
-              </NavLink>
-            </li>
-            <li>
-              <NavLink to="/cadenas" className={({ isActive }) => isActive ? 'active' : ''}>
-                Gestión de Cadenas
-              </NavLink>
-            </li>
-            <li>
-              <NavLink to="/tiendas" className={({ isActive }) => isActive ? 'active' : ''}>
-                Gestión de Tiendas
-              </NavLink>
-            </li>
-            <li>
-              <NavLink to="/colaboradores" className={({ isActive }) => isActive ? 'active' : ''}>
-                Colaboradores
-              </NavLink>
-            </li>
-            <li>
-              <NavLink to="/usuarios" className={({ isActive }) => isActive ? 'active' : ''}>
-                Usuarios
-              </NavLink>
-            </li>
-            <li>
-              <NavLink to="/turnos" className={({ isActive }) => isActive ? 'active' : ''}>
-                Asignación de Turnos
-              </NavLink>
-            </li>
-            <li>
-              <NavLink to="/bandeja" className={({ isActive }) => isActive ? 'active' : ''}>
-                Bandeja de Entrada
-              </NavLink>
-            </li>
+            {menuItems
+              .filter(item => item.roles.includes(user?.id_rol))
+              .map(item => (
+                <li key={item.to}>
+                  <NavLink to={item.to} className={({ isActive }) => (isActive ? 'active' : '')}>
+                    {item.label}
+                  </NavLink>
+                </li>
+              ))}
             <li>
               <a href="#" className="text-logout" onClick={handleLogout}>
                 Cerrar Sesión

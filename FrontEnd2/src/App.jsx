@@ -27,22 +27,20 @@ function App() {
         <Route path="/" element={<LoginPage />} />
       </Route>
 
-      {/*Rutas protegidas, solo accesibles si el usuario está autenticado*/}
-      <Route element={<ProtectedRoute />}>
+      {/* Rutas accesibles por TODOS los usuarios autenticados */}
+      <Route element={<ProtectedRoute allowedRoles={[1, 2, 3, 4, 5]} />}>
         <Route element={<SideBarMainLayout />}>
           <Route path="/dashboard" element={<DashboardPage />} />
+          <Route path="/turnos" element={<TurnosPage />} />
+          <Route path="/bandeja" element={<BandejaPage />} />
         </Route>
-
-        <Route path="/tiendas">
-          <Route element={<SideBarMainLayout />}>
-            <Route index element={<TiendasPage />} />
-          </Route>
-          <Route element={<MainLayout />}>
-            <Route path="crear" element={<CrearTiendaPage />} />
-            <Route path="editar/:id" element={<CrearTiendaPage />} />
-          </Route>
+        <Route element={<MainLayout />}>
+          <Route path="/bandeja/ver/:id" element={<VerMensajePage />} />
         </Route>
+      </Route>
 
+      {/* Rutas para Administrador (Rol 1) */}
+      <Route element={<ProtectedRoute allowedRoles={[1]} />}>
         <Route path="/campanas">
           <Route element={<SideBarMainLayout />}>
             <Route index element={<CampanasPage />} />
@@ -50,16 +48,6 @@ function App() {
           <Route element={<MainLayout />}>
             <Route path="crear" element={<CrearCampanaPage />} />
             <Route path="editar/:id" element={<CrearCampanaPage />} />
-          </Route>
-        </Route>
-
-        <Route path="/colaboradores">
-          <Route element={<SideBarMainLayout />}>
-            <Route index element={<ColaboradoresPage />} />
-          </Route>
-          <Route element={<MainLayout />}>
-            <Route path="crear" element={<CrearColaboradorPage />} />
-            <Route path="editar/:id" element={<CrearColaboradorPage />} />
           </Route>
         </Route>
 
@@ -83,21 +71,44 @@ function App() {
           </Route>
         </Route>
 
-        <Route path="/turnos">
-          <Route element={<SideBarMainLayout />}>
-            <Route index element={<TurnosPage />} />
-          </Route>
+        {/* El Admin también puede crear/editar tiendas */}
+        <Route path="/tiendas">
           <Route element={<MainLayout />}>
-            <Route path="crear" element={<CrearTurnoPage />} />
+            <Route path="crear" element={<CrearTiendaPage />} />
+            <Route path="editar/:id" element={<CrearTiendaPage />} />
           </Route>
         </Route>
+      </Route>
 
-        <Route path="/bandeja">
+      {/* Gestión de Tiendas (Listado): Admin, Capitán, Coordinador, Resp. Tienda */}
+      <Route element={<ProtectedRoute allowedRoles={[1, 2, 3, 5]} />}>
+        <Route path="/tiendas">
           <Route element={<SideBarMainLayout />}>
-            <Route index element={<BandejaPage />} />
+            <Route index element={<TiendasPage />} />
           </Route>
+        </Route>
+      </Route>
+
+      {/* Colaboradores (Listado): Admin, Capitán, Coordinador, Resp. Entidad */}
+      <Route element={<ProtectedRoute allowedRoles={[1, 2, 3, 4]} />}>
+        <Route path="/colaboradores">
+          <Route element={<SideBarMainLayout />}>
+            <Route index element={<ColaboradoresPage />} />
+          </Route>
+        </Route>
+      </Route>
+
+      {/* Crear/Editar Colaboradores y Turnos: Admin y Capitán (según lógica de permisos) */}
+      <Route element={<ProtectedRoute allowedRoles={[1, 2]} />}>
+        <Route path="/colaboradores">
           <Route element={<MainLayout />}>
-            <Route path="ver/:id" element={<VerMensajePage />} />
+            <Route path="crear" element={<CrearColaboradorPage />} />
+            <Route path="editar/:id" element={<CrearColaboradorPage />} />
+          </Route>
+        </Route>
+        <Route path="/turnos">
+          <Route element={<MainLayout />}>
+            <Route path="crear" element={<CrearTurnoPage />} />
           </Route>
         </Route>
       </Route>
