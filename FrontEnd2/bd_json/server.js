@@ -16,8 +16,8 @@ server.use(jsonServer.bodyParser)
 
 const ROLES = {
   ADMIN: "1",
-  CAPITAN: "2",
-  COORDINADOR: "3",
+  COORDINADOR: "2",
+  CAPITAN: "3",
   RESPONSABLE_ENTIDAD: "4",
   RESPONSABLE_TIENDA: "5"
 }
@@ -90,6 +90,7 @@ const PERMISOS = {
     delete: [ROLES.ADMIN]
   }
 }
+
 
 function getRecurso(path) {
   const parts = path.split('/')
