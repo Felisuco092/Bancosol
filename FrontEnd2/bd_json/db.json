@@ -1,24 +1,12 @@
 {
   "roles": [
     {
-      "id": "1",
-      "nombre": "Administrador"
-    },
-    {
       "id": "2",
       "nombre": "Capitán"
     },
     {
       "id": "3",
       "nombre": "Coordinador"
-    },
-    {
-      "id": "4",
-      "nombre": "Responsable Entidad"
-    },
-    {
-      "id": "5",
-      "nombre": "Responsable Tienda"
     }
   ],
   "usuarios": [
