@@ -13,7 +13,7 @@
     boolean esFisico = "FISICO".equals(voluntario.getTipo());
     boolean esEntidad = "ENTIDAD".equals(voluntario.getTipo());
     boolean esCreacion = voluntario.getId() == null;
-    Integer rolUser=(Integer) request.getAttribute("userRol");
+    Map<Permiso, Boolean> permisos = (Map<Permiso, Boolean>) session.getAttribute("permisos");
 %>
 <!DOCTYPE html>
 <html lang="es">
@@ -53,7 +53,7 @@
                     </div>
 
                     <%
-                        if(rolUser!= null && rolUser==1){ %>
+                        if(Boolean.TRUE.equals(permisos.get(Permiso.CONFIRMAR_COLABORADORES))){ %>
                     <div class="form-group" style="display: <%=voluntario.getAprobado() == false ? "block" : "none"%>">
                         <label for="confirmar">Confirmar colaborador</label>
                         <input type="checkbox" id="confirmar" name="confirmar" value="true"

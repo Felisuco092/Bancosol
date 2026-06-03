@@ -1,8 +1,10 @@
 <%@ page import="uma.grupo13.bancosol.entity.*, java.util.*" %>
 <%@ page import="uma.grupo13.bancosol.dto.VoluntarioDTO" %>
+<%@ page import="uma.grupo13.bancosol.services.utils.Permiso" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%
     List<VoluntarioDTO> cols = (List<VoluntarioDTO>) request.getAttribute("colaboradores");
+    Map<Permiso, Boolean> permisos = (Map<Permiso, Boolean>) session.getAttribute("permisos");
 %>
 <table>
     <thead>
@@ -41,12 +43,16 @@
             <td><%=v.getCodigoPostal()%></td>
             <td><%=nVol%></td>
             <td>
-                <a href="/colaboradores/editar?id=<%=v.getId()%>"><button class="btn btn-primary btn-sm">Editar</button></a>
-                <form action="/colaboradores/borrar" method="post"
-                      onsubmit="return confirm('¿Eliminar este voluntario? Se borrarán todos sus turnos.')">
-                    <input type="hidden" name="id" value="<%=v.getId()%>" />
-                    <button class="btn btn-danger btn-sm">Eliminar</button>
-                </form>
+                <% if (Boolean.TRUE.equals(permisos.get(Permiso.EDITAR_COLABORADORES))) { %>
+                    <a href="/colaboradores/editar?id=<%=v.getId()%>"><button class="btn btn-primary btn-sm">Editar</button></a>
+                <% } %>
+                <% if (Boolean.TRUE.equals(permisos.get(Permiso.BORRAR_COLABORADORES))) { %>
+                    <form action="/colaboradores/borrar" method="post"
+                          onsubmit="return confirm('¿Eliminar este voluntario? Se borrarán todos sus turnos.')">
+                        <input type="hidden" name="id" value="<%=v.getId()%>" />
+                        <button class="btn btn-danger btn-sm">Eliminar</button>
+                    </form>
+                <% } %>
             </td>
         </tr>
     <% } else { %>
