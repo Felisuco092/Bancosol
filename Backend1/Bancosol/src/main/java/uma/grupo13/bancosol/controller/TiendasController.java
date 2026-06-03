@@ -41,6 +41,8 @@ public class TiendasController {
             tiendas = tiendasService.listarTiendasCoord(user.getId());
         }else if (user.getRol().getId()==3){
             tiendas = tiendasService.listarTiendasCapi(user.getId());
+        } if (user.getRol().getId()==5){
+            tiendas = tiendasService.listarTiendasResponsable(user.getId());
         }
 
 
@@ -106,7 +108,6 @@ public class TiendasController {
 
         List<TiendaDTO> tiendas= new ArrayList<>();
 
-        tiendas = tiendasService.filtrarTiendasDependiendoDelRol(user, idCad, localidad, tiendas);
 
 
         model.addAttribute("tiendas", tiendas);

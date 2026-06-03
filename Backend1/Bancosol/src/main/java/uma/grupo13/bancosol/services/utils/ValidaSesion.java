@@ -59,7 +59,7 @@ public class ValidaSesion {
 
         Map<Permiso, Boolean> permisosRol3 = new HashMap<>();
         permisosRol3.put(Permiso.USUARIOS, false);
-        permisosRol3.put(Permiso.TIENDAS, true);
+        permisosRol3.put(Permiso.TIENDAS, false);
         permisosRol3.put(Permiso.CADENAS, false);
         permisosRol3.put(Permiso.CAMPANAS, false);
         permisosRol3.put(Permiso.TURNOS, true);
@@ -78,7 +78,7 @@ public class ValidaSesion {
         permisosRol4.put(Permiso.CADENAS, false);
         permisosRol4.put(Permiso.CAMPANAS, false);
         permisosRol4.put(Permiso.TURNOS, true);
-        permisosRol4.put(Permiso.COLABORADORES, true);
+        permisosRol4.put(Permiso.COLABORADORES, false);
         permisosRol4.put(Permiso.INCIDENCIAS, false);
         permisosRol4.put(Permiso.EDITAR_TIENDA, false);
         permisosRol4.put(Permiso.EDITAR_TURNOS, false);

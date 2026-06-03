@@ -111,6 +111,11 @@ public class TiendasService {
         return tiendaMapper.toDTOList(lista);
     }
 
+    public List<TiendaDTO> listarTiendasResponsable(Integer id){
+        List<TiendaEntity> lista = tiendasRepo.getAllResponsable(id);
+        return tiendaMapper.toDTOList(lista);
+    }
+
     public List<TiendaDTO> filtroLocalidadCadenaCoord(String local, Integer idCad, Integer idCoord) {
         List<TiendaEntity> lista = tiendasRepo.filtroLocalidadCadenaCoord(local, idCad, idCoord);
         return tiendaMapper.toDTOList(lista);
@@ -126,26 +131,43 @@ public class TiendasService {
         return tiendaMapper.toDTOList(lista);
     }
 
+
     public List<TiendaDTO> filtrarTiendasDependiendoDelRol(UsuarioDTO user, Integer idCad, String localidad, List<TiendaDTO> tiendas) {
-        if(user.getRol().getId()==1){
-            if (idCad !=0) {
+        if (user.getRol().getId() == 1) {
+            if (idCad != 0) {
                 tiendas = this.filtroLocalidadCadena(localidad, idCad);
-            } else{
+            } else {
                 tiendas = this.filtroLocalidad(localidad);
             }
-        }else if (user.getRol().getId()==2){
-            if (idCad !=0) {
+        } else if (user.getRol().getId() == 2) {
+            if (idCad != 0) {
                 tiendas = this.filtroLocalidadCadenaCoord(localidad, idCad, user.getId());
-            } else{
+            } else {
                 tiendas = this.filtroLocalidadCoord(localidad, user.getId());
             }
-        }else if (user.getRol().getId()==3){
-            if (idCad !=0) {
+        } else if (user.getRol().getId() == 3) {
+            if (idCad != 0) {
                 tiendas = this.filtroLocalidadCadenaCapi(localidad, idCad, user.getId());
-            } else{
+            } else {
                 tiendas = this.filtroLocalidadCapi(localidad, user.getId());
+            }
+        } else if (user.getRol().getId() == 5) {
+            if (idCad != 0) {
+                tiendas = this.filtroLocalidadCadenaResponsable(localidad, idCad, user.getId());
+            } else {
+                tiendas = this.filtroLocalidadResponsable(localidad, user.getId());
             }
         }
         return tiendas;
+    }
+
+    public List<TiendaDTO> filtroLocalidadResponsable(String local, Integer idCapi) {
+        List<TiendaEntity> lista = tiendasRepo.filtroLocalidadResponsable(local, idCapi);
+        return tiendaMapper.toDTOList(lista);
+    }
+
+    public List<TiendaDTO> filtroLocalidadCadenaResponsable(String local, Integer idCad, Integer idCapi) {
+        List<TiendaEntity> lista = tiendasRepo.filtroLocalidadCadenaResponsable(local, idCad, idCapi);
+        return tiendaMapper.toDTOList(lista);
     }
 }
