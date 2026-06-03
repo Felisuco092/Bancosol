@@ -62,9 +62,9 @@ public class CampanasService {
         campanaRepository.save(campana);
     }
 
-    public Optional<CampanaDTO> findCampanaActiva() {
-        Optional<CampanaEntity> campana = campanaRepository.findCampanaActiva();
-        return campana.map(campanaMapper::toDTO);
+    public CampanaDTO findCampanaActiva() {
+        CampanaEntity campana = campanaRepository.findCampanaActiva(LocalDate.now());
+        return campanaMapper.toDTO(campana);
     }
 
     public List<TiendaDTO> filtrarTiendasParticipaCampana(Integer idCampana) {
