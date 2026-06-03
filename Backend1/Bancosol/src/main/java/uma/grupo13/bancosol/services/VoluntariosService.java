@@ -59,11 +59,6 @@ public class VoluntariosService {
         return voluntarioMapper.toDTOList(lista);
     }
 
-    public List<VoluntarioDTO> findBaseEntidadesResponsable(String localidad, Integer id) {
-        List<VoluntarioBaseEntity> lista= voluntariosRepository.findBaseEntidadesResponsable(localidad, id);
-        return voluntarioMapper.toDTOList(lista);
-    }
-
     public List<VoluntarioDTO> findPendientesResponsable(String localidad, Integer id) {
         List<VoluntarioBaseEntity> lista= voluntariosRepository.findPendientesResponsable(localidad, id);
         return voluntarioMapper.toDTOList(lista);

@@ -40,12 +40,9 @@ public interface VoluntariosRepository extends JpaRepository<VoluntarioBaseEntit
     @Query("select v from VoluntarioEntidadEntity v where v.responsableEntidad.id = :idResp")
     List<VoluntarioBaseEntity> findAllResponsable(@Param("idResp") Integer idResp);
 
-    @Query("SELECT v FROM VoluntarioEntidadEntity v WHERE v.zonaGeografica LIKE CONCAT('%', :localidad, '%')")
+    @Query("SELECT v FROM VoluntarioEntidadEntity v WHERE (v.zonaGeografica LIKE CONCAT('%', :localidad, '%') and v.responsableEntidad.id = :idResp)")
     List<VoluntarioBaseEntity> findAllByLocalidadResponsable(@Param("localidad") String localidad, @Param("idResp") Integer idRes);
 
-    @Query("SELECT v FROM VoluntarioBaseEntity v WHERE TYPE(v) = VoluntarioEntidadEntity AND v.zonaGeografica LIKE CONCAT('%', :localidad, '%')")
-    List<VoluntarioBaseEntity> findBaseEntidadesResponsable(@Param("localidad") String localidad,@Param("idResp") Integer idRes);
-
-    @Query("SELECT v FROM VoluntarioBaseEntity v WHERE (v.aprobado IS NULL OR v.aprobado = FALSE) AND v.zonaGeografica LIKE CONCAT('%', :localidad, '%')")
+    @Query("SELECT v FROM VoluntarioEntidadEntity v WHERE (v.aprobado IS NULL OR v.aprobado = FALSE) AND (v.zonaGeografica LIKE CONCAT('%', :localidad, '%')) and v.responsableEntidad.id = :idResp")
     List<VoluntarioBaseEntity> findPendientesResponsable(@Param("localidad") String localidad, @Param("idResp") Integer idResp);
 }

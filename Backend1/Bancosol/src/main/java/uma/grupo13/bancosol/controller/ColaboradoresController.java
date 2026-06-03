@@ -69,11 +69,9 @@ public class ColaboradoresController {
                 todos = voluntariosService.findPendientes(localidadParam);
             }
         }else if (user.getRol().getId()==4){
-            if (tipo == null || tipo.equals("all")) {
+            if (tipo == null || tipo.equals("all") || tipo.equals("false")) {
                 todos = voluntariosService.findAllByLocalidadResponsable(localidadParam, user.getId());
             } else if (tipo.equals("true")) {
-            } else if (tipo.equals("false")) {
-                todos = voluntariosService.findBaseEntidadesResponsable(localidadParam, user.getId());
             } else {
                 todos = voluntariosService.findPendientesResponsable(localidadParam, user.getId());
             }
