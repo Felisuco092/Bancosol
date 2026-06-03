@@ -97,6 +97,10 @@ public class ValidaSesion {
         return user.getRol().getId();
     }
 
+    public Map<Permiso, Boolean> getPermisos(Integer rol){
+        return permisos.get(rol);
+    }
+
     public Boolean tienePermiso(Integer rol, Permiso permiso){
         Map<Permiso, Boolean> rolPermisos = permisos.get(rol);
         if (rolPermisos == null) return false;

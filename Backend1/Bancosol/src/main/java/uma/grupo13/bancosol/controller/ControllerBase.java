@@ -13,6 +13,7 @@ import uma.grupo13.bancosol.dto.CampanaDTO;
 import uma.grupo13.bancosol.dto.TiendaDTO;
 import uma.grupo13.bancosol.dto.UsuarioDTO;
 import uma.grupo13.bancosol.services.*;
+import uma.grupo13.bancosol.services.utils.ValidaSesion;
 
 import java.util.List;
 import java.util.Optional;
@@ -25,6 +26,7 @@ public class ControllerBase {
     private final VoluntariosService voluntariosService;
     private final CampanasService campanasService;
     private final CadenaService cadenaService;
+    private final ValidaSesion validaSesion;
 
 
     @GetMapping("/")
@@ -46,8 +48,7 @@ public class ControllerBase {
             int totalVoluntarios = voluntariosService.countTotalPersonasVoluntarias();
             model.addAttribute("totalVoluntarios", totalVoluntarios);
 
-            Optional<CampanaDTO> campanaOpt = campanasService.findCampanaActiva();
-            CampanaDTO campana = campanaOpt.orElse(null);
+            CampanaDTO campana = campanasService.findCampanaActiva();
             model.addAttribute("campana", campana);
             List<CadenaDTO> cadenas = cadenaService.cadenasPorTiendas();
             if (cadenas.size() > 5) cadenas = cadenas.subList(0, 5);
@@ -67,6 +68,7 @@ public class ControllerBase {
 
         if (usuario != null) {
             session.setAttribute("user", usuario);
+            session.setAttribute("permisos", validaSesion.getPermisos(usuario.getRol().getId()));
             return "redirect:/dashboard";
         } else {
             model.addAttribute("error", "Usuario no encontrado o error de autenticación");
