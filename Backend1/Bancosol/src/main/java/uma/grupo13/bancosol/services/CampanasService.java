@@ -46,8 +46,11 @@ public class CampanasService {
         campanaRepository.delete(campanaDelete);
     }
 
-    public void guardarCampana(Integer idCampana, String nombre, Integer anyo, LocalDate fechaInic, LocalDate fechaFin) {
+    public boolean guardarCampana(Integer idCampana, String nombre, Integer anyo, LocalDate fechaInic, LocalDate fechaFin) {
         CampanaEntity campana;
+        if(this.seSolapaCampanya(fechaInic,fechaFin)){
+            return false;
+        }
         if(idCampana == null){
             campana= new CampanaEntity();
         }else{
@@ -60,6 +63,7 @@ public class CampanasService {
         campana.setDiaFinal(fechaFin);
 
         campanaRepository.save(campana);
+        return true;
     }
 
     public CampanaDTO findCampanaActiva() {
@@ -70,5 +74,15 @@ public class CampanasService {
     public List<TiendaDTO> filtrarTiendasParticipaCampana(Integer idCampana) {
         List<TiendaEntity> tiendas = participaRepository.findTiendasByCampanaId(idCampana);
         return tiendaMapper.toDTOList(tiendas);
+    }
+
+    private boolean seSolapaCampanya(LocalDate fechaInic, LocalDate fechaFin) {
+        List<CampanaDTO> campanas = this.listarCampanas();
+        for (CampanaDTO campana : campanas) {
+            if(fechaFin.isAfter(campana.getDiaComienzo()) &&  fechaInic.isBefore(campana.getDiaFinal())) {
+                return true;
+            }
+        }
+        return false;
     }
 }
