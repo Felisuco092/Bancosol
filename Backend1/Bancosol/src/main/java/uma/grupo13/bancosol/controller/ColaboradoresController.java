@@ -6,10 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
-import uma.grupo13.bancosol.dto.NotificacionDTO;
-import uma.grupo13.bancosol.dto.TurnoDTO;
-import uma.grupo13.bancosol.dto.UsuarioDTO;
-import uma.grupo13.bancosol.dto.VoluntarioDTO;
+import uma.grupo13.bancosol.dto.*;
 
 import uma.grupo13.bancosol.services.UsuariosService;
 import uma.grupo13.bancosol.entity.*;
@@ -20,6 +17,7 @@ import uma.grupo13.bancosol.services.VoluntariosService;
 import uma.grupo13.bancosol.services.utils.Permiso;
 import uma.grupo13.bancosol.services.utils.ValidaSesion;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Controller
@@ -37,8 +35,15 @@ public class ColaboradoresController {
         if (user == null) return "redirect:/";
         if (!validaSesion.tienePermiso(user.getRol().getId(), Permiso.COLABORADORES)) return "redirect:/dashboard";
 
+        List<VoluntarioDTO> voluntarios= new ArrayList<>();
+        if(user.getRol().getId()==1 || user.getRol().getId()==2 || user.getRol().getId()==3){
+            voluntarios = voluntariosService.listarVoluntarios();
+        }else if (user.getRol().getId()==4){
+            voluntarios = voluntariosService.listarVoluntariosResponsable(user.getId());
+        }
+
         model.addAttribute("paginaActual", "colaboradores");
-        model.addAttribute("colaboradores", voluntariosService.listarVoluntarios());
+        model.addAttribute("colaboradores", voluntarios);
         model.addAttribute("localidades", voluntariosService.findLocalidadesDistintas());
         return "colaboradores";
     }
@@ -52,16 +57,24 @@ public class ColaboradoresController {
 
         String localidadParam = (localidad == null || localidad.equals("all")) ? "" : localidad;
 
-        List<VoluntarioDTO> todos;
-        if (tipo == null || tipo.equals("all")) {
-            todos = voluntariosService.findAllByLocalidad(localidadParam);
-
-        } else if (tipo.equals("true")) {
-            todos = voluntariosService.findBaseFisicos(localidadParam);
-        } else if (tipo.equals("false")) {
-            todos = voluntariosService.findBaseEntidades(localidadParam);
-        } else {
-            todos = voluntariosService.findPendientes(localidadParam);
+        List<VoluntarioDTO> todos= new ArrayList<>();
+        if(user.getRol().getId()==1 || user.getRol().getId()==2 || user.getRol().getId()==3){
+            if (tipo == null || tipo.equals("all")) {
+                todos = voluntariosService.findAllByLocalidad(localidadParam);
+            } else if (tipo.equals("true")) {
+                todos = voluntariosService.findBaseFisicos(localidadParam);
+            } else if (tipo.equals("false")) {
+                todos = voluntariosService.findBaseEntidades(localidadParam);
+            } else {
+                todos = voluntariosService.findPendientes(localidadParam);
+            }
+        }else if (user.getRol().getId()==4){
+            if (tipo == null || tipo.equals("all") || tipo.equals("false")) {
+                todos = voluntariosService.findAllByLocalidadResponsable(localidadParam, user.getId());
+            } else if (tipo.equals("true")) {
+            } else {
+                todos = voluntariosService.findPendientesResponsable(localidadParam, user.getId());
+            }
         }
 
         model.addAttribute("colaboradores", todos);
@@ -73,6 +86,7 @@ public class ColaboradoresController {
         if (user == null) return "redirect:/";
         if (!validaSesion.tienePermiso(user.getRol().getId(), Permiso.EDITAR_COLABORADORES)) return "redirect:/dashboard";
         model.addAttribute("voluntario", new VoluntarioDTO());
+        model.addAttribute("userRol", user.getRol().getId());
         List<UsuarioDTO> responsablesEntidad = usuariosService.findResponsablesEntidad();
         model.addAttribute("responsablesEntidad", responsablesEntidad);
         return "crear_editar/crear_editar_colaboradores";
@@ -86,6 +100,7 @@ public class ColaboradoresController {
 
         VoluntarioDTO voluntario = voluntariosService.buscarPorId(id);
         model.addAttribute("voluntario", voluntario);
+        model.addAttribute("userRol", user.getRol().getId());
         List<UsuarioDTO> responsablesEntidad = usuariosService.findResponsablesEntidad();
         model.addAttribute("responsablesEntidad", responsablesEntidad);
         return "crear_editar/crear_editar_colaboradores";
@@ -99,6 +114,7 @@ public class ColaboradoresController {
 
         VoluntarioDTO voluntario = voluntariosService.buscarPorId(id);
         model.addAttribute("voluntario", voluntario);
+        model.addAttribute("userRol", user.getRol().getId());
         List<UsuarioDTO> responsablesEntidad = usuariosService.findResponsablesEntidad();
         model.addAttribute("responsablesEntidad", responsablesEntidad);
         return "crear_editar/crear_editar_colaboradores";
@@ -109,6 +125,7 @@ public class ColaboradoresController {
         if (user == null) return "redirect:/";
         if (!validaSesion.tienePermiso(user.getRol().getId(), Permiso.EDITAR_COLABORADORES)) return "redirect:/dashboard";
 
+        model.addAttribute("userRol", user.getRol().getId());
         model.addAttribute("voluntario", new VoluntarioDTO());
         return "crear_editar/crear_editar_colaboradores";
     }
@@ -145,11 +162,10 @@ public class ColaboradoresController {
 
 
 
-        VoluntarioDTO voluntarioDTO = voluntariosService.guardarVoluntario(id, tipo, domicilio, zonaGeografica, codigoPostal, nombre,
+        voluntariosService.guardarVoluntario(id, tipo, domicilio, zonaGeografica, codigoPostal, nombre,
                 apellidos, nombreAsociacion, nVoluntarios, confirmar, idResponsableEntidad);
         if(!user.getRol().getId().equals(1) && id==null){// el admin no es el que crea al nuevo colaborador
             notificacionesService.crearNotificacionColabYEnviar(nombre, apellidos, user.getUsuario());
-
         }
 
         return "redirect:/colaboradores/";

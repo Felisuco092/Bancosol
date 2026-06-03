@@ -25,6 +25,11 @@ public class VoluntariosService {
         return voluntarioMapper.toDTOList(lista);
     }
 
+    public List<VoluntarioDTO> listarVoluntariosResponsable(Integer id) {
+        List<VoluntarioBaseEntity> lista= voluntariosRepository.findAllResponsable(id);
+        return voluntarioMapper.toDTOList(lista);
+    }
+
     public List<String> findLocalidadesDistintas() {
         return voluntariosRepository.findLocalidadesDistintas();
     }
@@ -49,6 +54,16 @@ public class VoluntariosService {
         return voluntarioMapper.toDTOList(lista);
     }
 
+    public List<VoluntarioDTO> findAllByLocalidadResponsable(String localidad, Integer id) {
+        List<VoluntarioBaseEntity> lista= voluntariosRepository.findAllByLocalidadResponsable(localidad, id);
+        return voluntarioMapper.toDTOList(lista);
+    }
+
+    public List<VoluntarioDTO> findPendientesResponsable(String localidad, Integer id) {
+        List<VoluntarioBaseEntity> lista= voluntariosRepository.findPendientesResponsable(localidad, id);
+        return voluntarioMapper.toDTOList(lista);
+    }
+
     public VoluntarioDTO buscarPorId(Integer id) {
         if (id==null) {return null;}
         VoluntarioBaseEntity voluntario = voluntariosRepository.findById(id).orElse(null);
@@ -66,7 +81,7 @@ public class VoluntariosService {
     }
 
 
-    public VoluntarioDTO guardarVoluntario(Integer id, String tipo, String domicilio, String zonaGeografica, String codigoPostal,
+    public void guardarVoluntario(Integer id, String tipo, String domicilio, String zonaGeografica, String codigoPostal,
                                    String nombre, String apellidos, String nombreAsociacion,
                                   Integer nVoluntarios, Boolean confirmar, Integer idResponsableEntidad) {
 
@@ -106,8 +121,7 @@ public class VoluntariosService {
             }
         }
 
-        VoluntarioBaseEntity v = voluntariosRepository.save(voluntario);
-        return voluntarioMapper.toDTO(v);
+        voluntariosRepository.save(voluntario);
     }
 
     public int countTotalPersonasVoluntarias() {

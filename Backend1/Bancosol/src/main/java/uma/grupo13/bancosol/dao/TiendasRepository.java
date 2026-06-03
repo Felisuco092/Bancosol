@@ -24,6 +24,9 @@ public interface TiendasRepository extends JpaRepository<TiendaEntity, Integer>{
     @Query("select t from TiendaEntity t where t.capitan.id = :idCapi")
     public List<TiendaEntity> getAllCapi(@Param("idCapi")Integer idCapi);
 
+    @Query("select t from TiendaEntity t where t.responsableTienda.id = :idResp")
+    public List<TiendaEntity> getAllResponsable(@Param("idResp")Integer idResponsable);
+
     @Query("select t from TiendaEntity t join t.participaciones p where (t.localidad like concat('%',:local,'%') and p.coordinador.id = :idCoord)")
     public List<TiendaEntity> filtroLocalidadCoord(@Param("local")String local, @Param("idCoord")Integer idCoord);
 
@@ -35,4 +38,11 @@ public interface TiendasRepository extends JpaRepository<TiendaEntity, Integer>{
 
     @Query("select t from TiendaEntity t where (t.localidad like concat('%',:local,'%') and t.cadena.id = :idCad) and t.capitan.id = :idCapi")
     public List<TiendaEntity> filtroLocalidadCadenaCapi(@Param("local")String local, @Param("idCad")Integer idCad, @Param("idCapi")Integer idCapi);
+
+    @Query("select t from TiendaEntity t where (t.localidad like concat('%',:local,'%')) and t.responsableTienda.id = :idResp")
+    public List<TiendaEntity> filtroLocalidadResponsable(@Param("local")String local, @Param("idResp")Integer idResp);
+
+    @Query("select t from TiendaEntity t where (t.localidad like concat('%',:local,'%') and t.cadena.id = :idCad) and t.responsableTienda.id = :idResp")
+    public List<TiendaEntity> filtroLocalidadCadenaResponsable(@Param("local")String local, @Param("idCad")Integer idCad, @Param("idResp")Integer idResp);
+
 }

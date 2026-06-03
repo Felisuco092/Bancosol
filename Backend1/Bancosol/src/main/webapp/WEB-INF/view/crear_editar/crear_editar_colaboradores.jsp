@@ -13,6 +13,7 @@
     boolean esFisico = "FISICO".equals(voluntario.getTipo());
     boolean esEntidad = "ENTIDAD".equals(voluntario.getTipo());
     boolean esCreacion = voluntario.getId() == null;
+    Integer rolUser=(Integer) request.getAttribute("userRol");
 %>
 <!DOCTYPE html>
 <html lang="es">
@@ -51,11 +52,16 @@
                                value="<%= voluntario.getCodigoPostal() != null ? voluntario.getCodigoPostal() : "" %>" />
                     </div>
 
+                    <%
+                        if(rolUser!= null && rolUser==1){ %>
                     <div class="form-group" style="display: <%=voluntario.getAprobado() == false ? "block" : "none"%>">
                         <label for="confirmar">Confirmar colaborador</label>
                         <input type="checkbox" id="confirmar" name="confirmar" value="true"
-                            <%=voluntario.getAprobado() == true ? "checked" : ""%>/>
+                                <%=voluntario.getAprobado() == true ? "checked" : ""%>/>
                     </div>
+                    <%
+                        }
+                    %>
                 </div>
 
 

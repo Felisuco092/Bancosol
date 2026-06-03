@@ -36,13 +36,17 @@ public class TurnosController {
         List<TurnoDTO> turnos = turnosService.listarTurnos();
         List<CampanaDTO> campanas = campanasService.listarCampanas();
         List<TiendaDTO> tiendas= new ArrayList<>();
+        //para las tiendas segun el rol(solo esta esto)
         if(user.getRol().getId()==1){
             tiendas = tiendasService.listarTiendas();
         }else if (user.getRol().getId()==2){
             tiendas = tiendasService.listarTiendasCoord(user.getId());
         }else if (user.getRol().getId()==3){
             tiendas = tiendasService.listarTiendasCapi(user.getId());
+        }else if (user.getRol().getId()==5){
+            tiendas = tiendasService.listarTiendasResponsable(user.getId());
         }
+
         model.addAttribute("paginaActual", "turnos");
         model.addAttribute("turnos", turnos);
         model.addAttribute("campanas", campanas);
