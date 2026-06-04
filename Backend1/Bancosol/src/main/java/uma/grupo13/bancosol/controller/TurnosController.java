@@ -198,7 +198,12 @@ public class TurnosController {
             idCampana = turnoDTO.getCampana().getId();
         }
 
-        CampanaDTO campanaDTO = (idCampana != null) ? campanasService.buscarPorId(idCampana) : turnoDTO.getCampana();
+        CampanaDTO campanaDTO;
+        if(idCampana != null){
+            campanaDTO = campanasService.buscarPorId(idCampana);
+        }else {
+            campanaDTO = turnoDTO.getCampana();
+        }
         List<VoluntarioDTO> voluntariosDTOIncidencia;
         if(idsVoluntarios != null){
             voluntariosDTOIncidencia = voluntariosService.findAllByIds(idsVoluntarios);

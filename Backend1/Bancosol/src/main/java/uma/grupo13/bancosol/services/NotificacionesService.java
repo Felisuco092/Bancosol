@@ -69,8 +69,8 @@ public class NotificacionesService {
             notificacionCrearIncidencia.setFechaCreacion(LocalDateTime.now());
             notificacionCrearIncidencia.setMensaje("El usuario " + nombreUsuario + " ha registrado una incidencia en la campaña " +
                                                     campana.getNombre() + " en el turno comprendido entre las horas [" +
-                                                    turno.getHoraInicio() + "-" + turno.getHoraFin() + "] por el siguiente motivo: "
-                                                    + mensaje + "."+"\n" + "Se involucra a los siguientes voluntarios: " +
+                                                    turno.getHoraInicio() + "-" + turno.getHoraFin() + "] en la tienda " + turno.getTienda().getDescripcion() +
+                                                    " por el siguiente motivo: " + mensaje + "."+"\n" + "Se involucra a los siguientes voluntarios: " +
                                                     devolverStringVoluntarios(voluntariosImplicados));
             notificacionCrearIncidencia.setUsuarioDestino(admin);
 
