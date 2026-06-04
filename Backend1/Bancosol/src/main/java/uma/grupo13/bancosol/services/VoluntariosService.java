@@ -21,8 +21,8 @@ public class VoluntariosService {
     private final VoluntarioMapper voluntarioMapper;
 
     public List<VoluntarioDTO> listarVoluntarios() {
-        List<VoluntarioBaseEntity> lista= voluntariosRepository.findAll();
-        return voluntarioMapper.toDTOList(lista);
+        List<VoluntarioBaseEntity> listaVoluntarios = voluntariosRepository.findAll();
+        return voluntarioMapper.toDTOList(listaVoluntarios);
     }
 
     public List<VoluntarioDTO> listarVoluntariosResponsable(Integer id) {

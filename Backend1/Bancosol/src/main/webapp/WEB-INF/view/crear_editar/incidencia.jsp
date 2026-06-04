@@ -15,17 +15,22 @@
 <%
     List<VoluntarioDTO> voluntarioDTOS = (List<VoluntarioDTO>) request.getAttribute("voluntarios");
     Integer idTurno = (Integer) request.getAttribute("idTurno");
+    Integer idCampana = (Integer) request.getAttribute("idCampana");
+    List<VoluntarioDTO> voluntariosDTOIncidencia = (List<VoluntarioDTO>) request.getAttribute("voluntariosDTOIncidencia");
     // CampanaDTO campana = (CampanaDTO) request.getAttribute("campana");
     //List<UsuarioDTO> admins = (List<UsuarioDTO>) request.getAttribute("admins");
 %>
 <body>
 <main class="main-content">
    <header class = "header">
-       <h1>Incidencia</h1>
+       <h1>Reporte de Incidencia</h1>
+   </header>
 
        <div class="formulario">
             <form id="crear-incidencia" action="/turnos/reportar-incidencia" method="post">
                 <input type="hidden" name="idNotificacion" value=""/>
+                <input type="hidden" name="idTurno" value="<%=idTurno%>"/>
+                <input type="hidden" name="idCampana" value="<%=idCampana%>"/>
                 <div class="form-group">
                     <label for="asunto-incidencia">Especifique el asunto de la incidencia:</label>
                     <input type="text" name="asunto" id="asunto" required/>
@@ -37,11 +42,25 @@
                 </div>
 
                 <div class="form-group">
-                    <label for="">Especifique los voluntarios/colaboradores implicados:</label>
-                    <% for(VoluntarioDTO voluntarioAct: voluntarioDTOS){%>
-                        <input type="checkbox" name="idsVoluntariosIncidencia" id="<%=voluntarioAct.getId()%>" value="<%=voluntarioAct.getId()%>"/>
-                        <%=voluntarioAct.getNombre()%> <%= voluntarioAct.getApellidos()%>
+                    <label>Especifique los voluntarios/colaboradores implicados:</label>
+                    <div class="checkbox-group" style="max-height: 200px; overflow-y: auto; border: 1px solid var(--input-border); padding: 10px; border-radius: 4px;">
+                    <% for(VoluntarioDTO voluntarioAct: voluntarioDTOS){
+                        boolean checked = false;
+                        if (voluntariosDTOIncidencia != null) {
+                            for (VoluntarioDTO v : voluntariosDTOIncidencia) {
+                                if (v.getId().equals(voluntarioAct.getId())) {
+                                    checked = true;
+                                    break;
+                                }
+                            }
+                        }
+                    %>
+                    <div class="checkbox-item" style="display: flex; align-items: center; margin-bottom: 0.5rem;">
+                        <input type="checkbox" name="idsVoluntariosIncidencia" id="vol-<%=voluntarioAct.getId()%>" value="<%=voluntarioAct.getId()%>" <%=checked ? "checked" : ""%> style="width: auto; margin-right: 10px;">
+                        <label for="vol-<%=voluntarioAct.getId()%>" style="margin-bottom: 0; display: inline; font-weight: normal;"><%=voluntarioAct.getNombreDisplay()%></label>
+                    </div>
                     <%}%>
+                    </div>
                 </div>
 
                 <div class="form-actions">
@@ -51,7 +70,7 @@
             </form>
 
        </div>
-   </header>
+
 </main>
 </body>
 </html>

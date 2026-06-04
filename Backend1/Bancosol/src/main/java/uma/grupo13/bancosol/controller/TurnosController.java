@@ -5,13 +5,10 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import uma.grupo13.bancosol.dto.*;
-import uma.grupo13.bancosol.entity.*;
 import uma.grupo13.bancosol.services.*;
 import uma.grupo13.bancosol.services.utils.Permiso;
 import uma.grupo13.bancosol.services.utils.ValidaSesion;
 
-import java.time.LocalDate;
-import java.time.LocalTime;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -28,6 +25,7 @@ public class TurnosController {
     private final VoluntariosService voluntariosService;
     private final ValidaSesion validaSesion;
     public final UsuariosService usuariosService;
+    public final NotificacionesService notificacionesService;
 
     @GetMapping("/")
     public String doTurnos(Model model, @SessionAttribute(name = "user", required = false) UsuarioDTO user){
@@ -147,38 +145,72 @@ public class TurnosController {
 
     @PostMapping("/incidencia")
     public String doIncidencia(@RequestParam(value="idTurno") Integer idTurno,
-                               @RequestParam(value = "idCampana") Integer idCampana,
+                               @RequestParam(value = "idCampana", required = false) Integer idCampana,
             Model model, @SessionAttribute(name = "user", required = false) UsuarioDTO user) {
         if (user == null) return "redirect:/";
         if (!validaSesion.tienePermiso(user.getRol().getId(), Permiso.INCIDENCIAS)) return "redirect:/dashboard";
+
+        TurnoDTO turnoDTO = turnosService.getReferenceById(idTurno);
+        if (turnoDTO == null) return "redirect:/turnos/";
+
+        if (idCampana == null && turnoDTO.getCampana() != null) {
+            idCampana = turnoDTO.getCampana().getId();
+        }
+
         model.addAttribute("idTurno", idTurno);
+        model.addAttribute("idCampana", idCampana);
         List<VoluntarioDTO> voluntarios = voluntariosService.listarVoluntarios();
-        CampanaDTO campanaDTO = campanasService.buscarPorId(idCampana);
+
+        CampanaDTO campanaDTO = new CampanaDTO();
+        if(idCampana != null) {
+            campanaDTO = campanasService.buscarPorId(idCampana);
+        }else{
+            turnoDTO.getCampana();
+        }
+
+        List<VoluntarioDTO> voluntariosDTOIncidencia = new java.util.ArrayList<>();
+        if (turnoDTO.getVoluntario() != null) {
+            voluntariosDTOIncidencia.add(turnoDTO.getVoluntario());
+        }
 
         model.addAttribute("voluntarios", voluntarios);
         model.addAttribute("campana", campanaDTO);
-
+        model.addAttribute("voluntariosDTOIncidencia", voluntariosDTOIncidencia);
 
         return "crear_editar/incidencia";
     }
 
     @PostMapping("/reportar-incidencia")
-    public String doEnviarIncidencias(@RequestParam("idTurno") Integer idTurno, @RequestParam("idCampana") Integer idCampana,
-                                      @RequestParam("idsVoluntariosIncidencia") List<Integer> idsVoluntarios,
-                                      @SessionAttribute(name = "user", required = false) UsuarioDTO user, Model model){
+    public String doEnviarIncidencia(@RequestParam("idTurno") Integer idTurno, 
+                                     @RequestParam(value = "idCampana", required = false) Integer idCampana,
+                                     @RequestParam(value = "idsVoluntariosIncidencia", required = false) List<Integer> idsVoluntarios,
+                                     @RequestParam("asunto") String asunto,
+                                     @RequestParam("mensaje") String mensaje,
+                                     @SessionAttribute(name = "user", required = false) UsuarioDTO user, Model model){
 
         if (user == null) return "redirect:/";
         if (!validaSesion.tienePermiso(user.getRol().getId(), Permiso.INCIDENCIAS)) return "redirect:/dashboard";
 
-        List<UsuarioDTO> admins = usuariosService.listarAdmins();
-        CampanaDTO campanaDTO = campanasService.buscarPorId(idCampana);
-        List<VoluntarioDTO> voluntariosDTOIncidencia = voluntariosService.findAllByIds(idsVoluntarios);
+        TurnoDTO turnoDTO = turnosService.getReferenceById(idTurno);
+        if (turnoDTO == null) return "redirect:/turnos/";
 
-        model.addAttribute("admins", admins);
-        model.addAttribute("campana", campanaDTO);
-        model.addAttribute("voluntariosIncidencias", voluntariosDTOIncidencia);
+        if (idCampana == null && turnoDTO.getCampana() != null) {
+            idCampana = turnoDTO.getCampana().getId();
+        }
 
-        return "redirect:/turnos";
+        CampanaDTO campanaDTO = (idCampana != null) ? campanasService.buscarPorId(idCampana) : turnoDTO.getCampana();
+        List<VoluntarioDTO> voluntariosDTOIncidencia;
+        if(idsVoluntarios != null){
+            voluntariosDTOIncidencia = voluntariosService.findAllByIds(idsVoluntarios);
+        }else {
+            voluntariosDTOIncidencia = new java.util.ArrayList<>();
+        }
+
+        if (campanaDTO != null) {
+            notificacionesService.crearNotificacionIncidencia(voluntariosDTOIncidencia, campanaDTO, turnoDTO, mensaje, asunto, user.getUsuario());
+        }
+
+        return "redirect:/turnos/";
     }
 
     @GetMapping("/tiendas-por-campana")
