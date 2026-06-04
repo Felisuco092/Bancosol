@@ -4,6 +4,8 @@
 <%@ page import="uma.grupo13.bancosol.dto.VoluntarioDTO" %>
 <%@ page import="uma.grupo13.bancosol.dto.UsuarioDTO" %>
 <%@ page import="java.util.List" %>
+<%@ page import="uma.grupo13.bancosol.services.utils.Permiso" %>
+<%@ page import="java.util.Map" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%
     VoluntarioDTO voluntario = (VoluntarioDTO) request.getAttribute("voluntario");
