@@ -110,7 +110,7 @@ Importante seleccionar la base de datos de PostgreSQL y clicar en apply.
 ![Paso 1](https://img.shields.io/badge/Paso_1-Completo-green)
 ![Paso 2](https://img.shields.io/badge/Paso_2-Completo-green)
 ![Paso 3](https://img.shields.io/badge/Paso_3-Completo-green)
-![Paso 4](https://img.shields.io/badge/Paso_4-En_proceso-yellow)
+![Paso 4](https://img.shields.io/badge/Paso_4-Completo-green)
 ![Paso 5](https://img.shields.io/badge/Paso_5-Completo-green)
 ![Paso 6](https://img.shields.io/badge/Paso_6-Completo-green)
 ![Paso 7](https://img.shields.io/badge/Paso_7-Completo-green)
