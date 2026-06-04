@@ -23,7 +23,7 @@
 <body>
 <main class="main-content">
     <header class="header">
-        <h1>Mensaje | Asunto: <%=notificacion.getAsunto()%></h1>
+        <h1>Mensaje | <%=notificacion.getAsunto()%></h1>
     </header>
 
     <div class="formulario">
