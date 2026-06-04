@@ -130,7 +130,14 @@ public class TurnosController {
                                   Model model, @SessionAttribute(name = "user", required = false) UsuarioDTO user) {
         if (user == null) return "redirect:/";
         if (!validaSesion.tienePermiso(user.getRol().getId(), Permiso.TURNOS)) return "redirect:/dashboard";
-        List<TurnoDTO> turnosFiltrados = turnosService.filtrarTurnos(idCampana, idTienda);
+
+        List<TurnoDTO> turnosFiltrados = new ArrayList<>();
+        if(user.getRol().getId()==4){
+            turnosFiltrados = turnosService.filtrarTurnosResponsableEntidad(idCampana, idTienda, user.getId());
+        }else{
+            turnosFiltrados = turnosService.filtrarTurnos(idCampana, idTienda);
+        }
+
         model.addAttribute("turnos", turnosFiltrados);
 
         if (idTienda != null) {

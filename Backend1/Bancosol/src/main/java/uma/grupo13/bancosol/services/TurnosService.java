@@ -75,6 +75,10 @@ public class TurnosService {
         List<TurnoEntity> lista= turnoRepository.filtrarTurnos(idCampana, idTienda);
         return turnoMapper.toDTOList(lista);
     }
+    public List<TurnoDTO> filtrarTurnosResponsableEntidad(Integer idCampana, Integer idTienda, Integer idResp) {
+        List<TurnoEntity> lista= turnoRepository.filtrarTurnosRespEntd(idCampana, idTienda, idResp);
+        return turnoMapper.toDTOList(lista);
+    }
 
     public List<TurnoDTO> findByVoluntarioId(Integer id) {
         if (id==null) {return null;}
