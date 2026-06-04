@@ -24,7 +24,9 @@
             <th>Día</th>
             <th>Inicio</th>
             <th>Fin</th>
+            <th>Campaña</th>
             <th>Voluntario Asignado</th>
+            <th>Tienda a la que se ha asignado</th>
             <th>Acciones</th>
         </tr>
         </thead>
@@ -34,6 +36,7 @@
             <td><%=turnoAct.getDia()%></td>
             <td><%=turnoAct.getHoraInicio()%></td>
             <td><%=turnoAct.getHoraFin()%></td>
+            <td><%=turnoAct.getCampana().getNombre()%></td>
             <td>
                 <%
                 String nameToDisplay = "Sin asignar";
@@ -51,6 +54,7 @@
                 %>
                 <%= nameToDisplay %>
             </td>
+            <td><%=turnoAct.getTienda().getDescripcion()%></td>
             <td>
                 <% if (Boolean.TRUE.equals(permisos.get(Permiso.EDITAR_TURNOS))) { %>
                     <form action = "/turnos/borrar" method = "POST">
