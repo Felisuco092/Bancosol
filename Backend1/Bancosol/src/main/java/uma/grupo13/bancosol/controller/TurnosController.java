@@ -35,7 +35,7 @@ public class TurnosController {
         List<CampanaDTO> campanas = campanasService.listarCampanas();
         List<TiendaDTO> tiendas= new ArrayList<>();
         //para las tiendas segun el rol(solo esta esto)
-        if(user.getRol().getId()==1){
+        if(user.getRol().getId()==1 || user.getRol().getId()==4){
             tiendas = tiendasService.listarTiendas();
         }else if (user.getRol().getId()==2){
             tiendas = tiendasService.listarTiendasCoord(user.getId());
