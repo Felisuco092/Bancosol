@@ -4,6 +4,7 @@ import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 import uma.grupo13.bancosol.dao.CadenaRepository;
 import uma.grupo13.bancosol.dto.CadenaDTO;
+import uma.grupo13.bancosol.dto.CampanaDTO;
 import uma.grupo13.bancosol.entity.CadenaEntity;
 import uma.grupo13.bancosol.mappers.CadenaMapper;
 

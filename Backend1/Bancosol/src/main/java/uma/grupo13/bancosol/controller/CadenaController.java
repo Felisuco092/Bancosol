@@ -69,7 +69,11 @@ public class CadenaController {
                                    @RequestParam(value = "id",required = false) Integer id) {
         if (user == null) return "redirect:/";
         if (!validaSesion.tienePermiso(user.getRol().getId(), Permiso.CADENAS)) return "redirect:/dashboard";
-        cadenaService.guardarCadena(id, nombre, codigo);
+        try{
+            cadenaService.guardarCadena(id, nombre, codigo);
+        }catch (Exception e){
+            return "redirect:/cadenas/crear";
+        }
         return "redirect:/cadenas/";
     }
 }
