@@ -31,10 +31,6 @@
                     <input type="text" name="nombre" id="nombre" value="<%=campana.getNombre() == null ? "":campana.getNombre()%>" required/>
                 </div>
                 <div class="form-group">
-                    <label for="anyo">Especifique el año del transcurso de la campaña:</label>
-                    <input type="number" name="anyo" id="anyo" value="<%=campana.getAno() == null ? "":campana.getAno()%>" required/>
-                </div>
-                <div class="form-group">
                     <label for="fecha-inicio">Especifique el día de comienzo de la campaña:</label>
                     <input type="date" name="fecha-inicio" id="fecha-inicio" value="<%=campana.getDiaComienzo() == null ? "":campana.getDiaComienzo()%>" required/>
                 </div>

@@ -76,7 +76,6 @@ public class CampanasController {
     @PostMapping("/guardar")
     public  String doGuardarCampana(@RequestParam(value ="idCampana", required = false) Integer idCampana,
                                     @RequestParam(value="nombre", required = false) String nombre,
-                                    @RequestParam(value="anyo", required = false) Integer anyo,
                                     @RequestParam(value="fecha-inicio", required = false) LocalDate fechaInic,
                                     @RequestParam(value="fecha-fin", required = false) LocalDate fechaFin,
             Model model, @SessionAttribute(name = "user", required = false) UsuarioDTO user) {
@@ -85,7 +84,7 @@ public class CampanasController {
 
 
 
-        boolean hecho = campanasService.guardarCampana(idCampana, nombre, anyo, fechaInic, fechaFin);
+        boolean hecho = campanasService.guardarCampana(idCampana, nombre, fechaInic, fechaFin);
         if (!hecho) {
             return "redirect:/campanas/crear";
         }
