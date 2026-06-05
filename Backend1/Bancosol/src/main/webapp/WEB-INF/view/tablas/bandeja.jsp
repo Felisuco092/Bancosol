@@ -15,7 +15,7 @@
     <tbody>
     <%for(NotificacionDTO notificacionAct: notificacionList){%>
     <tr>
-        <td><%=notificacionAct.getFechaCreacion()%></td>
+        <td><%=notificacionAct.getFechaFormateada()%></td>
         <td><%=notificacionAct.getAsunto()%></td>
         <td>
             <form method="post" action="/bandeja/mensaje">

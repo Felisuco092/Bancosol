@@ -70,7 +70,7 @@
                 </div>
                 <div class="form-group">
                     <label for="cPostal">Código Postal:</label>
-                    <input type="number" name="cPostal" id="cPostal" value="<%=tienda.getCPostal() != null ? tienda.getCPostal() : ""%>" required/>
+                    <input type="number" name="cPostal" id="cPostal" value="<%=tienda.getCPostal() != null ? tienda.getCPostal() : ""%>" min="0" required/>
                 </div>
                 <div class="form-group">
                     <label for="zonaGeografica">Zona Geográfica: </label>
