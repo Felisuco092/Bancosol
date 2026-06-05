@@ -41,7 +41,7 @@ export default function ColaboradoresPage() {
             nombre: `${f.nombre} ${f.apellidos}`,
             persona_fisica: true,
             n_voluntarios: 1,
-            localidad: f.localidad || vb.localidad || ''
+            zona_geografica: f.zona_geografica || vb.zona_geografica || ''
           }
         }
         const e = voluntariosEntidad.find(v => String(v.id_voluntario) === String(vb.id))
@@ -49,8 +49,7 @@ export default function ColaboradoresPage() {
           ...vb,
           nombre: e ? e.nombre_asociacion : 'Desconocido',
           persona_fisica: false,
-          n_voluntarios: e ? e.n_voluntarios : 0,
-          localidad: e ? e.localidad || '' : ''
+          n_voluntarios: e ? e.n_voluntarios : 0
         }
       })
       setRows(result)
@@ -79,14 +78,14 @@ export default function ColaboradoresPage() {
     }
   }
 
-  const localidades = [...new Set(rows.map(r => r.localidad).filter(Boolean))]
+  const localidades = [...new Set(rows.map(r => r.zona_geografica).filter(Boolean))]
 
   const filtered = rows.filter(row => {
     const matchTipo = filterTipo === 'all'
       || (filterTipo === 'confirmar' && row.aprobado === false || row.aprobado === 'false')
       || (filterTipo === 'true' && row.persona_fisica)
       || (filterTipo === 'false' && !row.persona_fisica)
-    const matchLocalidad = filterLocalidad === 'all' || row.localidad === filterLocalidad
+    const matchLocalidad = filterLocalidad === 'all' || row.zona_geografica === filterLocalidad
     return matchTipo && matchLocalidad
   })
 

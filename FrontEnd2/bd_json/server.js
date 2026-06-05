@@ -30,43 +30,43 @@ const PERMISOS = {
     delete: [ROLES.ADMIN]
   },
   usuarios: {
-    get: [ROLES.ADMIN],
+    get: [ROLES.ADMIN, ROLES.COORDINADOR, ROLES.CAPITAN, ROLES.RESPONSABLE_ENTIDAD, ROLES.RESPONSABLE_TIENDA],
     post: [ROLES.ADMIN],
     put: [ROLES.ADMIN],
     delete: [ROLES.ADMIN]
   },
   tiendas: {
-    get: [ROLES.ADMIN, ROLES.CAPITAN, ROLES.COORDINADOR, ROLES.RESPONSABLE_TIENDA],
+    get: [ROLES.ADMIN, ROLES.CAPITAN, ROLES.COORDINADOR, ROLES.RESPONSABLE_ENTIDAD, ROLES.RESPONSABLE_TIENDA],
     post: [ROLES.ADMIN],
     put: [ROLES.ADMIN],
     delete: [ROLES.ADMIN]
   },
   cadenas: {
-    get: [ROLES.ADMIN],
+    get: [ROLES.ADMIN, ROLES.COORDINADOR, ROLES.CAPITAN, ROLES.RESPONSABLE_ENTIDAD, ROLES.RESPONSABLE_TIENDA],
     post: [ROLES.ADMIN],
     put: [ROLES.ADMIN],
     delete: [ROLES.ADMIN]
   },
   campanas: {
-    get: [ROLES.ADMIN],
+    get: [ROLES.ADMIN, ROLES.COORDINADOR, ROLES.CAPITAN, ROLES.RESPONSABLE_ENTIDAD, ROLES.RESPONSABLE_TIENDA],
     post: [ROLES.ADMIN],
     put: [ROLES.ADMIN],
     delete: [ROLES.ADMIN]
   },
   voluntario_base: {
-    get: [ROLES.ADMIN, ROLES.CAPITAN, ROLES.COORDINADOR, ROLES.RESPONSABLE_ENTIDAD],
+    get: [ROLES.ADMIN, ROLES.CAPITAN, ROLES.COORDINADOR, ROLES.RESPONSABLE_ENTIDAD, ROLES.RESPONSABLE_TIENDA],
     post: [ROLES.ADMIN, ROLES.COORDINADOR],
     put: [ROLES.ADMIN, ROLES.COORDINADOR],
     delete: [ROLES.ADMIN]
   },
   voluntario_entidad: {
-    get: [ROLES.ADMIN, ROLES.CAPITAN, ROLES.COORDINADOR, ROLES.RESPONSABLE_ENTIDAD],
+    get: [ROLES.ADMIN, ROLES.CAPITAN, ROLES.COORDINADOR, ROLES.RESPONSABLE_ENTIDAD, ROLES.RESPONSABLE_TIENDA],
     post: [ROLES.ADMIN, ROLES.COORDINADOR],
     put: [ROLES.ADMIN, ROLES.COORDINADOR],
     delete: [ROLES.ADMIN]
   },
   voluntario_fisico: {
-    get: [ROLES.ADMIN, ROLES.CAPITAN, ROLES.COORDINADOR, ROLES.RESPONSABLE_ENTIDAD],
+    get: [ROLES.ADMIN, ROLES.CAPITAN, ROLES.COORDINADOR, ROLES.RESPONSABLE_ENTIDAD, ROLES.RESPONSABLE_TIENDA],
     post: [ROLES.ADMIN, ROLES.COORDINADOR],
     put: [ROLES.ADMIN, ROLES.COORDINADOR],
     delete: [ROLES.ADMIN]
@@ -84,7 +84,7 @@ const PERMISOS = {
     delete: [ROLES.ADMIN, ROLES.CAPITAN, ROLES.COORDINADOR, ROLES.RESPONSABLE_ENTIDAD, ROLES.RESPONSABLE_TIENDA]
   },
   participa: {
-    get: [ROLES.ADMIN],
+    get: [ROLES.ADMIN, ROLES.CAPITAN, ROLES.COORDINADOR, ROLES.RESPONSABLE_TIENDA],
     post: [ROLES.ADMIN],
     put: [ROLES.ADMIN],
     delete: [ROLES.ADMIN]
@@ -193,9 +193,93 @@ server.use((req, res, next) => {
 
 server.use(router)
 
+router.render = (req, res) => {
+  const data = res.locals.data
+  const user = req.user
+
+  if (!user || String(user.id_rol) === '1' || req.method !== 'GET' || !Array.isArray(data)) {
+    return res.json(data)
+  }
+
+  const path = req.path.replace(/^\/+/, '').split('/')[0]
+  const userId = String(user.id)
+  const roleId = String(user.id_rol)
+
+  let filtered = data
+
+  if (path === 'usuarios') {
+    filtered = data.map(u => {
+      const { password, ...userSinPassword } = u
+      return userSinPassword
+    })
+    return res.json(filtered)
+  }
+
+  if (path === 'notificaciones') {
+    filtered = data.filter(n => String(n.id_usuario_destino) === userId)
+  }
+  else if (roleId === '2') {
+    if (path === 'tiendas') {
+      filtered = data.filter(t => String(t.id_capitan) === userId)
+    } else if (path === 'turnos') {
+      const tiendas = router.db.get('tiendas').filter(t => String(t.id_capitan) === userId).value()
+      const ids = new Set(tiendas.map(t => String(t.id)))
+      filtered = data.filter(t => ids.has(String(t.id_tienda)))
+    }
+  }
+  else if (roleId === '3') {
+    if (path === 'tiendas') {
+      const participaciones = router.db.get('participa').filter(p => String(p.id_coordinador) === userId).value()
+      const ids = new Set(participaciones.map(p => String(p.id_tienda)))
+      filtered = data.filter(t => ids.has(String(t.id)))
+    } else if (path === 'turnos') {
+      const participaciones = router.db.get('participa').filter(p => String(p.id_coordinador) === userId).value()
+      const ids = new Set(participaciones.map(p => String(p.id_tienda)))
+      filtered = data.filter(t => ids.has(String(t.id_tienda)))
+    }
+  }
+  else if (roleId === '4') {
+    if (path === 'tiendas') {
+      const entidades = router.db.get('voluntario_entidad').filter(v => String(v.id_responsable_entidad) === userId).value()
+      const vbIds = new Set(entidades.map(e => String(e.id_voluntario)))
+      const turnos = router.db.get('turnos').filter(t => vbIds.has(String(t.id_voluntario))).value()
+      const tiendaIds = new Set(turnos.map(t => String(t.id_tienda)))
+      filtered = data.filter(t => tiendaIds.has(String(t.id))).map(t => ({ id: t.id, nombre: t.nombre, id_cadena: t.id_cadena }))
+    } else if (path === 'voluntario_entidad') {
+      filtered = data.filter(v => String(v.id_responsable_entidad) === userId)
+    } else if (path === 'voluntario_base') {
+      const entidades = router.db.get('voluntario_entidad').filter(v => String(v.id_responsable_entidad) === userId).value()
+      const ids = new Set(entidades.map(e => String(e.id_voluntario)))
+      filtered = data.filter(v => ids.has(String(v.id)))
+    } else if (path === 'turnos') {
+      const entidades = router.db.get('voluntario_entidad').filter(v => String(v.id_responsable_entidad) === userId).value()
+      const ids = new Set(entidades.map(e => String(e.id_voluntario)))
+      filtered = data.filter(t => ids.has(String(t.id_voluntario)))
+    }
+  }
+  else if (roleId === '5') {
+    if (path === 'tiendas') {
+      filtered = data.filter(t => String(t.id_responsable_tienda) === userId)
+    } else if (path === 'turnos') {
+      const tiendas = router.db.get('tiendas').filter(t => String(t.id_responsable_tienda) === userId).value()
+      const ids = new Set(tiendas.map(t => String(t.id)))
+      filtered = data.filter(t => ids.has(String(t.id_tienda)))
+    } else if (path === 'voluntario_fisico') {
+      filtered = data.map(v => ({ id_voluntario: v.id_voluntario, nombre: v.nombre, apellidos: v.apellidos }))
+    } else if (path === 'voluntario_entidad') {
+      filtered = data.map(v => ({ id_voluntario: v.id_voluntario, nombre_asociacion: v.nombre_asociacion, n_voluntarios: v.n_voluntarios }))
+    } else if (path === 'voluntario_base') {
+      filtered = data.map(v => ({ id: v.id }))
+    }
+  }
+
+  res.json(filtered)
+}
+
 server.listen(PORT, () => {
   console.log(`Servidor iniciado en http://localhost:${PORT}`)
   console.log(`Endpoints:`)
   console.log(`  POST /login         → Autenticación (público)`)
   console.log(`  GET|POST|PUT|DELETE  → Rutas protegidas por JWT y rol`)
+  console.log(`  Filtrado por roles activo en GET (tiendas, turnos, voluntarios, notificaciones)`)
 })
