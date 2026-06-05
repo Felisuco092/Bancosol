@@ -42,8 +42,8 @@ export default function BandejaPage() {
                 <td>{dateToString(n.fecha_creacion)}</td>
                 <td>{n.asunto}</td>
                 <td>
-                  <Link to={`/bandeja/ver/${n.id}`} className="btn btn-primary btn-sm" style={{marginRight: '0.5rem'}}>Ver mensaje</Link>
-                  <button onClick={() => handleDelete(n.id)} className="btn btn-danger btn-sm">Eliminar</button>
+                  <div><Link to={`/bandeja/ver/${n.id}`} className="btn btn-primary btn-sm">Ver mensaje</Link></div>
+                  <div><button onClick={() => handleDelete(n.id)} className="btn btn-danger btn-sm">Eliminar</button></div>
                 </td>
               </tr>
             ))}

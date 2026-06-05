@@ -129,8 +129,8 @@ export default function TiendasPage() {
                     <td>{tienda.zona_geografica}</td>
                     <td><span className={`status-badge ${statusClass}`}>{statusText}</span></td>
                     <td>
-                      {tienePermiso('EDITAR_TIENDA') && <Link to={`/tiendas/editar/${tienda.id}`} className="btn btn-primary btn-sm">Editar</Link>}
-                      {tienePermiso('EDITAR_TIENDA') && <button className="btn btn-danger btn-sm" onClick={() => handleDelete(tienda.id)}>Borrar</button>}
+                      {tienePermiso('EDITAR_TIENDA') && <div><Link to={`/tiendas/editar/${tienda.id}`} className="btn btn-primary btn-sm">Editar</Link></div>}
+                      {tienePermiso('EDITAR_TIENDA') && <div><button className="btn btn-danger btn-sm" onClick={() => handleDelete(tienda.id)}>Borrar</button></div>}
                     </td>
                   </tr>
                 )

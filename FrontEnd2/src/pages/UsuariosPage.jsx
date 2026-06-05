@@ -75,8 +75,8 @@ export default function UsuariosPage() {
                   <td><span className={`badge-rol badge-${quitarTildes(rolName.toLowerCase()).split(' ').join('-')}`}>{rolName}</span></td>
                   <td>{u.area_asignada}</td>
                   <td>
-                    <Link to={`/usuarios/editar/${u.id}`} className="btn btn-primary btn-sm">Editar</Link>
-                    <button className="btn btn-danger btn-sm" onClick={() => handleDelete(u.id)}>Baja</button>
+                    <div><Link to={`/usuarios/editar/${u.id}`} className="btn btn-primary btn-sm">Editar</Link></div>
+                    <div><button className="btn btn-danger btn-sm" onClick={() => handleDelete(u.id)}>Baja</button></div>
                   </td>
                 </tr>
               )
