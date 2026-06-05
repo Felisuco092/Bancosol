@@ -12,6 +12,7 @@ import uma.grupo13.bancosol.entity.TiendaEntity;
 import uma.grupo13.bancosol.entity.UsuarioEntity;
 import uma.grupo13.bancosol.mappers.TiendaMapper;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Set;
 import java.util.stream.Collectors;
@@ -132,7 +133,8 @@ public class TiendasService {
     }
 
 
-    public List<TiendaDTO> filtrarTiendasDependiendoDelRol(UsuarioDTO user, Integer idCad, String localidad, List<TiendaDTO> tiendas) {
+    public List<TiendaDTO> filtrarTiendasDependiendoDelRol(UsuarioDTO user, Integer idCad, String localidad) {
+        List<TiendaDTO> tiendas= new ArrayList<>();
         if (user.getRol().getId() == 1) {
             if (idCad != 0) {
                 tiendas = this.filtroLocalidadCadena(localidad, idCad);

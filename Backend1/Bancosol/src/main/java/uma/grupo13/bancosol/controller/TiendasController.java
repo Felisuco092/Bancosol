@@ -112,11 +112,9 @@ public class TiendasController {
                            @RequestParam("idCampana") Integer idCamp,
                            @RequestParam("localidad") String localidad) {
         if (user == null) return "redirect:/";
+        if (!validaSesion.tienePermiso(user.getRol().getId(), Permiso.TIENDAS)) return "redirect:/dashboard";
 
-
-        List<TiendaDTO> tiendas= new ArrayList<>();
-
-
+        List<TiendaDTO> tiendas= tiendasService.filtrarTiendasDependiendoDelRol(user, idCad, localidad);
 
         model.addAttribute("tiendas", tiendas);
         model.addAttribute("idCampanaActual", idCamp);
