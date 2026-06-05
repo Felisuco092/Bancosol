@@ -11,6 +11,7 @@ import uma.grupo13.bancosol.entity.VoluntarioEntidadEntity;
 import uma.grupo13.bancosol.entity.VoluntarioFisicoEntity;
 import uma.grupo13.bancosol.mappers.VoluntarioMapper;
 
+import org.hibernate.Hibernate;
 import java.util.List;
 
 @Service
@@ -104,13 +105,13 @@ public class VoluntariosService {
         voluntario.setZonaGeografica(zonaGeografica);
         voluntario.setCodigoPostal(codigoPostal);
 
-
-        if (voluntario instanceof VoluntarioFisicoEntity) {
-            VoluntarioFisicoEntity fisico = (VoluntarioFisicoEntity) voluntario;
+        Object actualEntity = Hibernate.unproxy(voluntario); // error corregido con IA generativa
+        if (actualEntity instanceof VoluntarioFisicoEntity) {
+            VoluntarioFisicoEntity fisico = (VoluntarioFisicoEntity) actualEntity;
             fisico.setNombre(nombre);
             fisico.setApellidos(apellidos);
-        } else if (voluntario instanceof VoluntarioEntidadEntity) {
-            VoluntarioEntidadEntity entidad = (VoluntarioEntidadEntity) voluntario;
+        } else if (actualEntity instanceof VoluntarioEntidadEntity) {
+            VoluntarioEntidadEntity entidad = (VoluntarioEntidadEntity) actualEntity;
             entidad.setNombreAsociacion(nombreAsociacion);
             entidad.setNVoluntarios(nVoluntarios);
             if (idResponsableEntidad != null) {
