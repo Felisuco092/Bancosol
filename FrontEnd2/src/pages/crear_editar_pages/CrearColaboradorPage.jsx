@@ -1,13 +1,16 @@
 import { useState, useEffect } from 'react'
 import { useNavigate, Link, useParams } from 'react-router-dom'
 import { fetchData, postData, putData } from '../../services/api'
+import { useAuth } from '../../auth/useAuthHook'
 
 export default function CrearColaboradorPage() {
+  const { tienePermiso } = useAuth()
   const { id } = useParams()
   const editando = !!id
   const navigate = useNavigate()
   const [tipo, setTipo] = useState('')
   const [responsablesEntidad, setResponsablesEntidad] = useState([])
+  const [aprobadoOriginal, setAprobadoOriginal] = useState(false) // estado original al cargar, para saber si mostrar el checkbox de confirmar
   const [form, setForm] = useState({
     domicilio: '',
     zona_geografica: '',
@@ -53,6 +56,7 @@ export default function CrearColaboradorPage() {
             idRespEntidad = ve[0].id_responsable_entidad || ''
           }
 
+          setAprobadoOriginal(vb.aprobado === true || vb.aprobado === 'true')
           setTipo(tipoDetectado)
           setForm({
             domicilio: vb.domicilio || '',
@@ -207,7 +211,7 @@ export default function CrearColaboradorPage() {
             </>
           )}
 
-          {!form.aprobado && (
+          {tienePermiso('CONFIRMAR_COLABORADORES') && !aprobadoOriginal && (
             <div className="form-group">
               <label htmlFor="confirmar">Confirmar colaborador</label>
               <input type="checkbox" id="confirmar" name="aprobado" checked={form.aprobado} onChange={handleChange} />

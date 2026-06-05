@@ -3,7 +3,7 @@ import { ContextoAuten } from './ContextoAuten';
 
 const PERMISOS_POR_ROL = {
   1: { EDITAR_TIENDA: true, EDITAR_TURNOS: true, INCIDENCIAS: true,
-       EDITAR_COLABORADORES: true, BORRAR_COLABORADORES: true },
+       EDITAR_COLABORADORES: true, BORRAR_COLABORADORES: true, CONFIRMAR_COLABORADORES: true },
   2: { EDITAR_TIENDA: false, EDITAR_TURNOS: false, INCIDENCIAS: true,
        EDITAR_COLABORADORES: false, BORRAR_COLABORADORES: false },
   3: { EDITAR_TIENDA: false, EDITAR_TURNOS: true, INCIDENCIAS: true,
