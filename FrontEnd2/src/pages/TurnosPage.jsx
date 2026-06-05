@@ -128,7 +128,7 @@ export default function TurnosPage() {
                       </td>
                       <td>
                         {tienePermiso('EDITAR_TURNOS') && <button className="btn btn-danger btn-sm">Borrar</button>}
-                        {tienePermiso('INCIDENCIAS') && <button className="btn btn-danger btn-incidence">Incidencia</button>}
+                        {tienePermiso('INCIDENCIAS') && <Link to={`/turnos/incidencia?idTurno=${turno.id}&idCampana=${turno.id_campana}`} className="btn btn-info btn-sm btn-incidence">Incidencia</Link>}
                       </td>
                     </tr>
                   ))

@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react'
 import { Link } from 'react-router-dom'
-import { fetchData } from '../services/api'
+import { fetchData, deleteData } from '../services/api'
 
 export default function BandejaPage() {
   const [notificaciones, setNotificaciones] = useState([])
@@ -11,6 +11,14 @@ export default function BandejaPage() {
 
   function dateToString(date) {
     return new Date(date).toLocaleDateString('es-ES')
+  }
+
+  function handleDelete(id) {
+    deleteData('notificaciones/' + id)
+      .then(() => {
+        setNotificaciones(prev => prev.filter(n => n.id !== id))
+      })
+      .catch(console.error)
   }
 
   return (
@@ -34,7 +42,8 @@ export default function BandejaPage() {
                 <td>{dateToString(n.fecha_creacion)}</td>
                 <td>{n.asunto}</td>
                 <td>
-                  <Link to={`/bandeja/ver/${n.id}`} className="btn btn-primary btn-view">Ver mensaje</Link>
+                  <Link to={`/bandeja/ver/${n.id}`} className="btn btn-primary btn-sm" style={{marginRight: '0.5rem'}}>Ver mensaje</Link>
+                  <button onClick={() => handleDelete(n.id)} className="btn btn-danger btn-sm">Eliminar</button>
                 </td>
               </tr>
             ))}

@@ -19,6 +19,7 @@ import TurnosPage from './pages/TurnosPage'
 import BandejaPage from './pages/BandejaPage'
 import SideBarMainLayout from './components/SideBarMainLayout'
 import { ProtectedRoute } from './components/RutaProtegida'
+import IncidenciasPage from './pages/IncidenciasPage'
 
 function App() {
   return (
@@ -98,7 +99,7 @@ function App() {
         </Route>
       </Route>
 
-      {/* Crear/Editar Colaboradores y Turnos: Admin y Coordinador */}
+      {/* Crear/Editar Colaboradores: Admin y Coordinador */}
       <Route element={<ProtectedRoute allowedRoles={[1, 3]} />}>
         <Route path="/colaboradores">
           <Route element={<MainLayout />}>
@@ -106,9 +107,22 @@ function App() {
             <Route path="editar/:id" element={<CrearColaboradorPage />} />
           </Route>
         </Route>
+      </Route>
+
+      {/* Crear Turnos: Admin y Coordinador */}
+      <Route element={<ProtectedRoute allowedRoles={[1, 3]} />}>
         <Route path="/turnos">
           <Route element={<MainLayout />}>
             <Route path="crear" element={<CrearTurnoPage />} />
+          </Route>
+        </Route>
+      </Route>
+
+      {/* Incidencias: Admin, Capitán, Coordinador, Resp. Entidad */}
+      <Route element={<ProtectedRoute allowedRoles={[1, 2, 3, 4]} />}>
+        <Route path="/turnos">
+          <Route element={<MainLayout />}>
+            <Route path="incidencia" element={<IncidenciasPage />} />
           </Route>
         </Route>
       </Route>
