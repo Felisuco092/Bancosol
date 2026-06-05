@@ -1,6 +1,7 @@
 import { useState, useEffect } from 'react'
 import { Link } from 'react-router-dom'
 import { fetchData, deleteData } from '../services/api'
+import { useAuth } from '../auth/useAuthHook'
 
 function formatTipo(esPersona, pendiente) {
   if (pendiente) {
@@ -12,6 +13,7 @@ function formatTipo(esPersona, pendiente) {
 }
 
 export default function ColaboradoresPage() {
+  const { tienePermiso } = useAuth()
   const [rows, setRows] = useState([])
   const [filterTipo, setFilterTipo] = useState('all')
   const [filterLocalidad, setFilterLocalidad] = useState('all')
@@ -93,7 +95,7 @@ export default function ColaboradoresPage() {
     <>
       <header className="header">
         <h1>Gestión de Colaboradores</h1>
-        <Link to="/colaboradores/crear" className="btn btn-primary">+ Nuevo Colaborador</Link>
+        {tienePermiso('EDITAR_COLABORADORES') && <Link to="/colaboradores/crear" className="btn btn-primary">+ Nuevo Colaborador</Link>}
       </header>
       <div className="card">
         <div className="filtros-grid">
@@ -141,8 +143,8 @@ export default function ColaboradoresPage() {
                   <td>{row.n_voluntarios}</td>
                   <td>{row.observaciones || ''}</td>
                   <td>
-                    <Link to={`/colaboradores/editar/${row.id}`} className="btn btn-primary btn-sm">Editar</Link>
-                    <button className="btn btn-danger btn-sm" onClick={() => handleDelete(row.id)}>Borrar</button>
+                    {tienePermiso('EDITAR_COLABORADORES') && <Link to={`/colaboradores/editar/${row.id}`} className="btn btn-primary btn-sm">Editar</Link>}
+                    {tienePermiso('BORRAR_COLABORADORES') && <button className="btn btn-danger btn-sm" onClick={() => handleDelete(row.id)}>Borrar</button>}
                   </td>
                 </tr>
               )
