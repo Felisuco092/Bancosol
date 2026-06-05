@@ -98,8 +98,8 @@ function App() {
         </Route>
       </Route>
 
-      {/* Crear/Editar Colaboradores y Turnos: Admin y Capitán (según lógica de permisos) */}
-      <Route element={<ProtectedRoute allowedRoles={[1, 2]} />}>
+      {/* Crear/Editar Colaboradores y Turnos: Admin y Coordinador */}
+      <Route element={<ProtectedRoute allowedRoles={[1, 3]} />}>
         <Route path="/colaboradores">
           <Route element={<MainLayout />}>
             <Route path="crear" element={<CrearColaboradorPage />} />

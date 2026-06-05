@@ -1,8 +1,10 @@
 import { useState, useEffect } from 'react'
 import { Link } from 'react-router-dom'
 import { fetchData } from '../services/api'
+import { useAuth } from '../auth/useAuthHook'
 
 export default function TurnosPage() {
+  const { tienePermiso } = useAuth()
   const [turnos, setTurnos] = useState([])
   const [campanas, setCampanas] = useState([])
   const [tiendas, setTiendas] = useState([])
@@ -94,7 +96,7 @@ export default function TurnosPage() {
               <h3>Cuadrante de Turnos</h3>
               <div className="cuadrante-actions">
                 <span>Capitán: <strong id="capitan-nombre">{capitanNombre}</strong></span>
-                <Link to="/turnos/crear" className="btn btn-success btn-add-extra">+ Añadir Turno Extra</Link>
+                {tienePermiso('EDITAR_TURNOS') && <Link to="/turnos/crear" className="btn btn-success btn-add-extra">+ Añadir Turno Extra</Link>}
               </div>
             </div>
             <table className="cuadrante-tabla">
@@ -125,7 +127,8 @@ export default function TurnosPage() {
                         </div>
                       </td>
                       <td>
-                        <button className="btn btn-danger btn-incidence">Incidencia</button>
+                        {tienePermiso('EDITAR_TURNOS') && <button className="btn btn-danger btn-sm">Borrar</button>}
+                        {tienePermiso('INCIDENCIAS') && <button className="btn btn-danger btn-incidence">Incidencia</button>}
                       </td>
                     </tr>
                   ))

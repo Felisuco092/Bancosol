@@ -1,8 +1,10 @@
 import { useState, useEffect } from 'react'
 import { Link } from 'react-router-dom'
 import { fetchData, deleteData } from '../services/api'
+import { useAuth } from '../auth/useAuthHook'
 
 export default function TiendasPage() {
+  const { tienePermiso } = useAuth()
   const [tiendas, setTiendas] = useState([])
   const [cadenas, setCadenas] = useState([])
   const [campanas, setCampanas] = useState([])
@@ -63,7 +65,7 @@ export default function TiendasPage() {
     <>
       <header className="header">
         <h1>Gestión de Tiendas</h1>
-        <Link to="/tiendas/crear" className="btn btn-primary">+ Nueva Tienda</Link>
+        {tienePermiso('EDITAR_TIENDA') && <Link to="/tiendas/crear" className="btn btn-primary">+ Nueva Tienda</Link>}
       </header>
       <div className="card">
         <div className="filtros-grid">
@@ -127,8 +129,8 @@ export default function TiendasPage() {
                     <td>{tienda.zona_geografica}</td>
                     <td><span className={`status-badge ${statusClass}`}>{statusText}</span></td>
                     <td>
-                      <Link to={`/tiendas/editar/${tienda.id}`} className="btn btn-primary btn-sm">Editar</Link>
-                      <button className="btn btn-danger btn-sm" onClick={() => handleDelete(tienda.id)}>Borrar</button>
+                      {tienePermiso('EDITAR_TIENDA') && <Link to={`/tiendas/editar/${tienda.id}`} className="btn btn-primary btn-sm">Editar</Link>}
+                      {tienePermiso('EDITAR_TIENDA') && <button className="btn btn-danger btn-sm" onClick={() => handleDelete(tienda.id)}>Borrar</button>}
                     </td>
                   </tr>
                 )
