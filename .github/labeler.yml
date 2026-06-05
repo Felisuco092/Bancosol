@@ -3,6 +3,7 @@ backend:
 
 frontend:
   - FrontEnd1/**/*
+  - FrontEnd2/**/*
 
 database:
   - bd/**/*
