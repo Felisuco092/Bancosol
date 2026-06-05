@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react'
 import { Link } from 'react-router-dom'
-import { fetchData } from '../services/api'
+import { fetchData, deleteData } from '../services/api'
 import { useAuth } from '../auth/useAuthHook'
 
 export default function TurnosPage() {
@@ -37,7 +37,12 @@ export default function TurnosPage() {
     if (fisico) return `${fisico.nombre} ${fisico.apellidos}`
     const entidad = voluntarioEntidad.find(v => String(v.id_voluntario) === String(idVoluntario))
     if (entidad) return `${entidad.nombre_asociacion} (${entidad.n_voluntarios})`
-    return `Voluntario #${idVoluntario}`
+    return 'Sin asignar'
+  }
+
+  function getCampanaNombre(idCampana) {
+    const camp = campanas.find(c => String(c.id) === String(idCampana))
+    return camp ? `${camp.nombre} - ${camp.ano}` : ''
   }
 
   function getUsuarioName(id) {
@@ -45,6 +50,15 @@ export default function TurnosPage() {
     return user ? `${user.nombre} ${user.apellidos}` : 'No asignado'
   }
 
+  function handleDelete(id) {
+    if (confirm('¿Estás seguro de que quieres eliminar este turno?')) {
+      deleteData('turnos/' + id)
+        .then(() => {
+          setTurnos(prev => prev.filter(t => t.id !== id))
+        })
+        .catch(console.error)
+    }
+  }
 
   const filteredTurnos = selectedCampana && selectedTienda
     ? turnos.filter(t =>
@@ -74,7 +88,7 @@ export default function TurnosPage() {
           <select id="select-campana" value={selectedCampana} onChange={e => setSelectedCampana(e.target.value)}>
             <option value="">-- Seleccione Campaña --</option>
             {campanas.map(c => (
-              <option key={c.id} value={c.id}>{c.nombre}</option>
+              <option key={c.id} value={c.id}>{c.nombre} - {c.ano}</option>
             ))}
           </select>
         </div>
@@ -89,7 +103,6 @@ export default function TurnosPage() {
         </div>
       </div>
 
-      
         <div id="cuadrante-container">
           <div className="card">
             <div className="cuadrante-header">
@@ -105,30 +118,33 @@ export default function TurnosPage() {
                   <th>Día</th>
                   <th>Inicio</th>
                   <th>Fin</th>
-                  <th>Voluntarios Asignados</th>
+                  <th>Campaña</th>
+                  <th>Voluntario Asignado</th>
                   <th>Acciones</th>
                 </tr>
               </thead>
               <tbody id="tabla-turnos-body">
                 {filteredTurnos.length === 0 ? (
-                  <tr><td colSpan={5} style={{ textAlign: 'center' }}>No hay turnos registrados para esta selección.</td></tr>
+                  <tr><td colSpan={6} style={{ textAlign: 'center' }}>No hay turnos registrados para esta selección.</td></tr>
                 ) : (
                   filteredTurnos.map((turno, i) => (
                     <tr key={i}>
                       <td style={{ textTransform: 'capitalize' }}>{formatDate(turno.dia)}</td>
                       <td>{turno.hora_inicio}</td>
                       <td>{turno.hora_fin}</td>
+                      <td>{getCampanaNombre(turno.id_campana)}</td>
+                      <td>{getVoluntarioDisplay(turno.id_voluntario)}</td>
                       <td>
-                        <div className="voluntarios-cell">
-                          <span className="voluntario-tag">
-                            {getVoluntarioDisplay(turno.id_voluntario)} <button className="btn-remove">×</button>
-                          </span>
-                          <button className="btn btn-sm btn-add">+ Añadir</button>
-                        </div>
-                      </td>
-                      <td>
-                        {tienePermiso('EDITAR_TURNOS') && <button className="btn btn-danger btn-sm">Borrar</button>}
-                        {tienePermiso('INCIDENCIAS') && <button className="btn btn-danger btn-incidence">Incidencia</button>}
+                        {tienePermiso('EDITAR_TURNOS') && (
+                          <div>
+                            <button onClick={() => handleDelete(turno.id)} className="btn btn-danger btn-sm">Borrar</button>
+                          </div>
+                        )}
+                        {tienePermiso('INCIDENCIAS') && (
+                          <div>
+                            <Link to={`/turnos/incidencia?idTurno=${turno.id}&idCampana=${turno.id_campana}`} className="btn btn-info btn-sm btn-incidence">Incidencia</Link>
+                          </div>
+                        )}
                       </td>
                     </tr>
                   ))
@@ -137,7 +153,6 @@ export default function TurnosPage() {
             </table>
           </div>
         </div>
-      
     </>
   )
 }

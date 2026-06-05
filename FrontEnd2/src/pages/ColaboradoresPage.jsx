@@ -143,8 +143,8 @@ export default function ColaboradoresPage() {
                   <td>{row.n_voluntarios}</td>
                   <td>{row.observaciones || ''}</td>
                   <td>
-                    {tienePermiso('EDITAR_COLABORADORES') && <Link to={`/colaboradores/editar/${row.id}`} className="btn btn-primary btn-sm">Editar</Link>}
-                    {tienePermiso('BORRAR_COLABORADORES') && <button className="btn btn-danger btn-sm" onClick={() => handleDelete(row.id)}>Borrar</button>}
+                    {tienePermiso('EDITAR_COLABORADORES') && <div><Link to={`/colaboradores/editar/${row.id}`} className="btn btn-primary btn-sm">Editar</Link></div>}
+                    {tienePermiso('BORRAR_COLABORADORES') && <div><button className="btn btn-danger btn-sm" onClick={() => handleDelete(row.id)}>Borrar</button></div>}
                   </td>
                 </tr>
               )

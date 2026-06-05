@@ -28,7 +28,6 @@
 
        <div class="formulario">
             <form id="crear-incidencia" action="/turnos/reportar-incidencia" method="post">
-                <input type="hidden" name="idNotificacion" value=""/>
                 <input type="hidden" name="idTurno" value="<%=idTurno%>"/>
                 <input type="hidden" name="idCampana" value="<%=idCampana%>"/>
                 <div class="form-group">

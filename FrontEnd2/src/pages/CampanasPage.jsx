@@ -84,8 +84,8 @@ export default function CampanasPage() {
                   <td>{campana.dia_final}</td>
                   <td><span style={{ padding: '4px 8px', borderRadius: '4px', fontSize: '0.85rem', ...info.style }}>{info.label}</span></td>
                   <td>
-                    <Link to={`/campanas/editar/${campana.id}`} className="btn btn-primary btn-sm">Editar</Link>
-                    <button className="btn btn-danger btn-sm" onClick={() => handleDelete(campana.id)}>Eliminar</button>
+                    <div><Link to={`/campanas/editar/${campana.id}`} className="btn btn-primary btn-sm">Editar</Link></div>
+                    <div><button className="btn btn-danger btn-sm" onClick={() => handleDelete(campana.id)}>Eliminar</button></div>
                   </td>
                 </tr>
               )

@@ -65,8 +65,8 @@ export default function CadenasPage() {
                   <td><strong>{cadena.nombre}</strong></td>
                   <td>{cadena.codigo || 'N/A'}</td>
                   <td>
-                    <Link to={`/cadenas/editar/${cadena.id}`} className="btn btn-primary btn-sm">Editar</Link>
-                    <button className="btn btn-danger btn-sm" onClick={() => handleDelete(cadena.id)}>Eliminar</button>
+                    <div><Link to={`/cadenas/editar/${cadena.id}`} className="btn btn-primary btn-sm">Editar</Link></div>
+                    <div><button className="btn btn-danger btn-sm" onClick={() => handleDelete(cadena.id)}>Eliminar</button></div>
                   </td>
                 </tr>
               ))
