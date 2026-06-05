@@ -22,8 +22,13 @@ public class NotificacionesService {
 
 
     public List<NotificacionDTO> listarNotificaciones() {
-        List<NotificacionEntity> lista= notificacionRepository.findAll();
+        List<NotificacionEntity> lista = notificacionRepository.findAll();
         return notificacionMapper.toDTOList(lista);
+    }
+
+    public List<NotificacionDTO> listarNotificacionesUsuario(Integer idUsuario) {
+        List<NotificacionEntity> notificacionesList = notificacionRepository.listarNotificacionesUsuario(idUsuario);
+        return notificacionMapper.toDTOList(notificacionesList);
     }
 
     public NotificacionDTO getReferenceById(Integer id) {

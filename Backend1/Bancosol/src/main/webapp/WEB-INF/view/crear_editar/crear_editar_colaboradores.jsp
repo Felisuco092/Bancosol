@@ -51,7 +51,7 @@
                     <div class="form-group">
                         <label for="codigo_postal">Código Postal<span class="required">*</span></label>
                         <input type="number" name="codigo_postal" id="codigo_postal" required
-                               value="<%= voluntario.getCodigoPostal() != null ? voluntario.getCodigoPostal() : "" %>" />
+                               value="<%= voluntario.getCodigoPostal() != null ? voluntario.getCodigoPostal() : "" %>" min="0"/>
                     </div>
 
                     <%
@@ -112,7 +112,7 @@
                     <div class="form-group">
                         <label for="n_voluntarios">Número de Voluntarios<span class="required">*</span></label>
                         <input type="number" name="n_voluntarios" id="n_voluntarios" required
-                               value="<%= voluntario.getNVoluntarios() != null ? voluntario.getNVoluntarios() : "" %>" />
+                               value="<%= voluntario.getNVoluntarios() != null ? voluntario.getNVoluntarios() : "" %>" min="0"/>
                     </div>
                     <div class="form-group">
                         <label for="responsableEntidad">Responsable de entidad: </label>

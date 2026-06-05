@@ -163,6 +163,7 @@ public class ColaboradoresController {
         voluntariosService.guardarVoluntario(id, tipo, domicilio, zonaGeografica, codigoPostal, nombre,
                 apellidos, nombreAsociacion, nVoluntarios, confirmar, idResponsableEntidad);
         if(!user.getRol().getId().equals(1) && id==null){// el admin no es el que crea al nuevo colaborador
+
             notificacionesService.crearNotificacionColabYEnviar(nombre, apellidos, user.getUsuario());
         }
 

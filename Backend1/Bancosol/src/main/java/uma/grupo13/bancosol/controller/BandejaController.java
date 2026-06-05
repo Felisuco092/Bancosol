@@ -9,6 +9,7 @@ import uma.grupo13.bancosol.dto.UsuarioDTO;
 import uma.grupo13.bancosol.entity.NotificacionEntity;
 import uma.grupo13.bancosol.entity.UsuarioEntity;
 import uma.grupo13.bancosol.services.NotificacionesService;
+import uma.grupo13.bancosol.services.utils.ValidaSesion;
 
 import java.util.List;
 
@@ -23,7 +24,7 @@ public class BandejaController {
         if (user == null) return "redirect:/";
 
         model.addAttribute("paginaActual", "bandeja");
-        List<NotificacionDTO> notificacionList = this.notificacionesService.listarNotificaciones();
+        List<NotificacionDTO> notificacionList = this.notificacionesService.listarNotificacionesUsuario(user.getId());
         model.addAttribute("notificacionesList", notificacionList);
 
         return "bandeja";
