@@ -48,7 +48,7 @@ public class NotificacionesService {
         for(UsuarioEntity admin: listaAdmins){
             NotificacionEntity notificacionCrearColab = new NotificacionEntity();
             notificacionCrearColab.setAsunto("Nuevo colaborador por confirmar");
-            notificacionCrearColab.setFechaCreacion(LocalDateTime.now()); // añadir fecha actual
+            notificacionCrearColab.setFechaCreacion(LocalDateTime.now().withNano(0));
             notificacionCrearColab.setMensaje("El usuario coordinador " + nickCoordinador +
                                         " ha creado un nuevo colaborador: "+ nombreColab + " " + apellidosColab +
                                         ", a espensas de la confirmación del administrador " + admin.getUsuario());
@@ -66,7 +66,7 @@ public class NotificacionesService {
         for(UsuarioEntity admin: listaAdmins){
             NotificacionEntity notificacionCrearIncidencia = new NotificacionEntity();
             notificacionCrearIncidencia.setAsunto("SE HA REGISTRADO UNA NUEVA INCIDENCIA: "+ asunto);
-            notificacionCrearIncidencia.setFechaCreacion(LocalDateTime.now());
+            notificacionCrearIncidencia.setFechaCreacion(LocalDateTime.now().withNano(0));
             notificacionCrearIncidencia.setMensaje("El usuario " + nombreUsuario + " ha registrado una incidencia en la campaña " +
                                                     campana.getNombre() + " en el turno comprendido entre las horas [" +
                                                     turno.getHoraInicio() + "-" + turno.getHoraFin() + "] en la tienda " + turno.getTienda().getDescripcion() +
