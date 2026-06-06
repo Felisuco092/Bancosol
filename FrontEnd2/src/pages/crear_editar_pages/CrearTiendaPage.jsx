@@ -192,18 +192,33 @@ export default function CrearTiendaPage() {
 
           <div className="form-group">
             <label>Campañas en las que participa:</label>
-            <div className="checkbox-group">
-              {campanas.map(camp => (
-                <div key={camp.id} className="checkbox-item">
-                  <input
-                    type="checkbox"
-                    checked={participaSeleccion.some(p => p.id_campana === String(camp.id))}
-                    onChange={() => toggleCampana(String(camp.id))}
-                  />
-                  <label>{camp.nombre}</label>
-                </div>
+            <table>
+                  <thead>
+                    <th>Campaña</th>
+                    <th>Participa</th>
+                    <th>Coordinador</th>
+                  </thead>
+                  <tbody>
+                    {campanas.map(camp => (
+                <tr key={camp.id} >
+                  <td><label>{camp.nombre}</label></td>
+                  <td>
+                      <input
+                      type="checkbox"
+                      checked={participaSeleccion.some(p => p.id_campana === String(camp.id))}
+                      onChange={() => toggleCampana(String(camp.id))}
+                    />
+                  </td>
+                  <td>
+                    <select>
+                    <option value="">-- Coordinador --</option>
+                    </select>
+                  </td>
+                </tr>
+                
               ))}
-            </div>
+                  </tbody>
+                </table>
           </div>
 
           <div className="form-actions">

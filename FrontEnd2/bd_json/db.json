@@ -509,12 +509,6 @@
       "id_coordinador": 5
     },
     {
-      "id": "7",
-      "id_campana": 1,
-      "id_tienda": 1,
-      "id_coordinador": 2
-    },
-    {
       "id": "8",
       "id_campana": 1,
       "id_tienda": 7,
@@ -531,6 +525,12 @@
       "id_campana": 1,
       "id_tienda": 4,
       "id_coordinador": 5
+    },
+    {
+      "id_tienda": "1",
+      "id_campana": "1",
+      "id_coordinador": null,
+      "id": "7Kc1j83"
     }
   ]
 }
