@@ -16,8 +16,8 @@ server.use(jsonServer.bodyParser)
 
 const ROLES = {
   ADMIN: "1",
-  COORDINADOR: "2",
-  CAPITAN: "3",
+  CAPITAN: "2",
+  COORDINADOR: "3",
   RESPONSABLE_ENTIDAD: "4",
   RESPONSABLE_TIENDA: "5"
 }
@@ -189,6 +189,17 @@ server.use((req, res, next) => {
   } catch (err) {
     return res.status(403).json({ error: 'Token inválido o expirado' })
   }
+})
+
+server.get('/dashboard/stats', (req, res) => {
+  const db = router.db
+  res.json({
+    tiendas: db.get('tiendas').value(),
+    cadenas: db.get('cadenas').value(),
+    campanas: db.get('campanas').value(),
+    voluntarioEntidad: db.get('voluntario_entidad').value(),
+    voluntarioFisico: db.get('voluntario_fisico').value()
+  })
 })
 
 server.use(router)

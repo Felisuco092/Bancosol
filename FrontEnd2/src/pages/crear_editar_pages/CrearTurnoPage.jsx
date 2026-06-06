@@ -1,11 +1,16 @@
 import { useState, useEffect } from 'react'
 import { useNavigate, Link } from 'react-router-dom'
 import { fetchData, postData } from '../../services/api'
+import { useAuth } from '../../auth/useAuthHook'
 
 export default function CrearTurnoPage() {
+  const { usuario } = useAuth()
   const navigate = useNavigate()
   const [campanas, setCampanas] = useState([])
   const [tiendas, setTiendas] = useState([])
+
+  //State select tiendas dependiendo de la campaña seleccionada
+  const [tiendasFiltradas, setTiendasFiltradas] = useState([])
   const [form, setForm] = useState({
     id_campana: '',
     id_tienda: '',
@@ -20,6 +25,22 @@ export default function CrearTurnoPage() {
     setForm(prev => ({ ...prev, [name]: value }))
   }
 
+  function handleCampanaChange(event) {
+    const campanaId = event.target.value
+    setForm(prev => ({ ...prev, id_campana: campanaId, id_tienda: '' }))
+    populateTiendas(campanaId)
+  }
+  async function populateTiendas(campanaId) {
+    let participacionesCampana = []
+    if (usuario.id_rol === 3) {
+      participacionesCampana = await fetchData(`participa?id_campana=${campanaId}&id_coordinador=${usuario.id}`)
+    } else {
+      participacionesCampana = await fetchData(`participa?id_campana=${campanaId}`)
+    }
+    const tiendasFiltradas = tiendas.filter(t => participacionesCampana.some(p => String(p.id_tienda) === String(t.id)))
+    setTiendasFiltradas(tiendasFiltradas)
+  }
+
   useEffect(() => {
     async function load() {
       try {
@@ -27,6 +48,7 @@ export default function CrearTurnoPage() {
           fetchData('campanas'),
           fetchData('tiendas')
         ])
+
         setCampanas(camps)
         setTiendas(tds)
       } catch (err) {
@@ -59,7 +81,7 @@ export default function CrearTurnoPage() {
 
           <div className="form-group">
             <label htmlFor="id_campana">Campaña<span className="required">*</span></label>
-            <select name="id_campana" id="id_campana" value={form.id_campana} onChange={handleChange} required>
+            <select name="id_campana" id="id_campana" value={form.id_campana} onChange={handleCampanaChange} required>
               <option value="">-- Seleccione Campaña --</option>
               {campanas.map(c => (
                 <option key={c.id} value={c.id}>{c.nombre} - {c.ano}</option>
@@ -69,9 +91,11 @@ export default function CrearTurnoPage() {
 
           <div className="form-group">
             <label htmlFor="id_tienda">Tienda<span className="required">*</span></label>
-            <select name="id_tienda" id="id_tienda" value={form.id_tienda} onChange={handleChange} required>
+            <select name="id_tienda" id="id_tienda" value={form.id_tienda} onChange={handleChange} 
+              disabled={!form.id_campana}
+              required>
               <option value="">-- Seleccione Tienda --</option>
-              {tiendas.map(t => (
+              {tiendasFiltradas.map(t => (
                 <option key={t.id} value={t.id}>{t.nombre}</option>
               ))}
             </select>

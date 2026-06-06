@@ -241,26 +241,26 @@
       "id_responsable_tienda": null
     },
     {
-      "id": "11",
       "nombre": "El Corte Inglés Bahía Málaga",
       "localidad": "Málaga",
       "domicilio": "c/ Hamlet, 2",
       "c_postal": "29006",
       "zona_geografica": "Cruz de Humilladero",
       "id_cadena": 6,
-      "id_capitan": 4,
-      "id_responsable_tienda": null
+      "id_capitan": null,
+      "id_responsable_tienda": null,
+      "id": "11"
     },
     {
-      "id": "12",
       "nombre": "El Corte Inglés Av. Andalucía",
       "localidad": "Málaga",
       "domicilio": "Av. Andalucía, 4",
       "c_postal": "29007",
       "zona_geografica": "Centro",
       "id_cadena": 6,
-      "id_capitan": 1,
-      "id_responsable_tienda": null
+      "id_capitan": null,
+      "id_responsable_tienda": null,
+      "id": "12"
     }
   ],
   "campanas": [
@@ -531,6 +531,12 @@
       "id_campana": "2",
       "id_coordinador": "2",
       "id": "HvzJjEf"
+    },
+    {
+      "id_tienda": "1",
+      "id_campana": "3",
+      "id_coordinador": "2",
+      "id": "BcLhgae"
     }
   ]
 }
