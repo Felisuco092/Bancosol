@@ -4,15 +4,19 @@ import { fetchData, deleteData } from '../services/api'
 import { useAuth } from '../auth/useAuthHook'
 
 export default function TurnosPage() {
-  const { tienePermiso } = useAuth()
+  const { tienePermiso, usuario } = useAuth()
   const [turnos, setTurnos] = useState([])
   const [campanas, setCampanas] = useState([])
   const [tiendas, setTiendas] = useState([])
   const [voluntarioEntidad, setVoluntarioEntidad] = useState([])
   const [voluntarioFisico, setVoluntarioFisico] = useState([])
   const [usuarios, setUsuarios] = useState([])
+  // Estados para filtros
   const [selectedCampana, setSelectedCampana] = useState('')
   const [selectedTienda, setSelectedTienda] = useState('')
+
+  //Tiendas del filtro dependen de la campaña seleccionada
+  const [tiendasFiltradas, setTiendasFiltradas] = useState([])
 
   useEffect(() => {
     Promise.all([
@@ -77,6 +81,19 @@ export default function TurnosPage() {
     return fecha.toLocaleDateString('es-ES', { weekday: 'long', day: '2-digit', month: '2-digit' })
   }
 
+  async function selectCampana(event) {
+    const campanaId = event.target.value
+    setSelectedCampana(campanaId)
+    let participacionesCampana = []
+    if (String(usuario.id_rol) === "3") {
+      participacionesCampana = await fetchData(`participa?id_campana=${campanaId}&id_coordinador=${usuario.id}`)
+    } else {
+      participacionesCampana = await fetchData(`participa?id_campana=${campanaId}`)
+    }
+    const tiendasFiltradas = tiendas.filter(t => participacionesCampana.some(p => String(p.id_tienda) === String(t.id)))
+    setTiendasFiltradas(tiendasFiltradas)
+  }
+
   return (
     <>
       <header className="header">
@@ -85,7 +102,7 @@ export default function TurnosPage() {
       <div className="card filtros-turnos">
         <div>
           <label htmlFor="select-campana">Campaña:</label>
-          <select id="select-campana" value={selectedCampana} onChange={e => setSelectedCampana(e.target.value)}>
+          <select id="select-campana" value={selectedCampana} onChange={selectCampana}>
             <option value="">-- Seleccione Campaña --</option>
             {campanas.map(c => (
               <option key={c.id} value={c.id}>{c.nombre} - {c.ano}</option>
@@ -94,9 +111,9 @@ export default function TurnosPage() {
         </div>
         <div>
           <label htmlFor="select-tienda">Tienda:</label>
-          <select id="select-tienda" value={selectedTienda} onChange={e => setSelectedTienda(e.target.value)}>
+          <select id="select-tienda" value={selectedTienda} onChange={e => setSelectedTienda(e.target.value)} disabled={!selectedCampana}>
             <option value="">-- Seleccione Tienda --</option>
-            {tiendas.map(t => (
+            {tiendasFiltradas.map(t => (
               <option key={t.id} value={t.id}>{t.nombre}</option>
             ))}
           </select>

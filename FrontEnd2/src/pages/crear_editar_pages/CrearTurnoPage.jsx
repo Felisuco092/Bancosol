@@ -1,14 +1,21 @@
 import { useState, useEffect } from 'react'
 import { useNavigate, Link } from 'react-router-dom'
 import { fetchData, postData } from '../../services/api'
+import { useAuth } from '../../auth/useAuthHook'
 
 export default function CrearTurnoPage() {
+  const { usuario } = useAuth()
   const navigate = useNavigate()
   const [campanas, setCampanas] = useState([])
   const [tiendas, setTiendas] = useState([])
+  const [voluntarios, setVoluntarios] = useState([])
+
+  //State select tiendas dependiendo de la campaña seleccionada
+  const [tiendasFiltradas, setTiendasFiltradas] = useState([])
   const [form, setForm] = useState({
     id_campana: '',
     id_tienda: '',
+    id_voluntario: '',
     tipo_turno: '',
     dia: '',
     hora_inicio: '',
@@ -20,15 +27,45 @@ export default function CrearTurnoPage() {
     setForm(prev => ({ ...prev, [name]: value }))
   }
 
+  function handleCampanaChange(event) {
+    const campanaId = event.target.value
+    setForm(prev => ({ ...prev, id_campana: campanaId, id_tienda: '' }))
+    populateTiendas(campanaId)
+  }
+  async function populateTiendas(campanaId) {
+    let participacionesCampana = []
+    if (usuario.id_rol === 3) {
+      participacionesCampana = await fetchData(`participa?id_campana=${campanaId}&id_coordinador=${usuario.id}`)
+    } else {
+      participacionesCampana = await fetchData(`participa?id_campana=${campanaId}`)
+    }
+    const tiendasFiltradas = tiendas.filter(t => participacionesCampana.some(p => String(p.id_tienda) === String(t.id)))
+    setTiendasFiltradas(tiendasFiltradas)
+  }
+
   useEffect(() => {
     async function load() {
       try {
-        const [camps, tds] = await Promise.all([
+        const [camps, tds, vb, vf, ve] = await Promise.all([
           fetchData('campanas'),
-          fetchData('tiendas')
+          fetchData('tiendas'),
+          fetchData('voluntario_base'),
+          fetchData('voluntario_fisico'),
+          fetchData('voluntario_entidad')
         ])
+
         setCampanas(camps)
         setTiendas(tds)
+
+        const aprobados = vb.filter(v => v.aprobado === true || v.aprobado === 'true')
+        const combined = aprobados.map(v => {
+          const fisico = vf.find(f => String(f.id_voluntario) === String(v.id))
+          if (fisico) return { ...v, nombreDisplay: `${fisico.nombre} ${fisico.apellidos}` }
+          const entidad = ve.find(e => String(e.id_voluntario) === String(v.id))
+          if (entidad) return { ...v, nombreDisplay: `${entidad.nombre_asociacion} (${entidad.n_voluntarios})` }
+          return { ...v, nombreDisplay: `Voluntario #${v.id}` }
+        })
+        setVoluntarios(combined)
       } catch (err) {
         console.error(err)
       }
@@ -59,7 +96,7 @@ export default function CrearTurnoPage() {
 
           <div className="form-group">
             <label htmlFor="id_campana">Campaña<span className="required">*</span></label>
-            <select name="id_campana" id="id_campana" value={form.id_campana} onChange={handleChange} required>
+            <select name="id_campana" id="id_campana" value={form.id_campana} onChange={handleCampanaChange} required>
               <option value="">-- Seleccione Campaña --</option>
               {campanas.map(c => (
                 <option key={c.id} value={c.id}>{c.nombre} - {c.ano}</option>
@@ -69,10 +106,22 @@ export default function CrearTurnoPage() {
 
           <div className="form-group">
             <label htmlFor="id_tienda">Tienda<span className="required">*</span></label>
-            <select name="id_tienda" id="id_tienda" value={form.id_tienda} onChange={handleChange} required>
+            <select name="id_tienda" id="id_tienda" value={form.id_tienda} onChange={handleChange} 
+              disabled={!form.id_campana}
+              required>
               <option value="">-- Seleccione Tienda --</option>
-              {tiendas.map(t => (
+              {tiendasFiltradas.map(t => (
                 <option key={t.id} value={t.id}>{t.nombre}</option>
+              ))}
+            </select>
+          </div>
+
+          <div className="form-group">
+            <label htmlFor="id_voluntario">Voluntario<span className="required">*</span></label>
+            <select name="id_voluntario" id="id_voluntario" value={form.id_voluntario} onChange={handleChange} required>
+              <option value="">-- Seleccione Voluntario --</option>
+              {voluntarios.map(v => (
+                <option key={v.id} value={v.id}>{v.nombreDisplay}</option>
               ))}
             </select>
           </div>

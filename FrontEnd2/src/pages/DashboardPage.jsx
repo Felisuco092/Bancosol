@@ -10,19 +10,14 @@ export default function DashboardPage() {
   const [voluntarioFisico, setVoluntarioFisico] = useState([])
 
   useEffect(() => {
-    Promise.all([
-      fetchData('tiendas'),
-      fetchData('cadenas'),
-      fetchData('campanas'),
-      fetchData('voluntario_entidad'),
-      fetchData('voluntario_fisico')
-    ]).then(([t, c, camp, ve, vf]) => {
-      setTiendas(t)
-      setCadenas(c)
-      setCampanas(camp)
-      setVoluntarioEntidad(ve)
-      setVoluntarioFisico(vf)
-    }).catch(err => console.error(err))
+    fetchData('dashboard/stats')
+      .then(({ tiendas, cadenas, campanas, voluntarioEntidad, voluntarioFisico }) => {
+        setTiendas(tiendas)
+        setCadenas(cadenas)
+        setCampanas(campanas)
+        setVoluntarioEntidad(voluntarioEntidad)
+        setVoluntarioFisico(voluntarioFisico)
+      }).catch(err => console.error(err))
   }, [])
 
   const totalVoluntarios = voluntarioEntidad.reduce((s, v) => s + v.n_voluntarios, 0) + voluntarioFisico.length
