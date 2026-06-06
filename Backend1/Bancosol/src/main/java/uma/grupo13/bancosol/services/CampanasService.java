@@ -6,12 +6,14 @@ import uma.grupo13.bancosol.dao.CampanaRepository;
 import uma.grupo13.bancosol.dao.ParticipaRepository;
 import uma.grupo13.bancosol.dto.CampanaDTO;
 import uma.grupo13.bancosol.dto.TiendaDTO;
+import uma.grupo13.bancosol.dto.UsuarioDTO;
 import uma.grupo13.bancosol.entity.CampanaEntity;
 import uma.grupo13.bancosol.entity.TiendaEntity;
 import uma.grupo13.bancosol.mappers.CampanaMapper;
 import uma.grupo13.bancosol.mappers.TiendaMapper;
 
 import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -77,6 +79,25 @@ public class CampanasService {
 
     public List<TiendaDTO> filtrarTiendasParticipaCampana(Integer idCampana) {
         List<TiendaEntity> tiendas = participaRepository.findTiendasByCampanaId(idCampana);
+        return tiendaMapper.toDTOList(tiendas);
+    }
+
+    public List<TiendaDTO> filtrarTiendasParticipaCampanaPorRol(Integer idCampana, UsuarioDTO usuario) {
+        List<TiendaEntity> tiendas;
+        Integer rolId = usuario.getRol().getId();
+        Integer userId = usuario.getId();
+
+        if (rolId == 1 || rolId == 4) { // Admin y Resp. Entidad ven todas las tiendas de la campaña
+            tiendas = participaRepository.findTiendasByCampanaId(idCampana);
+        } else if (rolId == 2) { // Coordinador
+            tiendas = participaRepository.findTiendasByCampanaAndCoord(idCampana, userId);
+        } else if (rolId == 3) { // Capitan
+            tiendas = participaRepository.findTiendasByCampanaAndCapi(idCampana, userId);
+        } else if (rolId == 5) { // Resp. Tienda
+            tiendas = participaRepository.findTiendasByCampanaAndResponsable(idCampana, userId);
+        } else {
+            tiendas = new ArrayList<>();
+        }
         return tiendaMapper.toDTOList(tiendas);
     }
 

@@ -18,4 +18,13 @@ public interface ParticipaRepository extends JpaRepository<ParticipaEntity, Part
 
     @Query("select p.tienda from ParticipaEntity p where p.campana.id = :idCampana")
     public List<TiendaEntity> findTiendasByCampanaId(@Param("idCampana") Integer idCampana); // para el filtro de los turnos
+
+    @Query("select p.tienda from ParticipaEntity p where p.campana.id = :idCampana and p.coordinador.id = :idCoord")
+    public List<TiendaEntity> findTiendasByCampanaAndCoord(@Param("idCampana") Integer idCampana, @Param("idCoord") Integer idCoord);
+
+    @Query("select p.tienda from ParticipaEntity p where p.campana.id = :idCampana and p.tienda.capitan.id = :idCapi")
+    public List<TiendaEntity> findTiendasByCampanaAndCapi(@Param("idCampana") Integer idCampana, @Param("idCapi") Integer idCapi);
+
+    @Query("select p.tienda from ParticipaEntity p where p.campana.id = :idCampana and p.tienda.responsableTienda.id = :idResp")
+    public List<TiendaEntity> findTiendasByCampanaAndResponsable(@Param("idCampana") Integer idCampana, @Param("idResp") Integer idResp);
 }
