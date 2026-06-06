@@ -83,9 +83,6 @@ export default function CrearTiendaPage() {
     const aActualizar = seleccion.filter(p =>
       existentes.some(e => String(e.id_campana) === p.id_campana && String(e.id_coordinador) !== String(p.id_coordinador))
     )
-    console.log('A borrar:', aBorrar)
-    console.log('Existentes:', existentes)
-    console.log('A actualizar:', aActualizar)
     return Promise.all([
       ...aBorrar.map(p => deleteData('participa/' + p.id)),
       ...aCrear.map(p =>
