@@ -8,12 +8,14 @@ export default function CrearTurnoPage() {
   const navigate = useNavigate()
   const [campanas, setCampanas] = useState([])
   const [tiendas, setTiendas] = useState([])
+  const [voluntarios, setVoluntarios] = useState([])
 
   //State select tiendas dependiendo de la campaña seleccionada
   const [tiendasFiltradas, setTiendasFiltradas] = useState([])
   const [form, setForm] = useState({
     id_campana: '',
     id_tienda: '',
+    id_voluntario: '',
     tipo_turno: '',
     dia: '',
     hora_inicio: '',
@@ -44,13 +46,26 @@ export default function CrearTurnoPage() {
   useEffect(() => {
     async function load() {
       try {
-        const [camps, tds] = await Promise.all([
+        const [camps, tds, vb, vf, ve] = await Promise.all([
           fetchData('campanas'),
-          fetchData('tiendas')
+          fetchData('tiendas'),
+          fetchData('voluntario_base'),
+          fetchData('voluntario_fisico'),
+          fetchData('voluntario_entidad')
         ])
 
         setCampanas(camps)
         setTiendas(tds)
+
+        const aprobados = vb.filter(v => v.aprobado === true || v.aprobado === 'true')
+        const combined = aprobados.map(v => {
+          const fisico = vf.find(f => String(f.id_voluntario) === String(v.id))
+          if (fisico) return { ...v, nombreDisplay: `${fisico.nombre} ${fisico.apellidos}` }
+          const entidad = ve.find(e => String(e.id_voluntario) === String(v.id))
+          if (entidad) return { ...v, nombreDisplay: `${entidad.nombre_asociacion} (${entidad.n_voluntarios})` }
+          return { ...v, nombreDisplay: `Voluntario #${v.id}` }
+        })
+        setVoluntarios(combined)
       } catch (err) {
         console.error(err)
       }
@@ -97,6 +112,16 @@ export default function CrearTurnoPage() {
               <option value="">-- Seleccione Tienda --</option>
               {tiendasFiltradas.map(t => (
                 <option key={t.id} value={t.id}>{t.nombre}</option>
+              ))}
+            </select>
+          </div>
+
+          <div className="form-group">
+            <label htmlFor="id_voluntario">Voluntario<span className="required">*</span></label>
+            <select name="id_voluntario" id="id_voluntario" value={form.id_voluntario} onChange={handleChange} required>
+              <option value="">-- Seleccione Voluntario --</option>
+              {voluntarios.map(v => (
+                <option key={v.id} value={v.id}>{v.nombreDisplay}</option>
               ))}
             </select>
           </div>
