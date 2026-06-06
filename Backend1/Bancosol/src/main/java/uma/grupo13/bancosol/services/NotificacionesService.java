@@ -75,7 +75,7 @@ public class NotificacionesService {
             notificacionCrearIncidencia.setMensaje("El usuario " + nombreUsuario + " ha registrado una incidencia en la campaña " +
                                                     campana.getNombre() + " en el turno comprendido entre las horas [" +
                                                     turno.getHoraInicio() + "-" + turno.getHoraFin() + "] en la tienda " + turno.getTienda().getDescripcion() +
-                                                    " por el siguiente motivo: " + mensaje + "."+"\n" + "Se involucra a los siguientes voluntarios: " +
+                                                    " por el siguiente motivo: " + mensaje + "." + "\n" + "Se involucra a los siguientes voluntarios: " +
                                                     devolverStringVoluntarios(voluntariosImplicados));
             notificacionCrearIncidencia.setUsuarioDestino(admin);
 
@@ -88,7 +88,7 @@ public class NotificacionesService {
     private String devolverStringVoluntarios(List<VoluntarioDTO> voluntariosIncidencia) {
         String mensaje = "";
         for(VoluntarioDTO voluntario: voluntariosIncidencia){
-            mensaje += "- " + voluntario.getNombreDisplay() + "\n";
+            mensaje += "\n- " + voluntario.getNombreDisplay();
         }
 
         return mensaje;
