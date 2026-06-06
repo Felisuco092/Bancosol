@@ -39,18 +39,8 @@
             <td><%=turnoAct.getCampana().getNombre()%></td>
             <td>
                 <%
-                String nameToDisplay = "Sin asignar";
-                // try catch eliminado
                     VoluntarioDTO v = turnoAct.getVoluntario();
-                    if (v != null) {
-                        if (v.getTipo()=="FISICO") {
-                            nameToDisplay = v.getNombre();
-                        } else if (v.getTipo()=="ENTIDAD") {
-                            nameToDisplay = v.getNombreAsociacion();
-                        } else {
-                            nameToDisplay = "Voluntario #" + v.getId();
-                        }
-                    }
+                    String nameToDisplay = (v != null && v.getNombreDisplay() != null) ? v.getNombreDisplay() : (v != null ? "Voluntario #" + v.getId() : "Sin asignar");
                 %>
                 <%= nameToDisplay %>
             </td>
