@@ -31,7 +31,7 @@
       "email": "juan.perez@email.com",
       "telefono": "600123456",
       "area_asignada": "Málaga Este",
-      "id_rol": "1"
+      "id_rol": 1
     },
     {
       "id": "2",
@@ -42,7 +42,7 @@
       "email": "m.lopez@email.com",
       "telefono": "611987654",
       "area_asignada": "Almáchar",
-      "id_rol": "3"
+      "id_rol": 3
     },
     {
       "id": "3",
@@ -53,7 +53,7 @@
       "email": "a.ruiz@email.com",
       "telefono": "622456789",
       "area_asignada": "Rincón de la Victoria",
-      "id_rol": "2"
+      "id_rol": 2
     },
     {
       "id": "4",
@@ -64,7 +64,7 @@
       "email": "c.gomez@email.com",
       "telefono": "633111222",
       "area_asignada": "Marbella",
-      "id_rol": "2"
+      "id_rol": 2
     },
     {
       "id": "5",
@@ -75,7 +75,7 @@
       "email": "p.sanchez@email.com",
       "telefono": "644333444",
       "area_asignada": "Antequera",
-      "id_rol": "3"
+      "id_rol": 3
     },
     {
       "id": "6",
@@ -86,7 +86,7 @@
       "email": "l.martinez@email.com",
       "telefono": "655444333",
       "area_asignada": "Málaga Centro",
-      "id_rol": "4"
+      "id_rol": 4
     },
     {
       "id": "7",
@@ -97,7 +97,7 @@
       "email": "r.fernandez@email.com",
       "telefono": "666555444",
       "area_asignada": "Málaga Oeste",
-      "id_rol": "5"
+      "id_rol": 5
     }
   ],
   "cadenas": [
@@ -139,8 +139,8 @@
       "domicilio": "c/ Aristófanes, nºxx",
       "c_postal": "29010",
       "zona_geografica": "Teatinos",
-      "id_cadena": "1",
-      "id_capitan": "1",
+      "id_cadena": 1,
+      "id_capitan": 1,
       "id_responsable_tienda": null,
       "id": "1"
     },
@@ -151,9 +151,9 @@
       "domicilio": "c/ Industrial, 5",
       "c_postal": "29600",
       "zona_geografica": "Polígono",
-      "id_cadena": "2",
-      "id_capitan": "4",
-      "id_responsable_tienda": "7"
+      "id_cadena": 2,
+      "id_capitan": 4,
+      "id_responsable_tienda": 7
     },
     {
       "id": "3",
@@ -162,8 +162,8 @@
       "domicilio": "Av. Principal, 10",
       "c_postal": "29200",
       "zona_geografica": "Centro",
-      "id_cadena": "2",
-      "id_capitan": "3"
+      "id_cadena": 2,
+      "id_capitan": 3
     },
     {
       "id": "4",
@@ -172,8 +172,8 @@
       "domicilio": "Av. de la Aurora",
       "c_postal": "29007",
       "zona_geografica": "Alameda",
-      "id_cadena": "3",
-      "id_capitan": "1",
+      "id_cadena": 3,
+      "id_capitan": 1,
       "id_responsable_tienda": null
     },
     {
@@ -183,8 +183,8 @@
       "domicilio": "c/ Lope de Vega",
       "c_postal": "29010",
       "zona_geografica": "Puerto de la Torre",
-      "id_cadena": "4",
-      "id_capitan": "3"
+      "id_cadena": 4,
+      "id_capitan": 3
     },
     {
       "id": "6",
@@ -193,8 +193,8 @@
       "domicilio": "c/ Mármoles, nº xx",
       "c_postal": "29007",
       "zona_geografica": "Centro",
-      "id_cadena": "5",
-      "id_capitan": "1",
+      "id_cadena": 5,
+      "id_capitan": 1,
       "id_responsable_tienda": null
     },
     {
@@ -204,8 +204,8 @@
       "domicilio": "c/ Principal, s/n",
       "c_postal": "29590",
       "zona_geografica": "Campanillas",
-      "id_cadena": "1",
-      "id_capitan": "4"
+      "id_cadena": 1,
+      "id_capitan": 4
     },
     {
       "id": "8",
@@ -214,8 +214,8 @@
       "domicilio": "Av. Velázquez, 45",
       "c_postal": "29004",
       "zona_geografica": "Ctra. Cádiz",
-      "id_cadena": "5",
-      "id_capitan": "1",
+      "id_cadena": 5,
+      "id_capitan": 1,
       "id_responsable_tienda": null
     },
     {
@@ -225,9 +225,9 @@
       "domicilio": "c/ Martínez de la Rosa",
       "c_postal": "29010",
       "zona_geografica": "Bailén",
-      "id_cadena": "4",
-      "id_capitan": "3",
-      "id_responsable_tienda": "7"
+      "id_cadena": 4,
+      "id_capitan": 3,
+      "id_responsable_tienda": 7
     },
     {
       "id": "10",
@@ -236,8 +236,8 @@
       "domicilio": "Alameda de Capuchinos",
       "c_postal": "29013",
       "zona_geografica": "Capuchinos",
-      "id_cadena": "5",
-      "id_capitan": "1",
+      "id_cadena": 5,
+      "id_capitan": 1,
       "id_responsable_tienda": null
     },
     {
@@ -246,7 +246,7 @@
       "domicilio": "c/ Hamlet, 2",
       "c_postal": "29006",
       "zona_geografica": "Cruz de Humilladero",
-      "id_cadena": "6",
+      "id_cadena": 6,
       "id_capitan": null,
       "id_responsable_tienda": null,
       "id": "11"
@@ -257,7 +257,7 @@
       "domicilio": "Av. Andalucía, 4",
       "c_postal": "29007",
       "zona_geografica": "Centro",
-      "id_cadena": "6",
+      "id_cadena": 6,
       "id_capitan": null,
       "id_responsable_tienda": null,
       "id": "12"
@@ -331,40 +331,40 @@
   "voluntario_entidad": [
     {
       "id": "1",
-      "id_voluntario": "1",
+      "id_voluntario": 1,
       "nombre_asociacion": "Ayuntamiento de Almáchar",
       "n_voluntarios": 15,
-      "id_responsable_entidad": "6"
+      "id_responsable_entidad": 6
     },
     {
       "id": "4",
-      "id_voluntario": "4",
+      "id_voluntario": 4,
       "nombre_asociacion": "Grupo Scout Malaka",
       "n_voluntarios": 12,
-      "id_responsable_entidad": "6"
+      "id_responsable_entidad": 6
     }
   ],
   "voluntario_fisico": [
     {
       "id": "2",
-      "id_voluntario": "2",
+      "id_voluntario": 2,
       "nombre": "Maria",
       "apellidos": "López García",
-      "id_coordinador": "201"
+      "id_coordinador": 201
     },
     {
       "id": "3",
-      "id_voluntario": "3",
+      "id_voluntario": 3,
       "nombre": "Carlos",
       "apellidos": "Sainz",
-      "id_coordinador": "202"
+      "id_coordinador": 202
     },
     {
       "id": "5",
-      "id_voluntario": "5",
+      "id_voluntario": 5,
       "nombre": "Lucía",
       "apellidos": "Méndez",
-      "id_coordinador": "201"
+      "id_coordinador": 201
     }
   ],
   "turnos": [
@@ -373,99 +373,99 @@
       "dia": "2026-05-02",
       "hora_inicio": "09:00",
       "hora_fin": "14:00",
-      "id_campana": "2",
-      "id_voluntario": "1",
-      "id_tienda": "1"
+      "id_campana": 2,
+      "id_voluntario": 1,
+      "id_tienda": 1
     },
     {
       "id": "2",
       "dia": "2026-05-02",
       "hora_inicio": "14:00",
       "hora_fin": "19:00",
-      "id_campana": "2",
-      "id_voluntario": "2",
-      "id_tienda": "1"
+      "id_campana": 2,
+      "id_voluntario": 2,
+      "id_tienda": 1
     },
     {
       "id": "3",
       "dia": "2026-05-03",
       "hora_inicio": "09:00",
       "hora_fin": "14:00",
-      "id_campana": "2",
-      "id_voluntario": "5",
-      "id_tienda": "1"
+      "id_campana": 2,
+      "id_voluntario": 5,
+      "id_tienda": 1
     },
     {
       "id": "4",
       "dia": "2026-05-02",
       "hora_inicio": "10:00",
       "hora_fin": "14:00",
-      "id_campana": "2",
-      "id_voluntario": "4",
-      "id_tienda": "2"
+      "id_campana": 2,
+      "id_voluntario": 4,
+      "id_tienda": 2
     },
     {
       "id": "5",
       "dia": "2025-11-25",
       "hora_inicio": "09:00",
       "hora_fin": "14:00",
-      "id_campana": "1",
-      "id_voluntario": "2",
-      "id_tienda": "7"
+      "id_campana": 1,
+      "id_voluntario": 2,
+      "id_tienda": 7
     },
     {
       "id": "6",
       "dia": "2026-05-03",
       "hora_inicio": "14:00",
       "hora_fin": "19:00",
-      "id_campana": "2",
-      "id_voluntario": "3",
-      "id_tienda": "3"
+      "id_campana": 2,
+      "id_voluntario": 3,
+      "id_tienda": 3
     },
     {
       "id": "7",
       "dia": "2026-05-04",
       "hora_inicio": "09:00",
       "hora_fin": "14:00",
-      "id_campana": "2",
-      "id_voluntario": "1",
-      "id_tienda": "9"
+      "id_campana": 2,
+      "id_voluntario": 1,
+      "id_tienda": 9
     },
     {
       "id": "8",
       "dia": "2026-05-04",
       "hora_inicio": "14:00",
       "hora_fin": "19:00",
-      "id_campana": "2",
-      "id_voluntario": "4",
-      "id_tienda": "4"
+      "id_campana": 2,
+      "id_voluntario": 4,
+      "id_tienda": 4
     }
   ],
   "notificaciones": [
     {
       "id": "1",
-      "id_usuario_destino": "2",
+      "id_usuario_destino": 2,
       "fecha_creacion": "2026-04-14T09:00:00Z",
       "asunto": "Nueva campaña \"Gran Recogida\" asignada",
       "mensaje": "Se te ha asignado la gestión de la Gran Recogida 2026 para tu zona."
     },
     {
       "id": "2",
-      "id_usuario_destino": "2",
+      "id_usuario_destino": 2,
       "fecha_creacion": "2026-04-12T16:30:00Z",
       "asunto": "Cambio en el turno de Sábado - Tienda Almáchar",
       "mensaje": "Se ha producido un cambio en los voluntarios asignados al turno de tarde en la tienda de Almáchar."
     },
     {
       "id": "3",
-      "id_usuario_destino": "1",
+      "id_usuario_destino": 1,
       "fecha_creacion": "2026-05-01T10:00:00Z",
       "asunto": "Validación pendiente: Nuevo Colaborador",
       "mensaje": "El coordinador J.M. Cobos ha registrado un nuevo colaborador que requiere tu aprobación."
     },
     {
       "id": "4",
-      "id_usuario_destino": "4",
+      "id_usuario_destino": 4,
       "fecha_creacion": "2026-05-04T12:00:00Z",
       "asunto": "Recordatorio: Inicio de Gran Recogida",
       "mensaje": "Mañana comienza la Gran Recogida. Por favor, asegúrate de que todos los capitanes tengan sus materiales."
@@ -474,51 +474,51 @@
   "participa": [
     {
       "id": "2",
-      "id_campana": "2",
-      "id_tienda": "2",
-      "id_coordinador": "2"
+      "id_campana": 2,
+      "id_tienda": 2,
+      "id_coordinador": 2
     },
     {
       "id": "3",
-      "id_campana": "2",
-      "id_tienda": "3",
-      "id_coordinador": "2"
+      "id_campana": 2,
+      "id_tienda": 3,
+      "id_coordinador": 2
     },
     {
       "id": "4",
-      "id_campana": "2",
-      "id_tienda": "4",
-      "id_coordinador": "5"
+      "id_campana": 2,
+      "id_tienda": 4,
+      "id_coordinador": 5
     },
     {
       "id": "5",
-      "id_campana": "2",
-      "id_tienda": "5",
-      "id_coordinador": "5"
+      "id_campana": 2,
+      "id_tienda": 5,
+      "id_coordinador": 5
     },
     {
       "id": "6",
-      "id_campana": "2",
-      "id_tienda": "6",
-      "id_coordinador": "5"
+      "id_campana": 2,
+      "id_tienda": 6,
+      "id_coordinador": 5
     },
     {
       "id": "8",
-      "id_campana": "1",
-      "id_tienda": "7",
-      "id_coordinador": "2"
+      "id_campana": 1,
+      "id_tienda": 7,
+      "id_coordinador": 2
     },
     {
       "id": "9",
-      "id_campana": "1",
-      "id_tienda": "12",
-      "id_coordinador": "5"
+      "id_campana": 1,
+      "id_tienda": 12,
+      "id_coordinador": 5
     },
     {
       "id": "10",
-      "id_campana": "1",
-      "id_tienda": "4",
-      "id_coordinador": "5"
+      "id_campana": 1,
+      "id_tienda": 4,
+      "id_coordinador": 5
     },
     {
       "id_tienda": "1",

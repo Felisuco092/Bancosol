@@ -85,7 +85,6 @@ export default function TurnosPage() {
     const campanaId = event.target.value
     setSelectedCampana(campanaId)
     let participacionesCampana = []
-    console.log('Usuario:', usuario)
     if (String(usuario.id_rol) === "3") {
       participacionesCampana = await fetchData(`participa?id_campana=${campanaId}&id_coordinador=${usuario.id}`)
     } else {
