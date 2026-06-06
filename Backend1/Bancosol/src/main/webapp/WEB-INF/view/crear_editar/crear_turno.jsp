@@ -65,19 +65,9 @@
                     <select name="idVoluntario" id="idVoluntario" required>
                         <option value="">-- Seleccione Voluntario --</option>
                         <% for(VoluntarioDTO v: voluntarios){%>
-                    <option value="<%=v.getId()%>" <%= (idVolunarioSel != null && idVolunarioSel.equals(v.getId())) ? "selected" : "" %>>
-                        <% // lo mismo que en tablas/turnos -> identificar si es voluntario Físico o voluntario Entity
-                            String nameToDisplay = null;
-                            Object actual = Hibernate.unproxy(v);
-                            if (actual instanceof VoluntarioFisicoEntity) {
-                            nameToDisplay = ((VoluntarioFisicoEntity) actual).getNombre();
-                            } else if (actual instanceof VoluntarioEntidadEntity) {
-                            nameToDisplay = ((VoluntarioEntidadEntity) actual).getNombreAsociacion();
-                            } else {
-                            nameToDisplay = "Voluntario #" + v.getId();
-                            }
-                        %>
-                        <%= nameToDisplay %></option>
+                        <option value="<%=v.getId()%>" <%= (idVolunarioSel != null && idVolunarioSel.equals(v.getId())) ? "selected" : "" %>>
+                            <%= v.getNombreDisplay() != null ? v.getNombreDisplay() : ("Voluntario #" + v.getId()) %>
+                        </option>
                         <%}%>
                     </select>
                 </div>

@@ -24,15 +24,8 @@
         boolean pendiente = v.getAprobado() == null || !v.getAprobado();
         String badgeClass = pendiente ? "badge-confirmar" : (esPersona ? "badge-persona" : "badge-entidad");
         String badgeText = pendiente ? "Por confirmar" : (esPersona ? "Persona Física" : "Entidad / Grupo");
-        String nombre;
-        int nVol;
-        if (esPersona) {
-            nombre = v.getNombre() + " " + v.getApellidos();
-            nVol = 1;
-        } else {
-            nombre = v.getNombreAsociacion();
-            nVol = v.getNVoluntarios();
-        }
+        String nombre = v.getNombreDisplay();
+        int nVol = v.getNumeroVoluntariosDisplay();
     %>
         <tr data-es-persona="<%=esPersona%>" data-localidad="<%=v.getZonaGeografica()%>">
             <td><%=nombre%></td>
