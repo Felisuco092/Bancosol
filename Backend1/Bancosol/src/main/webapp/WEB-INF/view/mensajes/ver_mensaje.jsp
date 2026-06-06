@@ -29,7 +29,8 @@
     <div class="formulario">
         <div class="form-group">
             <label for="nombre">Mensaje:</label>
-            <p><%=notificacion.getMensaje()%></p>
+            <!-- Para que respete los saltos de línea -->
+            <p style="white-space: pre-line;"><%=notificacion.getMensaje()%></p>
         </div>
         <div class="form-actions">
             <button type="button" class="btn btn-secondary" onclick="history.back()">Volver</button>
