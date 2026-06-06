@@ -191,6 +191,17 @@ server.use((req, res, next) => {
   }
 })
 
+server.get('/dashboard/stats', (req, res) => {
+  const db = router.db
+  res.json({
+    tiendas: db.get('tiendas').value(),
+    cadenas: db.get('cadenas').value(),
+    campanas: db.get('campanas').value(),
+    voluntarioEntidad: db.get('voluntario_entidad').value(),
+    voluntarioFisico: db.get('voluntario_fisico').value()
+  })
+})
+
 server.use(router)
 
 router.render = (req, res) => {
