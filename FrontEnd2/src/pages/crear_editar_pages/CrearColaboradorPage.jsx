@@ -4,13 +4,14 @@ import { fetchData, postData, putData } from '../../services/api'
 import { useAuth } from '../../auth/useAuthHook'
 
 export default function CrearColaboradorPage() {
-  const { tienePermiso } = useAuth()
+  const { tienePermiso, usuario } = useAuth()
   const { id } = useParams()
   const editando = !!id
   const navigate = useNavigate()
   const [tipo, setTipo] = useState('')
   const [responsablesEntidad, setResponsablesEntidad] = useState([])
-  const [aprobadoOriginal, setAprobadoOriginal] = useState(false) // estado original al cargar, para saber si mostrar el checkbox de confirmar
+  const [aprobadoOriginal, setAprobadoOriginal] = useState(false)
+  const [idRegistroVoluntario, setIdRegistroVoluntario] = useState(null)
   const [form, setForm] = useState({
     domicilio: '',
     zona_geografica: '',
@@ -45,6 +46,7 @@ export default function CrearColaboradorPage() {
             tipoDetectado = 'fisico'
             nombreFisico = vf[0].nombre || ''
             apellidosFisico = vf[0].apellidos || ''
+            setIdRegistroVoluntario(vf[0].id)
           }
 
           const ve = await fetchData('voluntario_entidad?id_voluntario=' + id).catch(() => [])
@@ -54,6 +56,7 @@ export default function CrearColaboradorPage() {
             nombreAsoc = ve[0].nombre_asociacion || ''
             nVol = ve[0].n_voluntarios || ''
             idRespEntidad = ve[0].id_responsable_entidad || ''
+            setIdRegistroVoluntario(ve[0].id)
           }
 
           setAprobadoOriginal(vb.aprobado === true || vb.aprobado === 'true')
@@ -90,13 +93,13 @@ export default function CrearColaboradorPage() {
           aprobado: form.aprobado
         })
         if (tipo === 'fisico') {
-          await putData('voluntario_fisico/' + id, {
+          await putData('voluntario_fisico/' + idRegistroVoluntario, {
             id_voluntario: id,
             nombre: form.nombre,
             apellidos: form.apellidos
           })
         } else if (tipo === 'entidad') {
-          await putData('voluntario_entidad/' + id, {
+          await putData('voluntario_entidad/' + idRegistroVoluntario, {
             id_voluntario: id,
             nombre_asociacion: form.nombre_asociacion,
             n_voluntarios: form.n_voluntarios,
@@ -127,7 +130,21 @@ export default function CrearColaboradorPage() {
             id_responsable_entidad: form.id_responsable_entidad || null
           })
         }
-        alert('Colaborador creado con éxito')
+        //Comprobamos si no es admin para avisar para que lo confirme un admin
+        if (String(usuario.id_rol) !== "1") {
+          const adminUsers = await fetchData('usuarios?id_rol=1')
+          Promise.all(adminUsers.map(admin => {
+            return postData('notificaciones', {
+              id_usuario_destino: admin.id,
+              asunto: 'Nuevo colaborador creado por ' + usuario.nombre + ' ' + usuario.apellidos + ' pendiente de confirmación',
+              mensaje: `Nuevo colaborador "${tipo === 'fisico' ? form.nombre + ' ' + form.apellidos : form.nombre_asociacion}" creado por ${usuario.nombre} ${usuario.apellidos}. Por favor, revisa y confirma su colaboración.`,
+              fecha_creacion: new Date().toISOString()
+            })
+          }))
+          alert('Colaborador creado con éxito. Por favor, espera a que un administrador lo confirme.')
+        } else {
+          alert('Colaborador creado con éxito')
+        }
       }
       navigate('/colaboradores')
     } catch (err) {
