@@ -1,12 +1,14 @@
 import { useState, useEffect } from 'react'
 import { useNavigate, Link, useParams } from 'react-router-dom'
 import { fetchData, postData, putData } from '../../services/api'
+import { isInvalidDateRange, hasDateOverlap } from '../../utils/dateUtils'
 
 export default function CrearCampanaPage() {
   const { id } = useParams()
   const editando = !!id
   const navigate = useNavigate()
   const [cadenas, setCadenas] = useState([])
+  const [todasCampanas, setTodasCampanas] = useState([])
   const [cadenasSeleccion, setCadenasSeleccion] = useState([])
   const [form, setForm] = useState({
     nombre: '',
@@ -31,27 +33,45 @@ export default function CrearCampanaPage() {
   useEffect(() => {
     async function load() {
       try {
-        const cads = await fetchData('cadenas')
+        const [cads, camps] = await Promise.all([
+          fetchData('cadenas'),
+          fetchData('campanas')
+        ])
         setCadenas(cads)
+        setTodasCampanas(camps)
 
         if (editando) {
-          const c = await fetchData('campanas/' + id)
-          setForm({
-            nombre: c.nombre || '',
-            ano: c.ano || '',
-            dia_comienzo: c.dia_comienzo || '',
-            dia_final: c.dia_final || ''
-          })
+          const c = camps.find(camp => String(camp.id) === String(id))
+          if (c) {
+            setForm({
+              nombre: c.nombre || '',
+              ano: c.ano || '',
+              dia_comienzo: c.dia_comienzo || '',
+              dia_final: c.dia_final || ''
+            })
+          }
         }
       } catch (err) {
         console.error(err)
       }
     }
     load()
-  }, [])
+  }, [id, editando])
 
   async function handleSubmit(e) {
     e.preventDefault()
+
+    // Validaciones
+    if (isInvalidDateRange(form.dia_comienzo, form.dia_final)) {
+      alert('La fecha de inicio no puede ser posterior a la fecha de fin.')
+      return
+    }
+
+    if (hasDateOverlap(form.dia_comienzo, form.dia_final, todasCampanas, id)) {
+      alert('Las fechas se solapan con una campaña existente.')
+      return
+    }
+
     try {
       if (editando) {
         await putData('campanas/' + id, form)
