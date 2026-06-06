@@ -200,7 +200,7 @@ export default function CrearTiendaPage() {
 
           <div className="form-group">
             <label htmlFor="c_postal">Código Postal<span className="required">*</span></label>
-            <input type="number" name="c_postal" id="c_postal" value={form.c_postal} onChange={handleChange} required />
+            <input type="number" name="c_postal" id="c_postal" value={form.c_postal} onChange={handleChange} required min="0" />
           </div>
 
           <div className="form-group">
