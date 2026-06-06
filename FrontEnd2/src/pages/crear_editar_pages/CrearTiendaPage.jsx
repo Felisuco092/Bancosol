@@ -7,7 +7,10 @@ export default function CrearTiendaPage() {
   const editando = !!id
   const navigate = useNavigate()
   const [cadenas, setCadenas] = useState([])
+
   const [capitanes, setCapitanes] = useState([])
+  const [coordinadores, setCoordinadores] = useState([])
+
   const [responsablesTienda, setResponsablesTienda] = useState([])
   const [campanas, setCampanas] = useState([])
   const [participaSeleccion, setParticipaSeleccion] = useState([])
@@ -30,16 +33,18 @@ export default function CrearTiendaPage() {
   useEffect(() => {
     async function load() {
       try {
-        const [cads, users, respTienda, camps] = await Promise.all([
+        const [cads, users, respTienda, camps, coordinadores] = await Promise.all([
           fetchData('cadenas'),
           fetchData('usuarios?id_rol=2'),
           fetchData('usuarios?id_rol=5'),
-          fetchData('campanas')
+          fetchData('campanas'),
+          fetchData('usuarios?id_rol=3')
         ])
         setCadenas(cads)
         setCapitanes(users)
         setResponsablesTienda(respTienda)
         setCampanas(camps)
+        setCoordinadores(coordinadores)
 
         if (editando) {
           const [t, participaciones] = await Promise.all([
@@ -75,6 +80,12 @@ export default function CrearTiendaPage() {
     const aCrear = seleccion.filter(p =>
       !existentes.some(e => String(e.id_campana) === p.id_campana)
     )
+    const aActualizar = seleccion.filter(p =>
+      existentes.some(e => String(e.id_campana) === p.id_campana && String(e.id_coordinador) !== String(p.id_coordinador))
+    )
+    console.log('A borrar:', aBorrar)
+    console.log('Existentes:', existentes)
+    console.log('A actualizar:', aActualizar)
     return Promise.all([
       ...aBorrar.map(p => deleteData('participa/' + p.id)),
       ...aCrear.map(p =>
@@ -83,7 +94,15 @@ export default function CrearTiendaPage() {
           id_campana: p.id_campana,
           id_coordinador: p.id_coordinador || null
         })
-      )
+      ),
+      ...aActualizar.map(p => {
+        const idParticipa = existentes.find(e => String(e.id_campana) === p.id_campana).id
+        return putData('participa/' + idParticipa, {
+          id_tienda: tiendaId,
+          id_campana: p.id_campana,
+          id_coordinador: p.id_coordinador || null
+        })
+      })
     ])
   }
 
@@ -123,6 +142,38 @@ export default function CrearTiendaPage() {
       prev.some(p => p.id_campana === idCampana)
         ? prev.filter(p => p.id_campana !== idCampana)
         : [...prev, { id_campana: idCampana, id_coordinador: null }]
+    )
+  }
+
+  function handleSelectCoordinador(camp){
+    let participacion = participaSeleccion.find(p => p.id_campana === String(camp.id))
+    const coordinatores = coordinadores.map(coor => (
+      <option>
+        {coor.nombre} {coor.apellidos}
+      </option>
+    ))
+    function handleChangeCoordinador(event) {
+      const idCoordinador = event.target.value
+      const idCampana = camp.id
+      setParticipaSeleccion(prev => prev.map(p =>
+        p.id_campana === String(idCampana)
+          ? { ...p, id_coordinador: idCoordinador || null }
+          : p
+      ))
+    }
+    return (
+      <select
+        disabled={!participacion}
+        value={participacion ? participacion.id_coordinador || '' : ''}
+        onChange={handleChangeCoordinador}
+        >
+          <option value="">-- Sin coordinador --</option>
+          {coordinadores.map(coor => (
+            <option key={coor.id} value={coor.id}>
+              {coor.nombre} {coor.apellidos}
+            </option>
+          ))}
+      </select>
     )
   }
 
@@ -194,9 +245,11 @@ export default function CrearTiendaPage() {
             <label>Campañas en las que participa:</label>
             <table>
                   <thead>
-                    <th>Campaña</th>
-                    <th>Participa</th>
-                    <th>Coordinador</th>
+                    <tr>
+                      <th>Campaña</th>
+                      <th>Participa</th>
+                      <th>Coordinador</th>
+                    </tr>
                   </thead>
                   <tbody>
                     {campanas.map(camp => (
@@ -210,9 +263,7 @@ export default function CrearTiendaPage() {
                     />
                   </td>
                   <td>
-                    <select>
-                    <option value="">-- Coordinador --</option>
-                    </select>
+                    {handleSelectCoordinador(camp)}
                   </td>
                 </tr>
                 

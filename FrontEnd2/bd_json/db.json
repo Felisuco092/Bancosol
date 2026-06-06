@@ -473,12 +473,6 @@
   ],
   "participa": [
     {
-      "id": "1",
-      "id_campana": 2,
-      "id_tienda": 1,
-      "id_coordinador": 2
-    },
-    {
       "id": "2",
       "id_campana": 2,
       "id_tienda": 2,
@@ -529,8 +523,14 @@
     {
       "id_tienda": "1",
       "id_campana": "1",
-      "id_coordinador": null,
-      "id": "7Kc1j83"
+      "id_coordinador": "5",
+      "id": "mabLjP9"
+    },
+    {
+      "id_tienda": "1",
+      "id_campana": "2",
+      "id_coordinador": "2",
+      "id": "HvzJjEf"
     }
   ]
 }
