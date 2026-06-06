@@ -157,7 +157,7 @@ export default function CrearColaboradorPage() {
 
           <div className="form-group">
             <label htmlFor="codigo_postal">Código Postal<span className="required">*</span></label>
-            <input type="text" name="codigo_postal" id="codigo_postal" value={form.codigo_postal} onChange={handleChange} required />
+            <input type="number" name="codigo_postal" id="codigo_postal" value={form.codigo_postal} onChange={handleChange} required min="0" />
           </div>
 
           <div className="form-group">
@@ -197,7 +197,7 @@ export default function CrearColaboradorPage() {
               </div>
               <div className="form-group">
                 <label htmlFor="n_voluntarios">Número de Voluntarios<span className="required">*</span></label>
-                <input type="number" name="n_voluntarios" id="n_voluntarios" value={form.n_voluntarios} onChange={handleChange} required />
+                <input type="number" name="n_voluntarios" id="n_voluntarios" value={form.n_voluntarios} onChange={handleChange} required min="0" />
               </div>
               <div className="form-group">
                 <label htmlFor="id_responsable_entidad">Responsable de entidad:</label>
