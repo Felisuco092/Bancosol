@@ -7,6 +7,7 @@ import uma.grupo13.bancosol.dao.TiendasRepository;
 import uma.grupo13.bancosol.dao.TurnoRepository;
 import uma.grupo13.bancosol.dao.VoluntariosRepository;
 import uma.grupo13.bancosol.dto.TurnoDTO;
+import uma.grupo13.bancosol.dto.UsuarioDTO;
 import uma.grupo13.bancosol.entity.CampanaEntity;
 import uma.grupo13.bancosol.entity.TiendaEntity;
 import uma.grupo13.bancosol.entity.TurnoEntity;
@@ -15,6 +16,7 @@ import uma.grupo13.bancosol.mappers.TurnoMapper;
 
 import java.time.LocalDate;
 import java.time.LocalTime;
+import java.util.ArrayList;
 import java.util.List;
 
 @Service
@@ -75,6 +77,28 @@ public class TurnosService {
         List<TurnoEntity> lista= turnoRepository.filtrarTurnos(idCampana, idTienda);
         return turnoMapper.toDTOList(lista);
     }
+
+    public List<TurnoDTO> filtrarTurnosPorRol(Integer idCampana, Integer idTienda, UsuarioDTO usuario) {
+        List<TurnoEntity> turnos;
+        Integer rolId = usuario.getRol().getId();
+        Integer userId = usuario.getId();
+
+        if (rolId == 1) { // Admin
+            turnos = turnoRepository.filtrarTurnos(idCampana, idTienda);
+        } else if (rolId == 2) { // Coordinador
+            turnos = turnoRepository.filtrarTurnosCoord(idCampana, idTienda, userId);
+        } else if (rolId == 3) { // Capitan
+            turnos = turnoRepository.filtrarTurnosCapi(idCampana, idTienda, userId);
+        } else if (rolId == 4) { // Resp. Entidad
+            turnos = turnoRepository.filtrarTurnosRespEntd(idCampana, idTienda, userId);
+        } else if (rolId == 5) { // Resp. Tienda
+            turnos = turnoRepository.filtrarTurnosRespTienda(idCampana, idTienda, userId);
+        } else {
+            turnos = new ArrayList<>();
+        }
+        return turnoMapper.toDTOList(turnos);
+    }
+
     public List<TurnoDTO> filtrarTurnosResponsableEntidad(Integer idCampana, Integer idTienda, Integer idResp) {
         List<TurnoEntity> lista= turnoRepository.filtrarTurnosRespEntd(idCampana, idTienda, idResp);
         return turnoMapper.toDTOList(lista);

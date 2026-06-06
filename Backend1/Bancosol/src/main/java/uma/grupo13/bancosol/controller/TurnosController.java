@@ -31,18 +31,14 @@ public class TurnosController {
     public String doTurnos(Model model, @SessionAttribute(name = "user", required = false) UsuarioDTO user){
         if (user == null) return "redirect:/";
         if (!validaSesion.tienePermiso(user.getRol().getId(), Permiso.TURNOS)) return "redirect:/dashboard";
-        List<TurnoDTO> turnos = turnosService.listarTurnos();
+        
+        List<TurnoDTO> turnos = turnosService.filtrarTurnosPorRol(null, null, user);
         List<CampanaDTO> campanas = campanasService.listarCampanas();
-        List<TiendaDTO> tiendas= new ArrayList<>();
-        //para las tiendas segun el rol(solo esta esto)
-        if(user.getRol().getId()==1 || user.getRol().getId()==4){
+        List<TiendaDTO> tiendas;
+        if (user.getRol().getId() == 4) { // Resp. Entidad ve todas las tiendas en filtros de turnos
             tiendas = tiendasService.listarTiendas();
-        }else if (user.getRol().getId()==2){
-            tiendas = tiendasService.listarTiendasCoord(user.getId());
-        }else if (user.getRol().getId()==3){
-            tiendas = tiendasService.listarTiendasCapi(user.getId());
-        }else if (user.getRol().getId()==5){
-            tiendas = tiendasService.listarTiendasResponsable(user.getId());
+        } else {
+            tiendas = tiendasService.filtrarTiendasDependiendoDelRol(user, 0, "");
         }
 
         model.addAttribute("paginaActual", "turnos");
@@ -66,8 +62,20 @@ public class TurnosController {
         if (!validaSesion.tienePermiso(user.getRol().getId(), Permiso.EDITAR_TURNOS)) return "redirect:/dashboard";
         TurnoDTO newTurno = new TurnoDTO();
         List<CampanaDTO> campanas = campanasService.listarCampanas();
-        List<TiendaDTO> tiendas = tiendasService.listarTiendas();
-        List<VoluntarioDTO> voluntarios = voluntariosService.listarVoluntarios();
+        List<TiendaDTO> tiendas;
+        if (user.getRol().getId() == 4) {
+            tiendas = tiendasService.listarTiendas();
+        } else {
+            tiendas = tiendasService.filtrarTiendasDependiendoDelRol(user, 0, "");
+        }
+        
+        List<VoluntarioDTO> voluntarios = new ArrayList<>();
+        if(user.getRol().getId()==1 || user.getRol().getId()==2 || user.getRol().getId()==3){
+            voluntarios = voluntariosService.listarVoluntarios();
+        }else if (user.getRol().getId()==4){
+            voluntarios = voluntariosService.listarVoluntariosResponsable(user.getId());
+        }
+
         model.addAttribute("turno", newTurno);
         model.addAttribute("campanas", campanas);
         model.addAttribute("tiendas", tiendas);
@@ -112,8 +120,19 @@ public class TurnosController {
             model.addAttribute("idVoluntarioSel", idVoluntario);
 
             List<CampanaDTO> campanas = campanasService.listarCampanas();
-            List<TiendaDTO> tiendas = tiendasService.listarTiendas();
-            List<VoluntarioDTO> voluntarios = voluntariosService.listarVoluntarios();
+            List<TiendaDTO> tiendas;
+            if (user.getRol().getId() == 4) {
+                tiendas = tiendasService.listarTiendas();
+            } else {
+                tiendas = tiendasService.filtrarTiendasDependiendoDelRol(user, 0, "");
+            }
+            List<VoluntarioDTO> voluntarios = new ArrayList<>();
+            if(user.getRol().getId()==1 || user.getRol().getId()==2 || user.getRol().getId()==3){
+                voluntarios = voluntariosService.listarVoluntarios();
+            }else if (user.getRol().getId()==4){
+                voluntarios = voluntariosService.listarVoluntariosResponsable(user.getId());
+            }
+
             model.addAttribute("voluntarios", voluntarios);
             model.addAttribute("campanas", campanas);
             model.addAttribute("tiendas", tiendas);
@@ -131,12 +150,7 @@ public class TurnosController {
         if (user == null) return "redirect:/";
         if (!validaSesion.tienePermiso(user.getRol().getId(), Permiso.TURNOS)) return "redirect:/dashboard";
 
-        List<TurnoDTO> turnosFiltrados = new ArrayList<>();
-        if(user.getRol().getId()==4){
-            turnosFiltrados = turnosService.filtrarTurnosResponsableEntidad(idCampana, idTienda, user.getId());
-        }else{
-            turnosFiltrados = turnosService.filtrarTurnos(idCampana, idTienda);
-        }
+        List<TurnoDTO> turnosFiltrados = turnosService.filtrarTurnosPorRol(idCampana, idTienda, user);
 
         model.addAttribute("turnos", turnosFiltrados);
 
@@ -166,7 +180,13 @@ public class TurnosController {
 
         model.addAttribute("idTurno", idTurno);
         model.addAttribute("idCampana", idCampana);
-        List<VoluntarioDTO> voluntarios = voluntariosService.listarVoluntarios();
+        
+        List<VoluntarioDTO> voluntarios = new ArrayList<>();
+        if(user.getRol().getId()==1 || user.getRol().getId()==2 || user.getRol().getId()==3){
+            voluntarios = voluntariosService.listarVoluntarios();
+        }else if (user.getRol().getId()==4){
+            voluntarios = voluntariosService.listarVoluntariosResponsable(user.getId());
+        }
 
         CampanaDTO campanaDTO = new CampanaDTO();
         if(idCampana != null) {
@@ -232,7 +252,7 @@ public class TurnosController {
                                                          @SessionAttribute(name = "user", required = false) UsuarioDTO user) {
         if (user == null) return List.of();
 
-        List<TiendaDTO> tiendas = campanasService.filtrarTiendasParticipaCampana(idCampana);
+        List<TiendaDTO> tiendas = campanasService.filtrarTiendasParticipaCampanaPorRol(idCampana, user);
         return tiendas.stream().map(t -> {
             Map<String, Object> m = new HashMap<>();
             m.put("id", t.getId());
