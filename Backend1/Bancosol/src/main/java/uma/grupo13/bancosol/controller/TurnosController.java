@@ -34,12 +34,7 @@ public class TurnosController {
         
         List<TurnoDTO> turnos = turnosService.filtrarTurnosPorRol(null, null, user);
         List<CampanaDTO> campanas = campanasService.listarCampanas();
-        List<TiendaDTO> tiendas;
-        if (user.getRol().getId() == 4) { // Resp. Entidad ve todas las tiendas en filtros de turnos
-            tiendas = tiendasService.listarTiendas();
-        } else {
-            tiendas = tiendasService.filtrarTiendasDependiendoDelRol(user, 0, "");
-        }
+        List<TiendaDTO> tiendas = tiendasService.listarTiendasParaTurnos(user);
 
         model.addAttribute("paginaActual", "turnos");
         model.addAttribute("turnos", turnos);
@@ -55,12 +50,7 @@ public class TurnosController {
         if (!validaSesion.tienePermiso(user.getRol().getId(), Permiso.EDITAR_TURNOS)) return "redirect:/dashboard";
         TurnoDTO newTurno = new TurnoDTO();
         List<CampanaDTO> campanas = campanasService.listarCampanas();
-        List<TiendaDTO> tiendas;
-        if (user.getRol().getId() == 4) {
-            tiendas = tiendasService.listarTiendas();
-        } else {
-            tiendas = tiendasService.filtrarTiendasDependiendoDelRol(user, 0, "");
-        }
+        List<TiendaDTO> tiendas = tiendasService.listarTiendasParaTurnos(user);
         
         List<VoluntarioDTO> voluntarios = voluntariosService.listarVoluntariosSegunRol(user);
 
@@ -108,12 +98,7 @@ public class TurnosController {
             model.addAttribute("idVoluntarioSel", idVoluntario);
 
             List<CampanaDTO> campanas = campanasService.listarCampanas();
-            List<TiendaDTO> tiendas;
-            if (user.getRol().getId() == 4) {
-                tiendas = tiendasService.listarTiendas();
-            } else {
-                tiendas = tiendasService.filtrarTiendasDependiendoDelRol(user, 0, "");
-            }
+            List<TiendaDTO> tiendas = tiendasService.listarTiendasParaTurnos(user);
             List<VoluntarioDTO> voluntarios = voluntariosService.listarVoluntariosSegunRol(user);
 
             model.addAttribute("voluntarios", voluntarios);

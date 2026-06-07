@@ -35,16 +35,7 @@ public class TiendasController {
         if (user == null) return "redirect:/";
         if (!validaSesion.tienePermiso(user.getRol().getId(), Permiso.TIENDAS)) return "redirect:/dashboard";
         model.addAttribute("paginaActual", "tiendas");
-        List<TiendaDTO> tiendas= new ArrayList<>();
-        if(user.getRol().getId()==1){
-            tiendas = tiendasService.listarTiendas();
-        }else if (user.getRol().getId()==2){
-            tiendas = tiendasService.listarTiendasCoord(user.getId());
-        }else if (user.getRol().getId()==3){
-            tiendas = tiendasService.listarTiendasCapi(user.getId());
-        } if (user.getRol().getId()==5){
-            tiendas = tiendasService.listarTiendasResponsable(user.getId());
-        }
+        List<TiendaDTO> tiendas = tiendasService.listarTiendasSegunRol(user);
 
 
         List<CampanaDTO> campanas = campanasService.listarCampanas();
