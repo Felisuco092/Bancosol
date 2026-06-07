@@ -13,6 +13,7 @@ import uma.grupo13.bancosol.services.NotificacionesService;
 import uma.grupo13.bancosol.services.TurnosService;
 import uma.grupo13.bancosol.services.VoluntariosService;
 import uma.grupo13.bancosol.services.utils.Permiso;
+import uma.grupo13.bancosol.services.utils.Roles;
 import uma.grupo13.bancosol.services.utils.ValidaSesion;
 
 import java.util.List;
@@ -109,7 +110,7 @@ public class ColaboradoresController {
 
         voluntariosService.guardarVoluntario(id, tipo, domicilio, zonaGeografica, codigoPostal, nombre,
                 apellidos, nombreAsociacion, nVoluntarios, confirmar, idResponsableEntidad);
-        if(!user.getRol().getId().equals(1) && id==null){// el admin no es el que crea al nuevo colaborador
+        if(!user.getRol().getId().equals(Roles.ADMIN) && id==null){
 
             notificacionesService.crearNotificacionColabYEnviar(nombre, apellidos, user.getUsuario());
         }

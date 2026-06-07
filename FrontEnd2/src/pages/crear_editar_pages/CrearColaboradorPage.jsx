@@ -2,6 +2,7 @@ import { useState, useEffect } from 'react'
 import { useNavigate, Link, useParams } from 'react-router-dom'
 import { fetchData, postData, putData } from '../../services/api'
 import { useAuth } from '../../auth/useAuthHook'
+import { Roles } from '../../utils/constants'
 
 export default function CrearColaboradorPage() {
   const { tienePermiso, usuario } = useAuth()
@@ -33,7 +34,7 @@ export default function CrearColaboradorPage() {
   useEffect(() => {
     async function load() {
       try {
-        const respEnt = await fetchData('usuarios?id_rol=4')
+        const respEnt = await fetchData('usuarios?id_rol=' + Roles.RESP_ENTIDAD)
         setResponsablesEntidad(respEnt)
 
         if (editando) {
@@ -131,8 +132,8 @@ export default function CrearColaboradorPage() {
           })
         }
         //Comprobamos si no es admin para avisar para que lo confirme un admin
-        if (String(usuario.id_rol) !== "1") {
-          const adminUsers = await fetchData('usuarios?id_rol=1')
+        if (usuario.id_rol !== Roles.ADMIN) {
+          const adminUsers = await fetchData('usuarios?id_rol=' + Roles.ADMIN)
           Promise.all(adminUsers.map(admin => {
             return postData('notificaciones', {
               id_usuario_destino: admin.id,

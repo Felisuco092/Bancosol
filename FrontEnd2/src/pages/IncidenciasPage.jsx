@@ -2,6 +2,7 @@ import { useState, useEffect } from 'react'
 import { useSearchParams, useNavigate } from 'react-router-dom'
 import { fetchData, postData } from '../services/api'
 import { useAuth } from '../auth/useAuthHook'
+import { Roles } from '../utils/constants'
 
 export default function IncidenciasPage() {
     const { usuario } = useAuth()
@@ -66,7 +67,7 @@ export default function IncidenciasPage() {
 
         const asuntoNotificacion = `SE HA REGISTRADO UNA NUEVA INCIDENCIA: ${asunto}`
 
-        fetchData('usuarios?id_rol=1')
+        fetchData('usuarios?id_rol=' + Roles.ADMIN)
             .then(admins => {
                 const promises = admins.map(admin =>
                     postData('notificaciones', {

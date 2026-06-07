@@ -25,7 +25,7 @@ public class ValidaSesion {
         permisosRol0.put(Permiso.EDITAR_COLABORADORES, true);
         permisosRol0.put(Permiso.BORRAR_COLABORADORES, true);
         permisosRol0.put(Permiso.CONFIRMAR_COLABORADORES, true);
-        permisos.put(1, permisosRol0);
+        permisos.put(Roles.ADMIN, permisosRol0);
 
         Map<Permiso, Boolean> permisosRol1 = new HashMap<>();
         permisosRol1.put(Permiso.USUARIOS, false);
@@ -40,7 +40,7 @@ public class ValidaSesion {
         permisosRol1.put(Permiso.EDITAR_COLABORADORES, true);
         permisosRol1.put(Permiso.BORRAR_COLABORADORES, false);
         permisosRol1.put(Permiso.CONFIRMAR_COLABORADORES, false);
-        permisos.put(2, permisosRol1);
+        permisos.put(Roles.COORDINADOR, permisosRol1);
 
         Map<Permiso, Boolean> permisosRol2 = new HashMap<>();
         permisosRol2.put(Permiso.USUARIOS, false);
@@ -55,7 +55,7 @@ public class ValidaSesion {
         permisosRol2.put(Permiso.EDITAR_COLABORADORES, false);
         permisosRol2.put(Permiso.BORRAR_COLABORADORES, false);
         permisosRol2.put(Permiso.CONFIRMAR_COLABORADORES, false);
-        permisos.put(3, permisosRol2);
+        permisos.put(Roles.CAPITAN, permisosRol2);
 
         Map<Permiso, Boolean> permisosRol3 = new HashMap<>();
         permisosRol3.put(Permiso.USUARIOS, false);
@@ -70,7 +70,7 @@ public class ValidaSesion {
         permisosRol3.put(Permiso.EDITAR_COLABORADORES, false);
         permisosRol3.put(Permiso.BORRAR_COLABORADORES, false);
         permisosRol3.put(Permiso.CONFIRMAR_COLABORADORES, false);
-        permisos.put(4, permisosRol3);
+        permisos.put(Roles.RESP_ENTIDAD, permisosRol3);
 
         Map<Permiso, Boolean> permisosRol4 = new HashMap<>();
         permisosRol4.put(Permiso.USUARIOS, false);
@@ -85,7 +85,7 @@ public class ValidaSesion {
         permisosRol4.put(Permiso.EDITAR_COLABORADORES, false);
         permisosRol4.put(Permiso.BORRAR_COLABORADORES, false);
         permisosRol4.put(Permiso.CONFIRMAR_COLABORADORES, false);
-        permisos.put(5, permisosRol4);
+        permisos.put(Roles.RESP_TIENDA, permisosRol4);
     }
 
     public boolean verificarSesion(HttpSession session){

@@ -1,23 +1,26 @@
 import { useState } from 'react';
 import { ContextoAuten } from './ContextoAuten';
+import { Roles } from '../utils/constants';
 
 const PERMISOS_POR_ROL = {
-  1: { EDITAR_TIENDA: true, EDITAR_TURNOS: true, INCIDENCIAS: true,
+  [Roles.ADMIN]: { EDITAR_TIENDA: true, EDITAR_TURNOS: true, INCIDENCIAS: true,
        EDITAR_COLABORADORES: true, BORRAR_COLABORADORES: true, CONFIRMAR_COLABORADORES: true },
-  2: { EDITAR_TIENDA: false, EDITAR_TURNOS: false, INCIDENCIAS: true,
+  [Roles.CAPITAN]: { EDITAR_TIENDA: false, EDITAR_TURNOS: false, INCIDENCIAS: true,
        EDITAR_COLABORADORES: false, BORRAR_COLABORADORES: false },
-  3: { EDITAR_TIENDA: false, EDITAR_TURNOS: true, INCIDENCIAS: true,
+  [Roles.COORDINADOR]: { EDITAR_TIENDA: false, EDITAR_TURNOS: true, INCIDENCIAS: true,
        EDITAR_COLABORADORES: true, BORRAR_COLABORADORES: false },
-  4: { EDITAR_TIENDA: false, EDITAR_TURNOS: false, INCIDENCIAS: false,
+  [Roles.RESP_ENTIDAD]: { EDITAR_TIENDA: false, EDITAR_TURNOS: false, INCIDENCIAS: false,
        EDITAR_COLABORADORES: false, BORRAR_COLABORADORES: false },
-  5: { EDITAR_TIENDA: false, EDITAR_TURNOS: false, INCIDENCIAS: false,
+  [Roles.RESP_TIENDA]: { EDITAR_TIENDA: false, EDITAR_TURNOS: false, INCIDENCIAS: false,
        EDITAR_COLABORADORES: false, BORRAR_COLABORADORES: false },
 }
 
 export function ProveedorAuten({ children }) {
   const [usuario, setUsuario] = useState(() => {
     const guardado = sessionStorage.getItem('user');
-    return guardado ? JSON.parse(guardado) : null;
+    if (!guardado) return null;
+    const userData = JSON.parse(guardado);
+    return { ...userData, id_rol: String(userData.id_rol) };
   });
 
   function tienePermiso(permiso) {
@@ -28,9 +31,10 @@ export function ProveedorAuten({ children }) {
 
   const login = (userData, token) => {
     console.log('Login called with:', { userData, token });
-    sessionStorage.setItem('user', JSON.stringify(userData));
+    const normalizedUser = { ...userData, id_rol: String(userData.id_rol) };
+    sessionStorage.setItem('user', JSON.stringify(normalizedUser));
     sessionStorage.setItem('token', token);
-    setUsuario(userData);
+    setUsuario(normalizedUser);
   };
 
   const logout = () => {

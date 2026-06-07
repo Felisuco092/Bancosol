@@ -1,6 +1,7 @@
 import { useState } from 'react'
 import { NavLink, useNavigate } from 'react-router-dom'
 import { useAuth } from '../auth/useAuthHook'
+import { Roles } from '../utils/constants'
 import logoSrc from '../assets/logo.png'
 
 export default function Sidebar() {
@@ -21,14 +22,14 @@ export default function Sidebar() {
   const enlacesClass = `abierto`
 
   const menuItems = [
-    { to: '/dashboard', label: 'Cuadro de Mando', roles: [1, 2, 3, 4, 5] },
-    { to: '/campanas', label: 'Gestión de Campañas', roles: [1] },
-    { to: '/cadenas', label: 'Gestión de Cadenas', roles: [1] },
-    { to: '/tiendas', label: 'Gestión de Tiendas', roles: [1, 2, 3, 5] },
-    { to: '/colaboradores', label: 'Colaboradores', roles: [1, 2, 3, 4] },
-    { to: '/usuarios', label: 'Usuarios', roles: [1] },
-    { to: '/turnos', label: 'Asignación de Turnos', roles: [1, 2, 3, 4, 5] },
-    { to: '/bandeja', label: 'Bandeja de Entrada', roles: [1, 2, 3, 4, 5] },
+    { to: '/dashboard', label: 'Cuadro de Mando', roles: [Roles.ADMIN, Roles.CAPITAN, Roles.COORDINADOR, Roles.RESP_ENTIDAD, Roles.RESP_TIENDA] },
+    { to: '/campanas', label: 'Gestión de Campañas', roles: [Roles.ADMIN] },
+    { to: '/cadenas', label: 'Gestión de Cadenas', roles: [Roles.ADMIN] },
+    { to: '/tiendas', label: 'Gestión de Tiendas', roles: [Roles.ADMIN, Roles.CAPITAN, Roles.COORDINADOR, Roles.RESP_TIENDA] },
+    { to: '/colaboradores', label: 'Colaboradores', roles: [Roles.ADMIN, Roles.CAPITAN, Roles.COORDINADOR, Roles.RESP_ENTIDAD] },
+    { to: '/usuarios', label: 'Usuarios', roles: [Roles.ADMIN] },
+    { to: '/turnos', label: 'Asignación de Turnos', roles: [Roles.ADMIN, Roles.CAPITAN, Roles.COORDINADOR, Roles.RESP_ENTIDAD, Roles.RESP_TIENDA] },
+    { to: '/bandeja', label: 'Bandeja de Entrada', roles: [Roles.ADMIN, Roles.CAPITAN, Roles.COORDINADOR, Roles.RESP_ENTIDAD, Roles.RESP_TIENDA] },
   ]
 
   return (

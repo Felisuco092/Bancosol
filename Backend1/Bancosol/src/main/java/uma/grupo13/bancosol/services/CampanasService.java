@@ -11,6 +11,7 @@ import uma.grupo13.bancosol.entity.CampanaEntity;
 import uma.grupo13.bancosol.entity.TiendaEntity;
 import uma.grupo13.bancosol.mappers.CampanaMapper;
 import uma.grupo13.bancosol.mappers.TiendaMapper;
+import uma.grupo13.bancosol.services.utils.Roles;
 
 import java.time.LocalDate;
 import java.util.ArrayList;
@@ -91,13 +92,13 @@ public class CampanasService {
         Integer rolId = usuario.getRol().getId();
         Integer userId = usuario.getId();
 
-        if (rolId == 1 || rolId == 4) { // Admin y Resp. Entidad ven todas las tiendas de la campaña
+        if (rolId == Roles.ADMIN || rolId == Roles.RESP_ENTIDAD) {
             tiendas = participaRepository.findTiendasByCampanaId(idCampana);
-        } else if (rolId == 2) { // Coordinador
+        } else if (rolId == Roles.COORDINADOR) {
             tiendas = participaRepository.findTiendasByCampanaAndCoord(idCampana, userId);
-        } else if (rolId == 3) { // Capitan
+        } else if (rolId == Roles.CAPITAN) {
             tiendas = participaRepository.findTiendasByCampanaAndCapi(idCampana, userId);
-        } else if (rolId == 5) { // Resp. Tienda
+        } else if (rolId == Roles.RESP_TIENDA) {
             tiendas = participaRepository.findTiendasByCampanaAndResponsable(idCampana, userId);
         } else {
             tiendas = new ArrayList<>();
