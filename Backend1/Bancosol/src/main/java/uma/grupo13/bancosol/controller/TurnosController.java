@@ -49,13 +49,6 @@ public class TurnosController {
         return "turnos";
     }
 
-    @GetMapping("/editar")
-    public  String doEditarTurnos(Model model, @SessionAttribute(name = "user", required = false) UsuarioDTO user) {
-        if (user == null) return "redirect:/";
-        if (!validaSesion.tienePermiso(user.getRol().getId(), Permiso.EDITAR_TURNOS)) return "redirect:/dashboard";
-        return "crear_editar/crear_turno";
-    }
-
     @GetMapping("/crear")
     public  String doCrearTurnos(Model model, @SessionAttribute(name = "user", required = false) UsuarioDTO user) {
         if (user == null) return "redirect:/";

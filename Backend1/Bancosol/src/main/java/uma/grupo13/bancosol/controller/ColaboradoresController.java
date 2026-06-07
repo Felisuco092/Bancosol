@@ -77,30 +77,6 @@ public class ColaboradoresController {
         return "crear_editar/crear_editar_colaboradores";
     }
 
-    @PostMapping("/editar")
-    public String doEditarColaboradoresPost(Model model, @SessionAttribute(name = "user", required = false) UsuarioDTO user,
-                                            @RequestParam("id") Integer id) {
-        if (user == null) return "redirect:/";
-        if (!validaSesion.tienePermiso(user.getRol().getId(), Permiso.EDITAR_COLABORADORES)) return "redirect:/dashboard";
-
-        VoluntarioDTO voluntario = voluntariosService.buscarPorId(id);
-        model.addAttribute("voluntario", voluntario);
-        model.addAttribute("userRol", user.getRol().getId());
-        List<UsuarioDTO> responsablesEntidad = usuariosService.findResponsablesEntidad();
-        model.addAttribute("responsablesEntidad", responsablesEntidad);
-        return "crear_editar/crear_editar_colaboradores";
-    }
-
-    @PostMapping("/crear")
-    public String doCrearColaboradoresPost(Model model, @SessionAttribute(name = "user", required = false) UsuarioDTO user) {
-        if (user == null) return "redirect:/";
-        if (!validaSesion.tienePermiso(user.getRol().getId(), Permiso.EDITAR_COLABORADORES)) return "redirect:/dashboard";
-
-        model.addAttribute("userRol", user.getRol().getId());
-        model.addAttribute("voluntario", new VoluntarioDTO());
-        return "crear_editar/crear_editar_colaboradores";
-    }
-
     @PostMapping("/borrar")
     public String doBorrarColaboradores(Model model, @SessionAttribute(name = "user", required = false) UsuarioDTO user,
                                         @RequestParam("id") Integer id) {
