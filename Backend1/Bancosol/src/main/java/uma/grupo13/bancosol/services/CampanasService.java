@@ -73,7 +73,11 @@ public class CampanasService {
     }
 
     public CampanaDTO findCampanaActiva() {
-        CampanaEntity campana = campanaRepository.findCampanaActiva(LocalDate.now());
+        List<CampanaEntity> campanasList = campanaRepository.findCampanaActiva();
+        if (campanasList.isEmpty()) {
+            return null;
+        }
+        CampanaEntity campana = campanasList.get(0);
         return campanaMapper.toDTO(campana);
     }
 

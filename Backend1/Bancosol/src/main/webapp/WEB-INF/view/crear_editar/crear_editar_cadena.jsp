@@ -10,6 +10,7 @@
 <%
     CadenaDTO cadena = (CadenaDTO) request.getAttribute("cadena");
     if(cadena == null) {cadena = new CadenaDTO();}
+    String error = (String) request.getAttribute("error");
 %>
 <html>
 <head>
@@ -24,18 +25,21 @@
 <main class="main-content">
     <header class="header">
         <h1><%= (cadena.getId()!=null?"Editar":"Crear") %> cadena</h1>
+        <% if (error != null) { %>
+        <div class="alert alert-error"><%= error %></div>
+        <% } %>
     </header>
 
     <div class="formulario">
         <form id="form-crear-tienda" action="/cadenas/guardar" method="post">
             <input type="hidden" value="<%=cadena.getId() != null ? cadena.getId() : ""%>" name="id"/>
             <div class="form-group">
-                <label for="nombre">Nombre</label>
+                <label for="nombre">Nombre<span class="required">*</span></label>
                 <input type="text" name="nombre" id="nombre" required
                        value="<%=cadena.getNombre() != null ? cadena.getNombre() : ""%>" >
             </div>
             <div class="form-group">
-                <label for="codigo">Código</label>
+                <label for="codigo">Código<span class="required">*</span></label>
                 <input type="text" name="codigo" id="codigo" required
                        value="<%=cadena.getCodigo() != null ? cadena.getCodigo() : ""%>"/>
             </div>

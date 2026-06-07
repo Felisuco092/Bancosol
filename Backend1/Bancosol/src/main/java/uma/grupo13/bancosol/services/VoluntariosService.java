@@ -4,6 +4,7 @@ import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 import uma.grupo13.bancosol.dao.UserRepository;
 import uma.grupo13.bancosol.dao.VoluntariosRepository;
+import uma.grupo13.bancosol.dto.UsuarioDTO;
 import uma.grupo13.bancosol.dto.VoluntarioDTO;
 import uma.grupo13.bancosol.entity.UsuarioEntity;
 import uma.grupo13.bancosol.entity.VoluntarioBaseEntity;
@@ -12,6 +13,7 @@ import uma.grupo13.bancosol.entity.VoluntarioFisicoEntity;
 import uma.grupo13.bancosol.mappers.VoluntarioMapper;
 
 import org.hibernate.Hibernate;
+import java.util.ArrayList;
 import java.util.List;
 
 @Service
@@ -127,5 +129,42 @@ public class VoluntariosService {
 
     public int countTotalPersonasVoluntarias() {
         return voluntariosRepository.countTotalPersonasVoluntarias();
+    }
+
+    public List<VoluntarioDTO> listarVoluntariosSegunRol(UsuarioDTO user) {
+        Integer rolId = user.getRol().getId();
+        if (rolId == 1 || rolId == 2 || rolId == 3) {
+            return listarVoluntarios();
+        } else if (rolId == 4) {
+            return listarVoluntariosResponsable(user.getId());
+        }
+        return new ArrayList<>();
+    }
+
+    public List<VoluntarioDTO> filtrarColaboradores(UsuarioDTO user, String tipo, String localidad) {
+        String localidadParam = (localidad == null || localidad.equals("all")) ? "" : localidad;
+        Integer rolId = user.getRol().getId();
+        Integer userId = user.getId();
+
+        if (rolId == 1 || rolId == 2 || rolId == 3) {
+            if (tipo == null || tipo.equals("all")) {
+                return findAllByLocalidad(localidadParam);
+            } else if (tipo.equals("true")) {
+                return findBaseFisicos(localidadParam);
+            } else if (tipo.equals("false")) {
+                return findBaseEntidades(localidadParam);
+            } else {
+                return findPendientes(localidadParam);
+            }
+        } else if (rolId == 4) {
+            if (tipo == null || tipo.equals("all") || tipo.equals("false")) {
+                return findAllByLocalidadResponsable(localidadParam, userId);
+            } else if (tipo.equals("true")) {
+                return new ArrayList<>();
+            } else {
+                return findPendientesResponsable(localidadParam, userId);
+            }
+        }
+        return new ArrayList<>();
     }
 }

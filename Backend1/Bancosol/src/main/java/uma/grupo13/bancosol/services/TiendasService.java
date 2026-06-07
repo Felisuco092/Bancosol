@@ -163,6 +163,27 @@ public class TiendasService {
         return tiendas;
     }
 
+    public List<TiendaDTO> listarTiendasSegunRol(UsuarioDTO user) {
+        Integer rol = user.getRol().getId();
+        if (rol == 1) {
+            return this.listarTiendas();
+        } else if (rol == 2) {
+            return this.listarTiendasCoord(user.getId());
+        } else if (rol == 3) {
+            return this.listarTiendasCapi(user.getId());
+        } else if (rol == 5) {
+            return this.listarTiendasResponsable(user.getId());
+        }
+        return new ArrayList<>();
+    }
+
+    public List<TiendaDTO> listarTiendasParaTurnos(UsuarioDTO user) {
+        if (user.getRol().getId() == 4) {
+            return this.listarTiendas();
+        }
+        return this.filtrarTiendasDependiendoDelRol(user, 0, "");
+    }
+
     public List<TiendaDTO> filtroLocalidadResponsable(String local, Integer idCapi) {
         List<TiendaEntity> lista = tiendasRepo.filtroLocalidadResponsable(local, idCapi);
         return tiendaMapper.toDTOList(lista);

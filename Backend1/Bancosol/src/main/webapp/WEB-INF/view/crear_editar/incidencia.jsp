@@ -15,7 +15,6 @@
 <%
     List<VoluntarioDTO> voluntarioDTOS = (List<VoluntarioDTO>) request.getAttribute("voluntarios");
     Integer idTurno = (Integer) request.getAttribute("idTurno");
-    Integer idCampana = (Integer) request.getAttribute("idCampana");
     List<VoluntarioDTO> voluntariosDTOIncidencia = (List<VoluntarioDTO>) request.getAttribute("voluntariosDTOIncidencia");
     // CampanaDTO campana = (CampanaDTO) request.getAttribute("campana");
     //List<UsuarioDTO> admins = (List<UsuarioDTO>) request.getAttribute("admins");
@@ -29,14 +28,13 @@
        <div class="formulario">
             <form id="crear-incidencia" action="/turnos/reportar-incidencia" method="post">
                 <input type="hidden" name="idTurno" value="<%=idTurno%>"/>
-                <input type="hidden" name="idCampana" value="<%=idCampana%>"/>
                 <div class="form-group">
-                    <label for="asunto-incidencia">Especifique el asunto de la incidencia:</label>
+                    <label for="asunto-incidencia">Especifique el asunto de la incidencia:<span class="required">*</span></label>
                     <input type="text" name="asunto" id="asunto" required/>
                 </div>
 
                 <div class="form-group">
-                    <label for="mensaje-incidencia">Especifique el motivo de la incidencia:</label>
+                    <label for="mensaje-incidencia">Especifique el motivo de la incidencia:<span class="required">*</span></label>
                     <input type="text" name="mensaje" id="mensaje" required/>
                 </div>
 

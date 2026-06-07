@@ -1,8 +1,6 @@
 package uma.grupo13.bancosol.controller;
 
-import jakarta.servlet.http.HttpSession;
 import lombok.AllArgsConstructor;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -17,7 +15,6 @@ import uma.grupo13.bancosol.services.VoluntariosService;
 import uma.grupo13.bancosol.services.utils.Permiso;
 import uma.grupo13.bancosol.services.utils.ValidaSesion;
 
-import java.util.ArrayList;
 import java.util.List;
 
 @Controller
@@ -35,12 +32,7 @@ public class ColaboradoresController {
         if (user == null) return "redirect:/";
         if (!validaSesion.tienePermiso(user.getRol().getId(), Permiso.COLABORADORES)) return "redirect:/dashboard";
 
-        List<VoluntarioDTO> voluntarios= new ArrayList<>();
-        if(user.getRol().getId()==1 || user.getRol().getId()==2 || user.getRol().getId()==3){
-            voluntarios = voluntariosService.listarVoluntarios();
-        }else if (user.getRol().getId()==4){
-            voluntarios = voluntariosService.listarVoluntariosResponsable(user.getId());
-        }
+        List<VoluntarioDTO> voluntarios = voluntariosService.listarVoluntariosSegunRol(user);
 
         model.addAttribute("paginaActual", "colaboradores");
         model.addAttribute("colaboradores", voluntarios);
@@ -55,28 +47,7 @@ public class ColaboradoresController {
         if (user == null) return "redirect:/";
         if (!validaSesion.tienePermiso(user.getRol().getId(), Permiso.COLABORADORES)) return "redirect:/dashboard";
 
-        String localidadParam = (localidad == null || localidad.equals("all")) ? "" : localidad;
-
-        List<VoluntarioDTO> todos= new ArrayList<>();
-        if(user.getRol().getId()==1 || user.getRol().getId()==2 || user.getRol().getId()==3){
-            if (tipo == null || tipo.equals("all")) {
-                todos = voluntariosService.findAllByLocalidad(localidadParam);
-            } else if (tipo.equals("true")) {
-                todos = voluntariosService.findBaseFisicos(localidadParam);
-            } else if (tipo.equals("false")) {
-                todos = voluntariosService.findBaseEntidades(localidadParam);
-            } else {
-                todos = voluntariosService.findPendientes(localidadParam);
-            }
-        }else if (user.getRol().getId()==4){
-            if (tipo == null || tipo.equals("all") || tipo.equals("false")) {
-                todos = voluntariosService.findAllByLocalidadResponsable(localidadParam, user.getId());
-            } else if (tipo.equals("true")) {
-            } else {
-                todos = voluntariosService.findPendientesResponsable(localidadParam, user.getId());
-            }
-        }
-
+        List<VoluntarioDTO> todos = voluntariosService.filtrarColaboradores(user, tipo, localidad);
         model.addAttribute("colaboradores", todos);
         return "tablas/colaboradores";
     }
@@ -103,30 +74,6 @@ public class ColaboradoresController {
         model.addAttribute("userRol", user.getRol().getId());
         List<UsuarioDTO> responsablesEntidad = usuariosService.findResponsablesEntidad();
         model.addAttribute("responsablesEntidad", responsablesEntidad);
-        return "crear_editar/crear_editar_colaboradores";
-    }
-
-    @PostMapping("/editar")
-    public String doEditarColaboradoresPost(Model model, @SessionAttribute(name = "user", required = false) UsuarioDTO user,
-                                            @RequestParam("id") Integer id) {
-        if (user == null) return "redirect:/";
-        if (!validaSesion.tienePermiso(user.getRol().getId(), Permiso.EDITAR_COLABORADORES)) return "redirect:/dashboard";
-
-        VoluntarioDTO voluntario = voluntariosService.buscarPorId(id);
-        model.addAttribute("voluntario", voluntario);
-        model.addAttribute("userRol", user.getRol().getId());
-        List<UsuarioDTO> responsablesEntidad = usuariosService.findResponsablesEntidad();
-        model.addAttribute("responsablesEntidad", responsablesEntidad);
-        return "crear_editar/crear_editar_colaboradores";
-    }
-
-    @PostMapping("/crear")
-    public String doCrearColaboradoresPost(Model model, @SessionAttribute(name = "user", required = false) UsuarioDTO user) {
-        if (user == null) return "redirect:/";
-        if (!validaSesion.tienePermiso(user.getRol().getId(), Permiso.EDITAR_COLABORADORES)) return "redirect:/dashboard";
-
-        model.addAttribute("userRol", user.getRol().getId());
-        model.addAttribute("voluntario", new VoluntarioDTO());
         return "crear_editar/crear_editar_colaboradores";
     }
 
