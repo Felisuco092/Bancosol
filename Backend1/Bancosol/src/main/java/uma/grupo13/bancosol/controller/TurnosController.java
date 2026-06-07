@@ -165,8 +165,7 @@ public class TurnosController {
     }
 
     @PostMapping("/incidencia")
-    public String doIncidencia(@RequestParam(value="idTurno") Integer idTurno,
-                               @RequestParam(value = "idCampana", required = false) Integer idCampana,
+    public String doIncidencia(@RequestParam("idTurno") Integer idTurno,
             Model model, @SessionAttribute(name = "user", required = false) UsuarioDTO user) {
         if (user == null) return "redirect:/";
         if (!validaSesion.tienePermiso(user.getRol().getId(), Permiso.INCIDENCIAS)) return "redirect:/dashboard";
@@ -174,32 +173,15 @@ public class TurnosController {
         TurnoDTO turnoDTO = turnosService.getReferenceById(idTurno);
         if (turnoDTO == null) return "redirect:/turnos/";
 
-        if (idCampana == null && turnoDTO.getCampana() != null) {
-            idCampana = turnoDTO.getCampana().getId();
-        }
+        CampanaDTO campanaDTO = turnoDTO.getCampana();
+        List<VoluntarioDTO> voluntarios = voluntariosService.listarVoluntariosSegunRol(user);
 
-        model.addAttribute("idTurno", idTurno);
-        model.addAttribute("idCampana", idCampana);
-        
-        List<VoluntarioDTO> voluntarios = new ArrayList<>();
-        if(user.getRol().getId()==1 || user.getRol().getId()==2 || user.getRol().getId()==3){
-            voluntarios = voluntariosService.listarVoluntarios();
-        }else if (user.getRol().getId()==4){
-            voluntarios = voluntariosService.listarVoluntariosResponsable(user.getId());
-        }
-
-        CampanaDTO campanaDTO = new CampanaDTO();
-        if(idCampana != null) {
-            campanaDTO = campanasService.buscarPorId(idCampana);
-        }else{
-            turnoDTO.getCampana();
-        }
-
-        List<VoluntarioDTO> voluntariosDTOIncidencia = new java.util.ArrayList<>();
+        List<VoluntarioDTO> voluntariosDTOIncidencia = new ArrayList<>();
         if (turnoDTO.getVoluntario() != null) {
             voluntariosDTOIncidencia.add(turnoDTO.getVoluntario());
         }
 
+        model.addAttribute("idTurno", idTurno);
         model.addAttribute("voluntarios", voluntarios);
         model.addAttribute("campana", campanaDTO);
         model.addAttribute("voluntariosDTOIncidencia", voluntariosDTOIncidencia);
@@ -209,7 +191,6 @@ public class TurnosController {
 
     @PostMapping("/reportar-incidencia")
     public String doEnviarIncidencia(@RequestParam("idTurno") Integer idTurno, 
-                                     @RequestParam(value = "idCampana", required = false) Integer idCampana,
                                      @RequestParam(value = "idsVoluntariosIncidencia", required = false) List<Integer> idsVoluntarios,
                                      @RequestParam("asunto") String asunto,
                                      @RequestParam("mensaje") String mensaje,
@@ -221,16 +202,8 @@ public class TurnosController {
         TurnoDTO turnoDTO = turnosService.getReferenceById(idTurno);
         if (turnoDTO == null) return "redirect:/turnos/";
 
-        if (idCampana == null && turnoDTO.getCampana() != null) {
-            idCampana = turnoDTO.getCampana().getId();
-        }
+        CampanaDTO campanaDTO = turnoDTO.getCampana();
 
-        CampanaDTO campanaDTO;
-        if(idCampana != null){
-            campanaDTO = campanasService.buscarPorId(idCampana);
-        }else {
-            campanaDTO = turnoDTO.getCampana();
-        }
         List<VoluntarioDTO> voluntariosDTOIncidencia;
         if(idsVoluntarios != null){
             voluntariosDTOIncidencia = voluntariosService.findAllByIds(idsVoluntarios);

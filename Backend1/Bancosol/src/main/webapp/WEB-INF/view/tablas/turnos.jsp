@@ -48,7 +48,6 @@
                 <% if (Boolean.TRUE.equals(permisos.get(Permiso.INCIDENCIAS))) { %>
                     <form action = "/turnos/incidencia" method = "POST">
                         <input type="hidden" name="idTurno" value="<%=turnoAct.getId()%>"/>
-                        <input type="hidden" name="idCampana" value="<%=turnoAct.getCampana().getId()%>"/>
                         <button class="btn btn-info btn-incidence">Incidencia</button>
                     </form>
                 <% } %>
