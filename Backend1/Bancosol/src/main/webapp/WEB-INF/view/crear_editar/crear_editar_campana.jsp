@@ -6,6 +6,7 @@
 <%
     CampanaDTO campana = (CampanaDTO) request.getAttribute("campana");
     if(campana == null) campana = new CampanaDTO();
+    String error = (String) request.getAttribute("error");
 %>
 <head>
     <meta charset="UTF-8">
@@ -13,6 +14,7 @@
     <title><%=campana.getNombre() != null ? "Editar " : "Crear "%>campaña</title>
     <link rel="stylesheet" href="../../../css/styles.css">
     <link rel="stylesheet" href="../../../css/formulario.css">
+    <link rel="stylesheet" href="../../../css/login.css">
 </head>
 
 <body>
@@ -20,6 +22,9 @@
     <main class="main-content">
         <header class="header">
             <h1><%= (campana.getId()!=null?"Editar ":"Crear ") %> campaña</h1>
+            <% if (error != null) { %>
+            <div class="alert-danger"><%= error %></div>
+            <% } %>
         </header>
 
         <div class="formulario">

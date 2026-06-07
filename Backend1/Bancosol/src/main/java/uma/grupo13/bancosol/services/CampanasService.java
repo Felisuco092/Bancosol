@@ -48,15 +48,15 @@ public class CampanasService {
         campanaRepository.delete(campanaDelete);
     }
 
-    public boolean guardarCampana(Integer idCampana, String nombre, LocalDate fechaInic, LocalDate fechaFin) {
-        CampanaEntity campana;
+    public String guardarCampana(Integer idCampana, String nombre, LocalDate fechaInic, LocalDate fechaFin) {
         if(this.seSolapaCampanya(fechaInic,fechaFin,idCampana)){
-            return false;
+            return "solapamiento";
         }
         if(this.fechaInvalida(fechaInic,fechaFin)){
-            return false;
+            return "fecha_invalida";
         }
 
+        CampanaEntity campana;
         if(idCampana == null){
             campana= new CampanaEntity();
         }else{
@@ -69,7 +69,7 @@ public class CampanasService {
         campana.setDiaFinal(fechaFin);
 
         campanaRepository.save(campana);
-        return true;
+        return null;
     }
 
     public CampanaDTO findCampanaActiva() {
