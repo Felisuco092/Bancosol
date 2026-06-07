@@ -29,12 +29,12 @@
             <form id="crear-incidencia" action="/turnos/reportar-incidencia" method="post">
                 <input type="hidden" name="idTurno" value="<%=idTurno%>"/>
                 <div class="form-group">
-                    <label for="asunto-incidencia">Especifique el asunto de la incidencia:</label>
+                    <label for="asunto-incidencia">Especifique el asunto de la incidencia:<span class="required">*</span></label>
                     <input type="text" name="asunto" id="asunto" required/>
                 </div>
 
                 <div class="form-group">
-                    <label for="mensaje-incidencia">Especifique el motivo de la incidencia:</label>
+                    <label for="mensaje-incidencia">Especifique el motivo de la incidencia:<span class="required">*</span></label>
                     <input type="text" name="mensaje" id="mensaje" required/>
                 </div>
 

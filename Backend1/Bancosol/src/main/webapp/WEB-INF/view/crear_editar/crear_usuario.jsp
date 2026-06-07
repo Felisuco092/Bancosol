@@ -46,23 +46,23 @@ List<RolDTO> roles= (List<RolDTO>) request.getAttribute("roles");
 
 
                 <div class="form-group">
-                    <label for="nombre">Nombre</label>
+                    <label for="nombre">Nombre<span class="required">*</span></label>
                     <input type="text" name="nombre" id="nombre" value="<%=usuario.getNombre() == null ? "" : usuario.getNombre()%>" required/>
                 </div>
                 <div class="form-group">
-                    <label for="apellidos">Apellidos</label>
+                    <label for="apellidos">Apellidos<span class="required">*</span></label>
                     <input type="text" name="apellidos" id="apellidos" value="<%=usuario.getApellidos() == null ? "" : usuario.getApellidos()%>" required/>
                 </div>
                 <div class="form-group">
-                    <label for="user">Usuario</label>
+                    <label for="user">Usuario<span class="required">*</span></label>
                     <input type="text" name="user" id="user" value="<%=usuario.getUsuario() == null ? "" : usuario.getUsuario()%>" required/>
                 </div>
                 <div class="form-group">
-                    <label for="password">Contraseña</label>
+                    <label for="password">Contraseña<% if(usuario.getId() == null) { %><span class="required">*</span><% } %></label>
                     <input type="password" name="password" id="password" <%= (usuario.getId() == null) ? "required" : "" %>/>
                 </div>
                 <div class="form-group">
-                    <label for="email">Email</label>
+                    <label for="email">Email<span class="required">*</span></label>
                     <input type="text" name="email" id="email" value="<%=usuario.getEmail() == null ? "" : usuario.getEmail()%>" required/>
                 </div>
                 <div class="form-group">

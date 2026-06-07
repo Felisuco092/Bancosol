@@ -57,27 +57,27 @@
                     }
                 %>
                 <div class="form-group">
-                    <label for="descripcion">Nombre de la tienda: </label>
+                    <label for="descripcion">Nombre de la tienda:<span class="required">*</span></label>
                     <input type="text" name="descripcion" id="descripcion" value="<%=tienda.getDescripcion() != null ? tienda.getDescripcion() : ""%>" required/>
                 </div>
                 <div class="form-group">
-                    <label for="localidad">Localidad:</label>
+                    <label for="localidad">Localidad:<span class="required">*</span></label>
                     <input type="text" name="localidad" id="localidad" value="<%=tienda.getLocalidad() != null ? tienda.getLocalidad() : ""%>" required/>
                 </div>
                 <div class="form-group">
-                    <label for="domicilio">Domicilio:</label>
+                    <label for="domicilio">Domicilio:<span class="required">*</span></label>
                     <input type="text" name="domicilio" id="domicilio" value="<%=tienda.getDomicilio() != null ? tienda.getDomicilio() : ""%>" required/>
                 </div>
                 <div class="form-group">
-                    <label for="cPostal">Código Postal:</label>
+                    <label for="cPostal">Código Postal:<span class="required">*</span></label>
                     <input type="number" name="cPostal" id="cPostal" value="<%=tienda.getCPostal() != null ? tienda.getCPostal() : ""%>" min="0" required/>
                 </div>
                 <div class="form-group">
-                    <label for="zonaGeografica">Zona Geográfica: </label>
+                    <label for="zonaGeografica">Zona Geográfica:<span class="required">*</span></label>
                     <input type="text" name="zonaGeografica" id="zonaGeografica" value="<%=tienda.getZonaGeografica() != null ? tienda.getZonaGeografica() : ""%>" required/>
                 </div>
                 <div class="form-group">
-                    <label for="cadena">Cadena: </label>
+                    <label for="cadena">Cadena:<span class="required">*</span></label>
                     <select name="cadena" id="cadena" required>
                         <option value="">-- Seleccione una cadena --</option>
                         <%

@@ -34,12 +34,12 @@
         <form id="form-crear-tienda" action="/cadenas/guardar" method="post">
             <input type="hidden" value="<%=cadena.getId() != null ? cadena.getId() : ""%>" name="id"/>
             <div class="form-group">
-                <label for="nombre">Nombre</label>
+                <label for="nombre">Nombre<span class="required">*</span></label>
                 <input type="text" name="nombre" id="nombre" required
                        value="<%=cadena.getNombre() != null ? cadena.getNombre() : ""%>" >
             </div>
             <div class="form-group">
-                <label for="codigo">Código</label>
+                <label for="codigo">Código<span class="required">*</span></label>
                 <input type="text" name="codigo" id="codigo" required
                        value="<%=cadena.getCodigo() != null ? cadena.getCodigo() : ""%>"/>
             </div>

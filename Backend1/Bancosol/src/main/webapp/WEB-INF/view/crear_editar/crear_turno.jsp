@@ -43,7 +43,7 @@
         <div class="formulario">
             <form id= "form-crear-turno" action="/turnos/guardar" method="post">
                 <div class="form-group">
-                    <label for="idCampana">Campaña:</label>
+                    <label for="idCampana">Campaña:<span class="required">*</span></label>
                     <select name="idCampana" id="idCampana" required>
                         <option value="">-- Seleccione Campaña --</option>
                         <% for(CampanaDTO c : campanas) { %>
@@ -52,7 +52,7 @@
                     </select>
                 </div>
                 <div class="form-group">
-                    <label for="idTienda">Tienda:</label>
+                    <label for="idTienda">Tienda:<span class="required">*</span></label>
                     <select name="idTienda" id="idTienda" required>
                         <option value="">-- Seleccione Tienda --</option>
                         <% for(TiendaDTO t : tiendas) { %>
@@ -61,7 +61,7 @@
                     </select>
                 </div>
                 <div class="form-group">
-                    <label for="idVoluntario">Voluntario:</label>
+                    <label for="idVoluntario">Voluntario:<span class="required">*</span></label>
                     <select name="idVoluntario" id="idVoluntario" required>
                         <option value="">-- Seleccione Voluntario --</option>
                         <% for(VoluntarioDTO v: voluntarios){%>
@@ -72,19 +72,19 @@
                     </select>
                 </div>
                 <div class="form-group">
-                    <label for="tipo-turno">Especifica el tipo de turno:</label>
+                    <label for="tipo-turno">Especifica el tipo de turno:<span class="required">*</span></label>
                     <input type="text" name="tipo-turno" id="tipo-turno" required value="<%= tipoTurno != null ? tipoTurno : "" %>"/>
                 </div>
                 <div class="form-group">
-                    <label for="dia">Especifica el día del turno:</label>
+                    <label for="dia">Especifica el día del turno:<span class="required">*</span></label>
                     <input type="date" name="dia" id="dia" required value="<%= dia != null ? dia : "" %>"/>
                 </div>
                 <div class="form-group">
-                    <label for="hora-inicio">Especifique la hora de comienzo del turno:</label>
+                    <label for="hora-inicio">Especifique la hora de comienzo del turno:<span class="required">*</span></label>
                     <input type="time" name="hora-inicio" id="hora-inicio" required value="<%= horaInicio != null ? horaInicio : "" %>"/>
                 </div>
                 <div class="form-group">
-                    <label for="hora-fin">Especifique la hora final del turno:</label>
+                    <label for="hora-fin">Especifique la hora final del turno:<span class="required">*</span></label>
                     <input type="time" name="hora-fin" id="hora-fin" required value="<%= horaFin != null ? horaFin : "" %>"/>
                 </div>
                 <div class="form-actions">

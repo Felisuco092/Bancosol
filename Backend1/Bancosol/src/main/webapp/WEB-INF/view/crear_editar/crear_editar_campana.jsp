@@ -27,15 +27,15 @@
                 <input type="hidden" name="idCampana" value="<%=campana.getId() == null?"":campana.getId()%>"/>
 
                 <div class="form-group">
-                    <label for="nombre">Especifique el nombre de la campaña:</label>
+                    <label for="nombre">Especifique el nombre de la campaña:<span class="required">*</span></label>
                     <input type="text" name="nombre" id="nombre" value="<%=campana.getNombre() == null ? "":campana.getNombre()%>" required/>
                 </div>
                 <div class="form-group">
-                    <label for="fecha-inicio">Especifique el día de comienzo de la campaña:</label>
+                    <label for="fecha-inicio">Especifique el día de comienzo de la campaña:<span class="required">*</span></label>
                     <input type="date" name="fecha-inicio" id="fecha-inicio" value="<%=campana.getDiaComienzo() == null ? "":campana.getDiaComienzo()%>" required/>
                 </div>
                 <div class="form-group">
-                    <label for="fecha-fin">Especifique el día final de la campaña: </label>
+                    <label for="fecha-fin">Especifique el día final de la campaña:<span class="required">*</span></label>
                     <input type="date" name="fecha-fin" id="fecha-fin" value="<%=campana.getDiaFinal() == null ? "":campana.getDiaFinal()%>" required/>
                 </div>
 
