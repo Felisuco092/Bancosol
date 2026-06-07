@@ -20,6 +20,7 @@ import BandejaPage from './pages/BandejaPage'
 import SideBarMainLayout from './components/SideBarMainLayout'
 import { ProtectedRoute } from './components/RutaProtegida'
 import IncidenciasPage from './pages/IncidenciasPage'
+import { Roles } from './utils/constants'
 
 function App() {
   return (
@@ -29,7 +30,7 @@ function App() {
       </Route>
 
       {/* Rutas accesibles por TODOS los usuarios autenticados */}
-      <Route element={<ProtectedRoute allowedRoles={[1, 2, 3, 4, 5]} />}>
+      <Route element={<ProtectedRoute allowedRoles={[Roles.ADMIN, Roles.CAPITAN, Roles.COORDINADOR, Roles.RESP_ENTIDAD, Roles.RESP_TIENDA]} />}>
         <Route element={<SideBarMainLayout />}>
           <Route path="/dashboard" element={<DashboardPage />} />
           <Route path="/turnos" element={<TurnosPage />} />
@@ -41,7 +42,7 @@ function App() {
       </Route>
 
       {/* Rutas para Administrador (Rol 1) */}
-      <Route element={<ProtectedRoute allowedRoles={[1]} />}>
+      <Route element={<ProtectedRoute allowedRoles={[Roles.ADMIN]} />}>
         <Route path="/campanas">
           <Route element={<SideBarMainLayout />}>
             <Route index element={<CampanasPage />} />
@@ -82,7 +83,7 @@ function App() {
       </Route>
 
       {/* Gestión de Tiendas (Listado): Admin, Capitán, Coordinador, Resp. Tienda */}
-      <Route element={<ProtectedRoute allowedRoles={[1, 2, 3, 5]} />}>
+      <Route element={<ProtectedRoute allowedRoles={[Roles.ADMIN, Roles.CAPITAN, Roles.COORDINADOR, Roles.RESP_TIENDA]} />}>
         <Route path="/tiendas">
           <Route element={<SideBarMainLayout />}>
             <Route index element={<TiendasPage />} />
@@ -91,7 +92,7 @@ function App() {
       </Route>
 
       {/* Colaboradores (Listado): Admin, Capitán, Coordinador, Resp. Entidad */}
-      <Route element={<ProtectedRoute allowedRoles={[1, 2, 3, 4]} />}>
+      <Route element={<ProtectedRoute allowedRoles={[Roles.ADMIN, Roles.CAPITAN, Roles.COORDINADOR, Roles.RESP_ENTIDAD]} />}>
         <Route path="/colaboradores">
           <Route element={<SideBarMainLayout />}>
             <Route index element={<ColaboradoresPage />} />
@@ -100,7 +101,7 @@ function App() {
       </Route>
 
       {/* Crear/Editar Colaboradores: Admin y Coordinador */}
-      <Route element={<ProtectedRoute allowedRoles={[1, 3]} />}>
+      <Route element={<ProtectedRoute allowedRoles={[Roles.ADMIN, Roles.COORDINADOR]} />}>
         <Route path="/colaboradores">
           <Route element={<MainLayout />}>
             <Route path="crear" element={<CrearColaboradorPage />} />
@@ -110,7 +111,7 @@ function App() {
       </Route>
 
       {/* Crear Turnos: Admin y Coordinador */}
-      <Route element={<ProtectedRoute allowedRoles={[1, 3]} />}>
+      <Route element={<ProtectedRoute allowedRoles={[Roles.ADMIN, Roles.COORDINADOR]} />}>
         <Route path="/turnos">
           <Route element={<MainLayout />}>
             <Route path="crear" element={<CrearTurnoPage />} />
@@ -119,7 +120,7 @@ function App() {
       </Route>
 
       {/* Incidencias: Admin, Capitán, Coordinador, Resp. Entidad */}
-      <Route element={<ProtectedRoute allowedRoles={[1, 2, 3, 4]} />}>
+      <Route element={<ProtectedRoute allowedRoles={[Roles.ADMIN, Roles.CAPITAN, Roles.COORDINADOR, Roles.RESP_ENTIDAD]} />}>
         <Route path="/turnos">
           <Route element={<MainLayout />}>
             <Route path="incidencia" element={<IncidenciasPage />} />

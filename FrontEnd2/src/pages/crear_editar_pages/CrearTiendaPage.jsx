@@ -1,6 +1,7 @@
 import { useState, useEffect } from 'react'
 import { useNavigate, Link, useParams } from 'react-router-dom'
 import { fetchData, postData, putData, deleteData } from '../../services/api'
+import { Roles } from '../../utils/constants'
 
 export default function CrearTiendaPage() {
   const { id } = useParams()
@@ -35,10 +36,10 @@ export default function CrearTiendaPage() {
       try {
         const [cads, users, respTienda, camps, coordinadores] = await Promise.all([
           fetchData('cadenas'),
-          fetchData('usuarios?id_rol=2'),
-          fetchData('usuarios?id_rol=5'),
+          fetchData('usuarios?id_rol=' + Roles.CAPITAN),
+          fetchData('usuarios?id_rol=' + Roles.RESP_TIENDA),
           fetchData('campanas'),
-          fetchData('usuarios?id_rol=3')
+          fetchData('usuarios?id_rol=' + Roles.COORDINADOR)
         ])
         setCadenas(cads)
         setCapitanes(users)

@@ -1,5 +1,6 @@
 import { Navigate, Outlet } from 'react-router';
 import { useAuth } from '../auth/useAuthHook';
+import { Roles } from '../utils/constants';
 
 export function ProtectedRoute({ allowedRoles }) {
   const { estaAutenticado, usuario } = useAuth();

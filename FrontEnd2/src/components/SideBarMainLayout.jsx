@@ -5,7 +5,7 @@ import Sidebar from './Sidebar'
 
 export default function SideBarMainLayout() {
   const navigate = useNavigate()
-
+  console.log('SideBarMainLayout renderizado')
 
   return (
     <>

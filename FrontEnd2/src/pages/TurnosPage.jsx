@@ -2,6 +2,7 @@ import { useState, useEffect } from 'react'
 import { Link } from 'react-router-dom'
 import { fetchData, deleteData } from '../services/api'
 import { useAuth } from '../auth/useAuthHook'
+import { Roles } from '../utils/constants'
 
 export default function TurnosPage() {
   const { tienePermiso, usuario } = useAuth()
@@ -85,7 +86,7 @@ export default function TurnosPage() {
     const campanaId = event.target.value
     setSelectedCampana(campanaId)
     let participacionesCampana = []
-    if (String(usuario.id_rol) === "3") {
+    if (usuario.id_rol === Roles.COORDINADOR) {
       participacionesCampana = await fetchData(`participa?id_campana=${campanaId}&id_coordinador=${usuario.id}`)
     } else {
       participacionesCampana = await fetchData(`participa?id_campana=${campanaId}`)

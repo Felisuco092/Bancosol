@@ -1,4 +1,4 @@
-const API_BASE = 'http://localhost:3001';
+import { API_BASE_URL } from '../utils/constants';
 
 function getToken() {
   return sessionStorage.getItem('token');
@@ -13,7 +13,7 @@ function authHeaders(headers = {}) {
 }
 
 export async function fetchData(ruta) {
-  const res = await fetch(`${API_BASE}/${ruta}`, {
+  const res = await fetch(`${API_BASE_URL}/${ruta}`, {
     headers: authHeaders(),
   });
   if (!res.ok) throw new Error(`Error HTTP ${res.status}`);
@@ -21,7 +21,7 @@ export async function fetchData(ruta) {
 }
 
 export async function postData(ruta, data) {
-  const res = await fetch(`${API_BASE}/${ruta}`, {
+  const res = await fetch(`${API_BASE_URL}/${ruta}`, {
     method: 'POST',
     headers: authHeaders(),
     body: JSON.stringify(data),
@@ -31,7 +31,7 @@ export async function postData(ruta, data) {
 }
 
 export async function putData(ruta, data) {
-  const res = await fetch(`${API_BASE}/${ruta}`, {
+  const res = await fetch(`${API_BASE_URL}/${ruta}`, {
     method: 'PUT',
     headers: authHeaders(),
     body: JSON.stringify(data),
@@ -41,7 +41,7 @@ export async function putData(ruta, data) {
 }
 
 export async function deleteData(ruta) {
-  const res = await fetch(`${API_BASE}/${ruta}`, {
+  const res = await fetch(`${API_BASE_URL}/${ruta}`, {
     method: 'DELETE',
     headers: authHeaders(),
   });
@@ -50,7 +50,7 @@ export async function deleteData(ruta) {
 }
 
 export async function loginUser(usuario, password) {
-  const res = await fetch(`${API_BASE}/login`, {
+  const res = await fetch(`${API_BASE_URL}/login`, {
     method: 'POST',
     headers: { 'Content-Type': 'application/json' },
     body: JSON.stringify({ usuario, password }),
