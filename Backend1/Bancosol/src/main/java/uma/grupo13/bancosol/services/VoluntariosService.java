@@ -140,4 +140,31 @@ public class VoluntariosService {
         }
         return new ArrayList<>();
     }
+
+    public List<VoluntarioDTO> filtrarColaboradores(UsuarioDTO user, String tipo, String localidad) {
+        String localidadParam = (localidad == null || localidad.equals("all")) ? "" : localidad;
+        Integer rolId = user.getRol().getId();
+        Integer userId = user.getId();
+
+        if (rolId == 1 || rolId == 2 || rolId == 3) {
+            if (tipo == null || tipo.equals("all")) {
+                return findAllByLocalidad(localidadParam);
+            } else if (tipo.equals("true")) {
+                return findBaseFisicos(localidadParam);
+            } else if (tipo.equals("false")) {
+                return findBaseEntidades(localidadParam);
+            } else {
+                return findPendientes(localidadParam);
+            }
+        } else if (rolId == 4) {
+            if (tipo == null || tipo.equals("all") || tipo.equals("false")) {
+                return findAllByLocalidadResponsable(localidadParam, userId);
+            } else if (tipo.equals("true")) {
+                return new ArrayList<>();
+            } else {
+                return findPendientesResponsable(localidadParam, userId);
+            }
+        }
+        return new ArrayList<>();
+    }
 }
