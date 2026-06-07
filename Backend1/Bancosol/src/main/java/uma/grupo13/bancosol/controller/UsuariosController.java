@@ -84,28 +84,13 @@ public class UsuariosController {
                                     @RequestParam("nombre") String nombre,
                                     @RequestParam("apellidos") String apellidos,
                                     @RequestParam("user") String user,
-                                    @RequestParam("password") String password,
+                                    @RequestParam(value = "password", required = false) String password,
                                     @RequestParam("email") String email,
                                     @RequestParam(value = "telefono", required = false) String telefono,
                                     @RequestParam(value = "area", required = false) String area,
                                     @RequestParam("rol") Integer idRol) {
         if (user_session == null) return "redirect:/";
         if (!validaSesion.tienePermiso(user_session.getRol().getId(), Permiso.USUARIOS)) return "redirect:/dashboard";
-
-        if (id == null && (password.isEmpty() || password == null)) {
-            model.addAttribute("error", "La contraseña es obligatoria para nuevos usuarios.");
-            UsuarioDTO usuario = new UsuarioDTO();
-            usuario.setNombre(nombre);
-            usuario.setApellidos(apellidos);
-            usuario.setUsuario(user);
-            usuario.setEmail(email);
-            usuario.setTelefono(telefono);
-            usuario.setAreaAsignada(area);
-            usuario.setRol(rolService.getReferenceById(idRol));
-            model.addAttribute("usuario", usuario);
-            model.addAttribute("roles", rolService.listarRoles());
-            return "crear_editar/crear_usuario";
-        }
 
         usuariosService.guardarUsuario(id, nombre, apellidos, user, email, telefono, area, password, idRol);
 

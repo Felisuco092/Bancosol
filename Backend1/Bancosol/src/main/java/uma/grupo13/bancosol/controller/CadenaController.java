@@ -72,7 +72,14 @@ public class CadenaController {
         try{
             cadenaService.guardarCadena(id, nombre, codigo);
         }catch (Exception e){
-            return "redirect:/cadenas/crear";
+            e.printStackTrace();
+            CadenaDTO cadena = new CadenaDTO();
+            cadena.setId(id);
+            cadena.setNombre(nombre);
+            cadena.setCodigo(codigo);
+            model.addAttribute("cadena", cadena);
+            model.addAttribute("error", "Error al guardar la cadena: " + e.getMessage());
+            return "crear_editar/crear_editar_cadena";
         }
         return "redirect:/cadenas/";
     }

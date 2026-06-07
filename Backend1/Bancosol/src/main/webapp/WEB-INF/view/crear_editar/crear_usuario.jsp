@@ -80,7 +80,7 @@ List<RolDTO> roles= (List<RolDTO>) request.getAttribute("roles");
                         <%
                             for(RolDTO rol : roles) {
                         %>
-                        <option value="<%=rol.getId()%>"><%=rol.getNombre()%></option>
+                        <option value="<%=rol.getId()%>" <%= (usuario.getRol() != null && usuario.getRol().getId().equals(rol.getId())) ? "selected" : "" %>><%=rol.getNombre()%></option>
                         <%
                             }
                         %>

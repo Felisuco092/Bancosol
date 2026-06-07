@@ -10,6 +10,7 @@
 <%
     CadenaDTO cadena = (CadenaDTO) request.getAttribute("cadena");
     if(cadena == null) {cadena = new CadenaDTO();}
+    String error = (String) request.getAttribute("error");
 %>
 <html>
 <head>
@@ -24,6 +25,9 @@
 <main class="main-content">
     <header class="header">
         <h1><%= (cadena.getId()!=null?"Editar":"Crear") %> cadena</h1>
+        <% if (error != null) { %>
+        <div class="alert alert-error"><%= error %></div>
+        <% } %>
     </header>
 
     <div class="formulario">
