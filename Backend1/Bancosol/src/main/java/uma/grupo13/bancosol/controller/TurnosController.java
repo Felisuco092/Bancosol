@@ -69,12 +69,7 @@ public class TurnosController {
             tiendas = tiendasService.filtrarTiendasDependiendoDelRol(user, 0, "");
         }
         
-        List<VoluntarioDTO> voluntarios = new ArrayList<>();
-        if(user.getRol().getId()==1 || user.getRol().getId()==2 || user.getRol().getId()==3){
-            voluntarios = voluntariosService.listarVoluntarios();
-        }else if (user.getRol().getId()==4){
-            voluntarios = voluntariosService.listarVoluntariosResponsable(user.getId());
-        }
+        List<VoluntarioDTO> voluntarios = voluntariosService.listarVoluntariosSegunRol(user);
 
         model.addAttribute("turno", newTurno);
         model.addAttribute("campanas", campanas);
@@ -126,12 +121,7 @@ public class TurnosController {
             } else {
                 tiendas = tiendasService.filtrarTiendasDependiendoDelRol(user, 0, "");
             }
-            List<VoluntarioDTO> voluntarios = new ArrayList<>();
-            if(user.getRol().getId()==1 || user.getRol().getId()==2 || user.getRol().getId()==3){
-                voluntarios = voluntariosService.listarVoluntarios();
-            }else if (user.getRol().getId()==4){
-                voluntarios = voluntariosService.listarVoluntariosResponsable(user.getId());
-            }
+            List<VoluntarioDTO> voluntarios = voluntariosService.listarVoluntariosSegunRol(user);
 
             model.addAttribute("voluntarios", voluntarios);
             model.addAttribute("campanas", campanas);

@@ -35,12 +35,7 @@ public class ColaboradoresController {
         if (user == null) return "redirect:/";
         if (!validaSesion.tienePermiso(user.getRol().getId(), Permiso.COLABORADORES)) return "redirect:/dashboard";
 
-        List<VoluntarioDTO> voluntarios= new ArrayList<>();
-        if(user.getRol().getId()==1 || user.getRol().getId()==2 || user.getRol().getId()==3){
-            voluntarios = voluntariosService.listarVoluntarios();
-        }else if (user.getRol().getId()==4){
-            voluntarios = voluntariosService.listarVoluntariosResponsable(user.getId());
-        }
+        List<VoluntarioDTO> voluntarios = voluntariosService.listarVoluntariosSegunRol(user);
 
         model.addAttribute("paginaActual", "colaboradores");
         model.addAttribute("colaboradores", voluntarios);
