@@ -75,18 +75,30 @@ public class CampanasController {
 
     @PostMapping("/guardar")
     public  String doGuardarCampana(@RequestParam(value ="idCampana", required = false) Integer idCampana,
-                                    @RequestParam(value="nombre", required = false) String nombre,
-                                    @RequestParam(value="fecha-inicio", required = false) LocalDate fechaInic,
-                                    @RequestParam(value="fecha-fin", required = false) LocalDate fechaFin,
+                                    @RequestParam("nombre") String nombre,
+                                    @RequestParam("fecha-inicio") LocalDate fechaInic,
+                                    @RequestParam("fecha-fin") LocalDate fechaFin,
             Model model, @SessionAttribute(name = "user", required = false) UsuarioDTO user) {
         if (user == null) return "redirect:/";
         if (!validaSesion.tienePermiso(user.getRol().getId(), Permiso.CAMPANAS)) return "redirect:/dashboard";
 
-
-
-        boolean hecho = campanasService.guardarCampana(idCampana, nombre, fechaInic, fechaFin);
-        if (!hecho) {
-            return "redirect:/campanas/crear";
+        String error = campanasService.guardarCampana(idCampana, nombre, fechaInic, fechaFin);
+        if (error != null) {
+            CampanaDTO campana;
+            if (idCampana != null) {
+                campana = campanasService.getReferenceById(idCampana);
+            } else {
+                campana = new CampanaDTO();
+                campana.setNombre(nombre);
+                campana.setDiaComienzo(fechaInic);
+                campana.setDiaFinal(fechaFin);
+            }
+            String msg = "solapamiento".equals(error)
+                    ? "La campaña se solapa con otra existente"
+                    : "La fecha de inicio debe ser anterior a la fecha de fin";
+            model.addAttribute("campana", campana);
+            model.addAttribute("error", msg);
+            return "crear_editar/crear_editar_campana";
         }
 
         return "redirect:/campanas/";
