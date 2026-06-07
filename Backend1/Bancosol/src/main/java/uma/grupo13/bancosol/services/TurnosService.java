@@ -13,9 +13,8 @@ import uma.grupo13.bancosol.entity.TiendaEntity;
 import uma.grupo13.bancosol.entity.TurnoEntity;
 import uma.grupo13.bancosol.entity.VoluntarioBaseEntity;
 import uma.grupo13.bancosol.mappers.TurnoMapper;
+import uma.grupo13.bancosol.services.utils.Roles;
 
-import java.time.LocalDate;
-import java.time.LocalTime;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -83,15 +82,15 @@ public class TurnosService {
         Integer rolId = usuario.getRol().getId();
         Integer userId = usuario.getId();
 
-        if (rolId == 1) { // Admin
+        if (rolId == Roles.ADMIN) {
             turnos = turnoRepository.filtrarTurnos(idCampana, idTienda);
-        } else if (rolId == 2) { // Coordinador
+        } else if (rolId == Roles.COORDINADOR) {
             turnos = turnoRepository.filtrarTurnosCoord(idCampana, idTienda, userId);
-        } else if (rolId == 3) { // Capitan
+        } else if (rolId == Roles.CAPITAN) {
             turnos = turnoRepository.filtrarTurnosCapi(idCampana, idTienda, userId);
-        } else if (rolId == 4) { // Resp. Entidad
+        } else if (rolId == Roles.RESP_ENTIDAD) {
             turnos = turnoRepository.filtrarTurnosRespEntd(idCampana, idTienda, userId);
-        } else if (rolId == 5) { // Resp. Tienda
+        } else if (rolId == Roles.RESP_TIENDA) {
             turnos = turnoRepository.filtrarTurnosRespTienda(idCampana, idTienda, userId);
         } else {
             turnos = new ArrayList<>();

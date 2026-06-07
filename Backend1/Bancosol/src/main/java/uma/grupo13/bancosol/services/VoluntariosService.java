@@ -11,6 +11,7 @@ import uma.grupo13.bancosol.entity.VoluntarioBaseEntity;
 import uma.grupo13.bancosol.entity.VoluntarioEntidadEntity;
 import uma.grupo13.bancosol.entity.VoluntarioFisicoEntity;
 import uma.grupo13.bancosol.mappers.VoluntarioMapper;
+import uma.grupo13.bancosol.services.utils.Roles;
 
 import org.hibernate.Hibernate;
 import java.util.ArrayList;
@@ -133,9 +134,9 @@ public class VoluntariosService {
 
     public List<VoluntarioDTO> listarVoluntariosSegunRol(UsuarioDTO user) {
         Integer rolId = user.getRol().getId();
-        if (rolId == 1 || rolId == 2 || rolId == 3) {
+        if (rolId == Roles.ADMIN || rolId == Roles.COORDINADOR || rolId == Roles.CAPITAN) {
             return listarVoluntarios();
-        } else if (rolId == 4) {
+        } else if (rolId == Roles.RESP_ENTIDAD) {
             return listarVoluntariosResponsable(user.getId());
         }
         return new ArrayList<>();
@@ -146,7 +147,7 @@ public class VoluntariosService {
         Integer rolId = user.getRol().getId();
         Integer userId = user.getId();
 
-        if (rolId == 1 || rolId == 2 || rolId == 3) {
+        if (rolId == Roles.ADMIN || rolId == Roles.COORDINADOR || rolId == Roles.CAPITAN) {
             if (tipo == null || tipo.equals("all")) {
                 return findAllByLocalidad(localidadParam);
             } else if (tipo.equals("true")) {
@@ -156,7 +157,7 @@ public class VoluntariosService {
             } else {
                 return findPendientes(localidadParam);
             }
-        } else if (rolId == 4) {
+        } else if (rolId == Roles.RESP_ENTIDAD) {
             if (tipo == null || tipo.equals("all") || tipo.equals("false")) {
                 return findAllByLocalidadResponsable(localidadParam, userId);
             } else if (tipo.equals("true")) {

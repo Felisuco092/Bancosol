@@ -11,6 +11,7 @@ import uma.grupo13.bancosol.entity.CadenaEntity;
 import uma.grupo13.bancosol.entity.TiendaEntity;
 import uma.grupo13.bancosol.entity.UsuarioEntity;
 import uma.grupo13.bancosol.mappers.TiendaMapper;
+import uma.grupo13.bancosol.services.utils.Roles;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -135,25 +136,25 @@ public class TiendasService {
 
     public List<TiendaDTO> filtrarTiendasDependiendoDelRol(UsuarioDTO user, Integer idCad, String localidad) {
         List<TiendaDTO> tiendas= new ArrayList<>();
-        if (user.getRol().getId() == 1) {
+        if (user.getRol().getId() == Roles.ADMIN) {
             if (idCad != 0) {
                 tiendas = this.filtroLocalidadCadena(localidad, idCad);
             } else {
                 tiendas = this.filtroLocalidad(localidad);
             }
-        } else if (user.getRol().getId() == 2) {
+        } else if (user.getRol().getId() == Roles.COORDINADOR) {
             if (idCad != 0) {
                 tiendas = this.filtroLocalidadCadenaCoord(localidad, idCad, user.getId());
             } else {
                 tiendas = this.filtroLocalidadCoord(localidad, user.getId());
             }
-        } else if (user.getRol().getId() == 3) {
+        } else if (user.getRol().getId() == Roles.CAPITAN) {
             if (idCad != 0) {
                 tiendas = this.filtroLocalidadCadenaCapi(localidad, idCad, user.getId());
             } else {
                 tiendas = this.filtroLocalidadCapi(localidad, user.getId());
             }
-        } else if (user.getRol().getId() == 5) {
+        } else if (user.getRol().getId() == Roles.RESP_TIENDA) {
             if (idCad != 0) {
                 tiendas = this.filtroLocalidadCadenaResponsable(localidad, idCad, user.getId());
             } else {
@@ -165,20 +166,20 @@ public class TiendasService {
 
     public List<TiendaDTO> listarTiendasSegunRol(UsuarioDTO user) {
         Integer rol = user.getRol().getId();
-        if (rol == 1) {
+        if (rol == Roles.ADMIN) {
             return this.listarTiendas();
-        } else if (rol == 2) {
+        } else if (rol == Roles.COORDINADOR) {
             return this.listarTiendasCoord(user.getId());
-        } else if (rol == 3) {
+        } else if (rol == Roles.CAPITAN) {
             return this.listarTiendasCapi(user.getId());
-        } else if (rol == 5) {
+        } else if (rol == Roles.RESP_TIENDA) {
             return this.listarTiendasResponsable(user.getId());
         }
         return new ArrayList<>();
     }
 
     public List<TiendaDTO> listarTiendasParaTurnos(UsuarioDTO user) {
-        if (user.getRol().getId() == 4) {
+        if (user.getRol().getId() == Roles.RESP_ENTIDAD) {
             return this.listarTiendas();
         }
         return this.filtrarTiendasDependiendoDelRol(user, 0, "");
