@@ -64,11 +64,13 @@
                     <label for="idVoluntario">Voluntario:<span class="required">*</span></label>
                     <select name="idVoluntario" id="idVoluntario" required>
                         <option value="">-- Seleccione Voluntario --</option>
-                        <% for(VoluntarioDTO v: voluntarios){%>
+                        <% for(VoluntarioDTO v: voluntarios){
+                            if (Boolean.TRUE.equals(v.getAprobado())) {
+                        %>
                         <option value="<%=v.getId()%>" <%= (idVolunarioSel != null && idVolunarioSel.equals(v.getId())) ? "selected" : "" %>>
                             <%= v.getNombreDisplay() != null ? v.getNombreDisplay() : ("Voluntario #" + v.getId()) %>
                         </option>
-                        <%}%>
+                        <% }} %>
                     </select>
                 </div>
                 <div class="form-group">
