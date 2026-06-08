@@ -84,6 +84,12 @@ export default function CrearTiendaPage() {
     const aActualizar = seleccion.filter(p =>
       existentes.some(e => String(e.id_campana) === p.id_campana && String(e.id_coordinador) !== String(p.id_coordinador))
     )
+
+    await Promise.all(aBorrar.map(async p => {
+      const turnos = await fetchData(`turnos?id_tienda=${tiendaId}&id_campana=${p.id_campana}`)
+      await Promise.all(turnos.map(t => deleteData('turnos/' + t.id)))
+    }))
+
     return Promise.all([
       ...aBorrar.map(p => deleteData('participa/' + p.id)),
       ...aCrear.map(p =>
