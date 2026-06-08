@@ -7,7 +7,6 @@
     <title>Bancosol - Campañas</title>
     <link rel="stylesheet" href="../../css/styles.css">
     <script src="../../js/aside.js" defer></script>
-    <script src="../../js/campanas.js" type="module"></script>
 </head>
 <body>
     <% request.setAttribute("paginaActual", "campanas"); %>
@@ -30,5 +29,21 @@
             <jsp:include page="tablas/campana.jsp"/>
         </div>
     </main>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            document.querySelectorAll('.filter-btn').forEach(button => {
+                button.addEventListener('click', () => {
+                    const filter = button.getAttribute('data-filter');
+                    document.querySelectorAll('.filter-btn').forEach(btn => btn.classList.remove('active'));
+                    button.classList.add('active');
+                    document.querySelectorAll('.campaign-row').forEach(row => {
+                        const status = row.getAttribute('data-status');
+                        row.style.display = (filter === 'all' || status === filter) ? '' : 'none';
+                    });
+                });
+            });
+        });
+    </script>
 </body>
 </html>

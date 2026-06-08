@@ -15,7 +15,6 @@
     <title>Bancosol - Asignación de Turnos</title>
     <link rel="stylesheet" href="../../css/styles.css">
     <script src="../../js/aside.js" defer></script>
-    <script src="../../js/turnos.js" defer></script>
 </head>
 <%
     List<TiendaDTO> tiendasList = (List<TiendaDTO>) request.getAttribute("tiendas");
