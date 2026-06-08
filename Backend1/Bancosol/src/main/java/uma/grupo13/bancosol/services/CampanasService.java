@@ -36,12 +36,6 @@ public class CampanasService {
         return campanaMapper.toDTOList(lista);
     }
 
-    public CampanaDTO buscarPorId(Integer id) {
-        if (id==null) {return null;}
-        CampanaEntity campana = campanaRepository.findById(id).orElse(null);
-        return campanaMapper.toDTO(campana);
-    }
-
     public CampanaDTO getReferenceById(Integer id) {
         if (id==null) {return null;}
         CampanaEntity campana = campanaRepository.getReferenceById(id);
@@ -106,11 +100,6 @@ public class CampanasService {
         }
         CampanaEntity campana = campanasList.get(0);
         return campanaMapper.toDTO(campana);
-    }
-
-    public List<TiendaDTO> filtrarTiendasParticipaCampana(Integer idCampana) {
-        List<TiendaEntity> tiendas = participaRepository.findTiendasByCampanaId(idCampana);
-        return tiendaMapper.toDTOList(tiendas);
     }
 
     public List<TiendaDTO> filtrarTiendasParticipaCampanaPorRol(Integer idCampana, UsuarioDTO usuario) {

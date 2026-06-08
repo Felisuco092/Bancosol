@@ -11,11 +11,6 @@ import java.util.List;
 
 // Función countTotalPersonasVoluntarias lo ha hecho Gemini
 public interface VoluntariosRepository extends JpaRepository<VoluntarioBaseEntity, Integer> {
-    @Query("SELECT v FROM VoluntarioFisicoEntity v")
-    List<VoluntarioFisicoEntity> findAllFisicos();
-
-    @Query("SELECT v FROM VoluntarioEntidadEntity v")
-    List<VoluntarioEntidadEntity> findAllEntidades();
 
     @Query("SELECT v FROM VoluntarioBaseEntity v WHERE v.zonaGeografica LIKE CONCAT('%', :localidad, '%')")
     List<VoluntarioBaseEntity> findAllByLocalidad(@Param("localidad") String localidad);

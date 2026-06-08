@@ -1,8 +1,12 @@
 import { useState, useEffect } from 'react'
 import { fetchData } from '../services/api'
 import { getActiveCampana, getNextCampana, getDaysRemaining } from '../utils/dateUtils'
+import { useAuth } from '../auth/useAuthHook'
 
 export default function DashboardPage() {
+
+  const { usuario } = useAuth()
+
   const [tiendas, setTiendas] = useState([])
   const [cadenas, setCadenas] = useState([])
   const [campanas, setCampanas] = useState([])
@@ -54,7 +58,7 @@ export default function DashboardPage() {
     <>
       <header className="header">
         <h1>Cuadro de Mando</h1>
-        <span>Bienvenido, Administrador</span>
+        <span>Bienvenido, {usuario.nombre}</span>
       </header>
       <div className="dashboard-grid">
         <div className="card dashboard-card">

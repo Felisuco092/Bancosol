@@ -29,10 +29,6 @@ public class TurnosService {
     private final TiendasRepository tiendaRepo;
     private final VoluntariosRepository voluntariosRepo;
 
-    public List<TurnoDTO> listarTurnos() {
-        List<TurnoEntity> lista= turnoRepository.findAll();
-        return turnoMapper.toDTOList(lista);
-    }
 
     public TurnoDTO getReferenceById(Integer id) {
         if (id==null) {return null;}
@@ -100,10 +96,6 @@ public class TurnosService {
         return turnoMapper.toDTOList(turnos);
     }
 
-    public List<TurnoDTO> filtrarTurnosResponsableEntidad(Integer idCampana, Integer idTienda, Integer idResp) {
-        List<TurnoEntity> lista= turnoRepository.filtrarTurnosRespEntd(idCampana, idTienda, idResp);
-        return turnoMapper.toDTOList(lista);
-    }
 
     public List<TurnoDTO> findByVoluntarioId(Integer id) {
         if (id==null) {return null;}

@@ -7,7 +7,6 @@
     <title>Bancosol - Gestión Cadenas</title>
     <link rel="stylesheet" href="../../css/styles.css">
     <script src="../../js/aside.js" defer></script>
-    <script src="../../js/crear_editar/crear_editar_cadena.js" defer></script>
 </head>
 <body>
     <% request.setAttribute("paginaActual", "cadenas"); %>
