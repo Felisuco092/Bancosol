@@ -7,8 +7,8 @@ async function handleSubmit(e) {
 
     const formData = new FormData(form);
 
-    // Mapeo de datos del formulario al objeto JSON
-    // Nota: Usamos los nombres que pusimos en el JSP (con guiones)
+    // Mapeo de datos del formulario al objeto JSON que se hace mucho mejor con el FormData
+
     const newCampana = {
         nombre: formData.get('nombre'),
         ano: Number(formData.get('anyo')),

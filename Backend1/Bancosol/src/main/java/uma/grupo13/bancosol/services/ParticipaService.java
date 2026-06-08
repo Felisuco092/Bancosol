@@ -31,10 +31,7 @@ public class ParticipaService {
         return participaMapper.toDTOList(lista);
     }
 
-    public List<ParticipaDTO> findByCoordinadorId(Integer id) {
-        List<ParticipaEntity> lista= participaRepository.findByCoordinadorId(id);
-        return participaMapper.toDTOList(lista);
-    }
+
 
     public void deleteAll(List<ParticipaDTO> participaciones) {
         for(ParticipaDTO p: participaciones){
@@ -45,9 +42,6 @@ public class ParticipaService {
         }
     }
 
-    public void guardarParticipacion(Integer idCampana, Integer idTienda) {
-        guardarParticipacion(idCampana, idTienda, null);
-    }
 
     public void guardarParticipacion(Integer idCampana, Integer idTienda, Integer idCoordinador) {
         TiendaEntity tienda = tiendasRepository.getReferenceById(idTienda);

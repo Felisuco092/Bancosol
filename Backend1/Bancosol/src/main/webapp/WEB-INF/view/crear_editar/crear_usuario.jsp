@@ -74,8 +74,8 @@ List<RolDTO> roles= (List<RolDTO>) request.getAttribute("roles");
                     <input type="text" name="area" id="area" value="<%=usuario.getAreaAsignada() == null ? "" : usuario.getAreaAsignada()%>"/>
                 </div>
                 <div class="form-group">
-                    <label for="rol">Rol</label>
-                    <select name="rol" id="rol">
+                    <label for="rol">Rol<span class="required">*</span></label>
+                    <select name="rol" id="rol" required>
                         <option value="">-- Seleccione una cadena --</option>
                         <%
                             for(RolDTO rol : roles) {
