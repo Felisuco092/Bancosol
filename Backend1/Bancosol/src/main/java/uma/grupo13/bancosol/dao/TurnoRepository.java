@@ -23,7 +23,7 @@ public interface TurnoRepository extends JpaRepository<TurnoEntity, Integer> {
     public List<TurnoEntity> filtrarTurnosRespEntd(@Param("idCampana") Integer idCampana, @Param("idTienda") Integer idTienda, @Param("idResp") Integer idResp);
 
     //Esta consulta busca tambien de que exista realmente un participa ligado a la misma tienda y campanya que el turno, ademas de filtrar
-    @Query("select t from TurnoEntity t where (:idCampana is null or t.campana.id = :idCampana) and (:idTienda is null or t.tienda.id = :idTienda) and exists (select p from ParticipaEntity p where p.tienda.id = t.tienda.id and p.campana.id = t.campana.id and p.coordinador.id = :idCoord)")
+    @Query("select t from TurnoEntity t join t.tienda.participaciones p where (:idCampana is null or t.campana.id = :idCampana) and (:idTienda is null or t.tienda.id = :idTienda) and p.coordinador.id = :idCoord and p.campana.id = t.campana.id")
     public List<TurnoEntity> filtrarTurnosCoord(@Param("idCampana") Integer idCampana, @Param("idTienda") Integer idTienda, @Param("idCoord") Integer idCoord);
 
     @Query("select t from TurnoEntity t where (:idCampana is null or t.campana.id = :idCampana) and (:idTienda is null or t.tienda.id = :idTienda) and t.tienda.capitan.id = :idCapi")
