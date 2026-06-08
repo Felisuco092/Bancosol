@@ -4,11 +4,15 @@ import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 import uma.grupo13.bancosol.dao.CampanaRepository;
 import uma.grupo13.bancosol.dao.ParticipaRepository;
+import uma.grupo13.bancosol.dao.CadenaRepository;
 import uma.grupo13.bancosol.dto.CampanaDTO;
 import uma.grupo13.bancosol.dto.TiendaDTO;
 import uma.grupo13.bancosol.dto.UsuarioDTO;
 import uma.grupo13.bancosol.entity.CampanaEntity;
+import uma.grupo13.bancosol.entity.CadenaEntity;
 import uma.grupo13.bancosol.entity.TiendaEntity;
+import uma.grupo13.bancosol.entity.ParticipaEntity;
+import uma.grupo13.bancosol.entity.ParticipaId;
 import uma.grupo13.bancosol.mappers.CampanaMapper;
 import uma.grupo13.bancosol.mappers.TiendaMapper;
 import uma.grupo13.bancosol.services.utils.Roles;
@@ -23,6 +27,7 @@ import java.util.Optional;
 public class CampanasService {
     private final CampanaRepository campanaRepository;
     private final ParticipaRepository participaRepository;
+    private final CadenaRepository cadenaRepository;
     private final CampanaMapper campanaMapper;
     private final TiendaMapper tiendaMapper;
 
@@ -49,7 +54,7 @@ public class CampanasService {
         campanaRepository.delete(campanaDelete);
     }
 
-    public String guardarCampana(Integer idCampana, String nombre, LocalDate fechaInic, LocalDate fechaFin) {
+    public String guardarCampana(Integer idCampana, String nombre, LocalDate fechaInic, LocalDate fechaFin, List<Integer> idCadenas) {
         if(this.seSolapaCampanya(fechaInic,fechaFin,idCampana)){
             return "solapamiento";
         }
@@ -58,8 +63,10 @@ public class CampanasService {
         }
 
         CampanaEntity campana;
+        boolean isNew = false;
         if(idCampana == null){
             campana= new CampanaEntity();
+            isNew = true;
         }else{
             campana = this.campanaRepository.getReferenceById(idCampana);
         }
@@ -69,7 +76,26 @@ public class CampanasService {
         campana.setDiaComienzo(fechaInic);
         campana.setDiaFinal(fechaFin);
 
-        campanaRepository.save(campana);
+        CampanaEntity savedCampana = campanaRepository.save(campana);
+
+        if (isNew && idCadenas != null && !idCadenas.isEmpty()) {
+            for (Integer idCadena : idCadenas) {
+                CadenaEntity cadena = cadenaRepository.findById(idCadena).orElse(null);
+                if (cadena != null) {
+                    for (TiendaEntity tienda : cadena.getTiendas()) {
+                        ParticipaEntity participa = new ParticipaEntity();
+                        ParticipaId participaId = new ParticipaId();
+                        participaId.setIdCampana(savedCampana.getId());
+                        participaId.setIdTienda(tienda.getId());
+                        participa.setId(participaId);
+                        participa.setCampana(savedCampana);
+                        participa.setTienda(tienda);
+                        participaRepository.save(participa);
+                    }
+                }
+            }
+        }
+
         return null;
     }
 
