@@ -117,3 +117,12 @@ ALTER TABLE "participa" ADD FOREIGN KEY ("id_campana") REFERENCES "campana" ("id
 ALTER TABLE "participa" ADD FOREIGN KEY ("id_tienda") REFERENCES "tienda" ("id") DEFERRABLE INITIALLY IMMEDIATE;
 
 ALTER TABLE "participa" ADD FOREIGN KEY ("id_coordinador") REFERENCES "usuario" ("id") DEFERRABLE INITIALLY IMMEDIATE;
+
+INSERT INTO "rol" ("nombre") VALUES ('Administrador');          -- ID 1
+INSERT INTO "rol" ("nombre") VALUES ('Coordinador');           -- ID 2
+INSERT INTO "rol" ("nombre") VALUES ('Capitan');               -- ID 3
+INSERT INTO "rol" ("nombre") VALUES ('Responsable Entidad');   -- ID 4
+INSERT INTO "rol" ("nombre") VALUES ('Responsable Tienda');    -- ID 5
+
+INSERT INTO "usuario" ("nombre", "apellidos", "contrasena", "usuario", "email", "telefono", "area_asignada", "id_rol")
+VALUES ('Juan', 'Pérez García', 'admin123', 'jperez', 'juan.perez@email.com', '600111222', 'Málaga', 1);

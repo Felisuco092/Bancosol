@@ -1,0 +1,22 @@
+services:
+  mock-api:
+    image: node:22-alpine
+    working_dir: /app
+    volumes:
+      - ../../FrontEnd2/bd_json:/app
+    command: sh -c "npm install && node server.js"
+    ports:
+      - "3001:3001"
+    environment:
+      PORT: 3001
+
+  frontend2:
+    build:
+      context: ../../FrontEnd2
+      dockerfile: ../docker/frontend/Dockerfile
+      args:
+        VITE_API_URL: http://localhost:3001
+    ports:
+      - "80:80"
+    depends_on:
+      - mock-api
