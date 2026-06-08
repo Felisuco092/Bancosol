@@ -22,11 +22,6 @@ public class CadenaService {
         return cadenaMapper.toDTOList(lista);
     }
 
-    public CadenaDTO buscarPorId(Integer id) {
-        CadenaEntity cadena = cadenaRepository.findById(id).orElse(null);
-        return cadenaMapper.toDTO(cadena);
-    }
-
     public CadenaDTO getReferenceById(Integer id) {
         CadenaEntity cadena = cadenaRepository.getReferenceById(id);
         return cadenaMapper.toDTO(cadena);
