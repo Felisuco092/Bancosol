@@ -1,5 +1,7 @@
 <%@ page import="uma.grupo13.bancosol.entity.CampanaEntity" %>
 <%@ page import="uma.grupo13.bancosol.dto.CampanaDTO" %>
+<%@ page import="uma.grupo13.bancosol.dto.CadenaDTO" %>
+<%@ page import="java.util.List" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <!DOCTYPE html>
 <html lang="es">
@@ -7,6 +9,7 @@
     CampanaDTO campana = (CampanaDTO) request.getAttribute("campana");
     if(campana == null) campana = new CampanaDTO();
     String error = (String) request.getAttribute("error");
+    List<CadenaDTO> cadenas = (List<CadenaDTO>) request.getAttribute("cadenas");
 %>
 <head>
     <meta charset="UTF-8">
@@ -43,6 +46,20 @@
                     <label for="fecha-fin">Especifique el día final de la campaña:<span class="required">*</span></label>
                     <input type="date" name="fecha-fin" id="fecha-fin" value="<%=campana.getDiaFinal() == null ? "":campana.getDiaFinal()%>" required/>
                 </div>
+
+                <% if (campana.getId() == null && cadenas != null && !cadenas.isEmpty()) { %>
+                <div class="form-group">
+                    <label>Cadenas que participan:</label>
+                    <div class="checkbox-group" style="max-height: 150px; overflow-y: auto; border: 1px solid var(--input-border); padding: 10px; border-radius: 4px;">
+                        <% for(CadenaDTO cadena : cadenas) { %>
+                        <div class="checkbox-item" style="display: flex; align-items: center; margin-bottom: 0.5rem;">
+                            <input type="checkbox" name="cadenasParticipantes" id="cad-<%=cadena.getId()%>" value="<%=cadena.getId()%>" style="width: auto; margin-right: 10px;">
+                            <label for="cad-<%=cadena.getId()%>" style="margin-bottom: 0; display: inline; font-weight: normal;"><%=cadena.getNombre()%></label>
+                        </div>
+                        <% } %>
+                    </div>
+                </div>
+                <% } %>
 
                 <div class="form-actions">
                     <button type="submit" class="btn btn-primary">

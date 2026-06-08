@@ -15,6 +15,7 @@ import uma.grupo13.bancosol.entity.TurnoEntity;
 import uma.grupo13.bancosol.entity.UsuarioEntity;
 import uma.grupo13.bancosol.services.CampanasService;
 import uma.grupo13.bancosol.services.TurnosService;
+import uma.grupo13.bancosol.services.CadenaService;
 import uma.grupo13.bancosol.services.utils.Permiso;
 import uma.grupo13.bancosol.services.utils.ValidaSesion;
 
@@ -28,6 +29,7 @@ import java.util.List;
 public class CampanasController {
     private final CampanasService campanasService;
     private final TurnosService turnosService;
+    private final CadenaService cadenaService;
     private final ValidaSesion validaSesion;
 
 
@@ -57,6 +59,7 @@ public class CampanasController {
         if (user == null) return "redirect:/";
         if (!validaSesion.tienePermiso(user.getRol().getId(), Permiso.CAMPANAS)) return "redirect:/dashboard";
         model.addAttribute("campana", new CampanaDTO());
+        model.addAttribute("cadenas", cadenaService.listarCadenas());
 
         return "crear_editar/crear_editar_campana";
     }
@@ -78,11 +81,12 @@ public class CampanasController {
                                     @RequestParam("nombre") String nombre,
                                     @RequestParam("fecha-inicio") LocalDate fechaInic,
                                     @RequestParam("fecha-fin") LocalDate fechaFin,
+                                    @RequestParam(value = "cadenasParticipantes", required = false) List<Integer> idCadenas,
             Model model, @SessionAttribute(name = "user", required = false) UsuarioDTO user) {
         if (user == null) return "redirect:/";
         if (!validaSesion.tienePermiso(user.getRol().getId(), Permiso.CAMPANAS)) return "redirect:/dashboard";
 
-        String error = campanasService.guardarCampana(idCampana, nombre, fechaInic, fechaFin);
+        String error = campanasService.guardarCampana(idCampana, nombre, fechaInic, fechaFin, idCadenas);
         if (error != null) {
             CampanaDTO campana;
             if (idCampana != null) {
@@ -92,6 +96,7 @@ public class CampanasController {
                 campana.setNombre(nombre);
                 campana.setDiaComienzo(fechaInic);
                 campana.setDiaFinal(fechaFin);
+                model.addAttribute("cadenas", cadenaService.listarCadenas());
             }
             String msg = "solapamiento".equals(error)
                     ? "La campaña se solapa con otra existente"
