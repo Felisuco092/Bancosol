@@ -1,3 +1,11 @@
+<%--
+Página JSP que muestra el formulario para crear y editar campaña
+
+Autores:
+- Félix Jiménez Almanza: 90%
+- IA Generativa: 10% (Algunos estilos inline son hecho por la IA)
+
+--%>
 <%@ page import="uma.grupo13.bancosol.entity.CampanaEntity" %>
 <%@ page import="uma.grupo13.bancosol.dto.CampanaDTO" %>
 <%@ page import="uma.grupo13.bancosol.dto.CadenaDTO" %>

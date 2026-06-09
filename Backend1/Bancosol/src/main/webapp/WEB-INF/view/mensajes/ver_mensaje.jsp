@@ -1,12 +1,15 @@
+<%--
+Página JSP que muestra la informacion de lo mensajes
+
+Autores:
+- German Pelaez Gallardo: 30%
+- Félix Jiménez Almanza: 66%
+- IA Generativa: 4% (El style que respeta los saltos de linea)
+
+--%>
 <%@ page import="uma.grupo13.bancosol.dto.NotificacionDTO" %>
 
-<%@ page import="org.aspectj.weaver.ast.Not" %><%--
-  Created by IntelliJ IDEA.
-  User: felix
-  Date: 18/05/2026
-  Time: 13:03
-  To change this template use File | Settings | File Templates.
---%>
+<%@ page import="org.aspectj.weaver.ast.Not" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%
     NotificacionDTO notificacion = (NotificacionDTO) request.getAttribute("notificacion");

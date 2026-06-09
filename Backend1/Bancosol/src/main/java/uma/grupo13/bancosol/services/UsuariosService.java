@@ -1,3 +1,10 @@
+/**
+ * Clase de logica de negocio de usuarios.
+ *
+ * Autores:
+ * - Félix Jiménez Almanza: 10%
+ * - Jorge Torres Sánchez: 90%
+ */
 package uma.grupo13.bancosol.services;
 
 import lombok.AllArgsConstructor;

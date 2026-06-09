@@ -1,3 +1,12 @@
+/**
+ * Clase que representa los endpoints de los turnos de los voluntarios.
+ *
+ * Autores:
+ * - Germán Pelaez Gallardo: 75%
+ * - Félix Jiménez Almanza: 5%
+ * - Jorge Torres Sánchez: 10%
+ * - IA Generativa: 10% (El ultimo endpoint lo hizo la IA)
+ */
 package uma.grupo13.bancosol.controller;
 
 import lombok.AllArgsConstructor;

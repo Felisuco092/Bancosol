@@ -1,3 +1,10 @@
+/**
+ * Clase de logica de negocio de participacione de las tiendas en las campañas.
+ *
+ * Autores:
+ * - Félix Jiménez Almanza: 20%
+ * - Jorge Torres Sánchez: 80%
+ */
 package uma.grupo13.bancosol.services;
 
 import jakarta.servlet.http.HttpServletRequest;
@@ -70,7 +77,7 @@ public class ParticipaService {
         }
     }
 
-    public void editarParticipaCoordinador(Integer id){
+    public void borrarCoordinadoresParticipaciones(Integer id){
         List<ParticipaEntity> participacionesCoord= participaRepository.findByCoordinadorId(id);
         for (ParticipaEntity p : participacionesCoord) {
             p.setCoordinador(null);

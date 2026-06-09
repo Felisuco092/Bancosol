@@ -1,3 +1,11 @@
+/**
+ * Clase que representa los endpoints de las campañas.
+ *
+ * Autores:
+ * - Germán Pelaez Gallardo: 20%
+ * - Félix Jiménez Almanza: 25%
+ * - Jorge Torres Sánchez: 55%
+ */
 package uma.grupo13.bancosol.controller;
 
 import jakarta.persistence.PreUpdate;

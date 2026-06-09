@@ -1,3 +1,10 @@
+/**
+ * Clase de logica de negocio de notificaciones.
+ *
+ * Autores:
+ * - Germán Pelaez Gallardo: 70%
+ * - Jorge Torres Sánchez: 30%
+ */
 package uma.grupo13.bancosol.services;
 
 import lombok.AllArgsConstructor;
@@ -20,11 +27,6 @@ public class NotificacionesService {
     private final NotificacionMapper notificacionMapper;
     private final UserRepository userRepository;
 
-
-    public List<NotificacionDTO> listarNotificaciones() {
-        List<NotificacionEntity> lista = notificacionRepository.findAll();
-        return notificacionMapper.toDTOList(lista);
-    }
 
     public List<NotificacionDTO> listarNotificacionesUsuario(Integer idUsuario) {
         List<NotificacionEntity> notificacionesList = notificacionRepository.listarNotificacionesUsuario(idUsuario);

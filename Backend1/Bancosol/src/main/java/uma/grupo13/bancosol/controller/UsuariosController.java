@@ -1,3 +1,11 @@
+/**
+ * Clase que representa los endpoints de los usuarios.
+ *
+ * Autores:
+ * - Germán Pelaez Gallardo: 5%
+ * - Félix Jiménez Almanza: 5%
+ * - Jorge Torres Sánchez: 90%
+ */
 package uma.grupo13.bancosol.controller;
 
 import jakarta.servlet.http.HttpSession;
@@ -72,7 +80,7 @@ public class UsuariosController {
         List<NotificacionDTO> notficaciones=usuariosService.getNotificaciones(id);
         notificacionesService.deleteAll(notficaciones);
 
-        participaService.editarParticipaCoordinador(id);
+        participaService.borrarCoordinadoresParticipaciones(id);
 
         usuariosService.borrarUsuario(id);
         return "redirect:/usuarios/";

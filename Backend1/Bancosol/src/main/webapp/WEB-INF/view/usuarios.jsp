@@ -1,3 +1,11 @@
+<%--
+Página JSP que muestra la pagina de gestion de usuarios
+
+Autores:
+- Jorge Torres Sánchez: 50%
+- Félix Jiménez Almanza: 50%
+
+--%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <!DOCTYPE html>
 <html lang="es-ES">

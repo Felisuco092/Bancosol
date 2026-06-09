@@ -1,3 +1,10 @@
+<%--
+Página JSP que muestra la pagina de gestion de tiendas
+
+Autores:
+- Jorge Torres Sánchez: 100%
+
+--%>
 <%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
 <%@ page import="uma.grupo13.bancosol.services.utils.Permiso" %>
 <%@ page import="java.util.Map" %>

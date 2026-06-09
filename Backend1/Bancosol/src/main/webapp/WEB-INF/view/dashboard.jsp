@@ -1,3 +1,10 @@
+<%--
+Página JSP que muestra la pagina base despues de iniciar sesion con datoss de la campaña actual
+
+Autores:
+- Jorge Torres Sánchez: 100%
+
+--%>
 <%@ page import="java.util.List" %>
 <%@ page import="uma.grupo13.bancosol.entity.*" %>
 <%@ page import="uma.grupo13.bancosol.dto.TiendaDTO" %>

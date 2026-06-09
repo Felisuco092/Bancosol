@@ -1,3 +1,10 @@
+<%--
+Página JSP que muestra el aside de la navegacion
+
+Autores:
+- Félix Jiménez Almanza: 100%
+
+--%>
 <%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
 <%@ page import="uma.grupo13.bancosol.services.utils.Permiso" %>
 <%@ page import="java.util.Map" %>

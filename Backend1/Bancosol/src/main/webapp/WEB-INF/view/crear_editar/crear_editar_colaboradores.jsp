@@ -1,3 +1,11 @@
+<%--
+Página JSP que muestra el formulario para crear y editar colaborador
+
+Autores:
+- Félix Jiménez Almanza: 90%
+- Jorge Torres Sánchez: 10%
+
+--%>
 <%@ page import="uma.grupo13.bancosol.entity.VoluntarioBaseEntity" %>
 <%@ page import="uma.grupo13.bancosol.entity.VoluntarioFisicoEntity" %>
 <%@ page import="uma.grupo13.bancosol.entity.VoluntarioEntidadEntity" %>

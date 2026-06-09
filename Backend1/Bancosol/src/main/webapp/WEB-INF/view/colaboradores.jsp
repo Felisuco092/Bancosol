@@ -1,3 +1,10 @@
+<%--
+Página JSP que muestra la gestion de colaboradores
+
+Autores:
+- Félix Jiménez Almanza: 100%
+
+--%>
 <%@ page import="java.util.List" %>
 <%@ page import="uma.grupo13.bancosol.services.utils.Permiso" %>
 <%@ page import="java.util.Map" %>
@@ -15,6 +22,7 @@
     <%
         request.setAttribute("paginaActual", "colaboradores");
         Map<Permiso, Boolean> permisos = (Map<Permiso, Boolean>) session.getAttribute("permisos");
+        List<String> localidades = (List<String>) request.getAttribute("localidades");
     %>
     <jsp:include page="aside.jsp"/>
 
@@ -41,7 +49,7 @@
                     <label for="filter-localidad">Localidad:</label>
                     <select id="filter-localidad">
                         <option value="all">Todas</option>
-                        <% for (String loc : (List<String>) request.getAttribute("localidades")) { %>
+                        <% for (String loc : localidades) { %>
                             <option value="<%=loc%>"><%=loc%></option>
                         <% } %>
                     </select>

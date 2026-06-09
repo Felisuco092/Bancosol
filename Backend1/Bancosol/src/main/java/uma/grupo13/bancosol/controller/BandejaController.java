@@ -1,3 +1,11 @@
+/**
+ * Clase que representa los endpoints de la bandeja de notificaciones.
+ *
+ * Autores:
+ * - Félix Jiménez Almanza: 30%
+ * - Germán Pelaez Gallardo: 60%
+ * - Jorge Torres Sánchez: 10%
+ */
 package uma.grupo13.bancosol.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;

@@ -1,3 +1,11 @@
+<%--
+Página JSP que muestra el formulario para crear turno
+
+Autores:
+- German Pelaez Gallardo: 80%
+- IA Generativa: 20% (El <script> nos ha ayudado la IA)
+
+--%>
 <%@ page import="java.util.List" %>
 <%@ page import="org.hibernate.Hibernate" %>
 <%@ page import="uma.grupo13.bancosol.entity.*" %>

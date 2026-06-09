@@ -1,3 +1,12 @@
+<%--
+Página JSP que muestra el formulario para crear y editar tienda
+
+Autores:
+- Félix Jiménez Almanza: 10%
+- Jorge Torres Sánchez: 85%
+- IA Generativa: 5% (El <script> nos ha ayudado la IA)
+
+--%>
 <%@ page import="uma.grupo13.bancosol.entity.TiendaEntity" %>
 <%@ page import="uma.grupo13.bancosol.entity.CadenaEntity" %>
 <%@ page import="uma.grupo13.bancosol.entity.CampanaEntity" %>

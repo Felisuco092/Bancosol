@@ -1,3 +1,9 @@
+/**
+ * Clase que representa una participacion de una tienda en una campaña dentro del sistema.
+ *
+ * Autores:
+ * - IA Generativa: 100%
+ */
 package uma.grupo13.bancosol.entity;
 
 import jakarta.persistence.*;

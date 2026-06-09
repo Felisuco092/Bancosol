@@ -1,3 +1,11 @@
+/**
+ * Interfaz de repository para participaciones con querys.
+ *
+ * Autores:
+ * - Germán Pelaez Gallardo: 15%
+ * - Félix Jiménez Almanza: 15%
+ * - Jorge Torres Sánchez: 70%
+ */
 package uma.grupo13.bancosol.dao;
 
 import org.springframework.data.jpa.repository.JpaRepository;

@@ -1,3 +1,9 @@
+/**
+ * Clase que representa un usuario dentro del sistema.
+ *
+ * Autores:
+ * - IA Generativa: 100%
+ */
 package uma.grupo13.bancosol.entity;
 
 

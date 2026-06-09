@@ -1,3 +1,10 @@
+<%--
+Página JSP que muestra la tabla de las tiendas en la bd
+
+Autores:
+- Jorge Torres Sánchez: 100%
+
+--%>
 <%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
 <%@ page import="uma.grupo13.bancosol.entity.TiendaEntity" %>
 <%@ page import="uma.grupo13.bancosol.entity.ParticipaEntity" %>
