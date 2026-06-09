@@ -1,7 +1,13 @@
 package uma.grupo13.bancosol.mappers;
-//Gemini nos ha ayudado con la parte de Hibernate.unproxy ya que eso no lo hemos dado en la asignatura, para poder convertirlo a 
-//VoluntarioFisicoEntity o VoluntarioEntidadEntity
-
+/**
+ * Clase que representa la DTO de las cadenas.
+ *
+ * Autores:
+ * -IA Generativa: 20%
+ * Aclaración: La IA Generativa nos ha ayudado en el uso de Hibernate.unproxy ya que eso no entra en los contenidos la asignatura.
+ * En esta clase mapper se controla si el voluntario que se pasa por argumento es de tipo VoluntarioFisicoEntity o VoluntarioEntidadEntity,
+ * y, en función del tipo del que sea, se establecerán unos u otros atributos.
+ */
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Component;
 import uma.grupo13.bancosol.dto.VoluntarioDTO;

@@ -1,5 +1,10 @@
 package uma.grupo13.bancosol.mappers;
-
+/**
+ * Clase que representa la DTO de las cadenas.
+ *
+ * Autores:
+ * -IA Generativa: 100%
+ */
 import org.springframework.stereotype.Component;
 import uma.grupo13.bancosol.dto.CampanaDTO;
 import uma.grupo13.bancosol.entity.CampanaEntity;
