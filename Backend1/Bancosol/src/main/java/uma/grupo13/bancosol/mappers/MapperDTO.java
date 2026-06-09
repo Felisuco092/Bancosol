@@ -1,10 +1,10 @@
 package uma.grupo13.bancosol.mappers;
 
 /**
- * Clase que representa la DTO de las cadenas.
+ * Clase abstracta que pasa los Entities a DTO
  *
  * Autores:
- * -IA Generativa: 100%
+ * - Eduardo Guzmán: 100% (Ejemplo de clase)
  */
 
 import java.util.List;
