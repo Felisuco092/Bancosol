@@ -4,7 +4,7 @@ import { fetchData, postData, putData } from '../../services/api'
 import { useAuth } from '../../auth/useAuthHook'
 import { Roles } from '../../utils/constants'
 
-export default function CrearColaboradorPage() {
+export default function CrearEditarColaboradorPage() {
   const { tienePermiso, usuario } = useAuth()
   const { id } = useParams()
   const editando = !!id

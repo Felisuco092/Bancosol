@@ -3,7 +3,7 @@ import { useNavigate, Link, useParams } from 'react-router-dom'
 import { fetchData, postData, putData, deleteData } from '../../services/api'
 import { Roles } from '../../utils/constants'
 
-export default function CrearTiendaPage() {
+export default function CrearEditarTiendaPage() {
   const { id } = useParams()
   const editando = !!id
   const navigate = useNavigate()

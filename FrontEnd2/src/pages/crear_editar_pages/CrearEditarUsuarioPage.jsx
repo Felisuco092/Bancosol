@@ -2,7 +2,7 @@ import { useState, useEffect } from 'react'
 import { useNavigate, Link, useParams } from 'react-router-dom'
 import { fetchData, postData, putData } from '../../services/api'
 
-export default function CrearUsuarioPage() {
+export default function CrearEditarUsuarioPage() {
   const { id } = useParams()
   const editando = !!id
   const navigate = useNavigate()

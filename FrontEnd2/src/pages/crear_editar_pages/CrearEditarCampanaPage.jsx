@@ -3,7 +3,7 @@ import { useNavigate, Link, useParams } from 'react-router-dom'
 import { fetchData, postData, putData } from '../../services/api'
 import { isInvalidDateRange, hasDateOverlap } from '../../utils/dateUtils'
 
-export default function CrearCampanaPage() {
+export default function CrearEditarCampanaPage() {
   const { id } = useParams()
   const editando = !!id
   const navigate = useNavigate()
