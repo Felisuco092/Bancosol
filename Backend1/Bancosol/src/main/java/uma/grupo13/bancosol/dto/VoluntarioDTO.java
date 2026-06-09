@@ -1,3 +1,11 @@
+/**
+ * Clase que representa la DTO de las cadenas.
+ *
+ * Autores:
+ * - IA Generativa: 85%
+ * - Félix Jiménez Almanza: 15%
+ */
+
 package uma.grupo13.bancosol.dto;
 
 import lombok.Data;
