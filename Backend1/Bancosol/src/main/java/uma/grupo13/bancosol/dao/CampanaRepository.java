@@ -1,3 +1,11 @@
+/**
+ * Interfaz de repository para campañas con querys.
+ *
+ * Autores:
+ *  * - Félix Jiménez Almanza: 45%
+ * - Jorge Torres Sánchez: 50%
+ * - IA Generativa: 5% (Hemos usado IA para lo de CURRENT_DATE)
+ */
 package uma.grupo13.bancosol.dao;
 
 import org.springframework.data.jpa.repository.JpaRepository;

@@ -1,3 +1,12 @@
+/**
+ * Interfaz de repository para user con querys.
+ *
+ * Autores:
+ * - Germán Pelaez Gallardo: 10%
+ * - Félix Jiménez Almanza: 45%
+ * - Jorge Torres Sánchez: 25%
+ * - IA Generativa: 20% (Usado para usar los Roles.* de la clase uma.grupo13.bancosol.services.utils.Roles)
+ */
 package uma.grupo13.bancosol.dao;
 
 import org.springframework.data.jpa.repository.JpaRepository;
