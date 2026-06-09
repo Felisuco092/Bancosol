@@ -9,6 +9,7 @@ export default function CrearCampanaPage() {
   const navigate = useNavigate()
   const [cadenas, setCadenas] = useState([])
   const [todasCampanas, setTodasCampanas] = useState([])
+  const [error, setError] = useState(null)
   const [cadenasSeleccion, setCadenasSeleccion] = useState([])
   const [form, setForm] = useState({
     nombre: '',
@@ -52,7 +53,7 @@ export default function CrearCampanaPage() {
           }
         }
       } catch (err) {
-        console.error(err)
+        setError(err.message)
       }
     }
     load()
@@ -63,12 +64,12 @@ export default function CrearCampanaPage() {
 
     // Validaciones
     if (isInvalidDateRange(form.dia_comienzo, form.dia_final)) {
-      alert('La fecha de inicio no puede ser posterior a la fecha de fin.')
+      setError('La fecha de inicio no puede ser posterior a la fecha de fin.')
       return
     }
 
     if (hasDateOverlap(form.dia_comienzo, form.dia_final, todasCampanas, id)) {
-      alert('Las fechas se solapan con una campaña existente.')
+      setError('Las fechas se solapan con una campaña existente.')
       return
     }
 
@@ -96,8 +97,7 @@ export default function CrearCampanaPage() {
       }
       navigate('/campanas')
     } catch (err) {
-      console.error('Error:', err)
-      alert('No se pudo conectar con el servidor')
+      setError(err.message)
     }
   }
 
@@ -108,6 +108,7 @@ export default function CrearCampanaPage() {
       </header>
 
       <div className="formulario">
+        {error && <p className="error-message">{error}</p>}
         <form onSubmit={handleSubmit}>
 
           <div className="form-group">

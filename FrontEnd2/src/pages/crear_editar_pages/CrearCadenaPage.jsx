@@ -6,6 +6,7 @@ export default function CrearCadenaPage() {
   const { id } = useParams()
   const editando = !!id
   const navigate = useNavigate()
+  const [error, setError] = useState(null)
   const [form, setForm] = useState({
     nombre: '',
     codigo: ''
@@ -27,7 +28,7 @@ export default function CrearCadenaPage() {
           })
         }
       } catch (err) {
-        console.error(err)
+        setError(err.message)
       }
     }
     load()
@@ -44,8 +45,7 @@ export default function CrearCadenaPage() {
       alert(editando ? 'Cadena actualizada con éxito' : 'Cadena creada con éxito')
       navigate('/cadenas')
     } catch (err) {
-      console.error('Error:', err)
-      alert('No se pudo conectar con el servidor')
+      setError(err.message)
     }
   }
 
@@ -56,6 +56,7 @@ export default function CrearCadenaPage() {
       </header>
 
       <div className="formulario">
+        {error && <p className="error-message">{error}</p>}
         <form onSubmit={handleSubmit}>
 
           <div className="form-group">

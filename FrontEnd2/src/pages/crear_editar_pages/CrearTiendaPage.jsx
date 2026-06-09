@@ -12,6 +12,7 @@ export default function CrearTiendaPage() {
   const [capitanes, setCapitanes] = useState([])
   const [coordinadores, setCoordinadores] = useState([])
 
+  const [error, setError] = useState(null)
   const [responsablesTienda, setResponsablesTienda] = useState([])
   const [campanas, setCampanas] = useState([])
   const [participaSeleccion, setParticipaSeleccion] = useState([])
@@ -68,7 +69,7 @@ export default function CrearTiendaPage() {
           })))
         }
       } catch (err) {
-        console.error(err)
+        setError(err.message)
       }
     }
     load()
@@ -136,8 +137,7 @@ export default function CrearTiendaPage() {
       alert(editando ? 'Tienda actualizada con éxito' : 'Tienda creada con éxito')
       navigate('/tiendas')
     } catch (err) {
-      console.error('Error:', err)
-      alert('No se pudo conectar con el servidor')
+      setError(err.message)
     }
   }
 
@@ -188,6 +188,7 @@ export default function CrearTiendaPage() {
       </header>
 
       <div className="formulario">
+        {error && <p className="error-message">{error}</p>}
         <form onSubmit={handleSubmit}>
 
           <div className="form-group">
