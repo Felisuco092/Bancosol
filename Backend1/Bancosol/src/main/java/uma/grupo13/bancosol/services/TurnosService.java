@@ -55,12 +55,20 @@ public class TurnosService {
             newTurno.setHoraFin(LocalTime.parse(horaFinStr));
         }
 
+        if (!newTurno.getHoraInicio().isBefore(newTurno.getHoraFin())) {
+            throw new Exception("La hora de inicio debe ser anterior a la de fin.");
+        }
+
         CampanaEntity campana = campanaRepo.getReferenceById(idCampana);
         TiendaEntity tienda = tiendaRepo.getReferenceById(idTienda);
         VoluntarioBaseEntity voluntario = voluntariosRepo.getReferenceById(idVoluntario);
 
         if (campana == null || tienda == null || voluntario == null) {
             throw new Exception("Campaña, Tienda o Voluntario no encontrado");
+        }
+
+        if (newTurno.getDia().isBefore(campana.getDiaComienzo()) || newTurno.getDia().isAfter(campana.getDiaFinal())) {
+            throw new Exception("El día seleccionado no se encuentra dentro del rango de la campaña seleccionada.");
         }
 
         newTurno.setCampana(campana);
