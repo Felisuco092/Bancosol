@@ -62,18 +62,15 @@ export default function CrearCampanaPage() {
   async function handleSubmit(e) {
     e.preventDefault()
 
-    // Validaciones
-    if (isInvalidDateRange(form.dia_comienzo, form.dia_final)) {
-      setError('La fecha de inicio no puede ser posterior a la fecha de fin.')
-      return
-    }
-
-    if (hasDateOverlap(form.dia_comienzo, form.dia_final, todasCampanas, id)) {
-      setError('Las fechas se solapan con una campaña existente.')
-      return
-    }
-
     try {
+        // Validaciones
+      if (isInvalidDateRange(form.dia_comienzo, form.dia_final)) {
+        throw new Error('La fecha de inicio no puede ser posterior a la fecha de fin.')
+      }
+
+      if (hasDateOverlap(form.dia_comienzo, form.dia_final, todasCampanas, id)) {
+        throw new Error('Las fechas se solapan con una campaña existente.')
+      }
       if (editando) {
         await putData('campanas/' + id, form)
         alert('Campaña actualizada con éxito')
