@@ -20,7 +20,13 @@ export default function CrearCampanaPage() {
 
   function handleChange(e) {
     const { name, value } = e.target
-    setForm(prev => ({ ...prev, [name]: value }))
+    setForm(prev => {
+      const next = { ...prev, [name]: value }
+      if (name === 'dia_comienzo' && value) {
+        next.ano = value.split('-')[0]
+      }
+      return next
+    })
   }
 
   function toggleCadena(idCadena) {
@@ -111,11 +117,6 @@ export default function CrearCampanaPage() {
           <div className="form-group">
             <label htmlFor="nombre">Nombre de la campaña<span className="required">*</span></label>
             <input type="text" name="nombre" id="nombre" value={form.nombre} onChange={handleChange} required />
-          </div>
-
-          <div className="form-group">
-            <label htmlFor="ano">Año<span className="required">*</span></label>
-            <input type="number" name="ano" id="ano" value={form.ano} onChange={handleChange} required />
           </div>
 
           <div className="form-group">
