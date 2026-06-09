@@ -4,12 +4,13 @@ import { fetchData, postData, putData } from '../../services/api'
 import { useAuth } from '../../auth/useAuthHook'
 import { Roles } from '../../utils/constants'
 
-export default function CrearColaboradorPage() {
+export default function CrearEditarColaboradorPage() {
   const { tienePermiso, usuario } = useAuth()
   const { id } = useParams()
   const editando = !!id
   const navigate = useNavigate()
   const [tipo, setTipo] = useState('')
+  const [error, setError] = useState(null)
   const [responsablesEntidad, setResponsablesEntidad] = useState([])
   const [aprobadoOriginal, setAprobadoOriginal] = useState(false)
   const [idRegistroVoluntario, setIdRegistroVoluntario] = useState(null)
@@ -76,7 +77,7 @@ export default function CrearColaboradorPage() {
           })
         }
       } catch (err) {
-        console.error(err)
+        setError(err.message)
       }
     }
     load()
@@ -149,8 +150,7 @@ export default function CrearColaboradorPage() {
       }
       navigate('/colaboradores')
     } catch (err) {
-      console.error('Error:', err)
-      alert('No se pudo conectar con el servidor')
+      setError(err.message)
     }
   }
 
@@ -161,6 +161,7 @@ export default function CrearColaboradorPage() {
       </header>
 
       <div className="formulario">
+        {error && <p className="error-message">{error}</p>}
         <form onSubmit={handleSubmit}>
 
           <div className="form-group">

@@ -9,6 +9,7 @@ export default function CrearTurnoPage() {
   const navigate = useNavigate()
   const [campanas, setCampanas] = useState([])
   const [tiendas, setTiendas] = useState([])
+  const [error, setError] = useState(null)
   const [voluntarios, setVoluntarios] = useState([])
 
   //State select tiendas dependiendo de la campaña seleccionada
@@ -34,14 +35,18 @@ export default function CrearTurnoPage() {
     populateTiendas(campanaId)
   }
   async function populateTiendas(campanaId) {
-    let participacionesCampana = []
-    if (usuario.id_rol === Roles.COORDINADOR) {
-      participacionesCampana = await fetchData(`participa?id_campana=${campanaId}&id_coordinador=${usuario.id}`)
-    } else {
-      participacionesCampana = await fetchData(`participa?id_campana=${campanaId}`)
+    try {
+      let participacionesCampana = []
+      if (usuario.id_rol === Roles.COORDINADOR) {
+        participacionesCampana = await fetchData(`participa?id_campana=${campanaId}&id_coordinador=${usuario.id}`)
+      } else {
+        participacionesCampana = await fetchData(`participa?id_campana=${campanaId}`)
+      }
+      const tiendasFiltradas = tiendas.filter(t => participacionesCampana.some(p => String(p.id_tienda) === String(t.id)))
+      setTiendasFiltradas(tiendasFiltradas)
+    } catch (err) {
+      setError(err.message)
     }
-    const tiendasFiltradas = tiendas.filter(t => participacionesCampana.some(p => String(p.id_tienda) === String(t.id)))
-    setTiendasFiltradas(tiendasFiltradas)
   }
 
   useEffect(() => {
@@ -68,7 +73,7 @@ export default function CrearTurnoPage() {
         })
         setVoluntarios(combined)
       } catch (err) {
-        console.error(err)
+        setError(err.message)
       }
     }
     load()
@@ -77,12 +82,23 @@ export default function CrearTurnoPage() {
   async function handleSubmit(e) {
     e.preventDefault()
     try {
+      // La fecha de inicio no puede ser posterior a la fecha de fin
+      
+      if(form.hora_inicio >= form.hora_fin) {
+        throw new Error('La hora de inicio debe ser anterior a la hora de fin.')
+      }
+
+      //La fecha debe estar dentro de las fechas de la campaña
+      const campana = campanas.find(c => String(c.id) === String(form.id_campana))
+      if (form.dia < campana.dia_comienzo || form.dia > campana.dia_final) {
+        throw new Error('La fecha del turno debe estar dentro de las fechas de la campaña seleccionada.')
+      }
+
       await postData('turnos', form)
       alert('Turno creado con éxito')
       navigate('/turnos')
     } catch (err) {
-      console.error('Error:', err)
-      alert('No se pudo conectar con el servidor')
+      setError(err.message)
     }
   }
 
@@ -93,6 +109,7 @@ export default function CrearTurnoPage() {
       </header>
 
       <div className="formulario">
+        {error && <p className="error-message">{error}</p>}
         <form onSubmit={handleSubmit}>
 
           <div className="form-group">

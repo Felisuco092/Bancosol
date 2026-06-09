@@ -2,10 +2,11 @@ import { useState, useEffect } from 'react'
 import { useNavigate, Link, useParams } from 'react-router-dom'
 import { fetchData, postData, putData } from '../../services/api'
 
-export default function CrearUsuarioPage() {
+export default function CrearEditarUsuarioPage() {
   const { id } = useParams()
   const editando = !!id
   const navigate = useNavigate()
+  const [error, setError] = useState(null)
   const [roles, setRoles] = useState([])
   const [form, setForm] = useState({
     nombre: '',
@@ -43,7 +44,7 @@ export default function CrearUsuarioPage() {
           })
         }
       } catch (err) {
-        console.error(err)
+        setError(err.message)
       }
     }
     load()
@@ -64,8 +65,7 @@ export default function CrearUsuarioPage() {
       alert(editando ? 'Usuario actualizado con éxito' : 'Usuario creado con éxito')
       navigate('/usuarios')
     } catch (err) {
-      console.error('Error:', err)
-      alert('No se pudo conectar con el servidor')
+      setError(err.message)
     }
   }
 
@@ -76,6 +76,7 @@ export default function CrearUsuarioPage() {
       </header>
 
       <div className="formulario">
+        {error && <p className="error-message">{error}</p>}
         <form onSubmit={handleSubmit}>
 
           <div className="form-group">

@@ -3,12 +3,13 @@ import { useNavigate, Link, useParams } from 'react-router-dom'
 import { fetchData, postData, putData } from '../../services/api'
 import { isInvalidDateRange, hasDateOverlap } from '../../utils/dateUtils'
 
-export default function CrearCampanaPage() {
+export default function CrearEditarCampanaPage() {
   const { id } = useParams()
   const editando = !!id
   const navigate = useNavigate()
   const [cadenas, setCadenas] = useState([])
   const [todasCampanas, setTodasCampanas] = useState([])
+  const [error, setError] = useState(null)
   const [cadenasSeleccion, setCadenasSeleccion] = useState([])
   const [form, setForm] = useState({
     nombre: '',
@@ -19,7 +20,13 @@ export default function CrearCampanaPage() {
 
   function handleChange(e) {
     const { name, value } = e.target
-    setForm(prev => ({ ...prev, [name]: value }))
+    setForm(prev => {
+      const next = { ...prev, [name]: value }
+      if (name === 'dia_comienzo' && value) {
+        next.ano = value.split('-')[0]
+      }
+      return next
+    })
   }
 
   function toggleCadena(idCadena) {
@@ -52,7 +59,7 @@ export default function CrearCampanaPage() {
           }
         }
       } catch (err) {
-        console.error(err)
+        setError(err.message)
       }
     }
     load()
@@ -61,18 +68,15 @@ export default function CrearCampanaPage() {
   async function handleSubmit(e) {
     e.preventDefault()
 
-    // Validaciones
-    if (isInvalidDateRange(form.dia_comienzo, form.dia_final)) {
-      alert('La fecha de inicio no puede ser posterior a la fecha de fin.')
-      return
-    }
-
-    if (hasDateOverlap(form.dia_comienzo, form.dia_final, todasCampanas, id)) {
-      alert('Las fechas se solapan con una campaña existente.')
-      return
-    }
-
     try {
+        // Validaciones
+      if (isInvalidDateRange(form.dia_comienzo, form.dia_final)) {
+        throw new Error('La fecha de inicio no puede ser posterior a la fecha de fin.')
+      }
+
+      if (hasDateOverlap(form.dia_comienzo, form.dia_final, todasCampanas, id)) {
+        throw new Error('Las fechas se solapan con una campaña existente.')
+      }
       if (editando) {
         await putData('campanas/' + id, form)
         alert('Campaña actualizada con éxito')
@@ -96,8 +100,7 @@ export default function CrearCampanaPage() {
       }
       navigate('/campanas')
     } catch (err) {
-      console.error('Error:', err)
-      alert('No se pudo conectar con el servidor')
+      setError(err.message)
     }
   }
 
@@ -108,16 +111,12 @@ export default function CrearCampanaPage() {
       </header>
 
       <div className="formulario">
+        {error && <p className="error-message">{error}</p>}
         <form onSubmit={handleSubmit}>
 
           <div className="form-group">
             <label htmlFor="nombre">Nombre de la campaña<span className="required">*</span></label>
             <input type="text" name="nombre" id="nombre" value={form.nombre} onChange={handleChange} required />
-          </div>
-
-          <div className="form-group">
-            <label htmlFor="ano">Año<span className="required">*</span></label>
-            <input type="number" name="ano" id="ano" value={form.ano} onChange={handleChange} required />
           </div>
 
           <div className="form-group">
