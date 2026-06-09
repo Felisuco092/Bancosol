@@ -1,5 +1,12 @@
 package uma.grupo13.bancosol.mappers;
 
+/**
+ * Clase que representa la DTO de las cadenas.
+ *
+ * Autores:
+ * -IA Generativa: 100%
+ */
+
 import java.util.List;
 import java.util.stream.Collectors;
 
