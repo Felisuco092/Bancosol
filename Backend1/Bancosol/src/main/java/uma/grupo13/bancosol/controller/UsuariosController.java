@@ -80,7 +80,7 @@ public class UsuariosController {
         List<NotificacionDTO> notficaciones=usuariosService.getNotificaciones(id);
         notificacionesService.deleteAll(notficaciones);
 
-        participaService.editarParticipaCoordinador(id);
+        participaService.borrarCoordinadoresParticipaciones(id);
 
         usuariosService.borrarUsuario(id);
         return "redirect:/usuarios/";

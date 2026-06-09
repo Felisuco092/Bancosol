@@ -1,3 +1,11 @@
+/**
+ * Clase de logica de negocio de los permisos y control de acceso.
+ *
+ * Autores:
+ * - Félix Jiménez Almanza: 10%
+ * - Jorge Torres Sánchez: 85%
+ * - IA Generativa: 5% (Idea de como afrontar los permisos de cada rol)
+ */
 package uma.grupo13.bancosol.services.utils;
 
 import jakarta.servlet.http.HttpSession;
@@ -88,14 +96,6 @@ public class ValidaSesion {
         permisos.put(Roles.RESP_TIENDA, permisosRol4);
     }
 
-    public boolean verificarSesion(HttpSession session){
-        return session.getAttribute("user") != null;
-    }
-
-    public Integer rolUsuario(HttpSession session){
-        UsuarioDTO user= (UsuarioDTO) session.getAttribute("user");
-        return user.getRol().getId();
-    }
 
     public Map<Permiso, Boolean> getPermisos(Integer rol){
         return permisos.get(rol);
