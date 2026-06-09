@@ -1,3 +1,10 @@
+<%--
+Página JSP que muestra los filtros de las tiendas para la gestion de tiendas
+
+Autores:
+- Jorge Torres Sánchez: 100%
+
+--%>
 <%@ page import="java.util.List" %>
 <%@ page import="java.util.Set" %>
 <%@ page import="uma.grupo13.bancosol.dto.CadenaDTO" %>

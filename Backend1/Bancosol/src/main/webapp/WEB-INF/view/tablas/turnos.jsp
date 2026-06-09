@@ -1,3 +1,10 @@
+<%--
+Página JSP que muestra la tabla de los turnos en la bd
+
+Autores:
+- German Pelaez Gallardo: 100%
+
+--%>
 <%@ page import="uma.grupo13.bancosol.entity.*, java.util.*" %>
 <%@ page import="org.hibernate.Hibernate" %>
 <%@ page import="uma.grupo13.bancosol.dto.TurnoDTO" %>

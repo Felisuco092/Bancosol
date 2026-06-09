@@ -1,11 +1,12 @@
-<%@ page import="uma.grupo13.bancosol.entity.CadenaEntity" %>
-<%@ page import="uma.grupo13.bancosol.dto.CadenaDTO" %><%--
-  Created by IntelliJ IDEA.
-  User: felix
-  Date: 11/05/2026
-  Time: 12:19
-  To change this template use File | Settings | File Templates.
+<%--
+Página JSP que muestra el formulario para crear y editar cadena
+
+Autores:
+- German Pelaez Gallardo: 100%
+
 --%>
+<%@ page import="uma.grupo13.bancosol.entity.CadenaEntity" %>
+<%@ page import="uma.grupo13.bancosol.dto.CadenaDTO" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%
     CadenaDTO cadena = (CadenaDTO) request.getAttribute("cadena");

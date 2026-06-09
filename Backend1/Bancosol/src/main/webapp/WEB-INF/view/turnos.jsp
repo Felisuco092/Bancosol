@@ -1,3 +1,11 @@
+<%--
+Página JSP que muestra la pagina de gestión de turnos
+
+Autores:
+- German Pelaez Gallardo: 80%
+- IA Generativa: 20%
+
+--%>
 <%@ page import="uma.grupo13.bancosol.entity.TiendaEntity" %>
 <%@ page import="uma.grupo13.bancosol.entity.CampanaEntity" %>
 <%@ page import="java.util.List" %>
