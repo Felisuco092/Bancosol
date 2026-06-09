@@ -1,3 +1,9 @@
+/**
+ * Clase que representa un voluntario tipo fisico dentro del sistema. Es subclase de voluntario_base
+ *
+ * Autores:
+ * - IA Generativa: 100%
+ */
 package uma.grupo13.bancosol.entity;
 
 import jakarta.persistence.*;

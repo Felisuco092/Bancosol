@@ -1,3 +1,10 @@
+<%--
+Página JSP que muestra el formulario para crear y editar usuario
+
+Autores:
+- Jorge Torres Sánchez: 100%
+
+--%>
 <%@ page import="uma.grupo13.bancosol.entity.UsuarioEntity" %>
 <%@ page import="uma.grupo13.bancosol.entity.RolEntity" %>
 <%@ page import="java.util.List" %>

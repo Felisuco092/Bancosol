@@ -1,3 +1,12 @@
+<%--
+Página JSP que muestra la tabla de las campañas en la bd
+
+Autores:
+- German Pelaez Gallardo: 15%
+- Félix Jiménez Almanza: 60%
+- IA Generativa: 25% (Lo hemos usado para las comparaciones con localDate)
+
+--%>
 <%@ page import="uma.grupo13.bancosol.entity.CampanaEntity" %>
 <%@ page import="java.util.List" %>
 <%@ page import="java.time.LocalDate" %>

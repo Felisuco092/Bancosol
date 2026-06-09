@@ -1,3 +1,9 @@
+/**
+ * Clase que representa el doble Id de la tabla intermedia muchos a muchos participa dentro del sistema.
+ *
+ * Autores:
+ * - IA Generativa: 100%
+ */
 package uma.grupo13.bancosol.entity;
 
 import jakarta.persistence.Column;

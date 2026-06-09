@@ -1,3 +1,11 @@
+/**
+ * Interfaz de repository para tiendas con querys.
+ *
+ * Autores:
+ * - Germán Pelaez Gallardo: 5%
+ * - Félix Jiménez Almanza: 5%
+ * - Jorge Torres Sánchez: 90%
+ */
 package uma.grupo13.bancosol.dao;
 
 import org.springframework.data.jpa.repository.JpaRepository;

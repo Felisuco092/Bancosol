@@ -1,3 +1,11 @@
+/**
+ * Clase que representa los endpoints de las tiendas.
+ *
+ * Autores:
+ * - Germán Pelaez Gallardo: 5%
+ * - Félix Jiménez Almanza: 15%
+ * - Jorge Torres Sánchez: 80%
+ */
 package uma.grupo13.bancosol.controller;
 
 import jakarta.servlet.http.HttpServletRequest;

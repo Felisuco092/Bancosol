@@ -1,3 +1,11 @@
+/**
+ * Clase que representa los endpoints de los colaboradores.
+ *
+ * Autores:
+ * - Germán Pelaez Gallardo: 10%
+ * - Félix Jiménez Almanza: 80%
+ * - Jorge Torres Sánchez: 10%
+ */
 package uma.grupo13.bancosol.controller;
 
 import lombok.AllArgsConstructor;

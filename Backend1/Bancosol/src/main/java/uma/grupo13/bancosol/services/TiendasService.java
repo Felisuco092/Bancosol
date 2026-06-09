@@ -1,3 +1,10 @@
+/**
+ * Clase de logica de negocio de las tiendas.
+ *
+ * Autores:
+ * - Félix Jiménez Almanza: 25%
+ * - Jorge Torres Sánchez: 75%
+ */
 package uma.grupo13.bancosol.services;
 
 import lombok.AllArgsConstructor;

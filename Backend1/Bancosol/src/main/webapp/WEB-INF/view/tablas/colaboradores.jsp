@@ -1,3 +1,10 @@
+<%--
+Página JSP que muestra la tabla de los colaboradores en la bd
+
+Autores:
+- Félix Jiménez Almanza: 100%
+
+--%>
 <%@ page import="uma.grupo13.bancosol.entity.*, java.util.*" %>
 <%@ page import="uma.grupo13.bancosol.dto.VoluntarioDTO" %>
 <%@ page import="uma.grupo13.bancosol.services.utils.Permiso" %>

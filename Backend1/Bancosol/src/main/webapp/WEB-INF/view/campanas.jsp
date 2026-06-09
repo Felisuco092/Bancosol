@@ -1,3 +1,11 @@
+<%--
+Página JSP que muestra la gestion de campañas
+
+Autores:
+- Félix Jiménez Almanza: 50%
+- Germán Pelaez Gallardo: 50%
+
+--%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <!DOCTYPE html>
 <html lang="es">

@@ -1,3 +1,9 @@
+/**
+ * Clase de logica de negocio de cadena de las tiendas.
+ *
+ * Autores:
+ * - Jorge Torres Sánchez: 100%
+ */
 package uma.grupo13.bancosol.services;
 
 import lombok.AllArgsConstructor;

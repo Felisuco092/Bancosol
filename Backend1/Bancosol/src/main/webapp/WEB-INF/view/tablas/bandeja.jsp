@@ -1,3 +1,11 @@
+<%--
+Página JSP que muestra la tabla de las notificaciones del usuario
+
+Autores:
+- German Pelaez Gallardo: 20%
+- Félix Jiménez Almanza: 80%
+
+--%>
 <%@ page import="java.util.List" %>
 <%@ page import="uma.grupo13.bancosol.dto.NotificacionDTO" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>

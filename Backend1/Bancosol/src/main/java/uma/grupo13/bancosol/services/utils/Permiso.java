@@ -1,3 +1,9 @@
+/**
+ * Enums de PERMISOS para control de acceso
+ *
+ * Autores:
+ * - Félix Jiménez Almanza: 100%
+ */
 package uma.grupo13.bancosol.services.utils;
 
 public enum Permiso {

@@ -1,3 +1,10 @@
+/**
+ * Clase que representa los endpoints del dashboard y del login.
+ *
+ * Autores:
+ * - Germán Pelaez Gallardo: 15%
+ * - Jorge Torres Sánchez: 85%
+ */
 package uma.grupo13.bancosol.controller;
 
 import jakarta.servlet.http.HttpSession;
@@ -20,6 +27,7 @@ import java.util.Optional;
 
 @Controller
 @AllArgsConstructor
+
 public class ControllerBase {
     private final UsuariosService usuariosService;
     private final TiendasService tiendasServ;

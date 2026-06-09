@@ -1,3 +1,11 @@
+/**
+ * Interfaz de repository para turnos con querys.
+ *
+ * Autores:
+ * - Germán Pelaez Gallardo: 35%
+ * - Félix Jiménez Almanza: 15%
+ * - Jorge Torres Sánchez: 50%
+ */
 package uma.grupo13.bancosol.dao;
 
 import org.springframework.data.jpa.repository.JpaRepository;

@@ -1,3 +1,11 @@
+/**
+ * Clase de logica de negocio de las campañas.
+ *
+ * Autores:
+ * - Germán Pelaez Gallardo: 1%
+ * - Félix Jiménez Almanza: 19%
+ * - Jorge Torres Sánchez: 80%
+ */
 package uma.grupo13.bancosol.services;
 
 import lombok.AllArgsConstructor;

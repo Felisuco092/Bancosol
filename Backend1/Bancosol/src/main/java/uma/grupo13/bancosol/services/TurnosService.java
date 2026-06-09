@@ -1,3 +1,12 @@
+/**
+ * Clase de logica de negocio de turnos.
+ *
+ * Autores:
+ * - Germán Pelaez Gallardo: 70%
+ * - Félix Jiménez Almanza: 5%
+ * - Jorge Torres Sánchez: 15%
+ * - IA Generativa: 10% (Nos ayudo con los tipos de datos LocalDate)
+ */
 package uma.grupo13.bancosol.services;
 
 import lombok.AllArgsConstructor;

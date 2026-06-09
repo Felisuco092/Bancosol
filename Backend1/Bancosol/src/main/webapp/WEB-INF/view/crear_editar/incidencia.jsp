@@ -1,8 +1,13 @@
-<%@ page import="uma.grupo13.bancosol.entity.TurnoEntity" %>
+<%--
+Página JSP que muestra el formulario para crear una incidencia sobre un turno de una tienda especifica
+
+Autores:
+- German Pelaez Gallardo: 95%
+- Félix Jiménez Almanza: 5%
+
+--%>
 <%@ page import="java.util.List" %>
 <%@ page import="uma.grupo13.bancosol.dto.VoluntarioDTO" %>
-<%@ page import="uma.grupo13.bancosol.dto.CampanaDTO" %>
-<%@ page import="uma.grupo13.bancosol.dto.UsuarioDTO" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
 <head>
@@ -16,8 +21,6 @@
     List<VoluntarioDTO> voluntarioDTOS = (List<VoluntarioDTO>) request.getAttribute("voluntarios");
     Integer idTurno = (Integer) request.getAttribute("idTurno");
     List<VoluntarioDTO> voluntariosDTOIncidencia = (List<VoluntarioDTO>) request.getAttribute("voluntariosDTOIncidencia");
-    // CampanaDTO campana = (CampanaDTO) request.getAttribute("campana");
-    //List<UsuarioDTO> admins = (List<UsuarioDTO>) request.getAttribute("admins");
 %>
 <body>
 <main class="main-content">

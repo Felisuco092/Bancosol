@@ -1,3 +1,12 @@
+<%--
+Página JSP que muestra la tabla de los usuarios en la bd
+
+Autores:
+- Jorge Torres Sánchez: 45%
+- Félix Jiménez Almanza: 45%
+- IA Generativa: 10% (Para pasar los roles sin tilde)
+
+--%>
 <%@ page import="java.util.List" %>
 <%@ page import="uma.grupo13.bancosol.entity.RolEntity" %>
 <%@ page import="uma.grupo13.bancosol.dto.UsuarioDTO" %>

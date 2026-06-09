@@ -1,3 +1,9 @@
+/**
+ * Valores de los ids de los roles en la base de datos
+ *
+ * Autores:
+ * - Félix Jiménez Almanza: 100%
+ */
 package uma.grupo13.bancosol.services.utils;
 
 public final class Roles {

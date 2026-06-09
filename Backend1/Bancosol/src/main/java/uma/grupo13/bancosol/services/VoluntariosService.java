@@ -1,3 +1,12 @@
+/**
+ * Clase de logica de negocio de voluntarios.
+ *
+ * Autores:
+ * - Germán Pelaez Gallardo: 35%
+ * - Félix Jiménez Almanza: 10%
+ * - Jorge Torres Sánchez: 40%
+ * - IA Generativa: 15% (Nos ayudo con los hibernate unproxy para pasar a un subtipo)
+ */
 package uma.grupo13.bancosol.services;
 
 import lombok.AllArgsConstructor;

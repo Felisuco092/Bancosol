@@ -1,3 +1,12 @@
+/**
+ * Interfaz de repository para voluntarios tanto fisico como entidades con querys.
+ *
+ * Autores:
+ * - Germán Pelaez Gallardo: 5%
+ * - Félix Jiménez Almanza: 55%
+ * - Jorge Torres Sánchez: 25%
+ * - IA Generativa: 15% (el query countTotalPersonasVoluntarias lo hizo la IA)
+ */
 package uma.grupo13.bancosol.dao;
 
 import org.springframework.data.jpa.repository.JpaRepository;

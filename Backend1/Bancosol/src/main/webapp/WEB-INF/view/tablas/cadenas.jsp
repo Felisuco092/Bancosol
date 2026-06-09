@@ -1,3 +1,11 @@
+<%--
+Página JSP que muestra la tabla de las cadenas en la bd
+
+Autores:
+- German Pelaez Gallardo: 20%
+- Félix Jiménez Almanza: 80%
+
+--%>
 <%@ page import="uma.grupo13.bancosol.entity.CadenaEntity" %>
 <%@ page import="java.util.List" %>
 <%@ page import="uma.grupo13.bancosol.dto.CadenaDTO" %>
