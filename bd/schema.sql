@@ -118,11 +118,149 @@ ALTER TABLE "participa" ADD FOREIGN KEY ("id_tienda") REFERENCES "tienda" ("id")
 
 ALTER TABLE "participa" ADD FOREIGN KEY ("id_coordinador") REFERENCES "usuario" ("id") DEFERRABLE INITIALLY IMMEDIATE;
 
+--- =====================================================================
+--- 1. ROLES
+--- =====================================================================
 INSERT INTO "rol" ("nombre") VALUES ('Administrador');          -- ID 1
 INSERT INTO "rol" ("nombre") VALUES ('Coordinador');           -- ID 2
 INSERT INTO "rol" ("nombre") VALUES ('Capitan');               -- ID 3
 INSERT INTO "rol" ("nombre") VALUES ('Responsable Entidad');   -- ID 4
 INSERT INTO "rol" ("nombre") VALUES ('Responsable Tienda');    -- ID 5
 
+--- =====================================================================
+--- 2. USUARIOS
+--- =====================================================================
+-- Administrador (ID 1)
 INSERT INTO "usuario" ("nombre", "apellidos", "contrasena", "usuario", "email", "telefono", "area_asignada", "id_rol")
 VALUES ('Juan', 'Pérez García', 'admin123', 'jperez', 'juan.perez@email.com', '600111222', 'Málaga', 1);
+
+-- Coordinadores (ID 2 y 3)
+INSERT INTO "usuario" ("nombre", "apellidos", "contrasena", "usuario", "email", "telefono", "area_asignada", "id_rol")
+VALUES ('María', 'López Sánchez', 'coord123', 'mlopez', 'maria.lopez@email.com', '611333444', 'Rincón de la Victoria', 2);
+INSERT INTO "usuario" ("nombre", "apellidos", "contrasena", "usuario", "email", "telefono", "area_asignada", "id_rol")
+VALUES ('Carmen', 'Martín Torres', 'coord123', 'cmartin', 'carmen.martin@email.com', '633777888', 'Almáchar', 2);
+
+-- Capitanes (ID 4 y 5)
+INSERT INTO "usuario" ("nombre", "apellidos", "contrasena", "usuario", "email", "telefono", "area_asignada", "id_rol")
+VALUES ('Antonio', 'Ruiz Fernández', 'capi123', 'aruiz', 'antonio.ruiz@email.com', '622555666', 'Málaga Centro', 3);
+INSERT INTO "usuario" ("nombre", "apellidos", "contrasena", "usuario", "email", "telefono", "area_asignada", "id_rol")
+VALUES ('Francisco', 'Javier Lara', 'capi456', 'fjlara', 'javier.lara@email.com', '622888999', 'Teatinos', 3);
+
+-- Responsable de Entidad (ID 6)
+INSERT INTO "usuario" ("nombre", "apellidos", "contrasena", "usuario", "email", "telefono", "area_asignada", "id_rol")
+VALUES ('Laura', 'Sanz Montero', 'respent123', 'lsanz', 'laura.sanz@email.com', '644111222', 'Málaga', 4);
+
+-- Responsable de Tienda / Gerente (ID 7)
+INSERT INTO "usuario" ("nombre", "apellidos", "contrasena", "usuario", "email", "telefono", "area_asignada", "id_rol")
+VALUES ('Ricardo', 'Gómez Naranjo', 'resptda123', 'rgomez', 'ricardo.gomez@email.com', '655333444', 'Rincón de la Victoria', 5);
+
+--- =====================================================================
+--- 3. CADENAS
+--- =====================================================================
+INSERT INTO "cadena" ("nombre", "codigo") VALUES ('Mercadona', 'MERC');
+INSERT INTO "cadena" ("nombre", "codigo") VALUES ('Carrefour', 'CARR');
+INSERT INTO "cadena" ("nombre", "codigo") VALUES ('Lidl', 'LIDL');
+INSERT INTO "cadena" ("nombre", "codigo") VALUES ('Dia', 'DIA_');
+
+--- =====================================================================
+--- 4. TIENDAS
+--- =====================================================================
+-- Mercadona El Cónsul (Capitán Francisco Lara ID 5)
+INSERT INTO "tienda" ("descripcion", "localidad", "domicilio", "c_postal", "zona_geografica", "id_cadena", "id_capitan", "id_responsable_tienda")
+VALUES ('Mercadona El Cónsul', 'Málaga', 'Av. El Cónsul, 5', '29010', 'Teatinos', 1, 5, NULL);
+
+-- Carrefour Centro (Capitán Antonio Ruiz ID 4)
+INSERT INTO "tienda" ("descripcion", "localidad", "domicilio", "c_postal", "zona_geografica", "id_cadena", "id_capitan", "id_responsable_tienda")
+VALUES ('Carrefour Centro', 'Málaga', 'Calle Larios, 12', '29015', 'Centro', 2, 4, NULL);
+
+-- Lidl Rincón (Asignado al responsable Ricardo ID 7)
+INSERT INTO "tienda" ("descripcion", "localidad", "domicilio", "c_postal", "zona_geografica", "id_cadena", "id_capitan", "id_responsable_tienda")
+VALUES ('Lidl Rincón', 'Rincón de la Victoria', 'Av. de la Victoria, 30', '29730', 'Rincón', 3, NULL, 7);
+
+-- Día Almáchar
+INSERT INTO "tienda" ("descripcion", "localidad", "domicilio", "c_postal", "zona_geografica", "id_cadena", "id_capitan", "id_responsable_tienda")
+VALUES ('Día Almáchar', 'Almáchar', 'Plaza del Carmen, 2', '29150', 'Axarquía', 4, NULL, NULL);
+
+-- NUEVA: Mercadona Centro
+INSERT INTO "tienda" ("descripcion", "localidad", "domicilio", "c_postal", "zona_geografica", "id_cadena", "id_capitan", "id_responsable_tienda")
+VALUES ('Mercadona Plaza de Armas', 'Málaga', 'Plaza de Armas, 1', '29001', 'Centro', 1, 4, NULL);
+
+--- =====================================================================
+--- 5. CAMPAÑAS (¡ARREGLADAS! Ya no se pisan en fecha)
+--- =====================================================================
+INSERT INTO "campana" ("nombre", "ano", "dia_comienzo", "dia_final")
+VALUES ('Gran Recogida Primavera', 2026, '2026-05-15', '2026-05-31');
+
+INSERT INTO "campana" ("nombre", "ano", "dia_comienzo", "dia_final")
+VALUES ('Operación Kilo Junio', 2026, '2026-06-01', '2026-06-30');
+
+-- NUEVA: Campaña de Otoño (Para tener datos futuros)
+INSERT INTO "campana" ("nombre", "ano", "dia_comienzo", "dia_final")
+VALUES ('Recogida Solidaria Otoño', 2026, '2026-10-01', '2026-10-15');
+
+--- =====================================================================
+--- 6. VOLUNTARIOS BASE
+--- =====================================================================
+INSERT INTO "voluntario_base" ("domicilio", "zona_geografica", "codigo_postal", "aprobado") VALUES ('Calle Sol, 5', 'Centro', '29010', true);     -- ID 1
+INSERT INTO "voluntario_base" ("domicilio", "zona_geografica", "codigo_postal", "aprobado") VALUES ('Calle Luna, 12', 'Teatinos', '29011', true);   -- ID 2
+INSERT INTO "voluntario_base" ("domicilio", "zona_geografica", "codigo_postal", "aprobado") VALUES ('Av. Andalucía, 30', 'Rincón', '29730', true); -- ID 3
+INSERT INTO "voluntario_base" ("domicilio", "zona_geografica", "codigo_postal", "aprobado") VALUES ('Calle Mar, 8', 'Centro', '29002', false);    -- ID 4
+INSERT INTO "voluntario_base" ("domicilio", "zona_geografica", "codigo_postal", "aprobado") VALUES ('Calle Victoria, 45', 'Centro', '29012', true);-- ID 5 (NUEVO)
+
+--- =====================================================================
+--- 7. VOLUNTARIOS FÍSICOS (Subclase 1)
+--- =====================================================================
+INSERT INTO "voluntario_fisico" ("id_voluntario", "nombre", "apellidos") VALUES (1, 'Carlos', 'Gómez Herrera');
+INSERT INTO "voluntario_fisico" ("id_voluntario", "nombre", "apellidos") VALUES (2, 'Ana', 'Belén Martín');
+INSERT INTO "voluntario_fisico" ("id_voluntario", "nombre", "apellidos") VALUES (5, 'Pedro', 'Jiménez Ortiz'); -- (NUEVO)
+
+--- =====================================================================
+--- 8. VOLUNTARIOS ENTIDAD (Subclase 2)
+--- =====================================================================
+-- ONG Cruz Solidaria gestionada por Laura (ID_Usuario: 6)
+INSERT INTO "voluntario_entidad" ("id_voluntario", "nombre_asociacion", "n_voluntarios", "id_responsable_entidad")
+VALUES (3, 'ONG Cruz Solidaria', 15, 6);
+
+INSERT INTO "voluntario_entidad" ("id_voluntario", "nombre_asociacion", "n_voluntarios", "id_responsable_entidad")
+VALUES (4, 'Asociación Vecinos del Palo', 8, NULL);
+
+--- =====================================================================
+--- 9. PARTICIPA (Asignación de Tiendas a Coordinadores por Campaña)
+--- =====================================================================
+-- Campaña 1 (Primavera)
+INSERT INTO "participa" ("id_campana", "id_tienda", "id_coordinador") VALUES (1, 1, 2);
+INSERT INTO "participa" ("id_campana", "id_tienda", "id_coordinador") VALUES (1, 2, 2);
+INSERT INTO "participa" ("id_campana", "id_tienda", "id_coordinador") VALUES (1, 3, 3);
+-- Campaña 2 (Junio)
+INSERT INTO "participa" ("id_campana", "id_tienda", "id_coordinador") VALUES (2, 1, 2);
+INSERT INTO "participa" ("id_campana", "id_tienda", "id_coordinador") VALUES (2, 4, 3);
+INSERT INTO "participa" ("id_campana", "id_tienda", "id_coordinador") VALUES (2, 5, 2); -- (NUEVA)
+
+--- =====================================================================
+--- 10. TURNOS (He añadido un par más para Junio)
+--- =====================================================================
+-- Turnos de la Campaña 1 (Mayo)
+INSERT INTO "turno" ("tipo_turno", "dia", "hora_inicio", "hora_fin", "id_campana", "id_voluntario", "id_tienda")
+VALUES ('Mañana', '2026-05-15', '09:00:00', '14:00:00', 1, 1, 1);
+INSERT INTO "turno" ("tipo_turno", "dia", "hora_inicio", "hora_fin", "id_campana", "id_voluntario", "id_tienda")
+VALUES ('Tarde', '2026-05-15', '15:00:00', '20:00:00', 1, 3, 1);
+INSERT INTO "turno" ("tipo_turno", "dia", "hora_inicio", "hora_fin", "id_campana", "id_voluntario", "id_tienda")
+VALUES ('Mañana', '2026-05-16', '09:00:00', '14:00:00', 1, 2, 2);
+
+-- Turnos de la Campaña 2 (Junio - Activa hoy)
+INSERT INTO "turno" ("tipo_turno", "dia", "hora_inicio", "hora_fin", "id_campana", "id_voluntario", "id_tienda")
+VALUES ('Mañana', '2026-06-01', '08:00:00', '13:00:00', 2, 3, 4);
+INSERT INTO "turno" ("tipo_turno", "dia", "hora_inicio", "hora_fin", "id_campana", "id_voluntario", "id_tienda")
+VALUES ('Tarde', '2026-06-03', '16:00:00', '21:00:00', 2, 1, 2); -- Hoy por la tarde Carlos en Carrefour Centro
+INSERT INTO "turno" ("tipo_turno", "dia", "hora_inicio", "hora_fin", "id_campana", "id_voluntario", "id_tienda")
+VALUES ('Mañana', '2026-06-04', '09:00:00', '14:00:00', 2, 5, 5); -- Mañana Pedro en Mercadona Plaza de Armas
+
+--- =====================================================================
+--- 11. NOTIFICACIONES
+--- =====================================================================
+INSERT INTO "notificacion" ("id_usuario_destino", "fecha_creacion", "asunto", "mensaje")
+VALUES (1, '2026-05-01 10:30:00', 'Bienvenido a Bancosol', 'Tu cuenta ha sido creada correctamente.');
+INSERT INTO "notificacion" ("id_usuario_destino", "fecha_creacion", "asunto", "mensaje")
+VALUES (4, '2026-05-02 14:15:00', 'Nuevo turno asignado', 'Se te ha asignado un turno en Carrefour Centro.');
+INSERT INTO "notificacion" ("id_usuario_destino", "fecha_creacion", "asunto", "mensaje")
+VALUES (1, '2026-05-03 09:00:00', 'Campaña activa', 'La campaña Gran Recogida Primavera 2026 ya está activa.');
