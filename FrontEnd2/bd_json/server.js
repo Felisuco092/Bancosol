@@ -84,7 +84,7 @@ const PERMISOS = {
     delete: [ROLES.ADMIN, ROLES.CAPITAN, ROLES.COORDINADOR, ROLES.RESPONSABLE_ENTIDAD, ROLES.RESPONSABLE_TIENDA]
   },
   participa: {
-    get: [ROLES.ADMIN, ROLES.CAPITAN, ROLES.COORDINADOR, ROLES.RESPONSABLE_TIENDA],
+    get: [ROLES.ADMIN, ROLES.CAPITAN, ROLES.COORDINADOR, ROLES.RESPONSABLE_ENTIDAD, ROLES.RESPONSABLE_TIENDA],
     post: [ROLES.ADMIN],
     put: [ROLES.ADMIN],
     delete: [ROLES.ADMIN]
@@ -266,6 +266,12 @@ router.render = (req, res) => {
       const entidades = router.db.get('voluntario_entidad').filter(v => String(v.id_responsable_entidad) === userId).value()
       const ids = new Set(entidades.map(e => String(e.id_voluntario)))
       filtered = data.filter(t => ids.has(String(t.id_voluntario)))
+    } else if (path === 'participa') {
+      const entidades = router.db.get('voluntario_entidad').filter(v => String(v.id_responsable_entidad) === userId).value()
+      const vbIds = new Set(entidades.map(e => String(e.id_voluntario)))
+      const turnos = router.db.get('turnos').filter(t => vbIds.has(String(t.id_voluntario))).value()
+      const tiendaIds = new Set(turnos.map(t => String(t.id_tienda)))
+      filtered = data.filter(p => tiendaIds.has(String(p.id_tienda)))
     }
   }
   else if (roleId === '5') {
