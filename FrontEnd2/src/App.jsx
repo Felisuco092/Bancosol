@@ -29,7 +29,7 @@ function App() {
         <Route path="/" element={<LoginPage />} />
       </Route>
 
-      {/* Rutas accesibles por TODOS los usuarios autenticados */}
+      
       <Route element={<ProtectedRoute allowedRoles={[Roles.ADMIN, Roles.CAPITAN, Roles.COORDINADOR, Roles.RESP_ENTIDAD, Roles.RESP_TIENDA]} />}>
         <Route element={<SideBarMainLayout />}>
           <Route path="/dashboard" element={<DashboardPage />} />
@@ -41,7 +41,7 @@ function App() {
         </Route>
       </Route>
 
-      {/* Rutas para Administrador (Rol 1) */}
+      
       <Route element={<ProtectedRoute allowedRoles={[Roles.ADMIN]} />}>
         <Route path="/campanas">
           <Route element={<SideBarMainLayout />}>
@@ -73,7 +73,7 @@ function App() {
           </Route>
         </Route>
 
-        {/* El Admin también puede crear/editar tiendas */}
+        
         <Route path="/tiendas">
           <Route element={<MainLayout />}>
             <Route path="crear" element={<CrearEditarTiendaPage />} />
@@ -82,7 +82,7 @@ function App() {
         </Route>
       </Route>
 
-      {/* Gestión de Tiendas (Listado): Admin, Capitán, Coordinador, Resp. Tienda */}
+      
       <Route element={<ProtectedRoute allowedRoles={[Roles.ADMIN, Roles.CAPITAN, Roles.COORDINADOR, Roles.RESP_TIENDA]} />}>
         <Route path="/tiendas">
           <Route element={<SideBarMainLayout />}>
@@ -91,7 +91,7 @@ function App() {
         </Route>
       </Route>
 
-      {/* Colaboradores (Listado): Admin, Capitán, Coordinador, Resp. Entidad */}
+      
       <Route element={<ProtectedRoute allowedRoles={[Roles.ADMIN, Roles.CAPITAN, Roles.COORDINADOR, Roles.RESP_ENTIDAD]} />}>
         <Route path="/colaboradores">
           <Route element={<SideBarMainLayout />}>
@@ -100,7 +100,7 @@ function App() {
         </Route>
       </Route>
 
-      {/* Crear/Editar Colaboradores: Admin y Coordinador */}
+      
       <Route element={<ProtectedRoute allowedRoles={[Roles.ADMIN, Roles.COORDINADOR]} />}>
         <Route path="/colaboradores">
           <Route element={<MainLayout />}>
@@ -110,7 +110,7 @@ function App() {
         </Route>
       </Route>
 
-      {/* Crear Turnos: Admin y Coordinador */}
+      
       <Route element={<ProtectedRoute allowedRoles={[Roles.ADMIN, Roles.COORDINADOR]} />}>
         <Route path="/turnos">
           <Route element={<MainLayout />}>
@@ -119,7 +119,7 @@ function App() {
         </Route>
       </Route>
 
-      {/* Incidencias: Admin, Capitán, Coordinador, Resp. Entidad */}
+      
       <Route element={<ProtectedRoute allowedRoles={[Roles.ADMIN, Roles.CAPITAN, Roles.COORDINADOR, Roles.RESP_ENTIDAD]} />}>
         <Route path="/turnos">
           <Route element={<MainLayout />}>
