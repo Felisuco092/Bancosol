@@ -13,8 +13,8 @@ Autores:
     <title>Bancosol - Login</title>
     <link rel="stylesheet" href="../../css/styles.css">
     <link rel="stylesheet" href="../../css/login.css">
-    <%String error = (String)request.getAttribute("error");%>
     <link rel="icon" type="image/png" href="/assets/LOGO_BANCOSOL_ICONO.png">
+    <%String error = (String)request.getAttribute("error");%>
 </head>
 <body id="login-page" class="login-body">
     <div id="login-card" class="card login-card">
