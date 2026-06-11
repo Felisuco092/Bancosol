@@ -19,6 +19,7 @@ Autores:
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Bancosol - Dashboard</title>
     <link rel="stylesheet" href="../../css/styles.css">
+    <link rel="icon" type="image/png" href="/assets/LOGO_BANCOSOL_ICONO.png">
     <script src="../../js/aside.js" defer></script>
     <%
         List<TiendaDTO> tiendas = (List<TiendaDTO>) request.getAttribute("tiendas");

@@ -20,6 +20,7 @@ Autores:
     <title><%=cadena.getNombre() != null ? "Editar " : "Crear "%>cadena</title>
     <link rel="stylesheet" href="../../../css/styles.css">
     <link rel="stylesheet" href="../../../css/formulario.css">
+    <link rel="icon" type="image/png" href="/assets/LOGO_BANCOSOL_ICONO.png">
 
 </head>
 <body>
