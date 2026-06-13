@@ -14,6 +14,7 @@ export default function CrearTurnoPage() {
 
   //State select tiendas dependiendo de la campaña seleccionada
   const [tiendasFiltradas, setTiendasFiltradas] = useState([])
+  
   const [form, setForm] = useState({
     id_campana: '',
     id_tienda: '',
