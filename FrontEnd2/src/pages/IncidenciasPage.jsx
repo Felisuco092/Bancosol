@@ -26,7 +26,7 @@ export default function IncidenciasPage() {
             fetchData(`turnos/${idTurno}`),
             fetchData('voluntario_fisico'),
             fetchData('voluntario_entidad'),
-            idCampana ? fetchData(`campanas/${idCampana}`) : Promise.resolve(null)
+            fetchData(`campanas/${idCampana}`)
         ]).then(([turnoData, vf, ve, campanaData]) => {
             setTurno(turnoData)
             setCampana(campanaData)
@@ -58,12 +58,11 @@ export default function IncidenciasPage() {
     function handleSubmit(e) {
         e.preventDefault()
 
-        const voluntariosInvolucrados = voluntarios
-            .filter(v => selectedVoluntarios.includes(String(v.id_voluntario)))
+        const voluntariosInvolucrados = voluntarios.filter(v => selectedVoluntarios.includes(String(v.id_voluntario)))
             .map(v => `- ${v.nombreDisplay}`)
             .join('\n')
 
-        const mensajeNotificacion = `El usuario ${usuario?.usuario} ha registrado una incidencia en la campaña ${campana?.nombre} en el turno comprendido entre las horas [${turno?.hora_inicio}-${turno?.hora_fin}] en la tienda ${tienda?.nombre} por el siguiente motivo: ${mensaje}.\nSe involucra a los siguientes voluntarios:\n${voluntariosInvolucrados || 'Ninguno'}`
+        const mensajeNotificacion = `El usuario ${usuario.usuario} ha registrado una incidencia en la campaña ${campana ? campana.nombre : 'Desconocida'} en el turno comprendido entre las horas [${turno ? turno.hora_inicio : '?'}-${turno ? turno.hora_fin : '?'}] en la tienda ${tienda ? tienda.nombre : 'Sin tienda'} por el siguiente motivo: ${mensaje}.\nSe involucra a los siguientes voluntarios:\n${voluntariosInvolucrados || 'Ninguno'}`
 
         const asuntoNotificacion = `SE HA REGISTRADO UNA NUEVA INCIDENCIA: ${asunto}`
 
@@ -99,6 +98,19 @@ export default function IncidenciasPage() {
                     <div className="form-actions">
                         <button type="button" className="btn btn-secondary" onClick={() => navigate('/turnos')}>Volver</button>
                     </div>
+                </div>
+            </main>
+        )
+    }
+
+    if (!turno || !campana) {
+        return (
+            <main className="main-content">
+                <header className="header">
+                    <h1>Reporte de Incidencia</h1>
+                </header>
+                <div className="formulario">
+                    <p className="text-center">Cargando datos del turno y campaña...</p>
                 </div>
             </main>
         )

@@ -48,7 +48,7 @@ body.no-sidebar {
     padding: 20px 0;
     overflow: hidden;
     overflow-y: auto;
-    transition: width 0.3s ease-in-out, min-width 0.3s ease-in-out;
+    transition: width 0.3s ease-in-out, min-width 0.3s ease-in-out; /* Esto es para la animación hecho por IA */
     z-index: 100;
 }
 
@@ -85,7 +85,7 @@ body.no-sidebar {
     opacity: 1;
 }
 
-@keyframes fadeIn {
+@keyframes fadeIn { /* Hecho por la IA la animación */
     from { opacity: 0; transform: translateY(-10px); }
     to { opacity: 1; transform: translateY(0); }
 }
@@ -665,7 +665,7 @@ th {
 }
 
 /* ---------- 10. Responsive ---------- */
-@media (min-width: 1200px) {
+@media (min-width: 1200px) { 
     .login-card {
         max-width: 500px;
         padding: 40px;
