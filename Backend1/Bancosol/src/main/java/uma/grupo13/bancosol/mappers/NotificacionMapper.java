@@ -1,6 +1,6 @@
 package uma.grupo13.bancosol.mappers;
 /**
- * Clase que representa la DTO de las notificaciones.
+ * Clase que representa el mapper de las notificaciones.
  *
  * Autores:
  * -IA Generativa: 100%

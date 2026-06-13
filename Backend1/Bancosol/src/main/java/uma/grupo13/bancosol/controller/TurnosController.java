@@ -76,7 +76,6 @@ public class TurnosController {
                                 Model model, @SessionAttribute(name = "user", required = false) UsuarioDTO user) {
         if (user == null) return "redirect:/";
         if (!validaSesion.tienePermiso(user.getRol().getId(), Permiso.EDITAR_TURNOS)) return "redirect:/dashboard";
-        //turnoDelete.eliminarDatos(); // eliminar lo datos restantes: campaña perteneciente, voluntarios, tiendas y día
         turnosService.borrarTurnoId(idTurno);
 
         return "redirect:/turnos/";

@@ -1,6 +1,6 @@
 package uma.grupo13.bancosol.mappers;
 /**
- * Clase que representa la DTO del usuario.
+ * Clase que representa el mapper del usuario.
  *
  * Autores:
  * -IA Generativa: 100%

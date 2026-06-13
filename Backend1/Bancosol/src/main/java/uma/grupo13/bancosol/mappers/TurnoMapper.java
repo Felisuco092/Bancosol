@@ -1,6 +1,6 @@
 package uma.grupo13.bancosol.mappers;
 /**
- * Clase que representa la DTO de las turnos.
+ * Clase que representa el mapper de los turnos.
  *
  * Autores:
  * -IA Generativa: 100%

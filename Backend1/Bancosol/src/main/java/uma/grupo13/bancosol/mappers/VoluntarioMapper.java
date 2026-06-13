@@ -1,6 +1,6 @@
 package uma.grupo13.bancosol.mappers;
 /**
- * Clase que representa la DTO de los voluntarios.
+ * Clase que representa el mapper de los voluntarios.
  *
  * Autores:
  * -IA Generativa: 20%
