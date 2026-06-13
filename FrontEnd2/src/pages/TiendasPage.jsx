@@ -10,6 +10,7 @@ export default function TiendasPage() {
   const [campanas, setCampanas] = useState([])
   const [participa, setParticipa] = useState([])
   const [selectedCampana, setSelectedCampana] = useState('')
+  // Filtros
   const [selectedCadena, setSelectedCadena] = useState('todas')
   const [selectedLocalidad, setSelectedLocalidad] = useState('todas')
   useEffect(() => {

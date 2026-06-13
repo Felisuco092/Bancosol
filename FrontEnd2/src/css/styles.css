@@ -1,7 +1,4 @@
-/* ================================================
-   FrontEnd1/nuevo/styles.css
-   Estilos principales - Sistema Bancosol
-   ================================================ */
+
 
 /* ---------- 1. Variables ---------- */
 :root {
@@ -48,7 +45,7 @@ body.no-sidebar {
     padding: 20px 0;
     overflow: hidden;
     overflow-y: auto;
-    transition: width 0.3s ease-in-out, min-width 0.3s ease-in-out;
+    transition: width 0.3s ease-in-out, min-width 0.3s ease-in-out; /* Esto es para la animación hecho por IA */
     z-index: 100;
 }
 
@@ -85,7 +82,7 @@ body.no-sidebar {
     opacity: 1;
 }
 
-@keyframes fadeIn {
+@keyframes fadeIn { /* Hecho por la IA la animación */
     from { opacity: 0; transform: translateY(-10px); }
     to { opacity: 1; transform: translateY(0); }
 }
@@ -144,6 +141,7 @@ body.no-sidebar {
     border-radius: 4px;
     cursor: pointer;
     font-weight: bold;
+    text-decoration: none;
     transition: background-color 0.3s, transform 0.1s;
 }
 
@@ -361,6 +359,11 @@ th {
     font-size: 0.75rem;
 }
 
+.btn.btn-sm {
+    padding: 5px 8px;
+    font-size: 0.75rem;
+}
+
 /* ---------- 11. Página Campañas ---------- */
 .filtros-campanas {
     display: flex;
@@ -452,15 +455,11 @@ th {
 
 
 /* ---------- 13. Página Turnos ---------- */
-.filtros-turnos form {
-    display: flex;
+.filtros-turnos {
+    display: grid;
+    grid-template-columns: 1fr 1fr auto;
     gap: 20px;
-    align-items: flex-end;
-    width: 100%;
-}
-
-.filtros-turnos form > div {
-    flex: 1;
+    align-items: end;
 }
 
 .filtros-turnos label {
@@ -585,6 +584,25 @@ th {
 }
 
 /* ---------- 16. Miscellaneous ---------- */
+.sidebar nav ul li a.text-logout {
+    background: none;
+    border: none;
+    padding: 15px 25px;
+    width: 100%;
+    text-align: left;
+    cursor: pointer;
+    font-family: inherit;
+    font-size: inherit;
+    color: #dc3545;
+    font-weight: bold;
+    transition: 0.3s;
+}
+
+.sidebar nav ul li a.text-logout:hover {
+    background-color: #f8dcdc;
+    color: #a71d2a;
+}
+
 .sidebar nav ul li .btn-logout {
     background: none;
     border: none;
@@ -665,7 +683,7 @@ th {
 }
 
 /* ---------- 10. Responsive ---------- */
-@media (min-width: 1200px) {
+@media (min-width: 1200px) { 
     .login-card {
         max-width: 500px;
         padding: 40px;
@@ -701,4 +719,10 @@ th {
         font-size: 1.25rem;
         padding: 15px 30px;
     }
+}
+
+/* ---------- 17. React Root ---------- */
+#root {
+    width: 100%;
+    min-height: 100vh;
 }
