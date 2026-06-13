@@ -208,7 +208,7 @@ router.render = (req, res) => {
   const data = res.locals.data
   const user = req.user
 
-  if (!user || String(user.id_rol) === '1' || req.method !== 'GET' || !Array.isArray(data)) {
+  if (!user || String(user.id_rol) === ROLES.ADMIN || req.method !== 'GET' || !Array.isArray(data)) {
     return res.json(data)
   }
 
@@ -229,7 +229,7 @@ router.render = (req, res) => {
   if (path === 'notificaciones') {
     filtered = data.filter(n => String(n.id_usuario_destino) === userId)
   }
-  else if (roleId === '2') {
+  else if (roleId === ROLES.CAPITAN) {
     if (path === 'tiendas') {
       filtered = data.filter(t => String(t.id_capitan) === userId)
     } else if (path === 'turnos') {
@@ -238,7 +238,7 @@ router.render = (req, res) => {
       filtered = data.filter(t => ids.has(String(t.id_tienda)))
     }
   }
-  else if (roleId === '3') {
+  else if (roleId === ROLES.COORDINADOR) {
     if (path === 'tiendas') {
       const participaciones = router.db.get('participa').filter(p => String(p.id_coordinador) === userId).value()
       const ids = new Set(participaciones.map(p => String(p.id_tienda)))
@@ -249,7 +249,7 @@ router.render = (req, res) => {
       filtered = data.filter(t => ids.has(String(t.id_tienda)))
     }
   }
-  else if (roleId === '4') {
+  else if (roleId === ROLES.RESPONSABLE_ENTIDAD) {
     if (path === 'tiendas') {
       const entidades = router.db.get('voluntario_entidad').filter(v => String(v.id_responsable_entidad) === userId).value()
       const vbIds = new Set(entidades.map(e => String(e.id_voluntario)))
@@ -274,7 +274,7 @@ router.render = (req, res) => {
       filtered = data.filter(p => tiendaIds.has(String(p.id_tienda)))
     }
   }
-  else if (roleId === '5') {
+  else if (roleId === ROLES.RESPONSABLE_TIENDA) {
     if (path === 'tiendas') {
       filtered = data.filter(t => String(t.id_responsable_tienda) === userId)
     } else if (path === 'turnos') {
