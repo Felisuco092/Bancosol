@@ -1,6 +1,6 @@
 package uma.grupo13.bancosol.mappers;
 /**
- * Clase que representa la DTO del participa.
+ * Clase que representa el mapper de las participaciones.
  *
  * Autores:
  * -IA Generativa: 100%

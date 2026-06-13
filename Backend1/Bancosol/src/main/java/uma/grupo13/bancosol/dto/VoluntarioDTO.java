@@ -1,5 +1,5 @@
 /**
- * Clase que representa la DTO de las cadenas.
+ * Clase que representa la DTO de los voluntarios.
  *
  * Autores:
  * - IA Generativa: 85%

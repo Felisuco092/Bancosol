@@ -1,6 +1,6 @@
 package uma.grupo13.bancosol.mappers;
 /**
- * Clase que representa la DTO del rol.
+ * Clase que representa el mapper del rol.
  *
  * Autores:
  * -IA Generativa: 100%
