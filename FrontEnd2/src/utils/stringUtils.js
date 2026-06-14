@@ -1,3 +1,9 @@
 export function quitarTildes(texto) {
-  return texto.normalize('NFD').replace(/[\u0300-\u036f]/g, '');
+  const mapaAcentos = {
+    'á': 'a', 'é': 'e', 'í': 'i', 'ó': 'o', 'ú': 'u',
+    'Á': 'A', 'É': 'E', 'Í': 'I', 'Ó': 'O', 'Ú': 'U',
+    'ü': 'u', 'Ü': 'U'
+  };
+
+  return texto.replace(/[áéíóúüÁÉÍÓÚÜ]/g, (letra) => mapaAcentos[letra]);
 }

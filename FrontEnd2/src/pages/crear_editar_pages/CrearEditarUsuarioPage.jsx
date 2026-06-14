@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react'
 import { useNavigate, Link, useParams } from 'react-router-dom'
-import { fetchData, postData, putData } from '../../services/api'
+import { fetchData, postData, putData, patchData } from '../../services/api'
 
 export default function CrearEditarUsuarioPage() {
   const { id } = useParams()
@@ -54,11 +54,13 @@ export default function CrearEditarUsuarioPage() {
     e.preventDefault()
     try {
       const data = { ...form }
-      if (editando && !data.password) {
-        delete data.password
-      }
       if (editando) {
-        await putData('usuarios/' + id, data)
+        if (data.password) {
+          await putData('usuarios/' + id, data)
+        } else {
+          delete data.password
+          await patchData('usuarios/' + id, data)
+        }
       } else {
         await postData('usuarios', data)
       }
