@@ -15,6 +15,8 @@ export default function IncidenciasPage() {
     const [campana, setCampana] = useState(null)
     const [tienda, setTienda] = useState(null)
     const [voluntarios, setVoluntarios] = useState([])
+
+    //Formulario
     const [asunto, setAsunto] = useState('')
     const [mensaje, setMensaje] = useState('')
     const [selectedVoluntarios, setSelectedVoluntarios] = useState([])

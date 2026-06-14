@@ -30,6 +30,16 @@ export async function postData(ruta, data) {
   return res.json();
 }
 
+export async function patchData(ruta, data) {
+  const res = await fetch(`${API_BASE_URL}/${ruta}`, {
+    method: 'PATCH',
+    headers: authHeaders(),
+    body: JSON.stringify(data),
+  });
+  if (!res.ok) throw new Error(`Error HTTP ${res.status}`);
+  return res.json();
+}
+
 export async function putData(ruta, data) {
   const res = await fetch(`${API_BASE_URL}/${ruta}`, {
     method: 'PUT',

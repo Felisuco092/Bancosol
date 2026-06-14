@@ -157,7 +157,8 @@ server.use((req, res, next) => {
     const recurso = getRecurso(path)
     const method = getMethod(req)
 
-    if (method === 'post' && recurso === 'usuarios') {
+    const httpMethod = req.method.toUpperCase()
+    if ((httpMethod === 'POST' || httpMethod === 'PUT' || httpMethod === 'PATCH') && recurso === 'usuarios') {
       const { password } = req.body
       if (password) {
         req.body.password = bcrypt.hashSync(password, 12)

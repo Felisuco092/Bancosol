@@ -23,15 +23,15 @@
   ],
   "usuarios": [
     {
-      "id": "1",
       "nombre": "Juan",
       "apellidos": "Pérez García",
       "usuario": "jperez",
-      "password": "$2b$12$UGPTaVHVv/7gDRS6/oUs6uvwADymK2k3/phBdNqJiIqaAXEVNJeQ.",
+      "password": "$2a$12$QI3yYpde2JpiGPrnsprADOYLXxxlSjSqHDxGYlAvQtoizAtSC4O3m",
       "email": "juan.perez@email.com",
       "telefono": "600123456",
       "area_asignada": "Málaga Este",
-      "id_rol": 1
+      "id_rol": 1,
+      "id": "1"
     },
     {
       "id": "2",
