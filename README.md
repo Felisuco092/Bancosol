@@ -106,36 +106,5 @@ Importante seleccionar la base de datos de PostgreSQL y clicar en apply.
 - 14º RestController
 
 
-![Paso 0](https://img.shields.io/badge/Paso_0-Completo-green)
-![Paso 1](https://img.shields.io/badge/Paso_1-Completo-green)
-![Paso 2](https://img.shields.io/badge/Paso_2-Completo-green)
-![Paso 3](https://img.shields.io/badge/Paso_3-Completo-green)
-![Paso 4](https://img.shields.io/badge/Paso_4-Completo-green)
-![Paso 5](https://img.shields.io/badge/Paso_5-Completo-green)
-![Paso 6](https://img.shields.io/badge/Paso_6-Completo-green)
-![Paso 7](https://img.shields.io/badge/Paso_7-Completo-green)
-![Paso 8](https://img.shields.io/badge/Paso_8-Completo-green)
-![Paso 9](https://img.shields.io/badge/Paso_9-Completo-green)
-![Paso 10](https://img.shields.io/badge/Paso_10-Completo-green)
-![Paso 11](https://img.shields.io/badge/Paso_11-Opcional-purple)
-![Paso 12](https://img.shields.io/badge/Paso_12-En_proceso-yellow)
-![Paso 13](https://img.shields.io/badge/Paso_13-Completo-green)
-![Paso 14](https://img.shields.io/badge/Paso_14-Opcional-purple)
 
-
-![LC](https://tenor.com/es/view/agnes-tachyon-low-cortisol-gif-6147390476112029717.gif)
-
-![que](https://tenor.com/es/view/double-speech-bubble-speechbubble-speech-bubble-umamusume-low-cortisol-gif-5557824492912855663.gif)
-
-![SD](https://tenor.com/es/view/satono-diamond-uma-musume-satono-satono-diamond-worm-gif-10400485730432458344.gif)
-
-![Leon](https://tenor.com/es/view/leon-kennedy-gif-14428209944621691527.gif)
-
-![MbappeIsListening](https://tenor.com/es/view/kylian-mbappe-mbappe-i-would-rather-kylian-mbappe-i-would-rather-gif-3637069057647683703.gif)
-
-![Leon2](https://tenor.com/es/view/leon-leon-kennedy-leon-s-kennedy-leon-scott-kennedy-67-gif-1938107146117258547.gif)
-![SionismForever](https://tenor.com/es/view/israel-chad-gigachad-love-israel-patriotic-gif-21179445.gif)
-![leonTrumpista](https://tenor.com/es/view/resident-evil-resident-evil-9-re9-leon-kennedy-leon-s-kennedy-gif-10733986607391926053.gif)
-
-![alberto](https://tenor.com/es/view/wesker-albert-wesker-7-minutes-eating-fat-gif-2520199480123465425.gif)
 
